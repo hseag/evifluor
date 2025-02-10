@@ -1,7 +1,7 @@
 # evifluor
 
-The eviFluor module is XXXXX which enables full Quality Control on liquid handlers. 
-For more information see https://www.hseag.com/XXXX. To control the eviFluor module HSE AG provides software interfaces in C or C#.
+The eviFluor module is  ultra-compact 2-channel fluorometer. 
+For more information see https://www.hseag.com/evifluor-duo-factsheet. To control the eviFluor module HSE AG provides software interfaces in C or C#.
 
 ## Measuring procedure in short
 1. Pick up a tip with your liquid handler
