@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: © 2024 HSE AG, <opensource@hseag.com>
 
+
 #include "cmdget.h"
 #include "cmdset.h"
 #include "cmdmeasure.h"
@@ -16,7 +17,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define VERSION_TOOL "0.2.0"
+#define VERSION_TOOL "0.2.1"
 
 void help(int argcCmd, char **argvCmd)
 {
@@ -24,18 +25,19 @@ void help(int argcCmd, char **argvCmd)
 	{
             fprintf_s(stdout, "Usage: evifluor [OPTIONS] COMMAND [ARGUMENTS]\n");
             fprintf_s(stdout, "Commands:\n");
-            fprintf_s(stdout, "  command COMMAND     : executes a command e.g evifluor.exe command \"V 0\" returns the value at index 0\n");
+            fprintf_s(stdout, "  baseline            : starts a new series of measurements\n");
+            fprintf_s(stdout, "  command COMMAND     : executes a command e.g evifluor.exe command \"V 0\" returns the value at index 0\n");            
+            fprintf_s(stdout, "  data                : handels data in a data file\n");
+            fprintf_s(stdout, "  empty               : checks if the cuvette guide is empty\n");
+            fprintf_s(stdout, "  export              : exports json data files as csv files\n");
             fprintf_s(stdout, "  fwupdate FILE       : loads a new firmware\n");
             fprintf_s(stdout, "  get INDEX           : get a value from the device\n");
             fprintf_s(stdout, "  help COMMAND        : Prints a detailed help\n");
-            fprintf_s(stdout, "  baseline            : starts a new series of measurements\n");
             fprintf_s(stdout, "  measure             : starts a measurement and return the values\n");
-            fprintf_s(stdout, "  save                : save the last measurement(s)\n");
-			fprintf_s(stdout, "  export              : exports json data files as csv files\n");
+            fprintf_s(stdout, "  save                : save the last measurement(s)\n");			
             fprintf_s(stdout, "  selftest            : executes an internal selftest\n");
             fprintf_s(stdout, "  set INDEX VALUE     : set a value in the device\n");
-            fprintf_s(stdout, "  version             : return the CLI and DLL version\n");
-            fprintf_s(stdout, "  empty               : checks if the cuvette guide is empty\n");
+            fprintf_s(stdout, "  version             : returns the version\n");
             fprintf_s(stdout, "Options:\n");
             fprintf_s(stdout, "  --verbose           : prints debug info\n");
             fprintf_s(stdout, "  --help -h           : show this help and exit\n");
@@ -100,6 +102,18 @@ void help(int argcCmd, char **argvCmd)
                 fprintf_s(stdout, "  --mode-raw         : append all measurments as single measurements.\n");
                 fprintf_s(stdout, "  --mode-measurement : append all measurments as air-sample pairs (Default).\n");
 			}
+            else if(strcmp(argvCmd[1], "data") == 0)
+            {
+                fprintf_s(stdout, "Usage: evifluor data print FILE\n");
+                fprintf_s(stdout, "  Prints the calculated values from file FILE.\n");
+                fprintf_s(stdout, "Output:\n");
+                fprintf_s(stdout, "  concentration comment\n");
+                fprintf_s(stdout, "\n");
+                fprintf_s(stdout, "Usage: evidense data calculate CONCENTRATION_LOW CONCENTRATION_HIGH FILE\n");
+                fprintf_s(stdout, "  Calculates the concentration in the given file and adds the values to the file.\n");
+                fprintf_s(stdout, "  CONCENTRATION_LOW is usually 0, CONCENTRATION_HIGH depends on the used kit.\n");
+                fprintf_s(stdout, "  To calculate the values the first sample must be standard high and the second sample must be standard low\n");
+            }
             else if(strcmp(argvCmd[1], "export") == 0)
             {
                 fprintf_s(stdout, "Usage: evifluor export [OPTIONS] [JSON FILE] [CSV FILE]\n");
@@ -123,6 +137,11 @@ void help(int argcCmd, char **argvCmd)
                 fprintf_s(stdout, "  --first-air           :  Performs a first air measurment.\n");
                 fprintf_s(stdout, "  --first-sample        :  Performs a first sample measurment (autogain).\n");
 			}
+            else if(strcmp(argvCmd[1], "baseline") == 0)
+            {
+                fprintf_s(stdout, "Usage: evifluor baseline\n");
+                fprintf_s(stdout, "  The firmware has an internal storage for up to ten measurements. The command baseline clears this storage.\n");
+            }
 			else if(strcmp(argvCmd[1], "version") == 0)
 			{
                 fprintf_s(stdout, "Usage: evifluor version\n");

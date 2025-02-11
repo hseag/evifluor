@@ -62,7 +62,7 @@ if (UNIX)
     target_link_libraries(libevifluor usb-1.0)
 endif()
 
-set_target_properties(libevifluor PROPERTIES PUBLIC_HEADER "src/evifluor.h;${FW}/evifluorerror.h;${FW}/evifluorindex.h;${FW_COMMON}/commonerror.h;${FW_COMMON}/commonindex.h;${COMMOM_LIB}/evibase.h")
+set_target_properties(libevifluor PROPERTIES PUBLIC_HEADER "src/measurement.h;src/singlemeasurement.h;src/channel.h;src/evifluor.h;${FW}/evifluorerror.h;${FW}/evifluorindex.h;${FW_COMMON}/commonerror.h;${FW_COMMON}/commonindex.h;${COMMOM_LIB}/evibase.h")
 
 add_executable(evifluor)
 target_sources(evifluor PRIVATE
