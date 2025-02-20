@@ -49,9 +49,9 @@ internal class Program
         //Dispense the sample back.
     }
 
-    void DisposeTip()
+    void DisposeTipWithAttachedCuvette()
     {
-        //Dispose the tip.
+        //Dispose the tip with attached cuvette.
     }
 
     void MoveCuvetteInCuvetteGuide()
@@ -222,9 +222,7 @@ internal class Program
                         break;
                 }
 
-                program.DisposeCuvette();
-                program.DispenseToSample();
-                program.DisposeTip();
+                program.DisposeTipWithAttachedCuvette();
             }
 
             program.storage.Save("data-evifluor.json");

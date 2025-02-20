@@ -14,8 +14,7 @@ For more information see https://www.hseag.com/evifluor-duo-factsheet. To contro
 8. Measure the cuvette with sample
 9. Calculate the concentration of the sample
 10. Move the cuvette out off the eviFluor module
-11. Aspirate the sample back into the tip
-12. Dispose the cuvette
-13. Process the sample further according to your needs
+11. Dispose the tip with attached cuvette
+12. Repeat steps 1-12 until all samples are processed
 
 A detailed description can be found at TBD.

@@ -1,6 +1,3 @@
-
-
-
 # Usage
 1. Pick up a tip with your liquid handler
 2. Aspirate at least 11 &#956;l of sample
@@ -13,14 +10,12 @@
 9. Execute `evifluor measure --first-sample`if it is the first sample measurement. If not execute `evifluor measure`
 10. Move the cuvette out off the eviFluor module
 11. Execute `evifluor save data.json`
-12. Aspirate the sample back into the tip
-13. Dispose the cuvette
-14. Process the sample further according to your needs
-15. Repeat steps 1-14 until all samples are processed
+12. Dispose the tip with attached cuvette
+13. Repeat steps 1-13 until all samples are processed
 
 The first sample must be standard high and the second sample must be standard low.
 
-With `evidense data calculate 0 CONCENTRATION_HIGH data.json` add the caclculated values to the data.json. Replace CONCENTRATION_HIGH with the correct value.
+With `evifluor data calculate 0 CONCENTRATION_HIGH data.json` add the caclculated values to the data.json. Replace CONCENTRATION_HIGH with the correct value.
 
 # Help
 ```
@@ -83,7 +78,7 @@ Output:
   concentration comment
 ```
 ```
-Usage: evidense data calculate CONCENTRATION_LOW CONCENTRATION_HIGH FILE
+Usage: evifluor data calculate CONCENTRATION_LOW CONCENTRATION_HIGH FILE
   Calculates the concentration in the given file and adds the values to the file.
   CONCENTRATION_LOW is usually 0, CONCENTRATION_HIGH depends on the used kit.
   To calculate the values the first sample must be standard high and the second sample must be standard low

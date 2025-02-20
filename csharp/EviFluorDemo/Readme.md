@@ -1,3 +1,3 @@
-# EviDense Demo Application
+#eviFluor Demo Application
 
- A sample program showing how to integrate the EviDense module into a liquid handler.
+ A sample program showing how to integrate the eviFluor module into a liquid handler.
