@@ -1,12 +1,12 @@
 # Usage
 1. Pick up a tip with your liquid handler
-2. Aspirate at least 11 &#956;l of sample
+2. Aspirate at least 10.0 &#956;l of sample
 3. Pick up a cuvette
 4. Move the cuvette over the eviFluor module
 5. Execute `evifluor baseline`
 6. Insert the cuvette into the eviFluor module
 7. Execute `evifluor measure --first-air` if it is the first air measurement. If not execute `evifluor measure`
-8. Dispense approximately 10.5 &#956;l sample into the cuvette
+8. Dispense approximately 10.0 &#956;l sample into the cuvette
 9. Execute `evifluor measure --first-sample`if it is the first sample measurement. If not execute `evifluor measure`
 10. Move the cuvette out off the eviFluor module
 11. Execute `evifluor save data.json`

@@ -5,12 +5,12 @@ For more information see https://www.hseag.com/evifluor-duo-factsheet. To contro
 
 ## Measuring procedure in short
 1. Pick up a tip with your liquid handler
-2. Aspirate at least 11 &#956;l of sample
+2. Aspirate at least 10.0 &#956;l of sample
 3. Pick up a cuvette
 4. Move the cuvette over the eviFluor module
 5. Insert the cuvette into the eviFluor module
 6. Measure the empty cuvette
-7. Dispense approximately 10.5 &#956;l sample into the cuvette
+7. Dispense approximately 10.0 &#956;l sample into the cuvette
 8. Measure the cuvette with sample
 9. Calculate the concentration of the sample
 10. Move the cuvette out off the eviFluor module
