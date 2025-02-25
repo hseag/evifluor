@@ -32,6 +32,7 @@ public class Dict
     public const string RESULTS = "results";
     public const string SERIALNUMBER = "serialnumber";
     public const string FIRMWAREVERSION = "firmwareVersion";
+    public const string PRODUCTIONNUMBER = "productionnumber";
     public const string SELFTEST = "selftest";
     public const string SELFTEST_RESULT = "result";
     public const string SELFTEST_COMUNICATION_ERROR = "comunicationerror";
@@ -54,7 +55,7 @@ public enum Index
 {
     VERSION = 0,
     SERIALNUMBER = 1,
-    HARDWARETYPE = 2,
+    PRODUCTIONNUMBER = 3,
     LAST_MEASUREMENT_COUNT = 10,
     AUTOGAIN_DELTA = 11,
     CUVETTE_EMPTY_DELTA = 12,
@@ -99,4 +100,16 @@ public enum TypeOf
 public enum Selftest
 {
     COMUNICATION_ERROR = 0x00000001,
+}
+
+/// <summary>
+/// Enumeration representing different status led colors .
+/// </summary>
+public enum StatusLedColor
+{
+    OFF = 0,
+    RED = 1,
+    GREEN = 2,
+    BLUE = 3,
+    WHITE = 4,
 }

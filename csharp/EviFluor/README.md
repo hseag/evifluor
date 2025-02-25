@@ -5,3 +5,4 @@ The eviFluor module is an ultra-compact 2-channel fluorometer on liquid handlers
 This C# interface allows you to control your eviFluor module.
 
 A detailed description can be found at TBD.
+

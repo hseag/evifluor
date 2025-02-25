@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define VERSION_TOOL "0.2.1"
+#define VERSION_TOOL "0.4.0"
 
 void help(int argcCmd, char **argvCmd)
 {
@@ -32,7 +32,7 @@ void help(int argcCmd, char **argvCmd)
             fprintf_s(stdout, "  export              : exports json data files as csv files\n");
             fprintf_s(stdout, "  fwupdate FILE       : loads a new firmware\n");
             fprintf_s(stdout, "  get INDEX           : get a value from the device\n");
-            fprintf_s(stdout, "  help COMMAND        : Prints a detailed help\n");
+            fprintf_s(stdout, "  help COMMAND        : prints a detailed help\n");
             fprintf_s(stdout, "  measure             : starts a measurement and return the values\n");
             fprintf_s(stdout, "  save                : save the last measurement(s)\n");			
             fprintf_s(stdout, "  selftest            : executes an internal selftest\n");
@@ -74,7 +74,7 @@ void help(int argcCmd, char **argvCmd)
                 fprintf_s(stdout, "INDEX:\n");
                 fprintf_s(stdout, "   0: Firmware version\n");
                 fprintf_s(stdout, "   1: Serial number\n");
-                fprintf_s(stdout, "   2: Hardware type\n");
+                fprintf_s(stdout, "   3: Production number\n");
                 fprintf_s(stdout, "  10: Number of internal stored last measurements\n");
 				fprintf_s(stdout, "  15: Led power\n");
 				fprintf_s(stdout, "  16: Led power minimum value\n");
@@ -88,13 +88,13 @@ void help(int argcCmd, char **argvCmd)
                 fprintf_s(stdout, "  Changing a value can damage the device or lead to incorrect results!\n");
                 fprintf_s(stdout, "INDEX:\n");
                 fprintf_s(stdout, "   1: Serial number\n");
-                fprintf_s(stdout, "   2: Hardware type\n");
+                fprintf_s(stdout, "   2: Production number\n");
 				fprintf_s(stdout, "  15: Led power\n");
 			}
 			else if(strcmp(argvCmd[1], "save") == 0)
 			{
                 fprintf_s(stdout, "Usage: evifluor save [FILE] [COMMENT]\n");
-                fprintf_s(stdout, "  Saves the last measurements in the given file FILE as a JSON file. If the file already exists, the data are appended.\n");
+                fprintf_s(stdout, "  Saves the last measurements in the given file FILE as a JSON file.\n");
                 fprintf_s(stdout, "  The optional string COMMENT is added as a comment to the measurement in the JSON file.\n");
                 fprintf_s(stdout, "Options: \n");
                 fprintf_s(stdout, "  --append           : append the new data at the end of the file (Default).\n");
@@ -109,7 +109,7 @@ void help(int argcCmd, char **argvCmd)
                 fprintf_s(stdout, "Output:\n");
                 fprintf_s(stdout, "  concentration comment\n");
                 fprintf_s(stdout, "\n");
-                fprintf_s(stdout, "Usage: evidense data calculate CONCENTRATION_LOW CONCENTRATION_HIGH FILE\n");
+                fprintf_s(stdout, "Usage: evifluor data calculate CONCENTRATION_LOW CONCENTRATION_HIGH FILE\n");
                 fprintf_s(stdout, "  Calculates the concentration in the given file and adds the values to the file.\n");
                 fprintf_s(stdout, "  CONCENTRATION_LOW is usually 0, CONCENTRATION_HIGH depends on the used kit.\n");
                 fprintf_s(stdout, "  To calculate the values the first sample must be standard high and the second sample must be standard low\n");
@@ -145,7 +145,7 @@ void help(int argcCmd, char **argvCmd)
 			else if(strcmp(argvCmd[1], "version") == 0)
 			{
                 fprintf_s(stdout, "Usage: evifluor version\n");
-                fprintf_s(stdout, "  Prints the version of this tool and the libcolibri to stdout.\n");
+                fprintf_s(stdout, "  Prints the version of this tool to stdout.\n");
 			}
 			else if(strcmp(argvCmd[1], "selftest") == 0)
 			{
