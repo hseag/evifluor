@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: © 2025 HSE AG, <opensource@hseag.com>
 
 using System;
+using System.Collections.Generic;
 using System.IO.Ports;
 using System.Management;
 using System.Text.Json.Nodes;
@@ -206,34 +207,28 @@ public class Device : IDisposable
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Device"/> class.
-    /// The constructor attempts to connect to an eviFluor module via a serial port.
+    /// The constructor attempts to connect to an EviFluor module via a serial port.
     /// If no serial port is provided, it tries to auto-detect the device.
     ///
     /// Throws an exception if:
     /// - No device is found during auto-detection.
-    /// - The provided serial port does not match the expected VID/PID for the eviFluor device.
+    /// - The provided serial port does not match the expected VID/PID for the EviFluor device.
     /// </summary>
-    /// <param name="serialPortName">
-    /// The name of the serial port to connect to. If null or empty, the constructor
-    /// attempts to automatically find the correct port.
+    /// <param name="serialNumber">
+    /// The serial number of the device to connect to. If null or empty, the constructor
+    /// attempts to automatically find a device.
     /// </param>
     /// <exception cref="Exception">
     /// Thrown when:
     /// - No device is found during auto-detection (if <paramref name="serialPortName"/> is null or empty).
-    /// - The provided serial port does not correspond to an eviFluor device.
+    /// - The provided serial port does not correspond to an EviFluor device.
     /// </exception>
-    public Device(string? serialPortName = null)
+    public Device(string? serialNumber = null)
     {
-        if (string.IsNullOrEmpty(serialPortName))
+        var serialPortName = FindDevice(serialNumber);
+        if (serialPortName == null)
         {
-            serialPortName = FindDevice();
-            if (serialPortName == null)
-                throw new Exception("No eviFluor module found found on any serial port with auto find");
-        }
-        else
-        {
-            if (!IsSerialPortMatchingVidAndPid(serialPortName, USB.VID, USB.PID))
-                throw new Exception($"No eviFluor device found on given serial port '{serialPortName}'");
+            throw new Exception($"EviFluor ({serialNumber}) module not found");
         }
 
         serialPort_ = new SerialPort(serialPortName, 115200, Parity.None, 8, StopBits.One)
@@ -270,16 +265,44 @@ public class Device : IDisposable
         }
     }
 
-    private string? FindDevice()
+    /// <summary>
+    /// Retrieves a list of available eviFluor devices by scanning serial ports.    
+    /// </summary>
+    /// <returns>A list of serial numbers of available matching devices.</returns>
+    public static List<string> GetAvailableDevices()
     {
-        foreach (string port in SerialPort.GetPortNames())
-            if (IsSerialPortMatchingVidAndPid(port, USB.VID, USB.PID))
-                return port;
+        List<string> serialnumbers = new List<string>() { };
+
+        foreach (var port in SerialPort.GetPortNames())
+        {
+            string serialNumber = "";
+
+            if (IsSerialPortMatchingVidAndPid(port, USB.VID, USB.PID, ref serialNumber))
+            {
+                serialnumbers.Add(serialNumber);
+            }
+        }
+        return serialnumbers;
+    }
+
+    private static string? FindDevice(string? serialNumber)
+    {
+        foreach (var port in SerialPort.GetPortNames())
+        {
+            string sn = "";
+            if (IsSerialPortMatchingVidAndPid(port, USB.VID, USB.PID, ref sn))
+            {
+                if (serialNumber == null || sn == serialNumber)
+                {
+                    return port;
+                }
+            }
+        }
 
         return null;
     }
 
-    private bool IsSerialPortMatchingVidAndPid(string portName, int vid, int pid)
+    private static bool IsSerialPortMatchingVidAndPid(string portName, int vid, int pid, ref string serialNumber)
     {
         if (!OperatingSystem.IsWindows())
         {
@@ -295,12 +318,14 @@ public class Device : IDisposable
         {
             var name = device["Name"]?.ToString(); // Friendly name (e.g., "USB Serial Device (COM3)")
             var deviceId = device["DeviceID"]?.ToString(); // Device ID containing VID and PID
+            var pnpDeviceId = device["PNPDeviceID"]?.ToString(); // Full PNPDeviceID (useful for extracting serial number)
 
-            if (name != null && name.Contains($"({portName})") && deviceId != null)
+            if (name != null && name.Contains($"({portName})") && deviceId != null && pnpDeviceId != null)
             {
                 // Check if VID and PID match
                 var foundVid = ExtractValue(deviceId, "VID_");
                 var foundPid = ExtractValue(deviceId, "PID_");
+                serialNumber = ExtractSerialNumber(pnpDeviceId);
 
                 if (foundVid == vidAsHex && foundPid == pidAsHex)
                 {
@@ -312,12 +337,21 @@ public class Device : IDisposable
         return false;
     }
 
-    private string ExtractValue(string deviceId, string key)
+    private static string ExtractValue(string deviceId, string key)
     {
         var startIndex = deviceId.IndexOf(key) + key.Length;
         return deviceId.Substring(startIndex, 4); // VID and PID are 4 characters long
     }
 
+    private static string ExtractSerialNumber(string pnpDeviceId)
+    {
+        var parts = pnpDeviceId.Split('\\');
+        if (parts.Length > 2)
+        {
+            return parts[^1]; // Letztes Segment enthält die Seriennummer
+        }
+        return string.Empty;
+    }
     private string[] Command(string tx)
     {
         serialPort_.DiscardInBuffer();
