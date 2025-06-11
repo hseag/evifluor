@@ -101,7 +101,7 @@ public class StorageMeasurementEntry
         if (node.AsObject().ContainsKey(Dict.COMMENT))
         {
             if (node is JsonObject jsonObject &&
-            jsonObject.TryGetPropertyValue(Dict.DARK, out JsonNode? commentNode) &&
+            jsonObject.TryGetPropertyValue(Dict.COMMENT, out JsonNode? commentNode) &&
             commentNode is not null)
             {
                 comment = commentNode.GetValue<string>();
@@ -117,7 +117,11 @@ public class StorageMeasurementEntry
 /// </summary>
 public class StorageMeasurement
 {
-    private JsonNode data;
+    /// <summary>
+    /// Raw JSON structure representing all stored measurement data.
+    /// This node may contain measurements, results, metadata, logging, and other associated entries.
+    /// </summary>
+    public JsonNode data { get; }
 
 
     /// <summary>
@@ -146,13 +150,23 @@ public class StorageMeasurement
     /// </summary>
     /// <param name="measurement">The measurement to append.</param>
     /// <param name="comment">An optional comment for the measurement.</param>
-    public void Append(Measurement measurement, string comment = "")
+    /// <param name="logging">Optional logging information.</param>
+    public void Append(Measurement measurement, string comment = "", List<string> ? logging = null)
     {
         if (measurement == null)
             throw new ArgumentException("No measurement object provided to append!");
 
         var m = measurement.ToJson();
         m[Dict.COMMENT] = comment;
+
+        if (logging != null && logging.Count > 0)
+        {
+            m[Dict.LOGGING] = new JsonArray();
+            foreach( var log in logging)
+            {
+                m[Dict.LOGGING]?.AsArray().Add(log);
+            }
+        }
 
         data[Dict.MEASUREMENTS]?.AsArray().Add(m);
     }
@@ -163,7 +177,8 @@ public class StorageMeasurement
     /// <param name="measurement">The measurement to append.</param>
     /// /// <param name="results">The results to append.</param>
     /// <param name="comment">An optional comment for the measurement.</param>
-    public void AppendWithResults(Measurement measurement, Results results, string comment = "")
+    /// <param name="logging">Optional logging information.</param>
+    public void AppendWithResults(Measurement measurement, Results results, string comment = "", List<string>? logging = null)
     {
         if (measurement == null)
             throw new ArgumentException("No measurement object provided to append!");
@@ -174,6 +189,15 @@ public class StorageMeasurement
             m[Dict.RESULTS] = results.ToJson();
 
         m[Dict.COMMENT] = comment;
+
+        if (logging != null && logging.Count > 0)
+        {
+            m[Dict.LOGGING] = new JsonArray();
+            foreach (var log in logging)
+            {
+                m[Dict.LOGGING]?.AsArray().Add(log);
+            }
+        }
 
         data[Dict.MEASUREMENTS]?.AsArray().Add(m);
     }
@@ -229,6 +253,16 @@ public class StorageMeasurement
         return ret;
     }
 
+    /// <summary>
+    /// Gets the <see cref="StorageMeasurementEntry"/> at the specified index.
+    /// </summary>
+    /// <param name="index">The zero-based index of the measurement entry to retrieve.</param>
+    /// <returns>
+    /// The <see cref="StorageMeasurementEntry"/> located at the given index in the measurement list.
+    /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// Thrown when <paramref name="index"/> is less than 0 or greater than or equal to the number of stored entries.
+    /// </exception>
     public StorageMeasurementEntry this[int index]
     {
         get

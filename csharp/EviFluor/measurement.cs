@@ -10,7 +10,7 @@ namespace Hse.EviFluor;
 /// <summary>
 /// Represents the results the concentration measurement.
 /// </summary>
-public class Results
+public class Results : IEquatable<Results>
 {
     /// <summary>
     /// Gets or sets the concentration. The unit of the concentration depends on the used standard high.
@@ -66,16 +66,34 @@ public class Results
     /// <summary>
     /// Determines whether the specified object is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The object to compare with the current instance.</param>
+    /// <param name="other">The object to compare with the current instance.</param>
     /// <returns><c>true</c> if the objects are equal; otherwise, <c>false</c>.</returns>
-    public override bool Equals(object? obj)
+    public bool Equals(Results? other)
     {
-        if (obj is not Results other) return false;
+        if (other is null) return false;
 
-        const double delta = 0.000000001; // Tolerance for floating-point comparisons
+        const double delta = 1e-9;
         return Math.Abs(Concentration - other.Concentration) < delta;
     }
 
+    /// <summary>
+    /// Determines whether the specified object is equal to the current instance.
+    /// </summary>
+    /// <param name="obj">The object to compare with the current instance.</param>
+    /// <returns><c>true</c> if the objects are equal; otherwise, <c>false</c>.</returns>
+    public override bool Equals(object? obj) =>
+    Equals(obj as Results);
+
+    /// <summary>
+    /// Returns a hash code for the current <see cref="Measurement"/> instance.
+    /// </summary>
+    /// <returns>
+    /// An integer hash code based on the air and sample measurements, as well as the optional comment.
+    /// </returns>
+    /// <remarks>
+    /// This override ensures that instances with the same measurement data produce the same hash code,
+    /// which is particularly important when using this class in hash-based collections like dictionaries or hash sets.
+    /// </remarks>
     public override int GetHashCode()
     {
         return HashCode.Combine(Concentration);
@@ -160,8 +178,19 @@ public class Factors
 /// </summary>
 public class Measurement
 {
+    /// <summary>
+    /// Optional comment associated with the measurement, such as notes or labels.
+    /// </summary>
     public string comment;
+
+    /// <summary>
+    /// The air reference measurement used for background correction.
+    /// </summary>
     public SingleMeasurement air;
+
+    /// <summary>
+    /// The actual sample measurement.
+    /// </summary>
     public SingleMeasurement sample;
 
     /// <summary>
@@ -227,25 +256,26 @@ public class Measurement
     }
 
     /// <summary>
-    /// Calculates the concentration.
+    /// Calculates the concentration using the given factors and kit.
     /// </summary>
-    /// <param name="factors">Factor to calculate the concentration.</param>
-    /// <returns></returns>
-    public double Concentration(Factors factors)
+    /// <param name="factors">Correction factors for the measurement.</param>
+    /// <param name="kit">Optional kit for concentration fitting (e.g., linear interpolation).</param>
+    /// <returns>The calculated concentration value.</returns>
+    public double Concentration(Factors factors, IKit ? kit = null)
     {
-        var m = (factors.StdHigh.Concentration - factors.StdLow.Concentration) / (factors.StdHigh.Value - factors.StdLow.Value);
-        var b = factors.StdHigh.Concentration - m * factors.StdHigh.Value;
-        return m * Value() + b;
+        kit = kit ?? new Kits.Default();
+        return kit.fit(factors.StdLow, factors.StdHigh, Value());
     }
 
     /// <summary>
-    /// Calculates the results.
+    /// Computes the measurement results using the provided factors and kit.
     /// </summary>
-    /// <param name="factors">Factor to calculate the results.</param>
-    /// <returns></returns>
-    public Results GetResults(Factors factors)
+    /// <param name="factors">Factors used for calibration or adjustment.</param>
+    /// <param name="kit">Optional kit to use for fitting measured data.</param>
+    /// <returns>A <see cref="Results"/> object with computed values.</returns>
+    public Results GetResults(Factors factors, IKit ? kit = null)
     {
-        return new Results(Concentration(factors));
+        return new Results(Concentration(factors, kit));
     }
 
     /// <summary>

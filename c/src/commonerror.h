@@ -21,11 +21,13 @@ typedef enum Errors
     ERROR_EVI_FILE_NOT_FOUND                        = 8,  //|  -  |  -  |  x    |
     ERROR_EVI_PROGRAMMING_FAILED                    = 9,  //|  -  |  x  |  -    |
     ERROR_EVI_INSTRUMENT_NOT_FOUND                  = 10, //|  -  |  -  |  x    |
+    ERROR_EVI_NO_MORE_LOGGING                       = 11, //|  x  |  -  |  -    |
     ERROR_EVI_UNKOWN_COMMAND_LINE_OPTION            = 50, //|  -  |  -  |  x    |
     ERROR_EVI_RESPONSE_ERROR                        = 51, //|  -  |  -  |  x    |
     ERROR_EVI_PROTOCOL_ERROR                        = 52, //|  -  |  -  |  x    |
     ERROR_EVI_UNKOWN_COMMAND_LINE_ARGUMENT          = 53, //|  -  |  -  |  x    |
     ERROR_EVI_INVALID_NUMBER                        = 55, //|  -  |  -  |  x    |
     ERROR_EVI_FILE_IO_ERROR                         = 56, //|  -  |  -  |  x    |
+    
     ERROR_EVI_USER                                  = 100,//|     |     |       |
 } Error_t;

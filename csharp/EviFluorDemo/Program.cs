@@ -1,5 +1,6 @@
 
 using Hse.EviFluor;
+using Hse.EviFluor.Kits;
 using System.Xml.Linq;
 
 internal class Program
@@ -179,7 +180,7 @@ internal class Program
                 throw new Exception("Factors can't be null!");
             }
 
-            var results = measurement.GetResults(factors);
+            var results = measurement.GetResults(factors, new Quant_iT_dsDNA_HS()); //For Quant-iT dsDNA High Sensitivity Assay Kit
 
             storage.AppendWithResults(measurement, results, comment);
 

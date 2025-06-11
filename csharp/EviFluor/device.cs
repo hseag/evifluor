@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Management;
 using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
 
 namespace Hse.EviFluor;
 
@@ -87,6 +88,11 @@ public class FirstAirMeasurementResult
     /// <returns>A new <see cref="SingleMeasurement"/> adjusted to the specified LED power.</returns>
     public SingleMeasurement AdjustToLedPower(int ledPower)
     {
+        if (MaxMeasurement.Channel470.LedPower == MinMeasurement.Channel470.LedPower)
+        {
+            throw new InvalidOperationException("Identical LED power with interpolation.");
+        }
+
         var dark = MinMeasurement.Channel470.Dark + (MaxMeasurement.Channel470.Dark - MinMeasurement.Channel470.Dark) / (MaxMeasurement.Channel470.LedPower - MinMeasurement.Channel470.LedPower) * (ledPower - MinMeasurement.Channel470.LedPower);
         var value = MinMeasurement.Channel470.Value + (MaxMeasurement.Channel470.Value - MinMeasurement.Channel470.Value) / (MaxMeasurement.Channel470.LedPower - MinMeasurement.Channel470.LedPower) * (ledPower - MinMeasurement.Channel470.LedPower);
         var channel470 = new Channel(dark, value, ledPower);
@@ -196,6 +202,9 @@ public class Device : IDisposable
     private string serialNumber_ = "?";
     private string firmwareVersion_ = "?";
 
+    /// <summary>
+    /// Close the serial port and dispose it.
+    /// </summary>
     public void Dispose()
     {
         if (serialPort_ != null && serialPort_.IsOpen)
@@ -220,7 +229,7 @@ public class Device : IDisposable
     /// </param>
     /// <exception cref="Exception">
     /// Thrown when:
-    /// - No device is found during auto-detection (if <paramref name="serialPortName"/> is null or empty).
+    /// - No device is found during auto-detection (if <paramref name="serialNumber"/> is null or empty).
     /// - The provided serial port does not correspond to an EviFluor device.
     /// </exception>
     public Device(string? serialNumber = null)
@@ -250,11 +259,17 @@ public class Device : IDisposable
         }
     }
 
+    /// <summary>
+    /// Destructor
+    /// </summary>
     ~Device()
     {
         Dispose();
     }
 
+    /// <summary>
+    /// Returns the library version.
+    /// </summary>
     public string LibraryVersion
     {
         get
@@ -352,7 +367,43 @@ public class Device : IDisposable
         }
         return string.Empty;
     }
-    private string[] Command(string tx)
+
+    private static string[] Split(string input)
+    {
+        var pattern = @"(?:""(?<q>[^""]*)"")|(?:'(?<q>[^']*)')|(?<q>\S+)";
+        var matches = Regex.Matches(input, pattern);
+
+        string[] tokens = new string[matches.Count];
+        for (int i = 0; i < matches.Count; i++)
+        {
+            tokens[i] = matches[i].Groups["q"].Value;
+        }
+
+        return tokens;
+    }
+
+    /// <summary>
+    /// Sends a command string to the device over the serial interface and waits for a valid response.
+    /// </summary>
+    /// <param name="tx">The command string to transmit (without prefix or newline, e.g., "V 1").</param>
+    /// <returns>
+    /// A list of response string tokens received from the device after processing the command. 
+    /// Each token represents a space- or quote-delimited component of the response.
+    /// </returns>
+    /// <exception cref="Exception">
+    /// Thrown in the following cases:
+    /// <list type="bullet">
+    /// <item><description>No response within the timeout period.</description></item>
+    /// <item><description>Response does not start with ':' (invalid format).</description></item>
+    /// <item><description>Response indicates an error code (e.g., unknown command, invalid parameter).</description></item>
+    /// </list>
+    /// </exception>
+    /// <remarks>
+    /// This method prepends a ':' to the transmitted command, sends it via the serial port,
+    /// then reads and validates the response. If an error is indicated by the device (response starting with "E"),
+    /// a corresponding error message is thrown based on the error code.
+    /// </remarks>
+    public string[] Command(string tx)
     {
         serialPort_.DiscardInBuffer();
         serialPort_.DiscardOutBuffer();
@@ -368,7 +419,7 @@ public class Device : IDisposable
         if (!rx.StartsWith(":"))
             throw new Exception($"Response did not start with ':' {rx}");
 
-        string[] parts = rx.Remove(0, 1).Split();
+        string[] parts = Split(rx.Remove(0, 1));
 
         if (parts[0] == "E")
         {
@@ -426,7 +477,7 @@ public class Device : IDisposable
     /// Sends a command to the device to fetch the value and parses the response.
     /// </summary>
     /// <typeparam name="T">
-    /// The type to which the retrieved value will be converted. Must be compatible with <see cref="Convert.ChangeType"/>.
+    /// The type to which the retrieved value will be converted.
     /// </typeparam>
     /// <param name="index">
     /// The index from which the value should be retrieved.
@@ -722,6 +773,8 @@ public class Device : IDisposable
     public void FwUpdate(string filename)
     {
         string[] fileLines = System.IO.File.ReadAllLines(filename);
+        var serialNumber = SerialNumber();
+
         erase();
         foreach (string line in fileLines)
         {
@@ -735,9 +788,10 @@ public class Device : IDisposable
 
         reboot();
         serialPort_.Close();
+        System.Threading.Thread.Sleep(30000);
 
-        System.Threading.Thread.Sleep(30000); // Wait for 30 seconds
-
+        //In some cases the device has after the reboot an other COM port...
+        serialPort_.PortName = FindDevice(serialNumber);
         serialPort_.Open();
         serialPort_.DiscardInBuffer();
         serialPort_.DiscardOutBuffer();
@@ -757,8 +811,7 @@ public class Device : IDisposable
     /// </returns>
     /// <remarks>
     /// The generated report consists of the following fields:
-    /// - <see cref="Dict.LEVELLING"/>: The levelling results in JSON format.
-    /// - <see cref="Dict.SELFTEST"/>: The base self-test results in JSON format, with additional details added via <see cref="AddSelfTestDetails"/>.
+    /// - <see cref="Dict.SELFTEST"/>: The base self-test results in JSON format.
     /// - <see cref="Dict.SERIALNUMBER"/>: The device's serial number.
     /// - <see cref="Dict.FIRMWAREVERSION"/>: The firmware version currently installed on the device.
     /// - <see cref="Dict.PRODUCTIONNUMBER"/>: The device's production number.
@@ -807,4 +860,30 @@ public class Device : IDisposable
     {
         Command($"Z {(int)color}");
     }
+
+    /// <summary>
+    /// Sets the status led color.
+    /// </summary>
+    /// <exception cref="IndexOutOfRangeException">
+    /// Thrown if the device response does not contain the expected number of values.
+    /// </exception>
+    public List<string> Logging()
+    {
+        List<string> messages = new List<string> { };
+        while (true)
+        {
+            try
+            {
+                string[] response = Command("Q");
+                messages.Add(response[1]);
+            }
+            catch (Exception)
+            {
+                break;
+            }
+        }
+
+        return messages ;
+    }
+
 }

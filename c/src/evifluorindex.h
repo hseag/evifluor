@@ -12,6 +12,7 @@ enum EviFluoIndices
   INDEX_CURRENT_LED625_POWER_MIN              = 18,
   INDEX_CURRENT_LED625_POWER_MAX              = 19,
   INDEX_CURRENT_LED625_POWER                  = 20,
+  INDEX_SENSOR_LED                            = 21,
 
   
   //USED ONLY FROM DILBERT
