@@ -1,0 +1,518 @@
+{
+  "source_base_path": "C:/scm/hse/colibri/evifluor/module/csharp/EviFluor/doc",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.AutoGainResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.AutoGainResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.AutoGainResult",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.AutoGainResult.yml\" sourcestartlinenumber=\"1\">Represents the result of an automatic gain adjustment operation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Channel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Channel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Channel",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Channel.yml\" sourcestartlinenumber=\"1\">Represents a measurement channel with sample and reference values, measured in mV.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Device.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Device.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Device",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Device.yml\" sourcestartlinenumber=\"1\">This class represents the eviFluor module.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Dict.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Dict.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Dict",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Dict.yml\" sourcestartlinenumber=\"1\">Defines constant dictionary keys used in measurement processing.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Error.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Error.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Error",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Error.yml\" sourcestartlinenumber=\"1\">Enumeration representing various error codes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Factors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Factors.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Factors",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Factors.yml\" sourcestartlinenumber=\"1\">Represents standardization factors with low and high values.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.FirstAirMeasurementResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.FirstAirMeasurementResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.FirstAirMeasurementResult",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.FirstAirMeasurementResult.yml\" sourcestartlinenumber=\"1\">Represents the result of the first air measurement, containing the minimum and maximum recorded measurements.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.FirstSampleMeasurementResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.FirstSampleMeasurementResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.FirstSampleMeasurementResult",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.FirstSampleMeasurementResult.yml\" sourcestartlinenumber=\"1\">Represents the result of the first sample measurement, containing auto-gain results and the measurement itself.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.IJsonSerializable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.IJsonSerializable.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.IJsonSerializable",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.IJsonSerializable.yml\" sourcestartlinenumber=\"1\">Defines a contract for types that can serialize themselves to a <xref href=\"System.Text.Json.Nodes.JsonNode\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.IKit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.IKit.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.IKit",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.IKit.yml\" sourcestartlinenumber=\"1\">Interface for implementing calibration fitting algorithms.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Index.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Index.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Index",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Index.yml\" sourcestartlinenumber=\"1\">Enumeration representing different index values for hardware configurations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Kits.Default.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Kits.Default.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Kits.Default",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Kits.Default.yml\" sourcestartlinenumber=\"1\">Default implementation of the IKit interface using linear interpolation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Kits.Quant_iT_dsDNA_HS",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.yml\" sourcestartlinenumber=\"1\">Specific implementation of the Quant-iT dsDNA High Sensitivity Assay Kit.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Kits.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Kits.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Kits",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Measurement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Measurement.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Measurement",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Measurement.yml\" sourcestartlinenumber=\"1\">Represents a measurement containing baseline, air, and sample values, along with optional comments.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Point.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Point.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Point",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Point.yml\" sourcestartlinenumber=\"1\">Represents a data point with a concentration and corresponding value.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Results.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Results.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Results",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Results.yml\" sourcestartlinenumber=\"1\">Represents the results the concentration measurement.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.SelfTestResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.SelfTestResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.SelfTestResult",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.SelfTestResult.yml\" sourcestartlinenumber=\"1\">Represents the result of a self-test, containing various checks and problem indicators.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Selftest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Selftest.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Selftest",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Selftest.yml\" sourcestartlinenumber=\"1\">Flags enumeration for self-test components.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.SingleMeasurement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.SingleMeasurement.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.SingleMeasurement",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.SingleMeasurement.yml\" sourcestartlinenumber=\"1\">Represents a single measurement consisting the 470 nm wavelength channel.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.StatusLedColor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.StatusLedColor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.StatusLedColor",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.StatusLedColor.yml\" sourcestartlinenumber=\"1\">Enumeration representing different status led colors .</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.StorageMeasurement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.StorageMeasurement.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.StorageMeasurement",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.StorageMeasurement.yml\" sourcestartlinenumber=\"1\">Handles storage and retrieval of measurements using JSON serialization.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.StorageMeasurementEntry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.StorageMeasurementEntry.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.StorageMeasurementEntry",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.StorageMeasurementEntry.yml\" sourcestartlinenumber=\"1\">Represents an entry in the storage measurement system.\nContains a measurement, an optional comment, results, and raw JSON data.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.TypeOf.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.TypeOf.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.TypeOf",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.TypeOf.yml\" sourcestartlinenumber=\"1\">Enumeration representing different data types.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.USB.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.USB.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.USB",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.USB.yml\" sourcestartlinenumber=\"1\">Provides USB-related constants.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Verification.Entry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Verification.Entry.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Verification.Entry",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Verification.Entry.yml\" sourcestartlinenumber=\"1\">Represents a single verification result entry within the <xref href=\"Hse.EviFluor.Verification\" data-throw-if-not-resolved=\"false\"></xref> process.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Verification.Hints.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Verification.Hints.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Verification.Hints",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Verification.Hints.yml\" sourcestartlinenumber=\"1\">Flags that provide context-sensitive hints for verification checks.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Verification.ProblemId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Verification.ProblemId.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Verification.ProblemId",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Verification.ProblemId.yml\" sourcestartlinenumber=\"1\">Enum representing various types of problems that may occur during verification.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Verification.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Verification.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Verification",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Verification.yml\" sourcestartlinenumber=\"1\">Provides verification checks for various measurement types and conditions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon.ico"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/hseagohnesubzeile_cmyk_150px.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/hseagohnesubzeile_cmyk_150px.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

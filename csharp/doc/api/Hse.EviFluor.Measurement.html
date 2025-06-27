@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Measurement | eviFluor </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Measurement | eviFluor ">
+      
+      <meta name="description" content="Represents a measurement containing baseline, air, and sample values, along with optional comments.">
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/hseagohnesubzeile_cmyk_150px.png" alt="eviFluor">
+            eviFluor
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Hse.EviFluor.Measurement">
+
+
+
+  <h1 id="Hse_EviFluor_Measurement" data-uid="Hse.EviFluor.Measurement" class="text-break">
+Class Measurement  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Hse.html">Hse</a>.<a class="xref" href="Hse.EviFluor.html">EviFluor</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Hseagcom.EviFluor.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Represents a measurement containing baseline, air, and sample values, along with optional comments.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Measurement</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Measurement</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Hse_EviFluor_Measurement__ctor_" data-uid="Hse.EviFluor.Measurement.#ctor*"></a>
+
+  <h3 id="Hse_EviFluor_Measurement__ctor_Hse_EviFluor_FirstAirMeasurementResult_Hse_EviFluor_FirstSampleMeasurementResult_System_String_" data-uid="Hse.EviFluor.Measurement.#ctor(Hse.EviFluor.FirstAirMeasurementResult,Hse.EviFluor.FirstSampleMeasurementResult,System.String)">
+  Measurement(FirstAirMeasurementResult, FirstSampleMeasurementResult, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Hse.EviFluor.Measurement.html">Measurement</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Measurement(FirstAirMeasurementResult air, FirstSampleMeasurementResult sample, string comment = &quot;&quot;)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>air</code> <a class="xref" href="Hse.EviFluor.FirstAirMeasurementResult.html">FirstAirMeasurementResult</a></dt>
+    <dd><p>The air measurement.</p>
+</dd>
+    <dt><code>sample</code> <a class="xref" href="Hse.EviFluor.FirstSampleMeasurementResult.html">FirstSampleMeasurementResult</a></dt>
+    <dd><p>The sample measurement.</p>
+</dd>
+    <dt><code>comment</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>An optional comment for the measurement.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Measurement__ctor_" data-uid="Hse.EviFluor.Measurement.#ctor*"></a>
+
+  <h3 id="Hse_EviFluor_Measurement__ctor_Hse_EviFluor_SingleMeasurement_Hse_EviFluor_SingleMeasurement_System_String_" data-uid="Hse.EviFluor.Measurement.#ctor(Hse.EviFluor.SingleMeasurement,Hse.EviFluor.SingleMeasurement,System.String)">
+  Measurement(SingleMeasurement, SingleMeasurement, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Hse.EviFluor.Measurement.html">Measurement</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Measurement(SingleMeasurement air, SingleMeasurement sample, string comment = &quot;&quot;)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>air</code> <a class="xref" href="Hse.EviFluor.SingleMeasurement.html">SingleMeasurement</a></dt>
+    <dd><p>The air measurement.</p>
+</dd>
+    <dt><code>sample</code> <a class="xref" href="Hse.EviFluor.SingleMeasurement.html">SingleMeasurement</a></dt>
+    <dd><p>The sample measurement.</p>
+</dd>
+    <dt><code>comment</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>An optional comment for the measurement.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="Hse_EviFluor_Measurement_air" data-uid="Hse.EviFluor.Measurement.air">
+  air
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The air reference measurement used for background correction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SingleMeasurement air</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Hse.EviFluor.SingleMeasurement.html">SingleMeasurement</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Hse_EviFluor_Measurement_comment" data-uid="Hse.EviFluor.Measurement.comment">
+  comment
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Optional comment associated with the measurement, such as notes or labels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string comment</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Hse_EviFluor_Measurement_sample" data-uid="Hse.EviFluor.Measurement.sample">
+  sample
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The actual sample measurement.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SingleMeasurement sample</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Hse.EviFluor.SingleMeasurement.html">SingleMeasurement</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Hse_EviFluor_Measurement_CalculateFactors_" data-uid="Hse.EviFluor.Measurement.CalculateFactors*"></a>
+
+  <h3 id="Hse_EviFluor_Measurement_CalculateFactors_System_Double_System_Double_Hse_EviFluor_Measurement_Hse_EviFluor_Measurement_" data-uid="Hse.EviFluor.Measurement.CalculateFactors(System.Double,System.Double,Hse.EviFluor.Measurement,Hse.EviFluor.Measurement)">
+  CalculateFactors(double, double, Measurement, Measurement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the correction factors based on known standard concentrations and corresponding measurements.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Factors CalculateFactors(double concentrationLow, double concentrationHigh, Measurement measurementStdLow, Measurement measurementStdHigh)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>concentrationLow</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The known low concentration standard.</p>
+</dd>
+    <dt><code>concentrationHigh</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The known high concentration standard.</p>
+</dd>
+    <dt><code>measurementStdLow</code> <a class="xref" href="Hse.EviFluor.Measurement.html">Measurement</a></dt>
+    <dd><p>The measurement corresponding to the low concentration.</p>
+</dd>
+    <dt><code>measurementStdHigh</code> <a class="xref" href="Hse.EviFluor.Measurement.html">Measurement</a></dt>
+    <dd><p>The measurement corresponding to the high concentration.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Hse.EviFluor.Factors.html">Factors</a></dt>
+    <dd><p>A <a class="xref" href="Hse.EviFluor.Factors.html">Factors</a> object containing calculated correction factors.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Measurement_CalculateFactors_" data-uid="Hse.EviFluor.Measurement.CalculateFactors*"></a>
+
+  <h3 id="Hse_EviFluor_Measurement_CalculateFactors_System_Double_System_Double_System_Collections_Generic_List_Hse_EviFluor_Measurement__System_Collections_Generic_List_Hse_EviFluor_Measurement__" data-uid="Hse.EviFluor.Measurement.CalculateFactors(System.Double,System.Double,System.Collections.Generic.List{Hse.EviFluor.Measurement},System.Collections.Generic.List{Hse.EviFluor.Measurement})">
+  CalculateFactors(double, double, List&lt;Measurement&gt;, List&lt;Measurement&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates correction factors using multiple measurements for each concentration level.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Factors CalculateFactors(double concentrationLow, double concentrationHigh, List&lt;Measurement&gt; measurementsStdLow, List&lt;Measurement&gt; measurementsStdHigh)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>concentrationLow</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The known low concentration standard.</p>
+</dd>
+    <dt><code>concentrationHigh</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The known high concentration standard.</p>
+</dd>
+    <dt><code>measurementsStdLow</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Hse.EviFluor.Measurement.html">Measurement</a>&gt;</dt>
+    <dd><p>A list of measurements corresponding to the low concentration.</p>
+</dd>
+    <dt><code>measurementsStdHigh</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Hse.EviFluor.Measurement.html">Measurement</a>&gt;</dt>
+    <dd><p>A list of measurements corresponding to the high concentration.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Hse.EviFluor.Factors.html">Factors</a></dt>
+    <dd><p>A <a class="xref" href="Hse.EviFluor.Factors.html">Factors</a> object containing calculated correction factors.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Measurement_Comment_" data-uid="Hse.EviFluor.Measurement.Comment*"></a>
+
+  <h3 id="Hse_EviFluor_Measurement_Comment" data-uid="Hse.EviFluor.Measurement.Comment">
+  Comment()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the comment associated with the measurement.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Comment()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The comment text.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Measurement_Concentration_" data-uid="Hse.EviFluor.Measurement.Concentration*"></a>
+
+  <h3 id="Hse_EviFluor_Measurement_Concentration_Hse_EviFluor_Factors_Hse_EviFluor_IKit_" data-uid="Hse.EviFluor.Measurement.Concentration(Hse.EviFluor.Factors,Hse.EviFluor.IKit)">
+  Concentration(Factors, IKit?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the concentration using the given factors and kit.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Concentration(Factors factors, IKit? kit = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>factors</code> <a class="xref" href="Hse.EviFluor.Factors.html">Factors</a></dt>
+    <dd><p>Correction factors for the measurement.</p>
+</dd>
+    <dt><code>kit</code> <a class="xref" href="Hse.EviFluor.IKit.html">IKit</a></dt>
+    <dd><p>Optional kit for concentration fitting (e.g., linear interpolation).</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The calculated concentration value.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Measurement_FromJson_" data-uid="Hse.EviFluor.Measurement.FromJson*"></a>
+
+  <h3 id="Hse_EviFluor_Measurement_FromJson_System_Text_Json_Nodes_JsonNode_" data-uid="Hse.EviFluor.Measurement.FromJson(System.Text.Json.Nodes.JsonNode)">
+  FromJson(JsonNode?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Hse.EviFluor.Measurement.html">Measurement</a> instance from a JSON representation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Measurement FromJson(JsonNode? node)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>node</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.nodes.jsonnode">JsonNode</a></dt>
+    <dd><p>The JSON node containing the measurement data.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Hse.EviFluor.Measurement.html">Measurement</a></dt>
+    <dd><p>A <a class="xref" href="Hse.EviFluor.Measurement.html">Measurement</a> object populated from JSON data.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p>Thrown if the provided JSON node is null.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Thrown if required fields are missing.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Hse_EviFluor_Measurement_GetResults_" data-uid="Hse.EviFluor.Measurement.GetResults*"></a>
+
+  <h3 id="Hse_EviFluor_Measurement_GetResults_Hse_EviFluor_Factors_Hse_EviFluor_IKit_" data-uid="Hse.EviFluor.Measurement.GetResults(Hse.EviFluor.Factors,Hse.EviFluor.IKit)">
+  GetResults(Factors, IKit?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Computes the measurement results using the provided factors and kit.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Results GetResults(Factors factors, IKit? kit = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>factors</code> <a class="xref" href="Hse.EviFluor.Factors.html">Factors</a></dt>
+    <dd><p>Factors used for calibration or adjustment.</p>
+</dd>
+    <dt><code>kit</code> <a class="xref" href="Hse.EviFluor.IKit.html">IKit</a></dt>
+    <dd><p>Optional kit to use for fitting measured data.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Hse.EviFluor.Results.html">Results</a></dt>
+    <dd><p>A <a class="xref" href="Hse.EviFluor.Results.html">Results</a> object with computed values.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Measurement_SetComment_" data-uid="Hse.EviFluor.Measurement.SetComment*"></a>
+
+  <h3 id="Hse_EviFluor_Measurement_SetComment_System_String_" data-uid="Hse.EviFluor.Measurement.SetComment(System.String)">
+  SetComment(string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets the comment for the measurement.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetComment(string comment)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>comment</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The comment text.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Measurement_ToJson_" data-uid="Hse.EviFluor.Measurement.ToJson*"></a>
+
+  <h3 id="Hse_EviFluor_Measurement_ToJson" data-uid="Hse.EviFluor.Measurement.ToJson">
+  ToJson()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts the measurement to a JSON representation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonNode ToJson()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.nodes.jsonnode">JsonNode</a></dt>
+    <dd><p>A JSON node representing the measurement.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Measurement_ToString_" data-uid="Hse.EviFluor.Measurement.ToString*"></a>
+
+  <h3 id="Hse_EviFluor_Measurement_ToString" data-uid="Hse.EviFluor.Measurement.ToString">
+  ToString()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a string representation of the measurement.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A formatted string displaying baseline, air, and sample measurements.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Measurement_Value_" data-uid="Hse.EviFluor.Measurement.Value*"></a>
+
+  <h3 id="Hse_EviFluor_Measurement_Value" data-uid="Hse.EviFluor.Measurement.Value">
+  Value()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the difference between air- and sample measurement.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Value()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>Difference between air- and sample measurement.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
