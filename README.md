@@ -17,4 +17,4 @@ For more information see https://www.hseag.com/evifluor-duo-factsheet. To contro
 11. Dispose the tip with attached cuvette
 12. Repeat steps 1-12 until all samples are processed
 
-A detailed description can be found at TBD.
+The C# documentation can be found [here](csharp/doc/api/Hse.EviDense.html).
