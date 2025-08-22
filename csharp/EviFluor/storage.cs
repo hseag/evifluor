@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 namespace Hse.EviFluor;
 
 /// <summary>
@@ -151,13 +152,17 @@ public class StorageMeasurement
     /// <param name="measurement">The measurement to append.</param>
     /// <param name="comment">An optional comment for the measurement.</param>
     /// <param name="logging">Optional logging information.</param>
-    public void Append(Measurement measurement, string comment = "", List<string> ? logging = null)
+    /// <param name="verification">Optional verification information.</param>
+    public void Append(Measurement measurement, string comment = "", List<string> ? logging = null, Verification? verification = null)
     {
         if (measurement == null)
             throw new ArgumentException("No measurement object provided to append!");
 
         var m = measurement.ToJson();
-        m[Dict.COMMENT] = comment;
+        if (!string.IsNullOrEmpty(comment))
+        {
+            m[Dict.COMMENT] = comment;
+        }
 
         if (logging != null && logging.Count > 0)
         {
@@ -166,6 +171,13 @@ public class StorageMeasurement
             {
                 m[Dict.LOGGING]?.AsArray().Add(log);
             }
+        }
+
+        m[Dict.DATE_TIME] = DateTime.UtcNow.ToString("o");
+
+        if (verification != null && verification.Failed())
+        {
+            m[Dict.ERRORS] = verification.ToJson();
         }
 
         data[Dict.MEASUREMENTS]?.AsArray().Add(m);
@@ -178,7 +190,8 @@ public class StorageMeasurement
     /// /// <param name="results">The results to append.</param>
     /// <param name="comment">An optional comment for the measurement.</param>
     /// <param name="logging">Optional logging information.</param>
-    public void AppendWithResults(Measurement measurement, Results results, string comment = "", List<string>? logging = null)
+    /// <param name="verification">Optional verification information.</param>
+    public void AppendWithResults(Measurement measurement, Results results, string comment = "", List<string>? logging = null, Verification ? verification = null)
     {
         if (measurement == null)
             throw new ArgumentException("No measurement object provided to append!");
@@ -188,7 +201,10 @@ public class StorageMeasurement
         if (results != null)
             m[Dict.RESULTS] = results.ToJson();
 
-        m[Dict.COMMENT] = comment;
+        if (!string.IsNullOrEmpty(comment))
+        {
+            m[Dict.COMMENT] = comment;
+        }
 
         if (logging != null && logging.Count > 0)
         {
@@ -197,6 +213,13 @@ public class StorageMeasurement
             {
                 m[Dict.LOGGING]?.AsArray().Add(log);
             }
+        }
+
+        m[Dict.DATE_TIME] = DateTime.UtcNow.ToString("o");
+
+        if(verification != null && verification.Failed())
+        {
+            m[Dict.ERRORS] = verification.ToJson();
         }
 
         data[Dict.MEASUREMENTS]?.AsArray().Add(m);
@@ -211,7 +234,8 @@ public class StorageMeasurement
         var options = new JsonSerializerOptions
         {
             NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals,
-            WriteIndented = true
+            WriteIndented = true,
+            TypeInfoResolver = new DefaultJsonTypeInfoResolver()
         };
 
         using (var writer = new StreamWriter(filename))

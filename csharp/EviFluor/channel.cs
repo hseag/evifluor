@@ -9,7 +9,7 @@ namespace Hse.EviFluor;
 /// <summary>
 /// Represents a measurement channel with sample and reference values, measured in mV.
 /// </summary>
-public class Channel
+public class Channel : IJsonSerializable
 {
     /// <summary>
     /// Gets or sets the dark value in mV.
@@ -87,7 +87,18 @@ public class Channel
             valueNode is not null &&
             ledPowerNode is not null)
         {
-            return new Channel(darkNode.GetValue<double>(), valueNode.GetValue<double>(), ledPowerNode.GetValue<int>());
+            int ledPower = 0;
+            //some intstruments write integer number as 70.0 and sometimes as 70.
+            if (ledPowerNode.AsValue().TryGetValue<int>(out ledPower))
+            {
+                //ok
+            }
+            else
+            {
+                ledPower = (int)ledPowerNode.GetValue<double>();
+            }
+
+            return new Channel(darkNode.GetValue<double>(), valueNode.GetValue<double>(), ledPower);
         }
         else
         {

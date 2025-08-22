@@ -10,7 +10,7 @@ namespace Hse.EviFluor;
 /// <summary>
 /// Represents the results the concentration measurement.
 /// </summary>
-public class Results : IEquatable<Results>
+public class Results : IEquatable<Results>, IJsonSerializable
 {
     /// <summary>
     /// Gets or sets the concentration. The unit of the concentration depends on the used standard high.
@@ -176,7 +176,7 @@ public class Factors
 /// <summary>
 /// Represents a measurement containing baseline, air, and sample values, along with optional comments.
 /// </summary>
-public class Measurement
+public class Measurement : IJsonSerializable
 {
     /// <summary>
     /// Optional comment associated with the measurement, such as notes or labels.

@@ -580,6 +580,18 @@ references:
   commentId: F:Hse.EviFluor.Dict.DARK
   fullName: Hse.EviFluor.Dict.DARK
   nameWithType: Dict.DARK
+- uid: Hse.EviFluor.Dict.DATE_TIME
+  name: DATE_TIME
+  href: api/Hse.EviFluor.Dict.html#Hse_EviFluor_Dict_DATE_TIME
+  commentId: F:Hse.EviFluor.Dict.DATE_TIME
+  fullName: Hse.EviFluor.Dict.DATE_TIME
+  nameWithType: Dict.DATE_TIME
+- uid: Hse.EviFluor.Dict.ERRORS
+  name: ERRORS
+  href: api/Hse.EviFluor.Dict.html#Hse_EviFluor_Dict_ERRORS
+  commentId: F:Hse.EviFluor.Dict.ERRORS
+  fullName: Hse.EviFluor.Dict.ERRORS
+  nameWithType: Dict.ERRORS
 - uid: Hse.EviFluor.Dict.FIRMWAREVERSION
   name: FIRMWAREVERSION
   href: api/Hse.EviFluor.Dict.html#Hse_EviFluor_Dict_FIRMWAREVERSION
@@ -1789,15 +1801,15 @@ references:
   fullName.vb: Hse.EviFluor.StorageMeasurement.New
   nameWithType: StorageMeasurement.StorageMeasurement
   nameWithType.vb: StorageMeasurement.New
-- uid: Hse.EviFluor.StorageMeasurement.Append(Hse.EviFluor.Measurement,System.String,System.Collections.Generic.List{System.String})
-  name: Append(Measurement, string, List<string>?)
-  href: api/Hse.EviFluor.StorageMeasurement.html#Hse_EviFluor_StorageMeasurement_Append_Hse_EviFluor_Measurement_System_String_System_Collections_Generic_List_System_String__
-  commentId: M:Hse.EviFluor.StorageMeasurement.Append(Hse.EviFluor.Measurement,System.String,System.Collections.Generic.List{System.String})
-  name.vb: Append(Measurement, String, List(Of String))
-  fullName: Hse.EviFluor.StorageMeasurement.Append(Hse.EviFluor.Measurement, string, System.Collections.Generic.List<string>?)
-  fullName.vb: Hse.EviFluor.StorageMeasurement.Append(Hse.EviFluor.Measurement, String, System.Collections.Generic.List(Of String))
-  nameWithType: StorageMeasurement.Append(Measurement, string, List<string>?)
-  nameWithType.vb: StorageMeasurement.Append(Measurement, String, List(Of String))
+- uid: Hse.EviFluor.StorageMeasurement.Append(Hse.EviFluor.Measurement,System.String,System.Collections.Generic.List{System.String},Hse.EviFluor.Verification)
+  name: Append(Measurement, string, List<string>?, Verification?)
+  href: api/Hse.EviFluor.StorageMeasurement.html#Hse_EviFluor_StorageMeasurement_Append_Hse_EviFluor_Measurement_System_String_System_Collections_Generic_List_System_String__Hse_EviFluor_Verification_
+  commentId: M:Hse.EviFluor.StorageMeasurement.Append(Hse.EviFluor.Measurement,System.String,System.Collections.Generic.List{System.String},Hse.EviFluor.Verification)
+  name.vb: Append(Measurement, String, List(Of String), Verification)
+  fullName: Hse.EviFluor.StorageMeasurement.Append(Hse.EviFluor.Measurement, string, System.Collections.Generic.List<string>?, Hse.EviFluor.Verification?)
+  fullName.vb: Hse.EviFluor.StorageMeasurement.Append(Hse.EviFluor.Measurement, String, System.Collections.Generic.List(Of String), Hse.EviFluor.Verification)
+  nameWithType: StorageMeasurement.Append(Measurement, string, List<string>?, Verification?)
+  nameWithType.vb: StorageMeasurement.Append(Measurement, String, List(Of String), Verification)
 - uid: Hse.EviFluor.StorageMeasurement.Append*
   name: Append
   href: api/Hse.EviFluor.StorageMeasurement.html#Hse_EviFluor_StorageMeasurement_Append_
@@ -1805,15 +1817,15 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.StorageMeasurement.Append
   nameWithType: StorageMeasurement.Append
-- uid: Hse.EviFluor.StorageMeasurement.AppendWithResults(Hse.EviFluor.Measurement,Hse.EviFluor.Results,System.String,System.Collections.Generic.List{System.String})
-  name: AppendWithResults(Measurement, Results, string, List<string>?)
-  href: api/Hse.EviFluor.StorageMeasurement.html#Hse_EviFluor_StorageMeasurement_AppendWithResults_Hse_EviFluor_Measurement_Hse_EviFluor_Results_System_String_System_Collections_Generic_List_System_String__
-  commentId: M:Hse.EviFluor.StorageMeasurement.AppendWithResults(Hse.EviFluor.Measurement,Hse.EviFluor.Results,System.String,System.Collections.Generic.List{System.String})
-  name.vb: AppendWithResults(Measurement, Results, String, List(Of String))
-  fullName: Hse.EviFluor.StorageMeasurement.AppendWithResults(Hse.EviFluor.Measurement, Hse.EviFluor.Results, string, System.Collections.Generic.List<string>?)
-  fullName.vb: Hse.EviFluor.StorageMeasurement.AppendWithResults(Hse.EviFluor.Measurement, Hse.EviFluor.Results, String, System.Collections.Generic.List(Of String))
-  nameWithType: StorageMeasurement.AppendWithResults(Measurement, Results, string, List<string>?)
-  nameWithType.vb: StorageMeasurement.AppendWithResults(Measurement, Results, String, List(Of String))
+- uid: Hse.EviFluor.StorageMeasurement.AppendWithResults(Hse.EviFluor.Measurement,Hse.EviFluor.Results,System.String,System.Collections.Generic.List{System.String},Hse.EviFluor.Verification)
+  name: AppendWithResults(Measurement, Results, string, List<string>?, Verification?)
+  href: api/Hse.EviFluor.StorageMeasurement.html#Hse_EviFluor_StorageMeasurement_AppendWithResults_Hse_EviFluor_Measurement_Hse_EviFluor_Results_System_String_System_Collections_Generic_List_System_String__Hse_EviFluor_Verification_
+  commentId: M:Hse.EviFluor.StorageMeasurement.AppendWithResults(Hse.EviFluor.Measurement,Hse.EviFluor.Results,System.String,System.Collections.Generic.List{System.String},Hse.EviFluor.Verification)
+  name.vb: AppendWithResults(Measurement, Results, String, List(Of String), Verification)
+  fullName: Hse.EviFluor.StorageMeasurement.AppendWithResults(Hse.EviFluor.Measurement, Hse.EviFluor.Results, string, System.Collections.Generic.List<string>?, Hse.EviFluor.Verification?)
+  fullName.vb: Hse.EviFluor.StorageMeasurement.AppendWithResults(Hse.EviFluor.Measurement, Hse.EviFluor.Results, String, System.Collections.Generic.List(Of String), Hse.EviFluor.Verification)
+  nameWithType: StorageMeasurement.AppendWithResults(Measurement, Results, string, List<string>?, Verification?)
+  nameWithType.vb: StorageMeasurement.AppendWithResults(Measurement, Results, String, List(Of String), Verification)
 - uid: Hse.EviFluor.StorageMeasurement.AppendWithResults*
   name: AppendWithResults
   href: api/Hse.EviFluor.StorageMeasurement.html#Hse_EviFluor_StorageMeasurement_AppendWithResults_
@@ -2109,6 +2121,12 @@ references:
   commentId: M:Hse.EviFluor.Verification.Check(Hse.EviFluor.Measurement,Hse.EviFluor.Verification.Hints)
   fullName: Hse.EviFluor.Verification.Check(Hse.EviFluor.Measurement, Hse.EviFluor.Verification.Hints)
   nameWithType: Verification.Check(Measurement, Verification.Hints)
+- uid: Hse.EviFluor.Verification.Check(Hse.EviFluor.Results,Hse.EviFluor.Verification.Hints)
+  name: Check(Results, Hints)
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Check_Hse_EviFluor_Results_Hse_EviFluor_Verification_Hints_
+  commentId: M:Hse.EviFluor.Verification.Check(Hse.EviFluor.Results,Hse.EviFluor.Verification.Hints)
+  fullName: Hse.EviFluor.Verification.Check(Hse.EviFluor.Results, Hse.EviFluor.Verification.Hints)
+  nameWithType: Verification.Check(Results, Verification.Hints)
 - uid: Hse.EviFluor.Verification.Check(Hse.EviFluor.SingleMeasurement,Hse.EviFluor.Verification.Hints)
   name: Check(SingleMeasurement, Hints)
   href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Check_Hse_EviFluor_SingleMeasurement_Hse_EviFluor_Verification_Hints_
@@ -2131,6 +2149,60 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Verification.Check
   nameWithType: Verification.Check
+- uid: Hse.EviFluor.Verification.DefaultExpectedMaxLedPower
+  name: DefaultExpectedMaxLedPower
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_DefaultExpectedMaxLedPower
+  commentId: F:Hse.EviFluor.Verification.DefaultExpectedMaxLedPower
+  fullName: Hse.EviFluor.Verification.DefaultExpectedMaxLedPower
+  nameWithType: Verification.DefaultExpectedMaxLedPower
+- uid: Hse.EviFluor.Verification.DefaultExpectedMaxRfu
+  name: DefaultExpectedMaxRfu
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_DefaultExpectedMaxRfu
+  commentId: F:Hse.EviFluor.Verification.DefaultExpectedMaxRfu
+  fullName: Hse.EviFluor.Verification.DefaultExpectedMaxRfu
+  nameWithType: Verification.DefaultExpectedMaxRfu
+- uid: Hse.EviFluor.Verification.DefaultExpectedMinLedPower
+  name: DefaultExpectedMinLedPower
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_DefaultExpectedMinLedPower
+  commentId: F:Hse.EviFluor.Verification.DefaultExpectedMinLedPower
+  fullName: Hse.EviFluor.Verification.DefaultExpectedMinLedPower
+  nameWithType: Verification.DefaultExpectedMinLedPower
+- uid: Hse.EviFluor.Verification.DefaultExpectedMinRfu
+  name: DefaultExpectedMinRfu
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_DefaultExpectedMinRfu
+  commentId: F:Hse.EviFluor.Verification.DefaultExpectedMinRfu
+  fullName: Hse.EviFluor.Verification.DefaultExpectedMinRfu
+  nameWithType: Verification.DefaultExpectedMinRfu
+- uid: Hse.EviFluor.Verification.DefaultMaxSignal
+  name: DefaultMaxSignal
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_DefaultMaxSignal
+  commentId: F:Hse.EviFluor.Verification.DefaultMaxSignal
+  fullName: Hse.EviFluor.Verification.DefaultMaxSignal
+  nameWithType: Verification.DefaultMaxSignal
+- uid: Hse.EviFluor.Verification.DefaultRfuThresholdMultiplier
+  name: DefaultRfuThresholdMultiplier
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_DefaultRfuThresholdMultiplier
+  commentId: F:Hse.EviFluor.Verification.DefaultRfuThresholdMultiplier
+  fullName: Hse.EviFluor.Verification.DefaultRfuThresholdMultiplier
+  nameWithType: Verification.DefaultRfuThresholdMultiplier
+- uid: Hse.EviFluor.Verification.DefaultStdHighDelta
+  name: DefaultStdHighDelta
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_DefaultStdHighDelta
+  commentId: F:Hse.EviFluor.Verification.DefaultStdHighDelta
+  fullName: Hse.EviFluor.Verification.DefaultStdHighDelta
+  nameWithType: Verification.DefaultStdHighDelta
+- uid: Hse.EviFluor.Verification.DefaultStdHighTarget
+  name: DefaultStdHighTarget
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_DefaultStdHighTarget
+  commentId: F:Hse.EviFluor.Verification.DefaultStdHighTarget
+  fullName: Hse.EviFluor.Verification.DefaultStdHighTarget
+  nameWithType: Verification.DefaultStdHighTarget
+- uid: Hse.EviFluor.Verification.DefaultThresholdNegativeConcentration
+  name: DefaultThresholdNegativeConcentration
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_DefaultThresholdNegativeConcentration
+  commentId: F:Hse.EviFluor.Verification.DefaultThresholdNegativeConcentration
+  fullName: Hse.EviFluor.Verification.DefaultThresholdNegativeConcentration
+  nameWithType: Verification.DefaultThresholdNegativeConcentration
 - uid: Hse.EviFluor.Verification.Entries
   name: Entries
   href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Entries
@@ -2221,6 +2293,30 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Verification.Entry.ToString
   nameWithType: Verification.Entry.ToString
+- uid: Hse.EviFluor.Verification.ExpectedMaxLedPower
+  name: ExpectedMaxLedPower
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_ExpectedMaxLedPower
+  commentId: F:Hse.EviFluor.Verification.ExpectedMaxLedPower
+  fullName: Hse.EviFluor.Verification.ExpectedMaxLedPower
+  nameWithType: Verification.ExpectedMaxLedPower
+- uid: Hse.EviFluor.Verification.ExpectedMaxRfu
+  name: ExpectedMaxRfu
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_ExpectedMaxRfu
+  commentId: F:Hse.EviFluor.Verification.ExpectedMaxRfu
+  fullName: Hse.EviFluor.Verification.ExpectedMaxRfu
+  nameWithType: Verification.ExpectedMaxRfu
+- uid: Hse.EviFluor.Verification.ExpectedMinLedPower
+  name: ExpectedMinLedPower
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_ExpectedMinLedPower
+  commentId: F:Hse.EviFluor.Verification.ExpectedMinLedPower
+  fullName: Hse.EviFluor.Verification.ExpectedMinLedPower
+  nameWithType: Verification.ExpectedMinLedPower
+- uid: Hse.EviFluor.Verification.ExpectedMinRfu
+  name: ExpectedMinRfu
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_ExpectedMinRfu
+  commentId: F:Hse.EviFluor.Verification.ExpectedMinRfu
+  fullName: Hse.EviFluor.Verification.ExpectedMinRfu
+  nameWithType: Verification.ExpectedMinRfu
 - uid: Hse.EviFluor.Verification.Failed
   name: Failed()
   href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Failed
@@ -2271,6 +2367,12 @@ references:
   commentId: F:Hse.EviFluor.Verification.Hints.STD_HIGH
   fullName: Hse.EviFluor.Verification.Hints.STD_HIGH
   nameWithType: Verification.Hints.STD_HIGH
+- uid: Hse.EviFluor.Verification.MaxSignal
+  name: MaxSignal
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_MaxSignal
+  commentId: F:Hse.EviFluor.Verification.MaxSignal
+  fullName: Hse.EviFluor.Verification.MaxSignal
+  nameWithType: Verification.MaxSignal
 - uid: Hse.EviFluor.Verification.ProblemId
   name: Verification.ProblemId
   href: api/Hse.EviFluor.Verification.ProblemId.html
@@ -2289,6 +2391,12 @@ references:
   commentId: F:Hse.EviFluor.Verification.ProblemId.CUVETTE_MISSING
   fullName: Hse.EviFluor.Verification.ProblemId.CUVETTE_MISSING
   nameWithType: Verification.ProblemId.CUVETTE_MISSING
+- uid: Hse.EviFluor.Verification.ProblemId.NEGATIVE_CONCENTRATION
+  name: NEGATIVE_CONCENTRATION
+  href: api/Hse.EviFluor.Verification.ProblemId.html#Hse_EviFluor_Verification_ProblemId_NEGATIVE_CONCENTRATION
+  commentId: F:Hse.EviFluor.Verification.ProblemId.NEGATIVE_CONCENTRATION
+  fullName: Hse.EviFluor.Verification.ProblemId.NEGATIVE_CONCENTRATION
+  nameWithType: Verification.ProblemId.NEGATIVE_CONCENTRATION
 - uid: Hse.EviFluor.Verification.ProblemId.SATURATION
   name: SATURATION
   href: api/Hse.EviFluor.Verification.ProblemId.html#Hse_EviFluor_Verification_ProblemId_SATURATION
@@ -2301,6 +2409,24 @@ references:
   commentId: F:Hse.EviFluor.Verification.ProblemId.WRONG_LEVEL
   fullName: Hse.EviFluor.Verification.ProblemId.WRONG_LEVEL
   nameWithType: Verification.ProblemId.WRONG_LEVEL
+- uid: Hse.EviFluor.Verification.RfuThresholdMultiplier
+  name: RfuThresholdMultiplier
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_RfuThresholdMultiplier
+  commentId: F:Hse.EviFluor.Verification.RfuThresholdMultiplier
+  fullName: Hse.EviFluor.Verification.RfuThresholdMultiplier
+  nameWithType: Verification.RfuThresholdMultiplier
+- uid: Hse.EviFluor.Verification.StdHighDelta
+  name: StdHighDelta
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_StdHighDelta
+  commentId: F:Hse.EviFluor.Verification.StdHighDelta
+  fullName: Hse.EviFluor.Verification.StdHighDelta
+  nameWithType: Verification.StdHighDelta
+- uid: Hse.EviFluor.Verification.StdHighTarget
+  name: StdHighTarget
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_StdHighTarget
+  commentId: F:Hse.EviFluor.Verification.StdHighTarget
+  fullName: Hse.EviFluor.Verification.StdHighTarget
+  nameWithType: Verification.StdHighTarget
 - uid: Hse.EviFluor.Verification.Success
   name: Success()
   href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Success
@@ -2314,6 +2440,12 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Verification.Success
   nameWithType: Verification.Success
+- uid: Hse.EviFluor.Verification.ThresholdNegativeConcentration
+  name: ThresholdNegativeConcentration
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_ThresholdNegativeConcentration
+  commentId: F:Hse.EviFluor.Verification.ThresholdNegativeConcentration
+  fullName: Hse.EviFluor.Verification.ThresholdNegativeConcentration
+  nameWithType: Verification.ThresholdNegativeConcentration
 - uid: Hse.EviFluor.Verification.ToJson
   name: ToJson()
   href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_ToJson

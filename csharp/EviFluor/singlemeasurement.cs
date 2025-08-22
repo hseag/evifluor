@@ -9,7 +9,7 @@ namespace Hse.EviFluor;
 /// <summary>
 /// Represents a single measurement consisting the 470 nm wavelength channel.
 /// </summary>
-public class SingleMeasurement
+public class SingleMeasurement : IJsonSerializable
 {
     /// <summary>
     /// Gets or sets the channel for 470 nm measurements.

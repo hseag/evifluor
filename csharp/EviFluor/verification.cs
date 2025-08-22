@@ -9,11 +9,86 @@ namespace Hse.EviFluor
     /// </summary>
     public class Verification
     {
-        private static readonly double ExpectedMinRfu = 4.5;
-        private static readonly int ExpectedMinLedPower = 32;
-        private static readonly double ExpectedMaxRfu = 35.0;
-        private static readonly int ExpectedMaxLedPower = 222;
-        private static readonly double RfuThresholdMultiplier = 2.0;
+        /// <summary>
+        /// Default minimum expected RFU value.
+        /// </summary>
+        public static readonly double DefaultExpectedMinRfu = 4.5;
+        /// <summary>
+        /// Minimum expected RFU value used for verification.
+        /// </summary>
+        public static double ExpectedMinRfu = DefaultExpectedMinRfu;
+
+        /// <summary>
+        /// Default maximum expected RFU value.
+        /// </summary>
+        public static readonly double DefaultExpectedMaxRfu = 35.0;
+        /// <summary>
+        /// Maximum expected RFU value used for verification.
+        /// </summary>
+        public static double ExpectedMaxRfu = DefaultExpectedMaxRfu;
+
+        /// <summary>
+        /// Default minimum expected LED power.
+        /// </summary>
+        public static readonly int DefaultExpectedMinLedPower = 32;
+        /// <summary>
+        /// Minimum expected LED power used for verification.
+        /// </summary>
+        public static int ExpectedMinLedPower = DefaultExpectedMinLedPower;
+
+        /// <summary>
+        /// Default maximum expected LED power.
+        /// </summary>
+        public static readonly int DefaultExpectedMaxLedPower = 222;
+        /// <summary>
+        /// Maximum expected LED power used for verification.
+        /// </summary>
+        public static int ExpectedMaxLedPower = DefaultExpectedMaxLedPower;
+
+        /// <summary>
+        /// Default multiplier used for calculating RFU thresholds when determining cuvette presence.
+        /// </summary>
+        public static readonly double DefaultRfuThresholdMultiplier = 2.0;
+        /// <summary>
+        /// Multiplier used for calculating RFU thresholds when determining cuvette presence.
+        /// </summary>
+        public static double RfuThresholdMultiplier = DefaultRfuThresholdMultiplier;
+
+        /// <summary>
+        /// Default maximum allowed signal before considering saturation.
+        /// </summary>
+        public static readonly double DefaultMaxSignal = 2499.0;
+        /// <summary>
+        /// Maximum allowed signal before considering saturation.
+        /// </summary>
+        public static double MaxSignal = DefaultMaxSignal;
+
+        /// <summary>
+        /// Default target signal value for standard high checks.
+        /// </summary>
+        public static readonly double DefaultStdHighTarget = 2000.0;
+        /// <summary>
+        /// Target signal value for standard high checks.
+        /// </summary>
+        public static double StdHighTarget = DefaultStdHighTarget;
+
+        /// <summary>
+        /// Default allowed deviation from the standard high target.
+        /// </summary>
+        public static readonly double DefaultStdHighDelta = 300;
+        /// <summary>
+        /// Allowed deviation from the standard high target.
+        /// </summary>
+        public static double StdHighDelta = DefaultStdHighDelta;
+
+        /// <summary>
+        /// Default threshold for detecting negative concentrations.
+        /// </summary>
+        public static readonly double DefaultThresholdNegativeConcentration = -0.1;
+        /// <summary>
+        /// Threshold for detecting negative concentrations.
+        /// </summary>
+        public static double ThresholdNegativeConcentration = DefaultThresholdNegativeConcentration;
 
         /// <summary>
         /// Enum representing various types of problems that may occur during verification.
@@ -38,7 +113,12 @@ namespace Hse.EviFluor
             /// <summary>
             /// The signal level is not in the expected range (1700 - 2300 mV)
             /// </summary>
-            WRONG_LEVEL = 6
+            WRONG_LEVEL = 6,
+
+            /// <summary>
+            /// The concentration is less than ThresholdNegativeConcentration
+            /// </summary>
+            NEGATIVE_CONCENTRATION = 7
         }
 
         /// <summary>
@@ -70,7 +150,7 @@ namespace Hse.EviFluor
         /// Each entry consists of a <see cref="Verification.ProblemId"/> indicating the type of problem detected,
         /// and an associated data object (e.g., a measurement or result) that caused the issue.
         /// </remarks>
-        public class Entry
+        public class Entry : IJsonSerializable
         {
             /// <summary>
             /// Gets the problem type that this entry represents.
@@ -171,7 +251,7 @@ namespace Hse.EviFluor
         {
             bool result = true;
 
-            if (sm.Channel470.Value >= 2499.0)
+            if (sm.Channel470.Value >= MaxSignal)
             {
                 entries.Add(new Entry(ProblemId.SATURATION, sm));
                 result = false;
@@ -188,7 +268,7 @@ namespace Hse.EviFluor
 
             if (hints.HasFlag(Hints.STD_HIGH))
             {
-                if (sm.Channel470.Value < 1700 || sm.Channel470.Value > 2300)
+                if (sm.Channel470.Value < (StdHighTarget - StdHighDelta) || sm.Channel470.Value > (StdHighTarget + StdHighDelta))
                 {
                     entries.Add(new Entry(ProblemId.WRONG_LEVEL, sm));
                     result = false;
@@ -229,6 +309,19 @@ namespace Hse.EviFluor
         }
 
         /// <summary>
+        /// Checks the validity of a full measurement (air and sample).
+        /// </summary>
+        public bool Check(Results results, Hints hints = Hints.NONE)
+        {
+            if (results.Concentration < ThresholdNegativeConcentration)
+            {
+                entries.Add(new Entry(ProblemId.NEGATIVE_CONCENTRATION, results));
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
         /// Generic check dispatcher that routes different types to the appropriate check method.
         /// </summary>
         public bool Check(object obj, Hints hints = Hints.NONE)
@@ -240,6 +333,7 @@ namespace Hse.EviFluor
                 FirstAirMeasurementResult fam => Check(fam, hints),
                 FirstSampleMeasurementResult fsm => Check(fsm, hints),
                 Measurement m => Check(m, hints),
+                Results r => Check(r, hints),
                 _ => throw new ArgumentException($"Unsupported class {obj.GetType()}")
             };
         }
@@ -266,27 +360,11 @@ namespace Hse.EviFluor
             if (ExpectedMaxLedPower == ExpectedMinLedPower)
                 throw new InvalidOperationException("LED power interpolation division by 0");
 
-            // Interpolierter Erwartungswert
+            // Interpolated expected value
             double slope = (ExpectedMaxRfu - ExpectedMinRfu) / (ExpectedMaxLedPower - ExpectedMinLedPower);
             double expectedRfu = slope * (ledPower - ExpectedMinLedPower) + ExpectedMinRfu;
 
             return sm.Delta() > expectedRfu * RfuThresholdMultiplier;
         }
-    }
-
-    /// <summary>
-    /// Defines a contract for types that can serialize themselves to a <see cref="System.Text.Json.Nodes.JsonNode"/>.
-    /// </summary>
-    /// <remarks>
-    /// This interface is used by the <see cref="Verification.Entry"/> class to convert associated data into
-    /// a standardized JSON format for reporting, logging, or storage.
-    /// </remarks>
-    public interface IJsonSerializable
-    {
-        /// <summary>
-        /// Converts the current instance to a JSON-serializable <see cref="JsonNode"/> structure.
-        /// </summary>
-        /// <returns>A <see cref="JsonNode"/> that represents the current object.</returns>
-        JsonNode ToJson();
     }
 }
