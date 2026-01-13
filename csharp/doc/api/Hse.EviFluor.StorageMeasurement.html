@@ -260,8 +260,8 @@ Class StorageMeasurement
 
   <h4 class="section">Exceptions</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p>Thrown when <code class="paramref">index</code> is less than 0 or greater than or equal to the number of stored entries.</p>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.indexoutofrangeexception">IndexOutOfRangeException</a></dt>
+    <dd><p>Thrown if <code class="paramref">index</code> is outside the range of stored measurements.</p>
 </dd>
   </dl>
 
@@ -342,6 +342,9 @@ This node may contain measurements, results, metadata, logging, and other associ
 
 
 
+  <h4 class="section" id="Hse_EviFluor_StorageMeasurement_Append_Hse_EviFluor_Measurement_System_String_System_Collections_Generic_List_System_String__Hse_EviFluor_Verification__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Adds <code>date_time</code> in ISO-8601 UTC and optional <code>logging</code>/<code>errors</code> sections if provided.</p>
+</div>
 
 
 
@@ -387,6 +390,9 @@ This node may contain measurements, results, metadata, logging, and other associ
 
 
 
+  <h4 class="section" id="Hse_EviFluor_StorageMeasurement_AppendWithResults_Hse_EviFluor_Measurement_Hse_EviFluor_Results_System_String_System_Collections_Generic_List_System_String__Hse_EviFluor_Verification__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Adds <code>date_time</code> in ISO-8601 UTC and optional <code>logging</code>/<code>errors</code> sections if provided.</p>
+</div>
 
 
 

@@ -8,7 +8,6 @@
 #include <stdint.h>
 
 #if defined(_WIN64) || defined(_WIN32)
-#include <windows.h>
 #define DLLEXPORT __declspec(dllexport)
 #else
 #define DLLEXPORT
@@ -16,16 +15,16 @@
 
 /**
  * @struct Channel_t
- * @brief Represents a measurement channel with dark and value.
+ * @brief Aggregates raw readings for a single optical channel.
  *
- * This structure holds the dark and value of a measurement channel,
- * both measured in millivolts (mV).
+ * Each channel keeps the raw dark signal, the illuminated signal and the
+ * LED drive that produced the measurement.
  */
 typedef struct
 {
-    double dark; /**< Dark value in millivolts (mV). */
-    double value; /**< Value in millivolts (mV). */
-    uint32_t ledPower; /**< Led power, no unit (0..255). */
+    double dark;      /**< Dark signal in millivolts (mV). */
+    double value;     /**< Illuminated signal in millivolts (mV). */
+    uint32_t ledPower; /**< LED drive level in the range 0..255. */
 
 } Channel_t;
 
@@ -40,10 +39,10 @@ typedef struct
 DLLEXPORT Channel_t channel_init(double dark, double value, uint32_t ledPower);
 
 /**
- * @briefCalculates the difference between value and dark.
+ * @brief Calculates the difference between the illuminated and dark readings.
  *
  * @param self Pointer to the Channel_t structure.
- * @return difference in mV.
+ * @return Delta in millivolts (mV).
  */
 DLLEXPORT double channel_delta(const Channel_t * self);
 

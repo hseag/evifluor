@@ -8,8 +8,20 @@
 #include <stddef.h>
 
 #if defined(_WIN64) || defined(_WIN32)
+#include <winsock2.h>
+#include <ws2tcpip.h>
 #include <windows.h>
 #define DLLEXPORT __declspec(dllexport)
+
+typedef struct
+{
+    HANDLE handle;
+    bool valid;
+    bool isSocket;
+    WSADATA wsa_data;
+    SOCKET socket;
+} EVI_HANDLE;
+
 #else
 #include <stdio.h>
 #include <string.h>
@@ -17,7 +29,7 @@
 #include <ctype.h>
 #include <stdarg.h>
 #define DLLEXPORT
-typedef int HANDLE;
+typedef int EVI_HANDLE;
 typedef int errno_t;
 typedef size_t rsize_t;
 #define INVALID_HANDLE_VALUE -1
@@ -47,7 +59,7 @@ typedef struct
 {
     uint32_t argc; /**< Number of arguments in the response. */
     char *argv[EVI_MAX_ARGS]; /**< Array of argument strings. */
-    char response[EVI_MAX_LINE_LENGTH]; /**< Response message. */
+    char response[EVI_MAX_LINE_LENGTH]; /**< Response message. */    
 } EvieResponse_t;
 
 /**
@@ -138,6 +150,8 @@ DLLEXPORT Error_t eviGet(Evi_t *self, uint32_t index, char *value, size_t valueS
  */
 DLLEXPORT Error_t eviSet(Evi_t *self, uint32_t index, const char *value);
 
+DLLEXPORT Error_t eviLogging(Evi_t *self, char *line, size_t length);
+
 /**
  * @brief Performs a self-test on the Evi device.
  *
@@ -177,14 +191,14 @@ DLLEXPORT const char *eviVersion();
  * @param portName Name of the port to open.
  * @return A handle to the opened communication port.
  */
-HANDLE eviPortOpen(char *portName);
+EVI_HANDLE eviPortOpen(char *portName);
 
 /**
  * @brief Closes an open communication port.
  *
  * @param hComm Handle to the communication port.
  */
-void eviPortClose(HANDLE hComm);
+void eviPortClose(EVI_HANDLE hComm);
 
 /**
  * @brief Writes data to the communication port.
@@ -194,7 +208,7 @@ void eviPortClose(HANDLE hComm);
  * @param verbose Whether to enable verbose output.
  * @return True if the write operation was successful, otherwise false.
  */
-bool eviPortWrite(HANDLE hComm, char *buffer, bool verbose);
+bool eviPortWrite(EVI_HANDLE hComm, char *buffer, bool verbose);
 
 /**
  * @brief Reads data from the communication port.
@@ -205,4 +219,4 @@ bool eviPortWrite(HANDLE hComm, char *buffer, bool verbose);
  * @param verbose Whether to enable verbose output.
  * @return The number of bytes read from the port.
  */
-uint32_t eviPortRead(HANDLE hComm, char *buffer, size_t size, bool verbose);
+uint32_t eviPortRead(EVI_HANDLE hComm, char *buffer, size_t size, bool verbose);

@@ -309,8 +309,9 @@ namespace Hse.EviFluor
         }
 
         /// <summary>
-        /// Checks the validity of a full measurement (air and sample).
+        /// Validates the computed concentration against negative thresholds.
         /// </summary>
+        /// <returns><c>true</c> if concentration ≥ <see cref="ThresholdNegativeConcentration"/>; otherwise <c>false</c>.</returns>
         public bool Check(Results results, Hints hints = Hints.NONE)
         {
             if (results.Concentration < ThresholdNegativeConcentration)
@@ -352,7 +353,8 @@ namespace Hse.EviFluor
         }
 
         /// <summary>
-        /// Determines whether the cuvette is present based on expected fluorescence value.
+        /// Heuristic test for cuvette presence based on LED power and expected RFU interpolation
+        /// scaled by <see cref="RfuThresholdMultiplier"/>.
         /// </summary>
         private bool HasCuvette(SingleMeasurement sm)
         {

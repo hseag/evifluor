@@ -3,6 +3,7 @@
 
 #include "cmdexport.h"
 #include "json.h"
+#include "dict.h"
 #include "evifluor.h"
 #include "printerror.h"
 #include <stdio.h>
@@ -11,21 +12,21 @@
 #include <sys/stat.h>
 #include <time.h>
 
-typedef enum
+void exportCalculated(ExportOptions_t * options, cJSON *object, FILE * csv, bool last)
 {
-    MODE_RAW,
-    MODE_MEASUREMENT
-} Mode_t;
+    cJSON * oConcentration = cJSON_GetObjectItem(object, DICT_CONCENTRATION);
+    if(oConcentration)
+    {
+        fprintf_s(csv, "%f", cJSON_GetNumberValue(oConcentration));
+    }
 
-typedef struct
-{
-    char delimiter;
-    char * filenameJson;
-    char * filenameCsv;
-    Mode_t mode;
-} Options_t;
+    if(!last)
+    {
+        fprintf_s(csv, "%c", options->delimiter);
+    }
+}
 
-void exportRawMeasurement(Options_t * options, cJSON *object, FILE * csv, bool last)
+void exportRawMeasurement(ExportOptions_t * options, cJSON *object, FILE * csv, bool last)
 {
     if(object)
     {
@@ -43,7 +44,7 @@ void exportRawMeasurement(Options_t * options, cJSON *object, FILE * csv, bool l
     }
 }
 
-void exportRaw(Options_t * options, cJSON *object, FILE * csv)
+void exportRaw(ExportOptions_t * options, cJSON *object, FILE * csv)
 {
     cJSON *iterator = NULL;
     cJSON *oComment = cJSON_GetObjectItem(object, DICT_COMMENT);
@@ -66,23 +67,25 @@ void exportRaw(Options_t * options, cJSON *object, FILE * csv)
     }
 }
 
-void exportMeasurement(Options_t * options, cJSON *object, FILE * csv)
+void exportMeasurement(ExportOptions_t * options, cJSON *object, FILE * csv)
 {
     cJSON *oComment = cJSON_GetObjectItem(object, DICT_COMMENT);
 
     cJSON *oAir = cJSON_GetObjectItem(object, DICT_AIR);
     cJSON *oSample = cJSON_GetObjectItem(object, DICT_SAMPLE);
+    cJSON *oCalculated = cJSON_GetObjectItem(object, DICT_CALCULATED);
 
     if(oAir != NULL && oSample != NULL)
     {
         fprintf_s(csv, "%s%c", oComment ? cJSON_GetStringValue(oComment) : "", options->delimiter);
         exportRawMeasurement(options, oAir, csv, false);
-        exportRawMeasurement(options, oSample, csv, true);
+        exportRawMeasurement(options, oSample, csv, false);
+        exportCalculated(options, oCalculated, csv, true);
         fprintf_s(csv, "\n");
     }
 }
 
-void exportRawHeader(Options_t * options, FILE * csv)
+void exportRawHeader(ExportOptions_t * options, FILE * csv)
 {
     fprintf_s(csv, "%s%c", DICT_COMMENT, options->delimiter);
     fprintf_s(csv, "%s%c", DICT_DARK, options->delimiter);
@@ -91,7 +94,7 @@ void exportRawHeader(Options_t * options, FILE * csv)
     fprintf_s(csv, "\n");
 }
 
-void exportMeasurementHeader(Options_t * options, FILE * csv)
+void exportMeasurementHeader(ExportOptions_t * options, FILE * csv)
 {
     fprintf_s(csv, "%s%c", DICT_COMMENT, options->delimiter);
     fprintf_s(csv, "%s%c", DICT_AIR_DARK, options->delimiter);
@@ -99,14 +102,15 @@ void exportMeasurementHeader(Options_t * options, FILE * csv)
     fprintf_s(csv, "%s%c", DICT_AIR_LED_POWER, options->delimiter);
     fprintf_s(csv, "%s%c", DICT_SAMPLE_DARK, options->delimiter);
     fprintf_s(csv, "%s%c", DICT_SAMPLE_VALUE, options->delimiter);
-    fprintf_s(csv, "%s",   DICT_SAMPLE_LED_POWER);
+    fprintf_s(csv, "%s%c", DICT_SAMPLE_LED_POWER, options->delimiter);
+    fprintf_s(csv, "%s",   DICT_CONCENTRATION);
     fprintf_s(csv, "\n");
 }
 
-static Error_t export(Options_t * options)
+Error_t exportData(ExportOptions_t * options)
 {
     Error_t ret  = ERROR_EVI_OK;
-    cJSON* json = jsonLoad(options->filenameJson);
+    cJSON* json = json_loadFromFile(options->filenameJson);
 
     if(json)
     {
@@ -157,7 +161,7 @@ static Error_t export(Options_t * options)
 Error_t cmdExport(Evi_t* self, int argcCmd, char** argvCmd)
 {
     Error_t ret  = ERROR_EVI_OK;
-    Options_t options = { 0 };
+    ExportOptions_t options = { 0 };
 
     options.delimiter = ',';
     options.mode      = MODE_MEASUREMENT;
@@ -218,7 +222,7 @@ Error_t cmdExport(Evi_t* self, int argcCmd, char** argvCmd)
         goto exit;
     }
 
-    ret = export(&options);
+    ret = exportData(&options);
 
 
 

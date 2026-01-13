@@ -10,6 +10,8 @@
 #include <unistd.h>
 #include <termios.h>
 #include <dirent.h>
+#include <sys/socket.h>
+#include <netdb.h>
 
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 
@@ -160,7 +162,34 @@ int eviPortOpen(char *portName)
 {
     int hComm;
     {
-        hComm = open(portName, O_RDWR | O_NOCTTY);
+        if(strcmp(portName, "SIMULATION") == 0)
+        {
+            struct sockaddr_in servaddr;
+
+            // socket create and varification
+            hComm = socket(AF_INET, SOCK_STREAM, 0);
+            if (hComm == -1)
+            {
+                fprintf(stderr, "Could not open socket %s\n", portName);
+                return -1;
+            }
+
+            bzero(&servaddr, sizeof(servaddr));
+            servaddr.sin_family = AF_INET;
+            servaddr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+            servaddr.sin_port = htons(5000);
+
+            if (connect(hComm, (struct sockaddr*)&servaddr, sizeof(servaddr)) != 0)
+            {
+                printf("connection with the server failed...\n");
+                exit(0);
+            }
+            return hComm;
+        }
+        else
+        {
+            hComm = open(portName, O_RDWR | O_NOCTTY);
+        }
     }
 
     if (hComm == -1)

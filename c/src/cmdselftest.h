@@ -5,4 +5,10 @@
 
 #include "evibase.h"
 
+/**
+ * @brief Handles the `selftest` CLI command.
+ *
+ * @param self Runtime context that receives self-test results.
+ * @return Error code describing the operation outcome.
+ */
 Error_t cmdSelftest(Evi_t * self);

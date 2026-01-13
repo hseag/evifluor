@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-cJSON* jsonLoad(char * file)
+cJSON* json_loadFromFile(const char * file)
 {
     FILE*  fin    = 0;
     char*  buffer = NULL;
@@ -18,7 +18,7 @@ cJSON* jsonLoad(char * file)
         struct stat st;
         stat(file, &st);
 
-        buffer = malloc(st.st_size);
+        buffer = calloc(st.st_size+1, 1);
 
         size_t ret = fread(buffer, 1, st.st_size, fin);
 
@@ -33,27 +33,22 @@ cJSON* jsonLoad(char * file)
     return json;
 }
 
-void jsonSave(char* file, cJSON* json)
+void json_saveToFile(const char *file, cJSON* json)
 {
     FILE* fout   = 0;
     char* buffer = NULL;
 
     fout = fopen(file, "w+");
+    if(fout != NULL)
+    {
+        buffer = cJSON_Print(json);
 
-    buffer = cJSON_Print(json);
+        fwrite(buffer, strlen(buffer), 1, fout);
 
-    fwrite(buffer, strlen(buffer), 1, fout);
+        free(buffer);
 
-    free(buffer);
-
-    fclose(fout);
+        fclose(fout);
+    }
 }
 
-cJSON* singleMeasurmentToJson(SingleMeasurement_t * measurement)
-{
-    cJSON* obj = cJSON_CreateObject();
-    cJSON_AddItemToObject(obj, DICT_DARK, cJSON_CreateNumber(measurement->channel470.dark));
-    cJSON_AddItemToObject(obj, DICT_VALUE, cJSON_CreateNumber(measurement->channel470.value));
-    cJSON_AddItemToObject(obj, DICT_LED_POWER, cJSON_CreateNumber(measurement->channel470.ledPower));
-    return obj;
-}
+

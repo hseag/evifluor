@@ -3,133 +3,20 @@
 
 #include "cmddata.h"
 #include "cJSON.h"
+#include "dict.h"
 #include "printerror.h"
 #include "measurement.h"
+#include "singlemeasurement.h"
 #include "json.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
-SingleMeasurement_t singleMeasurementFromJson(cJSON *obj, bool * valid)
-{
-    SingleMeasurement_t ret = {0};
-
-    cJSON *oDark = cJSON_GetObjectItem(obj, DICT_DARK);
-    cJSON *oValue = cJSON_GetObjectItem(obj, DICT_VALUE);
-    cJSON *oLedPower = cJSON_GetObjectItem(obj, DICT_LED_POWER);
-
-    if(oDark && oValue && oLedPower)
-    {
-        ret = singleMeasurement_init(channel_init(cJSON_GetNumberValue(oDark), cJSON_GetNumberValue(oValue), cJSON_GetNumberValue(oLedPower)));
-        *valid = true;
-    }
-    else
-    {
-        *valid = false;
-    }
-
-    return ret;
-}
-
-Measurement_t measurementFromJson(cJSON * obj, bool * valid)
-{
-    Measurement_t ret = {0};
-
-    cJSON* oAir = cJSON_GetObjectItem(obj, DICT_AIR);
-    cJSON* oSample = cJSON_GetObjectItem(obj, DICT_SAMPLE);
-    if(oAir && oSample)
-    {
-        bool validAir;
-        bool validSample;
-        ret = measurement_init(singleMeasurementFromJson(oAir, &validAir), singleMeasurementFromJson(oSample, &validSample));
-        *valid = validAir && validSample;
-    }
-    else
-    {
-        *valid = false;
-    }
-
-    return ret;
-}
-
-static cJSON *calculate(cJSON *obj, Factors_t * factors)
-{
-    cJSON *ret = cJSON_CreateObject();
-    bool valid;
-
-    Measurement_t measurement = measurementFromJson(obj, &valid);
-
-    if(valid)
-    {
-        double concentration = measurement_concentration(&measurement, factors);
-
-        cJSON_AddNumberToObject(ret, DICT_CONCENTRATION, concentration);
-    }
-
-    return ret;
-}
-
-static bool getSupportPoint(cJSON* oMeasurments, uint32_t index, Measurement_t * s)
-{
-    bool ret = false;
-
-    if (index < cJSON_GetArraySize(oMeasurments))
-    {
-        cJSON* measurement = cJSON_GetArrayItem(oMeasurments, index);
-        if (measurement)
-        {
-            bool valid;
-            *s = measurementFromJson(measurement, &valid);
-            if(valid)
-            {
-                ret = true;
-            }
-            else
-            {
-                cJSON* values = cJSON_GetObjectItem(measurement, DICT_VALUES);
-                if (values && cJSON_GetArraySize(values) == 3)
-                {
-                    SingleMeasurement_t minMeasurement = {0};
-                    SingleMeasurement_t maxMeasurement = {0};
-
-                    cJSON* oMin    = cJSON_GetArrayItem(values, 0);
-                    cJSON* oMax    = cJSON_GetArrayItem(values, 1);
-                    cJSON* oSample = cJSON_GetArrayItem(values, 2);
-
-                    if(oMin && oMax && oSample)
-                    {
-                        bool valid1;
-                        bool valid2;
-                        bool valid3;
-                        s->sample = singleMeasurementFromJson(oSample, &valid1);
-                        minMeasurement        = singleMeasurementFromJson(oMin, &valid2);
-                        maxMeasurement        = singleMeasurementFromJson(oMax, &valid3);
-
-                        if(valid1 && valid2 && valid3)
-                        {
-                          s->air = eviFluorAdjustToLedPower(&minMeasurement, &maxMeasurement, s->sample.channel470.ledPower);
-
-                          cJSON_AddItemToObject(measurement, DICT_AIR, singleMeasurmentToJson(&(s->air)));
-                          cJSON_AddItemToObject(measurement, DICT_SAMPLE, singleMeasurmentToJson(&(s->sample)));
-
-                          ret = true;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return ret;
-}
 
 static Error_t cmdCalculate(Evi_t *self, int argcCmd, char **argvCmd)
 {
     Error_t ret = ERROR_EVI_OK;
     int argcCmdSave = argcCmd;
     char **argvCmdSave = argvCmd;
-
-    Measurement_t stdLow = {0};
-    Measurement_t stdHigh = {0};
 
     bool options = true;
     int i = 0;
@@ -149,40 +36,22 @@ static Error_t cmdCalculate(Evi_t *self, int argcCmd, char **argvCmd)
     argcCmdSave = argcCmd - i;
     argvCmdSave = argvCmd + i;
 
-    if (argcCmdSave == 3)
+    if (argcCmdSave == 5)
     {
-        char *file = argvCmdSave[2];
-        cJSON *json = jsonLoad(file);
+        char *file = argvCmdSave[4];
+        cJSON *json = json_loadFromFile(file);
 
         double concentrationLow = atof(argvCmdSave[0]);
         double concentrationHigh = atof(argvCmdSave[1]);
+        int nrOfStdLow = atoi(argvCmdSave[2]);
+        int nrOfStdHigh = atoi(argvCmdSave[3]);
 
         if (json != NULL)
         {
-            cJSON *oMeasurments = cJSON_GetObjectItem(json, DICT_MEASUREMENTS);
+            cJSON *oMeasurements = cJSON_GetObjectItem(json, DICT_MEASUREMENTS);
 
-            if (oMeasurments)
-            {
-                if(getSupportPoint(oMeasurments, 0, &stdHigh) && getSupportPoint(oMeasurments, 1, &stdLow))
-                {
-
-                    Factors_t factors = measurement_calculateFactors(concentrationLow, concentrationHigh, &stdLow, &stdHigh);
-                    {
-                        cJSON *iterator = NULL;
-                        cJSON_ArrayForEach(iterator, oMeasurments)
-                        {
-                            cJSON_DeleteItemFromObject(iterator, DICT_CALCULATED);
-                            cJSON_AddItemToObject(iterator, DICT_CALCULATED, calculate(iterator, &factors));
-                        }
-                    }
-                }
-                else 
-                {
-                    ret = ERROR_EVI_INVALID_PARAMETER;
-                }
-            }
-
-            jsonSave(file, json);
+            measurement_calculate(oMeasurements, concentrationLow, concentrationHigh, nrOfStdLow, nrOfStdHigh);
+            json_saveToFile(file, json);
 
             cJSON_Delete(json);
         }
@@ -192,12 +61,17 @@ static Error_t cmdCalculate(Evi_t *self, int argcCmd, char **argvCmd)
             printError(ret, "File %s not found.", file);
         }
     }
+    else
+    {
+        ret = ERROR_EVI_INVALID_PARAMETER;
+        printError(ret, "Wrong number of parameters. Expected 5, given %d.", argcCmdSave);
+    }
     return ret;
 }
 
 static Error_t cmdDataPrint(Evi_t *self, char *file)
 {
-    cJSON *json = jsonLoad(file);
+    cJSON *json = json_loadFromFile(file);
 
     if (json != NULL)
     {

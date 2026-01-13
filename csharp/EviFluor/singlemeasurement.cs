@@ -26,9 +26,8 @@ public class SingleMeasurement : IJsonSerializable
     }
 
     /// <summary>
-    /// Returns a string representation of the measurement values.
+    /// Returns a compact textual representation in the form <c>"470: [Dark:{d} Value:{v} LedPower:{p}]"</c>.
     /// </summary>
-    /// <returns>A formatted string containing all channel values.</returns>
     public override string ToString()
     {
         return $"470: [{Channel470}]]";

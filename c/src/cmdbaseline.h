@@ -5,4 +5,12 @@
 
 #include "evifluor.h"
 
+/**
+ * @brief Executes the baseline CLI command.
+ *
+ * The command resets device memory without acquiring new data.
+ *
+ * @param self Runtime context passed to the command handler.
+ * @return Result code reported by the operation.
+ */
 Error_t cmdBaseline(Evi_t * self);

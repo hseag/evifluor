@@ -75,6 +75,10 @@ public class StorageMeasurementEntry
     /// Updates the JSON node representation if available.
     /// </summary>
     /// <param name="factors">The correction factors to apply.</param>
+    /// <remarks>
+    /// When the entry was loaded from JSON (<see cref="Node"/> != <c>null</c>), the computed results are
+    /// written back into that JSON node under <c>"results"</c>.
+    /// </remarks> 
     public void ApplyResults(Factors factors)
     {
         if (Node != null)
@@ -153,6 +157,9 @@ public class StorageMeasurement
     /// <param name="comment">An optional comment for the measurement.</param>
     /// <param name="logging">Optional logging information.</param>
     /// <param name="verification">Optional verification information.</param>
+    /// <remarks>
+    /// Adds <c>date_time</c> in ISO-8601 UTC and optional <c>logging</c>/<c>errors</c> sections if provided.
+    /// </remarks>
     public void Append(Measurement measurement, string comment = "", List<string> ? logging = null, Verification? verification = null)
     {
         if (measurement == null)
@@ -191,6 +198,9 @@ public class StorageMeasurement
     /// <param name="comment">An optional comment for the measurement.</param>
     /// <param name="logging">Optional logging information.</param>
     /// <param name="verification">Optional verification information.</param>
+    /// <remarks>
+    /// Adds <c>date_time</c> in ISO-8601 UTC and optional <c>logging</c>/<c>errors</c> sections if provided.
+    /// </remarks>
     public void AppendWithResults(Measurement measurement, Results results, string comment = "", List<string>? logging = null, Verification ? verification = null)
     {
         if (measurement == null)
@@ -284,8 +294,8 @@ public class StorageMeasurement
     /// <returns>
     /// The <see cref="StorageMeasurementEntry"/> located at the given index in the measurement list.
     /// </returns>
-    /// <exception cref="ArgumentOutOfRangeException">
-    /// Thrown when <paramref name="index"/> is less than 0 or greater than or equal to the number of stored entries.
+    /// <exception cref="IndexOutOfRangeException">
+    /// Thrown if <paramref name="index"/> is outside the range of stored measurements.
     /// </exception>
     public StorageMeasurementEntry this[int index]
     {

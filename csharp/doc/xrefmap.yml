@@ -328,15 +328,24 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Device.FirstSampleMeasurement
   nameWithType: Device.FirstSampleMeasurement
-- uid: Hse.EviFluor.Device.FwUpdate(System.String)
-  name: FwUpdate(string)
-  href: api/Hse.EviFluor.Device.html#Hse_EviFluor_Device_FwUpdate_System_String_
-  commentId: M:Hse.EviFluor.Device.FwUpdate(System.String)
-  name.vb: FwUpdate(String)
-  fullName: Hse.EviFluor.Device.FwUpdate(string)
-  fullName.vb: Hse.EviFluor.Device.FwUpdate(String)
-  nameWithType: Device.FwUpdate(string)
-  nameWithType.vb: Device.FwUpdate(String)
+- uid: Hse.EviFluor.Device.FwUpdate(System.String,Hse.EviFluor.Device.UpdateProgress,Hse.EviFluor.Device.Rebooting)
+  name: FwUpdate(string, UpdateProgress?, Rebooting?)
+  href: api/Hse.EviFluor.Device.html#Hse_EviFluor_Device_FwUpdate_System_String_Hse_EviFluor_Device_UpdateProgress_Hse_EviFluor_Device_Rebooting_
+  commentId: M:Hse.EviFluor.Device.FwUpdate(System.String,Hse.EviFluor.Device.UpdateProgress,Hse.EviFluor.Device.Rebooting)
+  name.vb: FwUpdate(String, UpdateProgress, Rebooting)
+  fullName: Hse.EviFluor.Device.FwUpdate(string, Hse.EviFluor.Device.UpdateProgress?, Hse.EviFluor.Device.Rebooting?)
+  fullName.vb: Hse.EviFluor.Device.FwUpdate(String, Hse.EviFluor.Device.UpdateProgress, Hse.EviFluor.Device.Rebooting)
+  nameWithType: Device.FwUpdate(string, Device.UpdateProgress?, Device.Rebooting?)
+  nameWithType.vb: Device.FwUpdate(String, Device.UpdateProgress, Device.Rebooting)
+- uid: Hse.EviFluor.Device.FwUpdate(System.String[],Hse.EviFluor.Device.UpdateProgress,Hse.EviFluor.Device.Rebooting)
+  name: FwUpdate(string[], UpdateProgress?, Rebooting?)
+  href: api/Hse.EviFluor.Device.html#Hse_EviFluor_Device_FwUpdate_System_String___Hse_EviFluor_Device_UpdateProgress_Hse_EviFluor_Device_Rebooting_
+  commentId: M:Hse.EviFluor.Device.FwUpdate(System.String[],Hse.EviFluor.Device.UpdateProgress,Hse.EviFluor.Device.Rebooting)
+  name.vb: FwUpdate(String(), UpdateProgress, Rebooting)
+  fullName: Hse.EviFluor.Device.FwUpdate(string[], Hse.EviFluor.Device.UpdateProgress?, Hse.EviFluor.Device.Rebooting?)
+  fullName.vb: Hse.EviFluor.Device.FwUpdate(String(), Hse.EviFluor.Device.UpdateProgress, Hse.EviFluor.Device.Rebooting)
+  nameWithType: Device.FwUpdate(string[], Device.UpdateProgress?, Device.Rebooting?)
+  nameWithType.vb: Device.FwUpdate(String(), Device.UpdateProgress, Device.Rebooting)
 - uid: Hse.EviFluor.Device.FwUpdate*
   name: FwUpdate
   href: api/Hse.EviFluor.Device.html#Hse_EviFluor_Device_FwUpdate_
@@ -438,6 +447,12 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Device.ProductionNumber
   nameWithType: Device.ProductionNumber
+- uid: Hse.EviFluor.Device.Rebooting
+  name: Device.Rebooting
+  href: api/Hse.EviFluor.Device.Rebooting.html
+  commentId: T:Hse.EviFluor.Device.Rebooting
+  fullName: Hse.EviFluor.Device.Rebooting
+  nameWithType: Device.Rebooting
 - uid: Hse.EviFluor.Device.SelfTest
   name: SelfTest()
   href: api/Hse.EviFluor.Device.html#Hse_EviFluor_Device_SelfTest
@@ -537,19 +552,60 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Device.ToString
   nameWithType: Device.ToString
-- uid: Hse.EviFluor.Device.verify
-  name: verify()
-  href: api/Hse.EviFluor.Device.html#Hse_EviFluor_Device_verify
-  commentId: M:Hse.EviFluor.Device.verify
-  fullName: Hse.EviFluor.Device.verify()
-  nameWithType: Device.verify()
-- uid: Hse.EviFluor.Device.verify*
-  name: verify
-  href: api/Hse.EviFluor.Device.html#Hse_EviFluor_Device_verify_
-  commentId: Overload:Hse.EviFluor.Device.verify
+- uid: Hse.EviFluor.Device.UpdateProgress
+  name: Device.UpdateProgress
+  href: api/Hse.EviFluor.Device.UpdateProgress.html
+  commentId: T:Hse.EviFluor.Device.UpdateProgress
+  fullName: Hse.EviFluor.Device.UpdateProgress
+  nameWithType: Device.UpdateProgress
+- uid: Hse.EviFluor.Device.Verify
+  name: Verify()
+  href: api/Hse.EviFluor.Device.html#Hse_EviFluor_Device_Verify
+  commentId: M:Hse.EviFluor.Device.Verify
+  fullName: Hse.EviFluor.Device.Verify()
+  nameWithType: Device.Verify()
+- uid: Hse.EviFluor.Device.Verify*
+  name: Verify
+  href: api/Hse.EviFluor.Device.html#Hse_EviFluor_Device_Verify_
+  commentId: Overload:Hse.EviFluor.Device.Verify
   isSpec: "True"
-  fullName: Hse.EviFluor.Device.verify
-  nameWithType: Device.verify
+  fullName: Hse.EviFluor.Device.Verify
+  nameWithType: Device.Verify
+- uid: Hse.EviFluor.DeviceFinder
+  name: DeviceFinder
+  href: api/Hse.EviFluor.DeviceFinder.html
+  commentId: T:Hse.EviFluor.DeviceFinder
+  fullName: Hse.EviFluor.DeviceFinder
+  nameWithType: DeviceFinder
+- uid: Hse.EviFluor.DeviceFinder.FindDevice(System.String)
+  name: FindDevice(string?)
+  href: api/Hse.EviFluor.DeviceFinder.html#Hse_EviFluor_DeviceFinder_FindDevice_System_String_
+  commentId: M:Hse.EviFluor.DeviceFinder.FindDevice(System.String)
+  name.vb: FindDevice(String)
+  fullName: Hse.EviFluor.DeviceFinder.FindDevice(string?)
+  fullName.vb: Hse.EviFluor.DeviceFinder.FindDevice(String)
+  nameWithType: DeviceFinder.FindDevice(string?)
+  nameWithType.vb: DeviceFinder.FindDevice(String)
+- uid: Hse.EviFluor.DeviceFinder.FindDevice*
+  name: FindDevice
+  href: api/Hse.EviFluor.DeviceFinder.html#Hse_EviFluor_DeviceFinder_FindDevice_
+  commentId: Overload:Hse.EviFluor.DeviceFinder.FindDevice
+  isSpec: "True"
+  fullName: Hse.EviFluor.DeviceFinder.FindDevice
+  nameWithType: DeviceFinder.FindDevice
+- uid: Hse.EviFluor.DeviceFinder.GetAvailableDevices
+  name: GetAvailableDevices()
+  href: api/Hse.EviFluor.DeviceFinder.html#Hse_EviFluor_DeviceFinder_GetAvailableDevices
+  commentId: M:Hse.EviFluor.DeviceFinder.GetAvailableDevices
+  fullName: Hse.EviFluor.DeviceFinder.GetAvailableDevices()
+  nameWithType: DeviceFinder.GetAvailableDevices()
+- uid: Hse.EviFluor.DeviceFinder.GetAvailableDevices*
+  name: GetAvailableDevices
+  href: api/Hse.EviFluor.DeviceFinder.html#Hse_EviFluor_DeviceFinder_GetAvailableDevices_
+  commentId: Overload:Hse.EviFluor.DeviceFinder.GetAvailableDevices
+  isSpec: "True"
+  fullName: Hse.EviFluor.DeviceFinder.GetAvailableDevices
+  nameWithType: DeviceFinder.GetAvailableDevices
 - uid: Hse.EviFluor.Dict
   name: Dict
   href: api/Hse.EviFluor.Dict.html
@@ -963,25 +1019,6 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.FirstSampleMeasurementResult.ToString
   nameWithType: FirstSampleMeasurementResult.ToString
-- uid: Hse.EviFluor.IJsonSerializable
-  name: IJsonSerializable
-  href: api/Hse.EviFluor.IJsonSerializable.html
-  commentId: T:Hse.EviFluor.IJsonSerializable
-  fullName: Hse.EviFluor.IJsonSerializable
-  nameWithType: IJsonSerializable
-- uid: Hse.EviFluor.IJsonSerializable.ToJson
-  name: ToJson()
-  href: api/Hse.EviFluor.IJsonSerializable.html#Hse_EviFluor_IJsonSerializable_ToJson
-  commentId: M:Hse.EviFluor.IJsonSerializable.ToJson
-  fullName: Hse.EviFluor.IJsonSerializable.ToJson()
-  nameWithType: IJsonSerializable.ToJson()
-- uid: Hse.EviFluor.IJsonSerializable.ToJson*
-  name: ToJson
-  href: api/Hse.EviFluor.IJsonSerializable.html#Hse_EviFluor_IJsonSerializable_ToJson_
-  commentId: Overload:Hse.EviFluor.IJsonSerializable.ToJson
-  isSpec: "True"
-  fullName: Hse.EviFluor.IJsonSerializable.ToJson
-  nameWithType: IJsonSerializable.ToJson
 - uid: Hse.EviFluor.IKit
   name: IKit
   href: api/Hse.EviFluor.IKit.html
@@ -1561,6 +1598,102 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Results.ToString
   nameWithType: Results.ToString
+- uid: Hse.EviFluor.Run
+  name: Run
+  href: api/Hse.EviFluor.Run.html
+  commentId: T:Hse.EviFluor.Run
+  fullName: Hse.EviFluor.Run
+  nameWithType: Run
+- uid: Hse.EviFluor.Run.#ctor(System.Int32,System.Int32,System.Double,System.String,System.String,System.String)
+  name: Run(int, int, double, string?, string?, string?)
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run__ctor_System_Int32_System_Int32_System_Double_System_String_System_String_System_String_
+  commentId: M:Hse.EviFluor.Run.#ctor(System.Int32,System.Int32,System.Double,System.String,System.String,System.String)
+  name.vb: New(Integer, Integer, Double, String, String, String)
+  fullName: Hse.EviFluor.Run.Run(int, int, double, string?, string?, string?)
+  fullName.vb: Hse.EviFluor.Run.New(Integer, Integer, Double, String, String, String)
+  nameWithType: Run.Run(int, int, double, string?, string?, string?)
+  nameWithType.vb: Run.New(Integer, Integer, Double, String, String, String)
+- uid: Hse.EviFluor.Run.#ctor*
+  name: Run
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run__ctor_
+  commentId: Overload:Hse.EviFluor.Run.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Hse.EviFluor.Run.Run
+  fullName.vb: Hse.EviFluor.Run.New
+  nameWithType: Run.Run
+  nameWithType.vb: Run.New
+- uid: Hse.EviFluor.Run.Filename
+  name: Filename
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_Filename
+  commentId: P:Hse.EviFluor.Run.Filename
+  fullName: Hse.EviFluor.Run.Filename
+  nameWithType: Run.Filename
+- uid: Hse.EviFluor.Run.Filename*
+  name: Filename
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_Filename_
+  commentId: Overload:Hse.EviFluor.Run.Filename
+  isSpec: "True"
+  fullName: Hse.EviFluor.Run.Filename
+  nameWithType: Run.Filename
+- uid: Hse.EviFluor.Run.Finalize
+  name: ~Run()
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_Finalize
+  commentId: M:Hse.EviFluor.Run.Finalize
+  name.vb: ''
+  fullName: Hse.EviFluor.Run.~Run()
+  fullName.vb: ''
+  nameWithType: Run.~Run()
+  nameWithType.vb: ''
+- uid: Hse.EviFluor.Run.Finalize*
+  name: ~Run
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_Finalize_
+  commentId: Overload:Hse.EviFluor.Run.Finalize
+  isSpec: "True"
+  fullName: Hse.EviFluor.Run.~Run
+  nameWithType: Run.~Run
+- uid: Hse.EviFluor.Run.checkEmpty
+  name: checkEmpty()
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_checkEmpty
+  commentId: M:Hse.EviFluor.Run.checkEmpty
+  fullName: Hse.EviFluor.Run.checkEmpty()
+  nameWithType: Run.checkEmpty()
+- uid: Hse.EviFluor.Run.checkEmpty*
+  name: checkEmpty
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_checkEmpty_
+  commentId: Overload:Hse.EviFluor.Run.checkEmpty
+  isSpec: "True"
+  fullName: Hse.EviFluor.Run.checkEmpty
+  nameWithType: Run.checkEmpty
+- uid: Hse.EviFluor.Run.measure(System.String)
+  name: measure(string)
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_measure_System_String_
+  commentId: M:Hse.EviFluor.Run.measure(System.String)
+  name.vb: measure(String)
+  fullName: Hse.EviFluor.Run.measure(string)
+  fullName.vb: Hse.EviFluor.Run.measure(String)
+  nameWithType: Run.measure(string)
+  nameWithType.vb: Run.measure(String)
+- uid: Hse.EviFluor.Run.measure*
+  name: measure
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_measure_
+  commentId: Overload:Hse.EviFluor.Run.measure
+  isSpec: "True"
+  fullName: Hse.EviFluor.Run.measure
+  nameWithType: Run.measure
+- uid: Hse.EviFluor.Run.reCalculate
+  name: reCalculate()
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_reCalculate
+  commentId: M:Hse.EviFluor.Run.reCalculate
+  fullName: Hse.EviFluor.Run.reCalculate()
+  nameWithType: Run.reCalculate()
+- uid: Hse.EviFluor.Run.reCalculate*
+  name: reCalculate
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_reCalculate_
+  commentId: Overload:Hse.EviFluor.Run.reCalculate
+  isSpec: "True"
+  fullName: Hse.EviFluor.Run.reCalculate
+  nameWithType: Run.reCalculate
 - uid: Hse.EviFluor.SelfTestResult
   name: SelfTestResult
   href: api/Hse.EviFluor.SelfTestResult.html

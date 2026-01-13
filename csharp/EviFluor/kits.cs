@@ -11,12 +11,11 @@ namespace Hse.EviFluor.Kits;
 public class Default : IKit
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="Default"/> class.
+    /// Creates a linear interpolation kit using two standard points (low/high).
     /// </summary>
     public Default()
      { 
      }
-
 
     /// <summary>
     /// Returns a textual description of the default kit.
@@ -28,6 +27,10 @@ public class Default : IKit
     }
 
     /// <inheritdoc/>
+    /// <remarks>
+    /// Throws <see cref="DivideByZeroException"/> if <c>stdHigh.Value == stdLow.Value</c>.
+    /// Callers should ensure distinct calibration signals.
+    /// </remarks> 
     public double fit(Point stdLow, Point stdHigh, double value)
      {
         var m = (stdHigh.Concentration - stdLow.Concentration) / (stdHigh.Value - stdLow.Value);
@@ -37,12 +40,12 @@ public class Default : IKit
 }
 
 /// <summary>
-/// Specific implementation of the Quant-iT dsDNA High Sensitivity Assay Kit.
+/// Linear kit preset for Thermo Fisher Quant-iT™ dsDNA HS Assay (Q33120).
 /// </summary>
 public class Quant_iT_dsDNA_HS : Default
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="Quant_iT_dsDNA_HS"/> class.
+    /// Linear kit preset for Thermo Fisher Quant-iT™ dsDNA HS Assay (Q33120).
     /// </summary>
     public Quant_iT_dsDNA_HS()
     {

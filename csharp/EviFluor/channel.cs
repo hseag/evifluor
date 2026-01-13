@@ -88,7 +88,6 @@ public class Channel : IJsonSerializable
             ledPowerNode is not null)
         {
             int ledPower = 0;
-            //some intstruments write integer number as 70.0 and sometimes as 70.
             if (ledPowerNode.AsValue().TryGetValue<int>(out ledPower))
             {
                 //ok

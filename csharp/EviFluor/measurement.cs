@@ -68,6 +68,10 @@ public class Results : IEquatable<Results>, IJsonSerializable
     /// </summary>
     /// <param name="other">The object to compare with the current instance.</param>
     /// <returns><c>true</c> if the objects are equal; otherwise, <c>false</c>.</returns>
+    /// <remarks>
+    /// Equality uses an absolute tolerance of 1e-9 on <see cref="Concentration"/> to account for floating-point rounding.
+    /// </remarks>
+    /// 
     public bool Equals(Results? other)
     {
         if (other is null) return false;
@@ -247,9 +251,9 @@ public class Measurement : IJsonSerializable
     }
 
     /// <summary>
-    /// Returns the difference between air- and sample measurement.
+    /// Computes the background-corrected signal by subtracting the air delta from the sample delta.
     /// </summary>
-    /// <returns>Difference between air- and sample measurement.</returns>
+    /// <returns>The corrected signal (same unit as channel mV).</returns>
     public double Value()
     {
         return sample.Delta() - air.Delta();
@@ -322,6 +326,10 @@ public class Measurement : IJsonSerializable
     /// <param name="measurementStdLow">The measurement corresponding to the low concentration.</param>
     /// <param name="measurementStdHigh">The measurement corresponding to the high concentration.</param>
     /// <returns>A <see cref="Factors"/> object containing calculated correction factors.</returns>
+    /// <remarks>
+    /// When multiple measurements are provided, their corrected signals are averaged per level.
+    /// Callers must ensure counts &gt; 0; otherwise the average will be undefined.
+    /// </remarks>
     public static Factors CalculateFactors(double concentrationLow, double concentrationHigh, Measurement measurementStdLow, Measurement measurementStdHigh)
     {
         List<Measurement> measurementsStdLow = new List<Measurement>() { measurementStdLow  };

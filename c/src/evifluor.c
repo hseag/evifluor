@@ -145,9 +145,17 @@ SingleMeasurement_t eviFluorAdjustToLedPower(const SingleMeasurement_t * minMeas
 {
     SingleMeasurement_t ret = {0};
 
-    ret.channel470.ledPower = ledPower;
-    ret.channel470.dark     = minMeasurement->channel470.dark + (maxMeasurement->channel470.dark - minMeasurement->channel470.dark) / (maxMeasurement->channel470.ledPower - minMeasurement->channel470.ledPower) * (ledPower - minMeasurement->channel470.ledPower);
-    ret.channel470.value    = minMeasurement->channel470.value + (maxMeasurement->channel470.value - minMeasurement->channel470.value) / (maxMeasurement->channel470.ledPower - minMeasurement->channel470.ledPower) * (ledPower - minMeasurement->channel470.ledPower);
+    int32_t denominator = maxMeasurement->channel470.ledPower - minMeasurement->channel470.ledPower;
+    if(denominator != 0)
+    {
+        ret.channel470.ledPower = ledPower;
+        ret.channel470.dark     = minMeasurement->channel470.dark + (maxMeasurement->channel470.dark - minMeasurement->channel470.dark) / (denominator) * (ledPower - minMeasurement->channel470.ledPower);
+        ret.channel470.value    = minMeasurement->channel470.value + (maxMeasurement->channel470.value - minMeasurement->channel470.value) / (denominator) * (ledPower - minMeasurement->channel470.ledPower);
+    }
+    else
+    {
+        ret = *minMeasurement;
+    }
 
     return ret;
 }

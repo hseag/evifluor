@@ -9,6 +9,7 @@
 #include "cmdselftest.h"
 #include "cmdcommand.h"
 #include "cmdfwupdate.h"
+#include "cmdrun.h"
 #include "cmddata.h"
 #include "cmdsave.h"
 #include "cmdexport.h"
@@ -17,7 +18,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define VERSION_TOOL "0.4.0"
+#define VERSION_TOOL "0.6.0"
 
 void help(int argcCmd, char **argvCmd)
 {
@@ -26,41 +27,43 @@ void help(int argcCmd, char **argvCmd)
             fprintf_s(stdout, "Usage: evifluor [OPTIONS] COMMAND [ARGUMENTS]\n");
             fprintf_s(stdout, "Commands:\n");
             fprintf_s(stdout, "  baseline            : starts a new series of measurements\n");
-            fprintf_s(stdout, "  command COMMAND     : executes a command e.g evifluor.exe command \"V 0\" returns the value at index 0\n");            
-            fprintf_s(stdout, "  data                : handels data in a data file\n");
+            fprintf_s(stdout, "  command COMMAND     : executes a device command; e.g. \"evifluor.exe command \\\"V 0\\\"\" returns the value at index 0\n");
+            fprintf_s(stdout, "  data                : handles data in a data file\n");
             fprintf_s(stdout, "  empty               : checks if the cuvette guide is empty\n");
-            fprintf_s(stdout, "  export              : exports json data files as csv files\n");
+            fprintf_s(stdout, "  export              : exports JSON data files as CSV files\n");
             fprintf_s(stdout, "  fwupdate FILE       : loads a new firmware\n");
-            fprintf_s(stdout, "  get INDEX           : get a value from the device\n");
-            fprintf_s(stdout, "  help COMMAND        : prints a detailed help\n");
-            fprintf_s(stdout, "  measure             : starts a measurement and return the values\n");
-            fprintf_s(stdout, "  save                : save the last measurement(s)\n");			
-            fprintf_s(stdout, "  selftest            : executes an internal selftest\n");
-            fprintf_s(stdout, "  set INDEX VALUE     : set a value in the device\n");
+            fprintf_s(stdout, "  get INDEX           : gets a value from the device\n");
+            fprintf_s(stdout, "  help [COMMAND]      : prints detailed help\n");
+            fprintf_s(stdout, "  measure             : starts a measurement and returns the values\n");
+            fprintf_s(stdout, "  run                 : performs a guided workflow\n");
+            fprintf_s(stdout, "  save                : saves the last measurement(s)\n");
+            fprintf_s(stdout, "  selftest            : executes an internal self-test\n");
+            fprintf_s(stdout, "  set INDEX VALUE     : sets a value in the device\n");
             fprintf_s(stdout, "  version             : returns the version\n");
             fprintf_s(stdout, "Options:\n");
             fprintf_s(stdout, "  --verbose           : prints debug info\n");
-            fprintf_s(stdout, "  --help -h           : show this help and exit\n");
-            fprintf_s(stdout, "  --device            : use the given device, if omitted the CLI searchs for a device\n");
+            fprintf_s(stdout, "  --help, -h          : show this help and exit\n");
+            fprintf_s(stdout, "  --device DEVICE     : use the given device; if omitted, the CLI searches for a device\n");
             fprintf_s(stdout, "  --use-checksum      : use the protocol with a checksum\n");
             fprintf_s(stdout, "\n");
-            fprintf_s(stdout, "The commandline tool returns the following exit codes:\n");
+            fprintf_s(stdout, "The command-line tool returns the following exit codes:\n");
             fprintf_s(stdout, "    0: No error.\n");
             fprintf_s(stdout, "    1: Unknown command\n");
             fprintf_s(stdout, "    2: Invalid parameter\n");
             fprintf_s(stdout, "    3: Timeout.\n");
-            fprintf_s(stdout, "    4: SREC Flash write error\n");
-            fprintf_s(stdout, "    5: SREC Unsupported type\n");
-            fprintf_s(stdout, "    6: SREC Invalid crc\n");
-            fprintf_s(stdout, "    7: SREC Invalid string\n");
-            fprintf_s(stdout, "    8: Levelling failed. Cuvette holder blocked?\n");
-            fprintf_s(stdout, "   10: EviFluor Module not found\n");
-            fprintf_s(stdout, "   50: Unknown command line option\n");
+            fprintf_s(stdout, "    4: SREC flash write error\n");
+            fprintf_s(stdout, "    5: SREC unsupported type\n");
+            fprintf_s(stdout, "    6: SREC invalid CRC\n");
+            fprintf_s(stdout, "    7: SREC invalid string\n");
+            fprintf_s(stdout, "    8: Leveling failed. Cuvette holder blocked?\n");
+            fprintf_s(stdout, "   10: EviFluor module not found\n");
+            fprintf_s(stdout, "   50: Unknown command-line option\n");
             fprintf_s(stdout, "   51: Response error\n");
             fprintf_s(stdout, "   52: Protocol error\n");
-            fprintf_s(stdout, "   53: Unknown command line argument\n");
+            fprintf_s(stdout, "   53: Unknown command-line argument\n");
             fprintf_s(stdout, "   55: Invalid number\n");
             fprintf_s(stdout, "   56: File not found\n");
+            fprintf_s(stdout, "   57: Cuvette guide not empty\n");
             fprintf_s(stdout, "  100: Communication error\n");
 	}
 	else
@@ -75,72 +78,87 @@ void help(int argcCmd, char **argvCmd)
                 fprintf_s(stdout, "   0: Firmware version\n");
                 fprintf_s(stdout, "   1: Serial number\n");
                 fprintf_s(stdout, "   3: Production number\n");
-                fprintf_s(stdout, "  10: Number of internal stored last measurements\n");
-				fprintf_s(stdout, "  15: Led power\n");
-				fprintf_s(stdout, "  16: Led power minimum value\n");
-				fprintf_s(stdout, "  17: Led power maximum value\n");
+                fprintf_s(stdout, "  10: Number of stored measurements\n");
+				fprintf_s(stdout, "  15: LED power\n");
+				fprintf_s(stdout, "  16: LED power minimum value\n");
+				fprintf_s(stdout, "  17: LED power maximum value\n");
 			}
 			else if(strcmp(argvCmd[1], "set") == 0)
 			{
                 fprintf_s(stdout, "Usage: evifluor set INDEX VALUE\n");
-                fprintf_s(stdout, "  Set a value in the device\n");
+                fprintf_s(stdout, "  Set a value on the device\n");
                 fprintf_s(stdout, "WARNING:\n");
                 fprintf_s(stdout, "  Changing a value can damage the device or lead to incorrect results!\n");
                 fprintf_s(stdout, "INDEX:\n");
                 fprintf_s(stdout, "   1: Serial number\n");
                 fprintf_s(stdout, "   2: Production number\n");
-				fprintf_s(stdout, "  15: Led power\n");
+				fprintf_s(stdout, "  15: LED power\n");
 			}
 			else if(strcmp(argvCmd[1], "save") == 0)
 			{
                 fprintf_s(stdout, "Usage: evifluor save [FILE] [COMMENT]\n");
-                fprintf_s(stdout, "  Saves the last measurements in the given file FILE as a JSON file.\n");
-                fprintf_s(stdout, "  The optional string COMMENT is added as a comment to the measurement in the JSON file.\n");
-                fprintf_s(stdout, "Options: \n");
-                fprintf_s(stdout, "  --append           : append the new data at the end of the file (Default).\n");
-                fprintf_s(stdout, "  --create           : create the file and add the data at the end of the file.\n");
-                fprintf_s(stdout, "  --mode-raw         : append all measurments as single measurements.\n");
-                fprintf_s(stdout, "  --mode-measurement : append all measurments as air-sample pairs (Default).\n");
+                fprintf_s(stdout, "  Saves the latest measurements to FILE as a JSON file.\n");
+                fprintf_s(stdout, "  The optional COMMENT string is added to the measurement in the JSON file.\n");
+                fprintf_s(stdout, "Options:\n");
+                fprintf_s(stdout, "  --append           : append the new data at the end of the file (default)\n");
+                fprintf_s(stdout, "  --create           : create the file and append the data at the end of the file\n");
+                fprintf_s(stdout, "  --mode-raw         : append all measurements as single measurements\n");
+                fprintf_s(stdout, "  --mode-measurement : append all measurements as air-sample pairs (default)\n");
 			}
             else if(strcmp(argvCmd[1], "data") == 0)
             {
                 fprintf_s(stdout, "Usage: evifluor data print FILE\n");
-                fprintf_s(stdout, "  Prints the calculated values from file FILE.\n");
+                fprintf_s(stdout, "  Prints the calculated values from FILE.\n");
                 fprintf_s(stdout, "Output:\n");
                 fprintf_s(stdout, "  concentration comment\n");
                 fprintf_s(stdout, "\n");
-                fprintf_s(stdout, "Usage: evifluor data calculate CONCENTRATION_LOW CONCENTRATION_HIGH FILE\n");
+                fprintf_s(stdout, "Usage: evifluor data calculate CONCENTRATION_LOW CONCENTRATION_HIGH NR_OF_SAMPLES_LOW NR_OF_SAMPLES_HIGH FILE\n");
                 fprintf_s(stdout, "  Calculates the concentration in the given file and adds the values to the file.\n");
                 fprintf_s(stdout, "  CONCENTRATION_LOW is usually 0, CONCENTRATION_HIGH depends on the used kit.\n");
-                fprintf_s(stdout, "  To calculate the values the first sample must be standard high and the second sample must be standard low\n");
+                fprintf_s(stdout, "  To calculate the values, the first NR_OF_SAMPLES_HIGH sample(s) must be standard high and the following NR_OF_SAMPLES_LOW sample(s) standard low.\n");
             }
             else if(strcmp(argvCmd[1], "export") == 0)
             {
                 fprintf_s(stdout, "Usage: evifluor export [OPTIONS] [JSON FILE] [CSV FILE]\n");
-                fprintf_s(stdout, "  Exports data from the JSON file in CSV format.\n");
-                fprintf_s(stdout, "Options: \n");
-                fprintf_s(stdout, "  --delimiter-comma     : use commas as separators (Default).\n");
-                fprintf_s(stdout, "  --delimiter-semicolon : use semicolons as separators.\n");
-                fprintf_s(stdout, "  --delimiter-tab       : use tabs as separators.\n");
-                fprintf_s(stdout, "  --mode-raw            : export single measurements.\n");
-                fprintf_s(stdout, "  --mode-measurement    : export air-sample pairs (Default).\n");
+                fprintf_s(stdout, "  Exports data from the JSON file to CSV format.\n");
+                fprintf_s(stdout, "Options:\n");
+                fprintf_s(stdout, "  --delimiter-comma     : use commas as separators (default)\n");
+                fprintf_s(stdout, "  --delimiter-semicolon : use semicolons as separators\n");
+                fprintf_s(stdout, "  --delimiter-tab       : use tabs as separators\n");
+                fprintf_s(stdout, "  --mode-raw            : export single measurements\n");
+                fprintf_s(stdout, "  --mode-measurement    : export air-sample pairs (default)\n");
             }
 			else if(strcmp(argvCmd[1], "measure") == 0)
 			{
                 fprintf_s(stdout, "Usage: evifluor measure [OPTIONS]\n");
-                fprintf_s(stdout, "  Measures and print the value to stdout.\n");                
+                fprintf_s(stdout, "  Measures and prints the value to stdout.\n");
                 fprintf_s(stdout, "Output (measure)    : dark sample ledPower\n");
-                fprintf_s(stdout, "Output (first-air)  : min-dark min-sample min-ledPower max-dark max-sample max-ledPower \n");
-                fprintf_s(stdout, "Output (first-sampl): dark sample ledPower autogain-found autogain-ledPower\n");
-                fprintf_s(stdout, "Options: \n");
-                fprintf_s(stdout, "  --measure             :  (Default).\n");
-                fprintf_s(stdout, "  --first-air           :  Performs a first air measurment.\n");
-                fprintf_s(stdout, "  --first-sample        :  Performs a first sample measurment (autogain).\n");
+                fprintf_s(stdout, "Output (first-air)  : min-dark min-sample min-ledPower max-dark max-sample max-ledPower\n");
+                fprintf_s(stdout, "Output (first-sample) : dark sample ledPower autogain-found autogain-ledPower\n");
+                fprintf_s(stdout, "Options:\n");
+                fprintf_s(stdout, "  --measure             : perform the default measurement (default)\n");
+                fprintf_s(stdout, "  --first-air           : perform a first-air measurement\n");
+                fprintf_s(stdout, "  --first-sample        : perform a first-sample measurement (autogain)\n");
 			}
+            else if(strcmp(argvCmd[1], "run") == 0)
+            {
+                fprintf_s(stdout, "Usage: evifluor run [OPTIONS] init NR_STD_HIGH NR_STD_LOW CONCENTRATION\n");
+                fprintf_s(stdout, "  Initializes a run.\n");
+                fprintf_s(stdout, "Usage: evifluor run [OPTIONS] measure [COMMENT]\n");
+                fprintf_s(stdout, "  Executes a measurement.\n");
+                fprintf_s(stdout, "Usage: evifluor run [OPTIONS] checkempty\n");
+                fprintf_s(stdout, "  Checks if the cuvette guide is empty.\n");
+                fprintf_s(stdout, "  Returns exit code 0 when the cuvette guide is empty; otherwise, the exit code is non-zero.\n");
+                fprintf_s(stdout, "Usage: evifluor run [OPTIONS] export\n");
+                fprintf_s(stdout, "  Exports the active run data JSON file as a CSV file with the same basename.\n");
+                fprintf_s(stdout, "Options:\n");
+                fprintf_s(stdout, "  --working-dir=DIR      : working directory (default: .)\n");
+                fprintf_s(stdout, "  --file=FILE            : data file\n");
+            }
             else if(strcmp(argvCmd[1], "baseline") == 0)
             {
                 fprintf_s(stdout, "Usage: evifluor baseline\n");
-                fprintf_s(stdout, "  The firmware has an internal storage for up to ten measurements. The command baseline clears this storage.\n");
+                fprintf_s(stdout, "  Clears the firmware's internal storage of up to ten measurements.\n");
             }
 			else if(strcmp(argvCmd[1], "version") == 0)
 			{
@@ -150,23 +168,23 @@ void help(int argcCmd, char **argvCmd)
 			else if(strcmp(argvCmd[1], "selftest") == 0)
 			{
                 fprintf_s(stdout, "Usage: evifluor selftest\n");
-                fprintf_s(stdout, "  Executes a selftest and prints the result.\n");
+                fprintf_s(stdout, "  Executes a self-test and prints the result.\n");
 			}
 			else if(strcmp(argvCmd[1], "fwupdate") == 0)
             {
                 fprintf_s(stdout, "Usage: evifluor fwupdate SREC_FILE\n");
-                fprintf_s(stdout, "  Updates the firmware.\n");
+                fprintf_s(stdout, "  Updates the firmware from the specified SREC file.\n");
 			}
             else if(strcmp(argvCmd[1], "empty") == 0)
             {
                 fprintf_s(stdout, "Usage: evifluor empty\n");
                 fprintf_s(stdout, "  Checks if the cuvette guide is empty.\n");
-                fprintf_s(stdout, "  Returns 'Empty' if the cuvette guide is empty or if not empty 'Not empty'\n");
+                fprintf_s(stdout, "  Returns 'Empty' if the cuvette guide is empty; otherwise, returns 'Not empty'.\n");
             }
             else if(strcmp(argvCmd[1], "command") == 0)
 			{
                 fprintf_s(stdout, "Usage: evifluor command COMMAND\n");
-                fprintf_s(stdout, "  Executes any evifluor command. Usefull for testing.\n");
+                fprintf_s(stdout, "  Executes any EviFluor command. Useful for testing.\n");
 			}
 			else
             {
@@ -276,6 +294,10 @@ int main(int argc, char *argv[])
         else if (strcmp(argvCmd[0], "empty") == 0)
         {
             return cmdEmpty(&evifluor);
+        }
+        else if (strcmp(argvCmd[0], "run") == 0)
+        {
+            return cmdRun(&evifluor, argcCmd, argvCmd);
         }
         else if (strcmp(argvCmd[0], "help") == 0)
 		{

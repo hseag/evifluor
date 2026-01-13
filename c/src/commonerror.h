@@ -28,6 +28,7 @@ typedef enum Errors
     ERROR_EVI_UNKOWN_COMMAND_LINE_ARGUMENT          = 53, //|  -  |  -  |  x    |
     ERROR_EVI_INVALID_NUMBER                        = 55, //|  -  |  -  |  x    |
     ERROR_EVI_FILE_IO_ERROR                         = 56, //|  -  |  -  |  x    |
+    ERROR_EVI_CUVETTE_GUIDE_NOT_EMPTY               = 57, //|  -  |  -  |  x    |
     
     ERROR_EVI_USER                                  = 100,//|     |     |       |
 } Error_t;

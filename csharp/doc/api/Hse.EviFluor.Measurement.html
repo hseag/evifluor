@@ -379,6 +379,10 @@ Class Measurement
 
 
 
+  <h4 class="section" id="Hse_EviFluor_Measurement_CalculateFactors_System_Double_System_Double_Hse_EviFluor_Measurement_Hse_EviFluor_Measurement__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>When multiple measurements are provided, their corrected signals are averaged per level.
+Callers must ensure counts &gt; 0; otherwise the average will be undefined.</p>
+</div>
 
 
 
@@ -702,7 +706,7 @@ Class Measurement
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Returns the difference between air- and sample measurement.</p>
+  <div class="markdown level1 summary"><p>Computes the background-corrected signal by subtracting the air delta from the sample delta.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -714,7 +718,7 @@ Class Measurement
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
-    <dd><p>Difference between air- and sample measurement.</p>
+    <dd><p>The corrected signal (same unit as channel mV).</p>
 </dd>
   </dl>
 
