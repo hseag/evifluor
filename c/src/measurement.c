@@ -10,7 +10,14 @@
 
 Measurement_t measurement_init(SingleMeasurement_t air, SingleMeasurement_t sample)
 {
-    Measurement_t ret = {.air = air, .sample = sample};
+    Measurement_t ret = {.hasAir = true, .air = air, .sample = sample};
+
+    return ret;
+}
+
+Measurement_t measurement_initNoAir(SingleMeasurement_t sample)
+{
+    Measurement_t ret = {.hasAir = false, .sample = sample};
 
     return ret;
 }
@@ -18,9 +25,12 @@ Measurement_t measurement_init(SingleMeasurement_t air, SingleMeasurement_t samp
 void measurement_print(const Measurement_t * self, FILE * stream, bool newLine)
 {
     fprintf_s(stream, " ");
-    fprintf_s(stream, "air: ");
-    singleMeasurement_print(&self->air, stream, false);
-    fprintf_s(stream, " ");
+    if(self->hasAir)
+    {
+        fprintf_s(stream, "air: ");
+        singleMeasurement_print(&self->air, stream, false);
+        fprintf_s(stream, " ");
+    }
     fprintf_s(stream, "sample: ");
     singleMeasurement_print(&self->sample, stream, false);
     fprintf_s(stream, "%s", newLine ? "\n" : "");
@@ -31,10 +41,12 @@ Factors_t measurement_calculateFactors(double concentrationLow, double concentra
     Factors_t ret = {0};
 
     ret.stdLow.concentration = concentrationLow;
-    ret.stdLow.value = measurement_value(measurementStdLow);
+    ret.stdLow.value = measurement_value(measurementStdLow, MeasurementAlgorithmV1);
 
     ret.stdHigh.concentration = concentrationHigh;
-    ret.stdHigh.value = measurement_value(measurementStdHigh);
+    ret.stdHigh.value = measurement_value(measurementStdHigh, MeasurementAlgorithmV1);
+    ret.measurementStdLow = 0.0;
+    ret.algorithm = MeasurementAlgorithmV1;
 
     return ret;
 }
@@ -43,12 +55,17 @@ double measurement_concentration(const Measurement_t * self, const Factors_t * f
 {
     double m = (factors->stdHigh.concentration - factors->stdLow.concentration) / (factors->stdHigh.value - factors->stdLow.value);
     double b = factors->stdHigh.concentration - m * factors->stdHigh.value;
-    return m * measurement_value(self) + b;
+    return m * (measurement_value(self, (MeasurementAlgorithm_t)factors->algorithm) - factors->measurementStdLow) + b;
 }
 
-double measurement_value(const Measurement_t * self)
+double measurement_value(const Measurement_t * self, MeasurementAlgorithm_t algorithm)
 {
-    return singleMeasurement_delta(&self->sample) - singleMeasurement_delta(&self->air);
+    if(algorithm == MeasurementAlgorithmV1)
+    {
+        return singleMeasurement_delta(&self->sample) - singleMeasurement_delta(&self->air);
+    }
+
+    return singleMeasurement_delta(&self->sample);
 }
 
 Measurement_t measurement_fromJsonValid(cJSON * obj, bool * valid)
@@ -71,6 +88,15 @@ bool measurement_fromJson(cJSON * obj, Measurement_t * measurement)
         if(singleMeasurement_fromJson(oAir, &air) && singleMeasurement_fromJson(oSample, &sample))
         {
             *measurement = measurement_init(air, sample);
+            ret = true;
+        }
+    }
+    else if(oSample)
+    {
+        SingleMeasurement_t sample = {};
+        if(singleMeasurement_fromJson(oSample, &sample))
+        {
+            *measurement = measurement_initNoAir(sample);
             ret = true;
         }
     }
@@ -116,6 +142,7 @@ static bool getSupportPointAtIndex(cJSON* oMeasurments, uint32_t index, Measurem
 
                         if(valid1 && valid2 && valid3)
                         {
+                            measurement->hasAir = true;
                             measurement->air = eviFluorAdjustToLedPower(&minMeasurement, &maxMeasurement, measurement->sample.channel470.ledPower);
 
                             cJSON_AddItemToObject(oMeasurement, DICT_AIR, singleMeasurement_toJson(&(measurement->air)));
@@ -131,7 +158,7 @@ static bool getSupportPointAtIndex(cJSON* oMeasurments, uint32_t index, Measurem
     return ret;
 }
 
-bool measurement_calculatePoint(cJSON *oMeasurments, double concentration, uint32_t start, uint32_t count, Point_t * point)
+bool measurement_calculatePoint(cJSON *oMeasurments, double concentration, uint32_t start, uint32_t count, Point_t * point, MeasurementAlgorithm_t algorithm)
 {
     Measurement_t m = {};
 
@@ -142,7 +169,7 @@ bool measurement_calculatePoint(cJSON *oMeasurments, double concentration, uint3
     {
         if(getSupportPointAtIndex(oMeasurments, i, &m))
         {
-            point->value += measurement_value(&m);
+            point->value += measurement_value(&m, algorithm);
         }
         else
         {
@@ -170,7 +197,7 @@ static cJSON *calculate(cJSON *obj, Factors_t * factors, double * concentration)
     return ret;
 }
 
-bool measurement_calculate(cJSON * oMeasurements, double concentrationLow, double concentrationHigh, int nrOfStdLow, int nrOfStdLHigh)
+bool measurement_calculate(cJSON * oMeasurements, double concentrationLow, double concentrationHigh, int nrOfStdLow, int nrOfStdLHigh, MeasurementAlgorithm_t algorithm)
 {
     bool ret = false;
 
@@ -178,8 +205,19 @@ bool measurement_calculate(cJSON * oMeasurements, double concentrationLow, doubl
     {
         Factors_t factors = {};
 
-        if(measurement_calculatePoint(oMeasurements, concentrationHigh, 0, nrOfStdLHigh, &factors.stdHigh) && measurement_calculatePoint(oMeasurements, concentrationLow, nrOfStdLHigh, nrOfStdLow, &factors.stdLow))
+        if(measurement_calculatePoint(oMeasurements, concentrationHigh, 0, nrOfStdLHigh, &factors.stdHigh, algorithm) && measurement_calculatePoint(oMeasurements, concentrationLow, nrOfStdLHigh, nrOfStdLow, &factors.stdLow, algorithm))
         {
+                factors.algorithm = algorithm;
+                if(algorithm == MeasurementAlgorithmV2)
+                {
+                    factors.measurementStdLow = factors.stdLow.value;
+                    factors.stdLow.value = factors.stdLow.value - factors.stdLow.value;
+                    factors.stdHigh.value = factors.stdHigh.value - factors.measurementStdLow;
+                }
+                else
+                {
+                    factors.measurementStdLow = 0.0;
+                }
                 cJSON *iterator = NULL;
                 cJSON_ArrayForEach(iterator, oMeasurements)
                 {

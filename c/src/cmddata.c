@@ -50,7 +50,7 @@ static Error_t cmdCalculate(Evi_t *self, int argcCmd, char **argvCmd)
         {
             cJSON *oMeasurements = cJSON_GetObjectItem(json, DICT_MEASUREMENTS);
 
-            measurement_calculate(oMeasurements, concentrationLow, concentrationHigh, nrOfStdLow, nrOfStdHigh);
+            measurement_calculate(oMeasurements, concentrationLow, concentrationHigh, nrOfStdLow, nrOfStdHigh, MeasurementAlgorithmV1);
             json_saveToFile(file, json);
 
             cJSON_Delete(json);

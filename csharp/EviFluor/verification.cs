@@ -303,7 +303,7 @@ namespace Hse.EviFluor
         /// </summary>
         public bool Check(Measurement m, Hints hints = Hints.NONE)
         {
-            bool r1 = Check(m.air, Hints.MUST_HAVE_CUVETTE);
+            bool r1 = m.air == null || Check(m.air, Hints.MUST_HAVE_CUVETTE);
             bool r2 = Check(m.sample, hints | Hints.MUST_HAVE_CUVETTE);
             return r1 && r2;
         }

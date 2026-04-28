@@ -1,0 +1,7 @@
+hse.evifluor.cli module
+=======================
+
+.. automodule:: hse.evifluor.cli
+   :members:
+   :show-inheritance:
+   :undoc-members:

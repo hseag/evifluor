@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>hse.evifluor.device module &#8212; eviFluor Python API  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="hse.evifluor.kits module" href="hse.evifluor.kits.html" />
+    <link rel="prev" title="hse.evifluor.constants module" href="hse.evifluor.constants.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-hse.evifluor.device">
+<span id="hse-evifluor-device-module"></span><h1>hse.evifluor.device module<a class="headerlink" href="#module-hse.evifluor.device" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="hse.evifluor.device.AutoGainResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.device.</span></span><span class="sig-name descname"><span class="pre">AutoGainResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">found</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">led_power</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#AutoGainResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.AutoGainResult" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents the result of an automatic gain adjustment operation.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.AutoGainResult.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#AutoGainResult.to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.AutoGainResult.to_json" title="Link to this definition">¶</a></dt>
+<dd><p>Converts the auto-gain result to a JSON representation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.device.</span></span><span class="sig-name descname"><span class="pre">Device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents the eviFluor module device API.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.autogain">
+<span class="sig-name descname"><span class="pre">autogain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.autogain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.autogain" title="Link to this definition">¶</a></dt>
+<dd><p>Performs an auto-gain operation at the specified level.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.baseline">
+<span class="sig-name descname"><span class="pre">baseline</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.baseline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.baseline" title="Link to this definition">¶</a></dt>
+<dd><p>Executes the baseline command to clear internal measurement memory.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.close" title="Link to this definition">¶</a></dt>
+<dd><p>Closes the serial connection if the device owns one.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.command">
+<span class="sig-name descname"><span class="pre">command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.command" title="Link to this definition">¶</a></dt>
+<dd><p>Sends a command to the device and returns the tokenized response.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.command_serial">
+<span class="sig-name descname"><span class="pre">command_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.command_serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.command_serial" title="Link to this definition">¶</a></dt>
+<dd><p>Transmits a command over the serial connection and returns the parsed response.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.command_socket">
+<span class="sig-name descname"><span class="pre">command_socket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.command_socket"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.command_socket" title="Link to this definition">¶</a></dt>
+<dd><p>Transmits a command to the simulator over TCP and returns the parsed response.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.erase">
+<span class="sig-name descname"><span class="pre">erase</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.erase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.erase" title="Link to this definition">¶</a></dt>
+<dd><p>Erases the secondary firmware image on the device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.error2text">
+<span class="sig-name descname"><span class="pre">error2text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.error2text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.error2text" title="Link to this definition">¶</a></dt>
+<dd><p>Converts device error codes into human-readable text.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.find_device">
+<span class="sig-name descname"><span class="pre">find_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.find_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.find_device" title="Link to this definition">¶</a></dt>
+<dd><p>Finds the serial device matching the eviFluor VID/PID and optional serial number.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.firmware_version">
+<span class="sig-name descname"><span class="pre">firmware_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.firmware_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.firmware_version" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the firmware version of the connected device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.first_air_measurement">
+<span class="sig-name descname"><span class="pre">first_air_measurement</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.first_air_measurement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.first_air_measurement" title="Link to this definition">¶</a></dt>
+<dd><p>Performs the first air measurement at minimum and maximum LED power levels.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.first_sample_measurement">
+<span class="sig-name descname"><span class="pre">first_sample_measurement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.first_sample_measurement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.first_sample_measurement" title="Link to this definition">¶</a></dt>
+<dd><p>Performs the first sample measurement using auto-gain to determine the LED power.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.fwupdate">
+<span class="sig-name descname"><span class="pre">fwupdate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.fwupdate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.fwupdate" title="Link to this definition">¶</a></dt>
+<dd><p>Streams an SREC file to the device and performs a firmware update.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.get" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves a value from the device at the specified index.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.is_cuvette_holder_empty">
+<span class="sig-name descname"><span class="pre">is_cuvette_holder_empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.is_cuvette_holder_empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.is_cuvette_holder_empty" title="Link to this definition">¶</a></dt>
+<dd><p>Checks whether the cuvette holder is empty.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.logging">
+<span class="sig-name descname"><span class="pre">logging</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.logging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.logging" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves log messages accumulated on the device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.measure">
+<span class="sig-name descname"><span class="pre">measure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">last</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.measure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.measure" title="Link to this definition">¶</a></dt>
+<dd><p>Performs a measurement and retrieves the channel values.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.production_number">
+<span class="sig-name descname"><span class="pre">production_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.production_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.production_number" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the production number of the connected device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.reboot">
+<span class="sig-name descname"><span class="pre">reboot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.reboot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.reboot" title="Link to this definition">¶</a></dt>
+<dd><p>Reboots the device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.selftest">
+<span class="sig-name descname"><span class="pre">selftest</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.selftest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.selftest" title="Link to this definition">¶</a></dt>
+<dd><p>Runs the device self-test and returns the aggregated result.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.serial_number">
+<span class="sig-name descname"><span class="pre">serial_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.serial_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.serial_number" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the serial number of the connected device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.set" title="Link to this definition">¶</a></dt>
+<dd><p>Sets a value on the device at the specified index.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.set_status_led">
+<span class="sig-name descname"><span class="pre">set_status_led</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.set_status_led"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.set_status_led" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the status LED color.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.technical_report">
+<span class="sig-name descname"><span class="pre">technical_report</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.technical_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.technical_report" title="Link to this definition">¶</a></dt>
+<dd><p>Builds a technical report containing measurement and device metadata.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.typeof">
+<span class="sig-name descname"><span class="pre">typeof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.typeof"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.typeof" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the data type stored at the specified index.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.Device.verify">
+<span class="sig-name descname"><span class="pre">verify</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#Device.verify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.Device.verify" title="Link to this definition">¶</a></dt>
+<dd><p>Verifies the integrity of the current firmware image.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hse.evifluor.device.FirstAirMeasurementResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.device.</span></span><span class="sig-name descname"><span class="pre">FirstAirMeasurementResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_measurement</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_measurement</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#FirstAirMeasurementResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.FirstAirMeasurementResult" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents the first air measurement with minimum and maximum recorded measurements.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.FirstAirMeasurementResult.adjust_to_led_power">
+<span class="sig-name descname"><span class="pre">adjust_to_led_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">led_power</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#FirstAirMeasurementResult.adjust_to_led_power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.FirstAirMeasurementResult.adjust_to_led_power" title="Link to this definition">¶</a></dt>
+<dd><p>Adjusts the measurement to a given LED power level using linear interpolation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.FirstAirMeasurementResult.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#FirstAirMeasurementResult.to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.FirstAirMeasurementResult.to_json" title="Link to this definition">¶</a></dt>
+<dd><p>Converts the first air measurement result to a JSON representation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hse.evifluor.device.FirstSampleMeasurementResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.device.</span></span><span class="sig-name descname"><span class="pre">FirstSampleMeasurementResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auto_gain_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#FirstSampleMeasurementResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.FirstSampleMeasurementResult" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents the result of the first sample measurement, including auto-gain data.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hse.evifluor.device.SelfttestResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.device.</span></span><span class="sig-name descname"><span class="pre">SelfttestResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#SelfttestResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.SelfttestResult" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents the aggregated flags resulting from a device self-test.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.SelfttestResult.has_communication_error">
+<span class="sig-name descname"><span class="pre">has_communication_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#SelfttestResult.has_communication_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.SelfttestResult.has_communication_error" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if there is a problem with the communication channel.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.SelfttestResult.has_problems">
+<span class="sig-name descname"><span class="pre">has_problems</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#SelfttestResult.has_problems"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.SelfttestResult.has_problems" title="Link to this definition">¶</a></dt>
+<dd><p>Determines whether there are any problems in the self-test.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.device.SelfttestResult.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/device.html#SelfttestResult.to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.device.SelfttestResult.to_json" title="Link to this definition">¶</a></dt>
+<dd><p>Converts the self-test result to a JSON representation.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">eviFluor Python API</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">hse</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="hse.html">hse package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">hse</a><ul>
+  <li><a href="hse.html">hse package</a><ul>
+  <li><a href="hse.evifluor.html">hse.evifluor package</a><ul>
+      <li>Previous: <a href="hse.evifluor.constants.html" title="previous chapter">hse.evifluor.constants module</a></li>
+      <li>Next: <a href="hse.evifluor.kits.html" title="next chapter">hse.evifluor.kits module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/api/hse.evifluor.device.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -29,7 +29,15 @@ typedef struct
 {
     Point_t stdLow;  /**< Measurement collected at the low concentration standard. */
     Point_t stdHigh; /**< Measurement collected at the high concentration standard. */
+    double measurementStdLow; /**< Averaged low-standard signal used as baseline in sample-only mode. */
+    int algorithm; /**< Measurement algorithm used for calculation. */
 } Factors_t;
+
+typedef enum
+{
+    MeasurementAlgorithmV1 = 0, /**< Calculates using air and sample values. */
+    MeasurementAlgorithmV2 = 1, /**< Calculates using sample-only values. */
+} MeasurementAlgorithm_t;
 
 /**
  * @struct Measurement_t
@@ -39,6 +47,7 @@ typedef struct
  */
 typedef struct
 {
+    bool hasAir;               /**< True when the air measurement is present. */
     SingleMeasurement_t air;      /**< Air measurement. */
     SingleMeasurement_t sample;   /**< Sample measurement. */
 } Measurement_t;
@@ -51,6 +60,7 @@ typedef struct
  * @return An initialized Measurement_t structure.
  */
 DLLEXPORT Measurement_t measurement_init(SingleMeasurement_t air, SingleMeasurement_t sample);
+DLLEXPORT Measurement_t measurement_initNoAir(SingleMeasurement_t sample);
 
 /**
  * @brief Prints the contents of a Measurement_t structure to the specified stream.
@@ -67,7 +77,7 @@ DLLEXPORT void measurement_print(const Measurement_t * self, FILE * stream, bool
  * @param self Pointer to the Measurement_t structure.
  * @return Difference between air- and sample measurement.
  */
-DLLEXPORT double measurement_value(const Measurement_t * self);
+DLLEXPORT double measurement_value(const Measurement_t * self, MeasurementAlgorithm_t algorithm);
 
 /**
  * @brief Returns the difference between air- and sample measurement.
@@ -123,4 +133,4 @@ DLLEXPORT bool measurement_fromJson(cJSON * obj, Measurement_t * measurement);
  * @param nrOfStdLHigh Number of high standard measurements to average.
  * @return true on success when all data could be processed.
  */
-DLLEXPORT bool measurement_calculate(cJSON * oMeasurements, double concentrationLow, double concentrationHigh, int nrOfStdLow, int nrOfStdLHigh);
+DLLEXPORT bool measurement_calculate(cJSON * oMeasurements, double concentrationLow, double concentrationHigh, int nrOfStdLow, int nrOfStdLHigh, MeasurementAlgorithm_t algorithm);

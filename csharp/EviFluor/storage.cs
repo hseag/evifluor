@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: © 2025 HSE AG, <opensource@hseag.com>
+// SPDX-FileCopyrightText: Â© 2025 HSE AG, <opensource@hseag.com>
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
@@ -252,6 +253,47 @@ public class StorageMeasurement
         {
             var json = data.ToJsonString(options);
             writer.Write(json);
+        }
+    }
+
+    /// <summary>
+    /// Exports the measurement data as CSV next to the JSON file.
+    /// </summary>
+    /// <param name="filename">The JSON filename used to derive the CSV filename.</param>
+    public void ExportAsCsv(string filename)
+    {
+        string csvFilename = Path.ChangeExtension(filename, ".csv");
+        using var writer = new StreamWriter(csvFilename);
+
+        writer.WriteLine("comment;air dark;air value;air ledPower;sample dark;sample value;sample ledPower;concentration");
+
+        foreach (var node in data[Dict.MEASUREMENTS]?.AsArray() ?? new JsonArray())
+        {
+            if (node == null)
+            {
+                continue;
+            }
+
+            string comment = node[Dict.COMMENT]?.ToString() ?? string.Empty;
+            string airDark = node[Dict.AIR]?[Dict.DARK]?.GetValue<double>().ToString(CultureInfo.InvariantCulture) ?? string.Empty;
+            string airValue = node[Dict.AIR]?[Dict.VALUE]?.GetValue<double>().ToString(CultureInfo.InvariantCulture) ?? string.Empty;
+            string airLedPower = node[Dict.AIR]?[Dict.LED_POWER]?.ToString() ?? string.Empty;
+            string sampleDark = node[Dict.SAMPLE]?[Dict.DARK]?.GetValue<double>().ToString(CultureInfo.InvariantCulture) ?? string.Empty;
+            string sampleValue = node[Dict.SAMPLE]?[Dict.VALUE]?.GetValue<double>().ToString(CultureInfo.InvariantCulture) ?? string.Empty;
+            string sampleLedPower = node[Dict.SAMPLE]?[Dict.LED_POWER]?.ToString() ?? string.Empty;
+            string concentration = node[Dict.RESULTS]?[Dict.CONCENTRATION]?.GetValue<double>().ToString(CultureInfo.InvariantCulture) ?? string.Empty;
+
+            writer.WriteLine(string.Join(";", new[]
+            {
+                comment,
+                airDark,
+                airValue,
+                airLedPower,
+                sampleDark,
+                sampleValue,
+                sampleLedPower,
+                concentration
+            }));
         }
     }
 

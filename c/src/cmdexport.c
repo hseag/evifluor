@@ -42,6 +42,15 @@ void exportRawMeasurement(ExportOptions_t * options, cJSON *object, FILE * csv, 
             fprintf_s(csv, "%c", options->delimiter);
         }
     }
+    else
+    {
+        fprintf_s(csv, "%c%c", options->delimiter, options->delimiter);
+        fprintf_s(csv, "%s", last ? "" : "");
+        if(!last)
+        {
+            fprintf_s(csv, "%c", options->delimiter);
+        }
+    }
 }
 
 void exportRaw(ExportOptions_t * options, cJSON *object, FILE * csv)
@@ -75,7 +84,7 @@ void exportMeasurement(ExportOptions_t * options, cJSON *object, FILE * csv)
     cJSON *oSample = cJSON_GetObjectItem(object, DICT_SAMPLE);
     cJSON *oCalculated = cJSON_GetObjectItem(object, DICT_CALCULATED);
 
-    if(oAir != NULL && oSample != NULL)
+    if(oSample != NULL)
     {
         fprintf_s(csv, "%s%c", oComment ? cJSON_GetStringValue(oComment) : "", options->delimiter);
         exportRawMeasurement(options, oAir, csv, false);

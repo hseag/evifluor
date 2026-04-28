@@ -1,0 +1,55 @@
+name: Deploy docs to GitHub Pages
+
+on:
+  push:
+    branches: ["main", "pre-release"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare Pages content
+        run: |
+          BRANCH_NAME="${GITHUB_REF_NAME}"
+
+          rm -rf public
+          mkdir -p "public/${BRANCH_NAME}"
+
+          cp -r doc/api/ "public/${BRANCH_NAME}/"
+          cp -r doc/images/ "public/${BRANCH_NAME}/"
+
+          mkdir -p "public/${BRANCH_NAME}/python"
+          cp -r python/dist "public/${BRANCH_NAME}/python/"
+
+          ls -la "public/${BRANCH_NAME}"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

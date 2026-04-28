@@ -28,6 +28,7 @@ typedef struct
 {
     char * filename_state;
 	char * filename_data;
+    bool noAir;
 } Options_t;
 
 typedef enum
@@ -57,6 +58,7 @@ typedef enum
 #define DICT_CONTEXT_DATA_FIRST_AIR_MAX   "max"
 
 #define DICT_CONTEXT_DATA_AIR             "air"
+#define DICT_CONTEXT_NO_AIR               "noAir"
 
 
 
@@ -258,6 +260,16 @@ static const char *  contextGetDataFile(cJSON * context)
     return contextGetString(context, DICT_CONTEXT_DATA_FILE);
 }
 
+static void contextSetNoAir(cJSON * context, bool noAir)
+{
+    contextSetNumber(context, DICT_CONTEXT_NO_AIR, noAir ? 1 : 0);
+}
+
+static bool contextGetNoAir(cJSON * context)
+{
+    return contextGetNumber(context, DICT_CONTEXT_NO_AIR) != 0;
+}
+
 static void contextSetFirstAir(cJSON * context, const MeasurementFirstAir_t * firstAir)
 {
     cJSON * oData = cJSON_GetObjectItem(context, DICT_CONTEXT_DATA);
@@ -382,7 +394,10 @@ static void dataAddMeasurement(Evi_t* self, cJSON * context, const SingleMeasure
 
     cJSON* oMeasurements = cJSON_GetObjectItem(data, DICT_MEASUREMENTS);
     cJSON* obj = cJSON_CreateObject();
-    cJSON_AddItemToObject(obj, DICT_AIR, singleMeasurement_toJson(air));
+    if(air != NULL)
+    {
+        cJSON_AddItemToObject(obj, DICT_AIR, singleMeasurement_toJson(air));
+    }
     cJSON_AddItemToObject(obj, DICT_SAMPLE, singleMeasurement_toJson(sample));
 
     {
@@ -454,7 +469,14 @@ static void reCalculate(cJSON * context, Options_t * options)
     if (json != NULL)
     {
         cJSON *oMeasurements = cJSON_GetObjectItem(json, DICT_MEASUREMENTS);
-        bool ret = measurement_calculate(oMeasurements, contextGetConcentrationStdLow(context), contextGetConcentrationStdHigh(context), contextGetNrOfStdLow(context), contextGetNrOfStdHigh(context));
+        bool ret = measurement_calculate(
+            oMeasurements,
+            contextGetConcentrationStdLow(context),
+            contextGetConcentrationStdHigh(context),
+            contextGetNrOfStdLow(context),
+            contextGetNrOfStdHigh(context),
+            contextGetNoAir(context) ? MeasurementAlgorithmV2 : MeasurementAlgorithmV1
+        );
         if(ret == true)
         {
             json_saveToFile(contextGetDataFile(context), json);
@@ -502,7 +524,14 @@ static Error_t measure(Evi_t* self, cJSON * context, Options_t * options, const 
                 verification_checkFirstSampleMeasurementResult(&verification, &sample, HINTS_NONE);
                 contextSetVerification(context, &verification);
                 contextGetFirstAir(context, &firstAir);
-                air = eviFluorAdjustToLedPower(&firstAir.min, &firstAir.max, sample.measurement.channel470.ledPower);
+                if(contextGetNoAir(context))
+                {
+                    air = (SingleMeasurement_t){0};
+                }
+                else
+                {
+                    air = eviFluorAdjustToLedPower(&firstAir.min, &firstAir.max, sample.measurement.channel470.ledPower);
+                }
                 {
                     char * _comment = NULL;
                     if(comment == NULL)
@@ -510,7 +539,7 @@ static Error_t measure(Evi_t* self, cJSON * context, Options_t * options, const 
                         _comment = createComment(context);
                     }
 
-                    dataAddMeasurement(self, context, &air, &sample.measurement, comment ? comment : _comment, false);
+                    dataAddMeasurement(self, context, contextGetNoAir(context) ? NULL : &air, &sample.measurement, comment ? comment : _comment, false);
 
                     if(_comment != NULL)
                     {
@@ -524,7 +553,7 @@ static Error_t measure(Evi_t* self, cJSON * context, Options_t * options, const 
                 printError(ret, NULL);
             }
             contextAddLog(context, "measure() first sample ret:%i", ret);
-            contextSetState(context, StateAir);
+            contextSetState(context, contextGetNoAir(context) ? StateSample : StateAir);
             contextSetCount(context, contextGetCount(context) + 1);
         }
         break;
@@ -557,11 +586,15 @@ static Error_t measure(Evi_t* self, cJSON * context, Options_t * options, const 
             SingleMeasurement_t sample;
             ret = eviFluorMeasure(self, &sample);
 
-            contextGetSingleMeasurement(context, DICT_CONTEXT_DATA_AIR, &air);
             if(ret == ERROR_EVI_OK)
             {
                 verification_checkSingleMeasurement(&verification, &sample, HINTS_NONE);
                 contextSetVerification(context, &verification);
+
+                if(!contextGetNoAir(context))
+                {
+                    contextGetSingleMeasurement(context, DICT_CONTEXT_DATA_AIR, &air);
+                }
 
                 char * _comment = NULL;
                 if(comment == NULL)
@@ -569,7 +602,7 @@ static Error_t measure(Evi_t* self, cJSON * context, Options_t * options, const 
                     _comment = createComment(context);
                 }
 
-                dataAddMeasurement(self, context, &air, &sample, comment ? comment : _comment, true);
+                dataAddMeasurement(self, context, contextGetNoAir(context) ? NULL : &air, &sample, comment ? comment : _comment, true);
 
                 if(_comment != NULL)
                 {
@@ -583,7 +616,7 @@ static Error_t measure(Evi_t* self, cJSON * context, Options_t * options, const 
                 printError(ret, NULL);
             }
             contextAddLog(context, "measure() sample ret:%i", ret);
-            contextSetState(context, StateAir);
+            contextSetState(context, contextGetNoAir(context) ? StateSample : StateAir);
             contextSetCount(context, contextGetCount(context) + 1);
         }
         break;
@@ -664,16 +697,23 @@ Error_t cmdRun(Evi_t* self, int argcCmd, char** argvCmd)
         {
             if(strcmp(argvCmdSave[0], "init") == 0)
             {
-                if(argcCmdSave == 4)
+                bool noAir = false;
+                if(argcCmdSave == 5 && strcmp(argvCmdSave[4], "--no-air") == 0)
+                {
+                    noAir = true;
+                }
+
+                if(argcCmdSave == 4 || noAir)
                 {
                     char sn[100] = {};
                     context = contextCreate(context);
-                    contextSetNrOfStdHigh(context, atoi(argvCmdSave[1]));
-                    contextSetNrOfStdLow(context, atoi(argvCmdSave[2]));
+                    contextSetNrOfStdLow(context, atoi(argvCmdSave[1]));
+                    contextSetNrOfStdHigh(context, atoi(argvCmdSave[2]));
                     contextSetConcentrationStdHigh(context, atof(argvCmdSave[3]));
                     contextSetConcentrationStdLow(context, 0.0);
                     contextSetCount(context, 0);
-                    contextSetState(context, StateFirstAir);
+                    contextSetNoAir(context, noAir);
+                    contextSetState(context, noAir ? StateFirstSample : StateFirstAir);
 
                     if(options.filename_data == NULL)
                     {
@@ -701,6 +741,10 @@ Error_t cmdRun(Evi_t* self, int argcCmd, char** argvCmd)
                     contextAddLog(context, "Created");
                     loggingClear(self);
                     fprintf_s(stdout, "Run initialized with %i stdandard high (%.1f ng/ul) and %i stdandard low.\n", contextGetNrOfStdHigh(context), contextGetConcentrationStdHigh(context), contextGetNrOfStdLow(context));
+                    if(noAir)
+                    {
+                        fprintf_s(stdout, "Air measurements are disabled for this run.\n");
+                    }
                     fprintf_s(stdout, "State stored in %s.\n", options.filename_state);
                     fprintf_s(stdout, "Data stored in %s.\n", contextGetDataFile(context));
                 }

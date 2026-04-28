@@ -1,21 +1,226 @@
-# eviFluor Duo Fluorometer
+# eviFluor Duo Fluorometer User Manual
 
-The eviFluor Duo module is ultra-compact 2-channel fluorometer. 
-For more information see www.on-deck-fluorometer.com. To control the eviFluor Duo module, HSE AG provides software interfaces in C or C#.
+## 0. Pre-Release Status
 
-## Measuring procedure in short
-1. Pick up a tip with your liquid handler
-2. Aspirate at least 10.0 &#956;l of sample
-3. Pick up a cuvette
-4. Move the cuvette over the eviFluor Duo module
-5. Insert the cuvette into the eviFluor Duo module
-6. Measure the empty cuvette
-7. Dispense 10 &#956;l sample into the cuvette
-8. Measure the cuvette with sample
-9. Calculate the concentration of the sample
-10. Move the cuvette out off the eviFluor Duo module
-11. Dispose the tip with the attached cuvette
-12. Repeat steps 1-12 until all samples are processed
+This software is currently a pre-release version.
+It is not yet a final release and may still change in behavior, interfaces, documentation, and supported workflows.
 
-The C# documentation can be found [here](https://hseag.github.io/evifluor/csharp/doc/api/Hse.EviFluor.html). 
-                                      
+## 1. Introduction
+
+![eviFluor Duo Fluorometer](./doc/images/evifluor.png)
+
+The eviFluor Duo Fluorometer is a compact fluorescence-based photometer for liquid handlers.
+For more information see https://www.hseag.com/on-deck-fluorometer.
+To control the eviFluor Duo Fluorometer, HSE AG provides software interfaces in C, Python or C#.
+
+### 1.1 Purpose of This Manual
+
+This manual describes how to use the eviFluor Duo Fluorometer software interfaces from a user perspective.
+It focuses on practical handling and separates language-independent concepts from language-specific usage.
+
+### 1.2 Supported Software Interfaces
+
+The eviFluor Duo Fluorometer software stack provides three interface groups:
+
+- Source code in [C#](./doc/csharp.md) and [Python](./doc/python.md), for applications that require full control over device communication, measurement sequencing, data handling, and integration logic.
+- Command line tools in [C](./doc/c-cli.md) and [Python](./doc/python-cli.md), for scripting, automation, and operational workflows without writing a custom application.
+- A Python-based [REST API server](./doc/python-rest.md), for controlling the eviFluor Duo Fluorometer from external software over HTTP.
+
+### 1.3 Typical Measurement Workflow
+
+A typical workflow with a liquid handler is:
+
+1. Prepare a microtiter plate that contains the required standards and sample wells.
+2. The liquid handler picks up a tip and aspirates liquid from the selected well.
+3. The liquid handler picks up a cuvette with the tip and moves above the cuvette guide.
+4. The liquid handler checks that the cuvette guide is empty.
+5. The liquid handler starts the required measurement sequence with the selected software interface.
+6. The liquid handler moves the cuvette into the cuvette guide.
+7. The liquid handler dispenses the liquid into the cuvette and starts the sample measurement.
+8. The liquid handler aspirates the liquid back into the tip if required by the workflow.
+9. The liquid handler moves out of the cuvette guide and discards the tip together with the cuvette.
+
+Two typical software workflows are supported:
+
+1. Workflow with air measurement
+2. Workflow without air measurement (`no_air=True`)
+
+The workflow with air measurement uses one air measurement and one sample measurement for each stored measurement after the initial setup.
+The typical sequence is:
+
+1. `first air`
+2. `first sample`
+3. `air`
+4. `sample`
+5. repeat `air` / `sample` for all following standards and samples
+
+The workflow without air measurement omits the separate air step after initialization.
+The typical sequence is:
+
+1. `first sample`
+2. `sample`
+3. `sample`
+4. repeat `sample` for all following standards and samples
+
+The `no_air=True` workflow is especially useful for multi-pipettes or other workflows where a separate air measurement per channel would add unnecessary handling effort.
+In such setups, the sample-only workflow reduces the number of measurement steps and can simplify synchronized operation across multiple pipetting channels.
+
+The measurement order must always be:
+
+1. standard high
+2. standard low
+3. samples
+
+The standard high measurement must come first because the detector performs an automatic gain adjustment during the initial setup.
+Starting with the high standard ensures that the gain is adjusted so that the standard high reaches approximately 80% of the maximum detector response.
+
+See a video of a simple workflow on an Opentrons OT-2 Robot:
+[![Simple workflow](doc/images/evifluor-workflow.png)](https://hseag.github.io/evifluor/pre-release/images/evifluor-workflow.mp4)
+
+## 2. CAD
+
+The following CAD views provide a starting point for mechanical integration of the eviFluor Duo Fluorometer.
+
+[Side View](./doc/images/evifluor-cad-side.png)
+
+Use this view to understand the side profile, overall height, and the vertical relationship between the device body and the cuvette guide area.
+
+[Top View Calibration](./doc/images/evifluor-cad-top-calibration.png)
+
+Use this view to understand the top-side geometry relevant for calibration and positioning in relation to the surrounding system.
+
+[Top View Detail](./doc/images/evifluor-cad-top-detail.png)
+
+Use this view to inspect the detailed top-side geometry, including the area around the cuvette guide and nearby mechanical constraints.
+
+### 2.1 Calibration
+
+For calibration, one of the defined calibration references in the CAD should be used as the reference position.
+
+### 2.2 Cuvette Pickup
+
+The cuvette should be picked up with the pipette tip.
+The cuvette holding force must be at least 8 N.
+
+### 2.3 Cuvette Insertion
+
+The liquid handler should first move the cuvette above the cuvette guide.
+After that, the liquid handler should move the cuvette into the cuvette guide.
+
+For teaching the insertion height, it is recommended to use the cuvette guide bottom as the mechanical reference.
+In practice, the target position can be taught as 1 mm above the cuvette guide bottom.
+For this purpose, the cuvette guide may be pulled out by 1 mm up to the stop, and the position can then be taught accordingly.
+
+As a geometric reference, the lower edge of the cuvette is approximately 26.0 mm above the work deck at the end position.
+
+## 3. Troubleshooting
+
+### Device not found
+
+If the software cannot detect the device, verify that the USB connection is present and stable.
+Also make sure that no other application is currently using the same device.
+
+### Empty check or baseline fails
+
+If the empty check or baseline step fails, verify that no cuvette is inserted and that the cuvette guide is free of residual liquid or contamination.
+
+### Measurement values are unstable
+
+If repeated measurements show unexpected variation, verify that the cuvette is positioned consistently, that the sample volume is appropriate, and that no air bubbles are present in the liquid.
+
+### Unexpected measurement results
+
+If calculated or reported values do not match expectations, verify that standards and samples were processed in the intended order and that the first air and first sample measurements were performed correctly.
+
+## 4. Appendix
+
+### 4.1 JSON data file format
+
+All interface implementations produce a JSON data file with the same general structure.
+This common file format is used to store measurement runs in a consistent way, independent of whether the data was generated by the C command line interface, the C# interfaces, or the Python interfaces.
+
+The JSON data file is intended for:
+
+- persistent storage of measurement results
+- later review and traceability
+- post-processing and result calculation
+- CSV export
+- regression tests and automated comparisons
+
+The file typically contains:
+
+- device information
+- measurement parameters
+- optional adjustment or calibration information
+- one or more stored measurements
+- optional calculated results for each measurement
+- optional comments, timestamps, and logging information
+
+A measurement entry typically contains the air and sample values relevant for the eviFluor Duo Fluorometer workflow.
+If results have already been calculated, the corresponding result values are stored together with the raw measurement data.
+
+Typical top-level fields:
+
+- `info`: device metadata and API version
+- `measurements`: list of stored measurements
+
+Typical measurement entry fields:
+
+- `air`: air measurement values
+- `sample`: sample measurement values
+- `comment`: optional user comment
+- `date_time`: timestamp
+- `results`: optional calculated result values
+- `logging`: optional device log messages
+
+Example:
+
+```json
+{
+  "info": {
+    "date": "2026-04-23T15:08:40.123456",
+    "product": "eviFluor",
+    "production_number": "P10006",
+    "serial_number": "SN5002",
+    "firmware_version": "9.9.9",
+    "comment": "example run",
+    "api": "1.2.3"
+  },
+  "measurements": [
+    {
+      "air": {
+        "dark": 8.087,
+        "value": 100.784,
+        "ledPower": 224
+      },
+      "sample": {
+        "dark": 7.935,
+        "value": 100.327,
+        "ledPower": 224.0
+      },
+      "comment": "Sample@A1",
+      "date_time": "2026-04-23T15:08:50.380421",
+      "logging": [
+        "1672447 SLP1 * power=40",
+        "1672461 MEAS +",
+        "1674929 MEAS - dark1=8.087159 value1=100.784314 ledPower1=224"
+      ],
+      "errors": [
+        {
+          "problem_id": 5,
+          "description": "AUTO_GAIN_RESULT",
+          "data": {
+            "found": false,
+            "led_power": 224
+          }
+        }
+      ],
+      "results": {
+        "concentration": 10.0
+      }
+    }
+  ]
+}
+```
+
+The exact JSON content may differ slightly depending on the workflow and interface, but the overall structure is intended to remain compatible across all supported implementations.

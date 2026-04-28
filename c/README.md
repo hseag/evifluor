@@ -2,13 +2,13 @@
 1. Pick up a tip with your liquid handler
 2. Aspirate at least 10.0 &#956;l of sample
 3. Pick up a cuvette
-4. Move the cuvette over the eviFluor module
+4. Move the cuvette over the eviFluor Duo Fluorometer
 5. Execute `evifluor baseline`
-6. Insert the cuvette into the eviFluor module
+6. Insert the cuvette into the eviFluor Duo Fluorometer
 7. Execute `evifluor measure --first-air` if it is the first air measurement. If not execute `evifluor measure`
 8. Dispense approximately 10.0 &#956;l sample into the cuvette
 9. Execute `evifluor measure --first-sample`if it is the first sample measurement. If not execute `evifluor measure`
-10. Move the cuvette out off the eviFluor module
+10. Move the cuvette out off the eviFluor Duo Fluorometer
 11. Execute `evifluor save data.json`
 12. Dispose the tip with attached cuvette
 13. Repeat steps 1-13 until all samples are processed
@@ -50,7 +50,7 @@ The commandline tool returns the following exit codes:
     6: SREC Invalid crc
     7: SREC Invalid string
     8: Levelling failed. Cuvette holder blocked?
-   10: EviFluor Module not found
+   10: eviFluor Duo Fluorometer not found
    50: Unknown command line option
    51: Response error
    52: Protocol error

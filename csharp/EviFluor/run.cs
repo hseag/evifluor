@@ -1,4 +1,4 @@
-﻿using Hse.EviFluor;
+using Hse.EviFluor;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,6 +17,8 @@ namespace Hse.EviFluor;
 /// </summary>
 public class Run
 {
+    private readonly bool NoAir_;
+
     private enum State
     {
         FIRST_AIR,
@@ -56,9 +58,11 @@ public class Run
     /// <param name="path">Optional folder for the output JSON file.</param>
     /// <param name="filename">Optional file name; generated if <c>null</c>.</param>
     /// <param name="device">Optional device serial or "SIMULATION" for socket mode.</param>
-    public Run(int nrOfStdLow, int nrOfStdHigh, double concentration, string? path = null, string? filename = null, string? device = null)
+    /// <param name="noAir">If set to <c>true</c>, the run will skip air measurements.</param>
+    public Run(int nrOfStdLow, int nrOfStdHigh, double concentration, string? path = null, string? filename = null, string? device = null, bool noAir = false)
     {
         Filename = null;
+        NoAir_ = noAir;
         NrOfStdLow_ = nrOfStdLow;
         NrOfStdHigh_ = nrOfStdHigh;
         Concentration_ = concentration;
@@ -85,6 +89,8 @@ public class Run
         {
             Filename = System.IO.Path.Combine(path, Filename);
         }
+
+        State_ = NoAir_ ? State.FIRST_SAMPLE : State.FIRST_AIR;
     }
 
     /// <summary>
@@ -106,7 +112,13 @@ public class Run
     {
         if (Factors_ == null && Storage_.Count == NrOfStdLow_ + NrOfStdHigh_)
         {
-            Factors_ = Measurement.CalculateFactors(0, Concentration_, Storage_.Measurements().GetRange(NrOfStdLow_, NrOfStdHigh_), Storage_.Measurements().GetRange(0, NrOfStdHigh_));
+            Factors_ = Measurement.CalculateFactors(
+                0,
+                Concentration_,
+                Storage_.Measurements().GetRange(NrOfStdLow_, NrOfStdHigh_),
+                Storage_.Measurements().GetRange(0, NrOfStdHigh_),
+                NoAir_ ? Algorithm.V2 : Algorithm.V1
+            );
         }
 
         if (Factors_ != null)
@@ -122,12 +134,12 @@ public class Run
     }
 
     /// <summary>
-    /// Executes the next step in the run’s state machine:
+    /// Executes the next step in the runâ€™s state machine:
     /// <list type="bullet">
     /// <item>FIRST_AIR: records min/max air and verifies</item>
     /// <item>FIRST_SAMPLE: auto-gains, measures sample, verifies, stores</item>
     /// <item>AIR: measures air and verifies</item>
-    /// <item>SAMPLE: measures sample, verifies, stores, and returns to AIR</item>
+    /// <item>SAMPLE: measures sample, verifies, stores, and returns to AIR or SAMPLE depending on <c>noAir</c></item>
     /// </list>
     /// Saves the updated JSON after each step.
     /// </summary>
@@ -153,16 +165,27 @@ public class Run
 
             case State.FIRST_SAMPLE:
                 {
-                    if (FirstAirMeasurementResult_ == null)
+                    if (!NoAir_ && FirstAirMeasurementResult_ == null)
                     {
                         throw new Exception("FirstAirMeasurementResult cant be null!");
                     }
 
                     FirstSampleMeasurementResult_ = Device_.FirstSampleMeasurement();
                     Verification_.Check(FirstSampleMeasurementResult_);
-                    var measurement = new Measurement(FirstAirMeasurementResult_, FirstSampleMeasurementResult_);
+                    Measurement measurement;
+
+                    if (NoAir_)
+                    {
+                        measurement = new Measurement(null, FirstSampleMeasurementResult_.Measurement);
+                        State_ = State.SAMPLE;
+                    }
+                    else
+                    {
+                        measurement = new Measurement(FirstAirMeasurementResult_!, FirstSampleMeasurementResult_);
+                        State_ = State.AIR;
+                    }
+
                     Storage_.Append(measurement, comment, Device_.Logging(), Verification_);
-                    State_ = State.AIR;
                 }
                 break;
 
@@ -177,16 +200,16 @@ public class Run
 
             case State.SAMPLE:
                 {
-                    if (Air_ == null)
+                    if (!NoAir_ && Air_ == null)
                     {
                         throw new Exception("Air cant be null!");
                     }
 
                     Sample_ = Device_.Measure();
                     Verification_.Check(Sample_);
-                    var measurement = new Measurement(Air_, Sample_);
+                    var measurement = new Measurement(NoAir_ ? null : Air_, Sample_);
                     Storage_.Append(measurement, comment, Device_.Logging(), Verification_);
-                    State_ = State.AIR;
+                    State_ = NoAir_ ? State.SAMPLE : State.AIR;
                 }
                 break;
         }
@@ -200,7 +223,7 @@ public class Run
     }
 
     /// <summary>
-    /// Returns whether the instrument’s cuvette holder is empty, as reported by the device.
+    /// Returns whether the instrumentâ€™s cuvette holder is empty, as reported by the device.
     /// </summary>
     public bool checkEmpty()
     {
@@ -209,6 +232,18 @@ public class Run
             throw new Exception("Device cant be null!");
         }
         return Device_.IsCuvetteHolderEmpty();
+    }
+
+    /// <summary>
+    /// Exports the stored measurements as CSV next to the JSON file.
+    /// </summary>
+    public void exportAsCsv()
+    {
+        if (Filename == null)
+        {
+            throw new Exception("Filename cant be null!");
+        }
+        Storage_.ExportAsCsv(Filename);
     }
 }
 

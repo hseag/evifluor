@@ -1,0 +1,7 @@
+hse.evifluor.rest\_server module
+================================
+
+.. automodule:: hse.evifluor.rest_server
+   :members:
+   :show-inheritance:
+   :undoc-members:

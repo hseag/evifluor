@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: © 2025 HSE AG, <opensource@hseag.com>
+// SPDX-FileCopyrightText: Â© 2025 HSE AG, <opensource@hseag.com>
 
 using System;
 
@@ -140,6 +140,26 @@ public class Dict
     /// JSON key 'errors'.
     /// </summary>
     public const string ERRORS = "errors";
+
+    /// <summary>
+    /// JSON key 'std_low'.
+    /// </summary>
+    public const string STD_LOW = "std_low";
+
+    /// <summary>
+    /// JSON key 'std_high'.
+    /// </summary>
+    public const string STD_HIGH = "std_high";
+
+    /// <summary>
+    /// JSON key 'measurement_std_low'.
+    /// </summary>
+    public const string MEASUREMENT_STD_LOW = "measurement_std_low";
+
+    /// <summary>
+    /// JSON key 'algorithm'.
+    /// </summary>
+    public const string ALGORITHM = "algorithm";
 }
 
 /// <summary>

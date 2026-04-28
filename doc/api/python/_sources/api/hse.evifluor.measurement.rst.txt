@@ -1,0 +1,7 @@
+hse.evifluor.measurement module
+===============================
+
+.. automodule:: hse.evifluor.measurement
+   :members:
+   :show-inheritance:
+   :undoc-members:

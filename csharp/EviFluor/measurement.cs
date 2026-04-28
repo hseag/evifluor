@@ -1,11 +1,27 @@
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: � 2025 HSE AG, <opensource@hseag.com>
+// SPDX-FileCopyrightText: Â© 2025 HSE AG, <opensource@hseag.com>
 
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Nodes;
 
 namespace Hse.EviFluor;
+
+/// <summary>
+/// Measurement algorithms for converting signals to concentrations.
+/// </summary>
+public enum Algorithm
+{
+    /// <summary>
+    /// Calculates using air and sample values.
+    /// </summary>
+    V1 = 0,
+
+    /// <summary>
+    /// Calculates using sample-only values.
+    /// </summary>
+    V2 = 1
+}
 
 /// <summary>
 /// Represents the results the concentration measurement.
@@ -69,15 +85,15 @@ public class Results : IEquatable<Results>, IJsonSerializable
     /// <param name="other">The object to compare with the current instance.</param>
     /// <returns><c>true</c> if the objects are equal; otherwise, <c>false</c>.</returns>
     /// <remarks>
-    /// Equality uses an absolute tolerance of 1e-9 on <see cref="Concentration"/> to account for floating-point rounding.
+    /// Equality uses a relative tolerance of 1e-13 to align with the Python implementation.
     /// </remarks>
     /// 
     public bool Equals(Results? other)
     {
         if (other is null) return false;
 
-        const double delta = 1e-9;
-        return Math.Abs(Concentration - other.Concentration) < delta;
+        const double delta = 1e-13;
+        return Math.Abs(Concentration - other.Concentration) <= delta * Math.Max(Math.Abs(Concentration), Math.Abs(other.Concentration));
     }
 
     /// <summary>
@@ -138,6 +154,29 @@ public class Point
     {
         return $"Concentration: {Concentration} Value: {Value}";
     }
+
+    /// <summary>
+    /// Converts the point to a JSON representation.
+    /// </summary>
+    public JsonNode ToJson()
+    {
+        JsonObject obj = new JsonObject();
+        obj[Dict.CONCENTRATION] = Concentration;
+        obj[Dict.VALUE] = Value;
+        return obj;
+    }
+
+    /// <summary>
+    /// Creates a point from a JSON representation.
+    /// </summary>
+    public static Point FromJson(JsonNode? node)
+    {
+        if (node == null) throw new ArgumentNullException(nameof(node));
+        return new Point(
+            node[Dict.CONCENTRATION]?.GetValue<double>() ?? throw new InvalidOperationException($"{Dict.CONCENTRATION} is missing or null"),
+            node[Dict.VALUE]?.GetValue<double>() ?? throw new InvalidOperationException($"{Dict.VALUE} is missing or null")
+        );
+    }
 }
 
 /// <summary>
@@ -156,14 +195,28 @@ public class Factors
     public Point StdHigh { get; set; }
 
     /// <summary>
+    /// Gets or sets the averaged standard-low measurement used as sample-only baseline in algorithm V2.
+    /// </summary>
+    public double MeasurementStdLow { get; set; }
+
+    /// <summary>
+    /// Gets or sets the algorithm used to derive the factors.
+    /// </summary>
+    public Algorithm? Algorithm { get; set; }
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Factors"/> class.
     /// </summary>
     /// <param name="stdLow">The low standard factor.</param>
     /// <param name="stdHigh">The high standard factor.</param>
-    public Factors(Point stdLow, Point stdHigh)
+    /// <param name="measurementStdLow">The averaged standard-low measurement used as sample-only baseline in algorithm V2.</param>
+    /// <param name="algorithm">The algorithm to use for factor calculation.</param>
+    public Factors(Point stdLow, Point stdHigh, double measurementStdLow = 0.0, Algorithm? algorithm = null)
     {
         StdLow = stdLow;
         StdHigh = stdHigh;
+        MeasurementStdLow = measurementStdLow;
+        Algorithm = algorithm;
     }
 
     /// <summary>
@@ -172,7 +225,39 @@ public class Factors
     /// <returns>A formatted string displaying the low and high standard factors.</returns>
     public override string ToString()
     {
-        return $"StdLow: {StdLow} StdHigh: {StdHigh}";
+        return $"StdLow: {StdLow} StdHigh: {StdHigh} MeasurementStdLow: {MeasurementStdLow} Algorithm: {Algorithm}";
+    }
+
+    /// <summary>
+    /// Converts the factors to a JSON representation.
+    /// </summary>
+    public JsonNode ToJson()
+    {
+        JsonObject obj = new JsonObject();
+        obj[Dict.STD_LOW] = StdLow.ToJson();
+        obj[Dict.STD_HIGH] = StdHigh.ToJson();
+        obj[Dict.MEASUREMENT_STD_LOW] = MeasurementStdLow;
+        obj[Dict.ALGORITHM] = Algorithm == null ? null : (int)Algorithm;
+        return obj;
+    }
+
+    /// <summary>
+    /// Creates factors from a JSON representation.
+    /// </summary>
+    public static Factors FromJson(JsonNode? node)
+    {
+        if (node == null) throw new ArgumentNullException(nameof(node));
+        Algorithm? algorithm = null;
+        if (node[Dict.ALGORITHM] != null)
+        {
+            algorithm = (Algorithm)node[Dict.ALGORITHM]!.GetValue<int>();
+        }
+        return new Factors(
+            Point.FromJson(node[Dict.STD_LOW] ?? throw new InvalidOperationException($"{Dict.STD_LOW} is missing or null")),
+            Point.FromJson(node[Dict.STD_HIGH] ?? throw new InvalidOperationException($"{Dict.STD_HIGH} is missing or null")),
+            node[Dict.MEASUREMENT_STD_LOW]?.GetValue<double>() ?? 0.0,
+            algorithm
+        );
     }
 }
 
@@ -190,7 +275,7 @@ public class Measurement : IJsonSerializable
     /// <summary>
     /// The air reference measurement used for background correction.
     /// </summary>
-    public SingleMeasurement air;
+    public SingleMeasurement? air;
 
     /// <summary>
     /// The actual sample measurement.
@@ -203,7 +288,7 @@ public class Measurement : IJsonSerializable
     /// <param name="air">The air measurement.</param>
     /// <param name="sample">The sample measurement.</param>
     /// <param name="comment">An optional comment for the measurement.</param>
-    public Measurement(SingleMeasurement air, SingleMeasurement sample, string comment = "")
+    public Measurement(SingleMeasurement? air, SingleMeasurement sample, string comment = "")
     {
         this.air = air;
         this.sample = sample;
@@ -224,12 +309,26 @@ public class Measurement : IJsonSerializable
     }
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="Measurement"/> class from a first-sample result without air.
+    /// </summary>
+    public Measurement(FirstSampleMeasurementResult sample, string comment = "")
+    {
+        this.air = null;
+        this.sample = sample.Measurement;
+        this.comment = comment;
+    }
+
+    /// <summary>
     /// Returns a string representation of the measurement.
     /// </summary>
     /// <returns>A formatted string displaying baseline, air, and sample measurements.</returns>
     public override string ToString()
     {
-        return $"air:{air} sample:{sample}";
+        if (air == null)
+        {
+            return $"sample:{sample} comment:{comment}";
+        }
+        return $"air:{air} sample:{sample} comment:{comment}";
     }
 
     /// <summary>
@@ -254,9 +353,18 @@ public class Measurement : IJsonSerializable
     /// Computes the background-corrected signal by subtracting the air delta from the sample delta.
     /// </summary>
     /// <returns>The corrected signal (same unit as channel mV).</returns>
-    public double Value()
+    public double Value(Algorithm algorithm = Algorithm.V1)
     {
-        return sample.Delta() - air.Delta();
+        if (algorithm == Algorithm.V1)
+        {
+            if (air == null)
+            {
+                throw new InvalidOperationException("Air measurement is required for Algorithm.V1");
+            }
+            return sample.Delta() - air.Delta();
+        }
+
+        return sample.Delta();
     }
 
     /// <summary>
@@ -268,7 +376,7 @@ public class Measurement : IJsonSerializable
     public double Concentration(Factors factors, IKit ? kit = null)
     {
         kit = kit ?? new Kits.Default();
-        return kit.fit(factors.StdLow, factors.StdHigh, Value());
+        return kit.fit(factors.StdLow, factors.StdHigh, Value(factors.Algorithm ?? Algorithm.V1) - factors.MeasurementStdLow);
     }
 
     /// <summary>
@@ -290,7 +398,10 @@ public class Measurement : IJsonSerializable
     {
         JsonObject obj = new JsonObject();
 
-        obj[Dict.AIR] = air.ToJson();
+        if (air != null)
+        {
+            obj[Dict.AIR] = air.ToJson();
+        }
         obj[Dict.SAMPLE] = sample.ToJson();
 
         if (!String.IsNullOrEmpty(comment))
@@ -311,10 +422,13 @@ public class Measurement : IJsonSerializable
     public static Measurement FromJson(JsonNode? node)
     {
         if (node == null) throw new ArgumentNullException(nameof(node));
-        return new Measurement(            
-            SingleMeasurement.FromJson(node[Dict.AIR] ?? throw new InvalidOperationException($"{Dict.AIR} is missing or null")),
-            SingleMeasurement.FromJson(node[Dict.SAMPLE] ?? throw new InvalidOperationException($"{Dict.SAMPLE} is missing or null")),
-            node.AsObject().ContainsKey(Dict.COMMENT) ? node[Dict.COMMENT]?.ToString() ?? string.Empty : string.Empty
+        var obj = node.AsObject();
+        return new Measurement(
+            obj.ContainsKey(Dict.AIR) && obj[Dict.AIR] is JsonNode airNode && airNode != null
+                ? SingleMeasurement.FromJson(airNode)
+                : null,
+            SingleMeasurement.FromJson(obj[Dict.SAMPLE] ?? throw new InvalidOperationException($"{Dict.SAMPLE} is missing or null")),
+            obj.ContainsKey(Dict.COMMENT) ? obj[Dict.COMMENT]?.ToString() ?? string.Empty : string.Empty
         );
     }
 
@@ -345,8 +459,10 @@ public class Measurement : IJsonSerializable
     /// <param name="concentrationHigh">The known high concentration standard.</param>
     /// <param name="measurementsStdLow">A list of measurements corresponding to the low concentration.</param>
     /// <param name="measurementsStdHigh">A list of measurements corresponding to the high concentration.</param>
+    /// <param name="algorithm">The algorithm to use for factor calculation.</param>
     /// <returns>A <see cref="Factors"/> object containing calculated correction factors.</returns>
-    public static Factors CalculateFactors(double concentrationLow, double concentrationHigh, List<Measurement> measurementsStdLow, List<Measurement> measurementsStdHigh)
+   
+    public static Factors CalculateFactors(double concentrationLow, double concentrationHigh, List<Measurement> measurementsStdLow, List<Measurement> measurementsStdHigh, Algorithm algorithm = Algorithm.V1)
     {
         var countLow = measurementsStdLow.Count;
         var countHigh = measurementsStdHigh.Count;
@@ -357,7 +473,7 @@ public class Measurement : IJsonSerializable
         {
             foreach (Measurement measurement in measurementsStdLow)
             {
-                stdLow = stdLow + measurement.Value();
+                stdLow = stdLow + measurement.Value(algorithm);
             }
             stdLow = stdLow / countLow;
         }
@@ -370,7 +486,7 @@ public class Measurement : IJsonSerializable
         {
             foreach (Measurement measurement in measurementsStdHigh)
             {
-                stdHigh = stdHigh + measurement.Value();
+                stdHigh = stdHigh + measurement.Value(algorithm);
             }
             stdHigh = stdHigh / countHigh;
         }
@@ -379,6 +495,16 @@ public class Measurement : IJsonSerializable
             stdHigh = 1;
         }
 
-        return new Factors(new Point(concentrationLow, stdLow), new Point(concentrationHigh, stdHigh));
+        if (algorithm == Algorithm.V2)
+        {
+            return new Factors(
+                new Point(concentrationLow, stdLow - stdLow),
+                new Point(concentrationHigh, stdHigh - stdLow),
+                stdLow,
+                algorithm
+            );
+        }
+
+        return new Factors(new Point(concentrationLow, stdLow), new Point(concentrationHigh, stdHigh), algorithm: algorithm);
     }
 }

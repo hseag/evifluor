@@ -18,7 +18,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define VERSION_TOOL "0.6.0"
+#define VERSION_TOOL "0.8.0-pre1"
 
 void help(int argcCmd, char **argvCmd)
 {
@@ -26,7 +26,7 @@ void help(int argcCmd, char **argvCmd)
 	{
             fprintf_s(stdout, "Usage: evifluor [OPTIONS] COMMAND [ARGUMENTS]\n");
             fprintf_s(stdout, "Commands:\n");
-            fprintf_s(stdout, "  baseline            : starts a new series of measurements\n");
+            fprintf_s(stdout, "  baseline            : clears the firmware's internal measurement storage\n");
             fprintf_s(stdout, "  command COMMAND     : executes a device command; e.g. \"evifluor.exe command \\\"V 0\\\"\" returns the value at index 0\n");
             fprintf_s(stdout, "  data                : handles data in a data file\n");
             fprintf_s(stdout, "  empty               : checks if the cuvette guide is empty\n");
@@ -96,7 +96,7 @@ void help(int argcCmd, char **argvCmd)
 			}
 			else if(strcmp(argvCmd[1], "save") == 0)
 			{
-                fprintf_s(stdout, "Usage: evifluor save [FILE] [COMMENT]\n");
+                fprintf_s(stdout, "Usage: evifluor save [OPTIONS] FILE [COMMENT]\n");
                 fprintf_s(stdout, "  Saves the latest measurements to FILE as a JSON file.\n");
                 fprintf_s(stdout, "  The optional COMMENT string is added to the measurement in the JSON file.\n");
                 fprintf_s(stdout, "Options:\n");
@@ -119,7 +119,7 @@ void help(int argcCmd, char **argvCmd)
             }
             else if(strcmp(argvCmd[1], "export") == 0)
             {
-                fprintf_s(stdout, "Usage: evifluor export [OPTIONS] [JSON FILE] [CSV FILE]\n");
+                fprintf_s(stdout, "Usage: evifluor export [OPTIONS] JSON_FILE CSV_FILE\n");
                 fprintf_s(stdout, "  Exports data from the JSON file to CSV format.\n");
                 fprintf_s(stdout, "Options:\n");
                 fprintf_s(stdout, "  --delimiter-comma     : use commas as separators (default)\n");
@@ -142,7 +142,7 @@ void help(int argcCmd, char **argvCmd)
 			}
             else if(strcmp(argvCmd[1], "run") == 0)
             {
-                fprintf_s(stdout, "Usage: evifluor run [OPTIONS] init NR_STD_HIGH NR_STD_LOW CONCENTRATION\n");
+                fprintf_s(stdout, "Usage: evifluor run [OPTIONS] init NR_STD_LOW NR_STD_HIGH CONCENTRATION [--no-air]\n");
                 fprintf_s(stdout, "  Initializes a run.\n");
                 fprintf_s(stdout, "Usage: evifluor run [OPTIONS] measure [COMMENT]\n");
                 fprintf_s(stdout, "  Executes a measurement.\n");
@@ -154,6 +154,7 @@ void help(int argcCmd, char **argvCmd)
                 fprintf_s(stdout, "Options:\n");
                 fprintf_s(stdout, "  --working-dir=DIR      : working directory (default: .)\n");
                 fprintf_s(stdout, "  --file=FILE            : data file\n");
+                fprintf_s(stdout, "  --no-air               : only for 'run init'; initialize the run without air measurements\n");
             }
             else if(strcmp(argvCmd[1], "baseline") == 0)
             {

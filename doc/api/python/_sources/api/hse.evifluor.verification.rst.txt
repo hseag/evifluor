@@ -1,0 +1,7 @@
+hse.evifluor.verification module
+================================
+
+.. automodule:: hse.evifluor.verification
+   :members:
+   :show-inheritance:
+   :undoc-members:

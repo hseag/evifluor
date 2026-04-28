@@ -1,0 +1,7 @@
+hse.evifluor.storage module
+===========================
+
+.. automodule:: hse.evifluor.storage
+   :members:
+   :show-inheritance:
+   :undoc-members:
