@@ -34,7 +34,12 @@ jobs:
           mkdir -p "public/${BRANCH_NAME}/python"
           cp -r python/dist "public/${BRANCH_NAME}/python/"
 
+          mkdir -p "public/${BRANCH_NAME}/simulator"
+          cp -r simulator/dist "public/${BRANCH_NAME}/simulator/"
+
           ls -la "public/${BRANCH_NAME}"
+          ls -la "public/${BRANCH_NAME}/python/"
+          ls -la "public/${BRANCH_NAME}/simulator/"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
