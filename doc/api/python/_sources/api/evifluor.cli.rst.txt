@@ -1,0 +1,7 @@
+evifluor.cli module
+===================
+
+.. automodule:: evifluor.cli
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -92,10 +92,8 @@ def main():
 
         std_high = [
             acquire_first_measurement(device),
-            acquire_follow_up_measurement(device),
         ]
         std_low = [
-            acquire_follow_up_measurement(device),
             acquire_follow_up_measurement(device),
         ]
         samples = [
@@ -107,9 +105,7 @@ def main():
 
         for name, measurement in [
             ("std high 1", std_high[0]),
-            ("std high 2", std_high[1]),
             ("std low 1", std_low[0]),
-            ("std low 2", std_low[1]),
             ("sample 1", samples[0]),
             ("sample 2", samples[1]),
         ]:

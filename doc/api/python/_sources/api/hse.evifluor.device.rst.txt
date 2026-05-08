@@ -1,7 +1,0 @@
-hse.evifluor.device module
-==========================
-
-.. automodule:: hse.evifluor.device
-   :members:
-   :show-inheritance:
-   :undoc-members:

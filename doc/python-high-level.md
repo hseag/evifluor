@@ -33,14 +33,12 @@ from hse.evifluor.run import Run
 
 
 def main():
-    run = Run(nr_of_std_low=2, nr_of_std_high=2, concentration=10.0)
+    run = Run(nr_of_std_low=1, nr_of_std_high=1, concentration=10.0)
 
     try:
         sample_order = [
             "std high 1",
-            "std high 2",
             "std low 1",
-            "std low 2",
             "sample 1",
             "sample 2",
         ]
@@ -52,7 +50,7 @@ def main():
 
             # Move the empty cuvette into the cuvette guide and start the air measurement.
             run.measure()
-            # Dispense the liquid into the cuvette and start the sample measurement.
+            # Dispense 10 µl sample into the cuvette and start the sample measurement.
             run.measure(sample_name)
             # Aspirate the liquid back into the tip, leave the cuvette guide, and discard tip plus cuvette.
 

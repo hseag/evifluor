@@ -162,7 +162,7 @@ python -m hse.evifluor checkempty
 Initialize and use a guided run:
 
 ```bash
-python -m hse.evifluor run init 2 2 10
+python -m hse.evifluor run init 1 1 10
 # The liquid handler picks up a cuvette with the tip and moves above the cuvette guide.
 python -m hse.evifluor checkempty
 # Move the empty cuvette into the cuvette guide and start the air measurement.
@@ -176,23 +176,7 @@ python -m hse.evifluor checkempty
 # Move the empty cuvette into the cuvette guide and start the air measurement.
 python -m hse.evifluor run measure
 # Dispense the liquid into the cuvette and start the sample measurement.
-python -m hse.evifluor run measure "std high 2"
-# Aspirate the liquid back into the tip, leave the cuvette guide, and discard tip plus cuvette.
-
-# The liquid handler picks up a cuvette with the tip and moves above the cuvette guide.
-python -m hse.evifluor checkempty
-# Move the empty cuvette into the cuvette guide and start the air measurement.
-python -m hse.evifluor run measure
-# Dispense the liquid into the cuvette and start the sample measurement.
 python -m hse.evifluor run measure "std low 1"
-# Aspirate the liquid back into the tip, leave the cuvette guide, and discard tip plus cuvette.
-
-# The liquid handler picks up a cuvette with the tip and moves above the cuvette guide.
-python -m hse.evifluor checkempty
-# Move the empty cuvette into the cuvette guide and start the air measurement.
-python -m hse.evifluor run measure
-# Dispense the liquid into the cuvette and start the sample measurement.
-python -m hse.evifluor run measure "std low 2"
 # Aspirate the liquid back into the tip, leave the cuvette guide, and discard tip plus cuvette.
 
 # The liquid handler picks up a cuvette with the tip and moves above the cuvette guide.
@@ -216,7 +200,7 @@ python -m hse.evifluor run export
 Initialize and use a guided no-air run:
 
 ```bash
-python -m hse.evifluor run init 2 2 10 --no-air
+python -m hse.evifluor run init 1 1 10 --no-air
 # The liquid handler picks up a cuvette with the tip and moves above the cuvette guide.
 python -m hse.evifluor checkempty
 # Dispense the liquid into the cuvette and start the sample measurement.
@@ -226,19 +210,7 @@ python -m hse.evifluor run measure "std high 1"
 # The liquid handler picks up a cuvette with the tip and moves above the cuvette guide.
 python -m hse.evifluor checkempty
 # Dispense the liquid into the cuvette and start the sample measurement.
-python -m hse.evifluor run measure "std high 2"
-# Aspirate the liquid back into the tip, leave the cuvette guide, and discard tip plus cuvette.
-
-# The liquid handler picks up a cuvette with the tip and moves above the cuvette guide.
-python -m hse.evifluor checkempty
-# Dispense the liquid into the cuvette and start the sample measurement.
 python -m hse.evifluor run measure "std low 1"
-# Aspirate the liquid back into the tip, leave the cuvette guide, and discard tip plus cuvette.
-
-# The liquid handler picks up a cuvette with the tip and moves above the cuvette guide.
-python -m hse.evifluor checkempty
-# Dispense the liquid into the cuvette and start the sample measurement.
-python -m hse.evifluor run measure "std low 2"
 # Aspirate the liquid back into the tip, leave the cuvette guide, and discard tip plus cuvette.
 
 # The liquid handler picks up a cuvette with the tip and moves above the cuvette guide.

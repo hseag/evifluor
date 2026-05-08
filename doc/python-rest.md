@@ -291,7 +291,7 @@ Response:
 
 Purpose:
 
-- returns a simple service-side device status in single-device mode
+- returns the current service-side device status in single-device mode
 
 Request:
 
@@ -303,23 +303,35 @@ Response:
 {
   "device_id": "P10006",
   "status": "idle",
-  "serialnumber": "P10006",
-  "firmwareVersion": "1.2.3",
-  "productionnumber": "2025-0001"
+  "error": null
 }
 ```
 
 Response fields:
 
-- `device_id`: resolved device identifier
-- `status`: current service-side status
-- `serialnumber`, `firmwareVersion`, `productionnumber`: same information as the `info` endpoint
+- `device_id`: resolved device identifier if known
+- `status`: current service-side status, one of `idle`, `busy`, or `error`
+- `error`: optional backend-side status message, otherwise `null`
+
+Status meaning:
+
+- `idle`: the REST server is currently not executing device commands and the device is present in the currently discovered device list
+- `busy`: the REST server is currently executing device commands for that device
+- `error`: the REST server is currently not busy, but the device is not present in the currently discovered device list
+
+The status endpoint does not communicate with the device.
+It is derived only from the REST server lock state and the currently discovered device list.
+Therefore, the status endpoint can always be queried independently of a running device command.
+Other device-related endpoints such as `info`, `selftest`, `checkempty`, and run-related measurement operations access the device directly and are therefore subject to the single-device execution model of the REST server.
+The `error` state is not persistent.
+Each status request evaluates the current state again.
+If the device appears again in a later discovery pass, the endpoint returns `idle` again.
 
 ### 5.11 `GET /api/v1/devices/{device_id}/status`
 
 Purpose:
 
-- returns a simple service-side device status for the explicitly selected device
+- returns the current service-side device status for the explicitly selected device
 
 Path parameters:
 
@@ -332,6 +344,12 @@ Request:
 Response:
 
 - same structure as `GET /api/v1/device/status`
+
+Behavior:
+
+- `idle`: the selected device is currently available to the REST service
+- `busy`: the device is currently used by another REST request, for example during a self-test or active measurement step
+- `error`: no matching device is available or no device could be resolved
 
 ### 5.12 `POST /api/v1/runs`
 
@@ -566,17 +584,15 @@ def main():
     client = RestClient()
 
     run = client.run_init(
-        nr_of_std_low=2,
-        nr_of_std_high=2,
+        nr_of_std_low=1,
+        nr_of_std_high=1,
         concentration=10.0,
     )
     run_id = run["run_id"]
 
     sample_order = [
         "std high 1",
-        "std high 2",
         "std low 1",
-        "std low 2",
         "sample 1",
         "sample 2",
     ]
@@ -609,8 +625,8 @@ def main():
     client = RestClient()
 
     run = client.run_init(
-        nr_of_std_low=2,
-        nr_of_std_high=2,
+        nr_of_std_low=1,
+        nr_of_std_high=1,
         concentration=10.0,
         no_air=True,
     )
@@ -618,9 +634,7 @@ def main():
 
     sample_order = [
         "std high 1",
-        "std high 2",
         "std low 1",
-        "std low 2",
         "sample 1",
         "sample 2",
     ]

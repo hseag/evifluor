@@ -345,15 +345,7 @@ evifluor-cli save data.json "std high 1"
 evifluor-cli empty
 evifluor-cli measure
 evifluor-cli measure
-evifluor-cli save data.json "std high 2"
-evifluor-cli empty
-evifluor-cli measure
-evifluor-cli measure
 evifluor-cli save data.json "std low 1"
-evifluor-cli empty
-evifluor-cli measure
-evifluor-cli measure
-evifluor-cli save data.json "std low 2"
 evifluor-cli empty
 evifluor-cli measure
 evifluor-cli measure
@@ -369,19 +361,13 @@ evifluor-cli export data.json data.csv
 Initialize and use a guided run:
 
 ```text
-evifluor-cli run init 2 2 10
+evifluor-cli run init 1 1 10
 evifluor-cli run checkempty
 evifluor-cli run measure
 evifluor-cli run measure "std high 1"
 evifluor-cli run checkempty
 evifluor-cli run measure
-evifluor-cli run measure "std high 2"
-evifluor-cli run checkempty
-evifluor-cli run measure
 evifluor-cli run measure "std low 1"
-evifluor-cli run checkempty
-evifluor-cli run measure
-evifluor-cli run measure "std low 2"
 evifluor-cli run checkempty
 evifluor-cli run measure
 evifluor-cli run measure "sample 1"
@@ -394,15 +380,11 @@ evifluor-cli run export
 Initialize and use a guided run without air measurements:
 
 ```text
-evifluor-cli run init 2 2 10 --no-air
+evifluor-cli run init 1 1 10 --no-air
 evifluor-cli run checkempty
 evifluor-cli run measure "std high 1"
 evifluor-cli run checkempty
-evifluor-cli run measure "std high 2"
-evifluor-cli run checkempty
 evifluor-cli run measure "std low 1"
-evifluor-cli run checkempty
-evifluor-cli run measure "std low 2"
 evifluor-cli run checkempty
 evifluor-cli run measure "sample 1"
 evifluor-cli run checkempty

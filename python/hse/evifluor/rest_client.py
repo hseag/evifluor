@@ -87,6 +87,7 @@ class RestClient:
         return self._request_json("GET", self._device_path("checkempty"))
 
     def status(self):
+        """Return the service-side device status (`idle`, `busy`, or `error`)."""
         return self._request_json("GET", self._device_path("status"))
 
     def run_init(self, nr_of_std_low, nr_of_std_high, concentration, no_air=False):

@@ -1,7 +1,0 @@
-hse.evifluor.singlemeasurement module
-=====================================
-
-.. automodule:: hse.evifluor.singlemeasurement
-   :members:
-   :show-inheritance:
-   :undoc-members:

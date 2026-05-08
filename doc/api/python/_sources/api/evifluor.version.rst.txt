@@ -1,0 +1,7 @@
+evifluor.version module
+=======================
+
+.. automodule:: evifluor.version
+   :members:
+   :show-inheritance:
+   :undoc-members:

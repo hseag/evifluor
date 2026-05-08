@@ -1,0 +1,28 @@
+evifluor package
+================
+
+.. automodule:: evifluor
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   evifluor.channel
+   evifluor.cli
+   evifluor.constants
+   evifluor.device
+   evifluor.kits
+   evifluor.measurement
+   evifluor.rest_client
+   evifluor.rest_server
+   evifluor.run
+   evifluor.service
+   evifluor.singlemeasurement
+   evifluor.storage
+   evifluor.verification
+   evifluor.version

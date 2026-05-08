@@ -1,0 +1,7 @@
+evifluor.device module
+======================
+
+.. automodule:: evifluor.device
+   :members:
+   :show-inheritance:
+   :undoc-members:

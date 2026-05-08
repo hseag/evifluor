@@ -1,0 +1,7 @@
+evifluor.rest\_server module
+============================
+
+.. automodule:: evifluor.rest_server
+   :members:
+   :show-inheritance:
+   :undoc-members:

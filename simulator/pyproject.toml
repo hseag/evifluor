@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hse-simulator"
+version = "0.1.0"
+description = "Simulator tooling and web demos for HSE devices"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "HSE AG", email = "opensource@hseag.com" },
+]
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn>=0.29",
+]
+
+[project.scripts]
+hse-simulator = "hse.simulator.cli:main"
+hse-simulator-compare = "hse.simulator.compare.cli:main"
+hse-sim-web-evifluor = "hse.simulator.evifluor.web:main"
+hse-sim-web-evidense = "hse.simulator.evidense.web:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["hse", "hse.*"]

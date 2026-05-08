@@ -1,7 +1,0 @@
-hse.evifluor.version module
-===========================
-
-.. automodule:: hse.evifluor.version
-   :members:
-   :show-inheritance:
-   :undoc-members:

@@ -1,7 +1,0 @@
-hse.evifluor.kits module
-========================
-
-.. automodule:: hse.evifluor.kits
-   :members:
-   :show-inheritance:
-   :undoc-members:

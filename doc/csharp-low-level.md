@@ -83,23 +83,7 @@ internal class Program
 
         stdHigh.Add(AcquireFirstMeasurement(device)); // std high 1
 
-        // std high 2
-        {
-            // The liquid handler picks up a cuvette with the tip and moves above the cuvette guide.
-            if (!device.IsCuvetteHolderEmpty())
-            {
-                throw new InvalidOperationException("Cuvette holder is not empty");
-            }
-
-            // Move the empty cuvette into the cuvette guide and start the air measurement.
-            SingleMeasurement air = device.Measure();
-            // Dispense the liquid into the cuvette and start the sample measurement.
-            SingleMeasurement sample = device.Measure();
-            // Aspirate the liquid back into the tip, leave the cuvette guide, and discard tip plus cuvette.
-            stdHigh.Add(new Measurement(air, sample));
-        }
-
-        foreach (int _ in new[] { 0, 1 })
+        foreach (int _ in new[] { 0 })
         {
             // The liquid handler picks up a cuvette with the tip and moves above the cuvette guide.
             if (!device.IsCuvetteHolderEmpty())
@@ -136,9 +120,7 @@ internal class Program
         foreach ((string name, Measurement measurement) in new[]
         {
             ("std high 1", stdHigh[0]),
-            ("std high 2", stdHigh[1]),
             ("std low 1", stdLow[0]),
-            ("std low 2", stdLow[1]),
             ("sample 1", samples[0]),
             ("sample 2", samples[1]),
         })

@@ -143,9 +143,7 @@ def create_app(working_dir: Optional[str] = None) -> FastAPI:
 
     @app.get("/api/v1/device/status")
     def device_status():
-        device_id = _resolve_single_device_id()
-        info = service.get_device_info(device_id)
-        return {"device_id": device_id, "status": "idle", **info}
+        return service.get_device_status()
 
     @app.get("/api/v1/devices/{device_id}/info")
     def device_info_by_id(device_id: str):
@@ -161,8 +159,7 @@ def create_app(working_dir: Optional[str] = None) -> FastAPI:
 
     @app.get("/api/v1/devices/{device_id}/status")
     def device_status_by_id(device_id: str):
-        info = service.get_device_info(device_id)
-        return {"device_id": device_id, "status": "idle", **info}
+        return service.get_device_status(device_id)
 
     @app.post("/api/v1/runs")
     def run_init(request: RunInitRequest):

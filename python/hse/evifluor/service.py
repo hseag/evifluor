@@ -69,26 +69,54 @@ def _lock_key(kind, value):
     return "{}:{}".format(kind, normalized)
 
 
-@contextmanager
-def _acquire_lock(kind, value):
+def _get_lock(kind, value):
     key = _lock_key(kind, value)
     with _LOCKS_GUARD:
-        lock = _LOCKS.setdefault(key, threading.Lock())
+        return _LOCKS.setdefault(key, threading.Lock())
+
+
+@contextmanager
+def _acquire_lock(kind, value):
+    lock = _get_lock(kind, value)
     with lock:
         yield
 
 
+def _device_lock_value(device=None):
+    return device or "__default__"
+
+
+def _device_lock_is_busy(device=None):
+    lock = _get_lock("device", _device_lock_value(device))
+    acquired = lock.acquire(blocking=False)
+    if acquired:
+        lock.release()
+        return False
+    return True
+
+
+def _probe_device_info(device=None):
+    evifluor = Device(device)
+    try:
+        return {
+            "serialnumber": evifluor.serial_number(),
+            "firmwareVersion": evifluor.firmware_version(),
+            "productionnumber": evifluor.production_number(),
+        }
+    finally:
+        evifluor.close()
+
+
+def _device_from_state_file(state_file):
+    state = _read_json_if_exists(state_file)
+    if state is None:
+        return None
+    return state.get("device")
+
+
 def get_device_info(device=None):
-    with _acquire_lock("device", device or "__default__"):
-        evifluor = Device(device)
-        try:
-            return {
-                "serialnumber": evifluor.serial_number(),
-                "firmwareVersion": evifluor.firmware_version(),
-                "productionnumber": evifluor.production_number(),
-            }
-        finally:
-            evifluor.close()
+    with _acquire_lock("device", _device_lock_value(device)):
+        return _probe_device_info(device)
 
 
 def list_devices():
@@ -103,7 +131,7 @@ def list_devices():
 
 
 def run_selftest(device=None):
-    with _acquire_lock("device", device or "__default__"):
+    with _acquire_lock("device", _device_lock_value(device)):
         evifluor = Device(device)
         try:
             payload = evifluor.selftest().to_json()
@@ -114,7 +142,7 @@ def run_selftest(device=None):
 
 
 def check_empty(device=None):
-    with _acquire_lock("device", device or "__default__"):
+    with _acquire_lock("device", _device_lock_value(device)):
         evifluor = Device(device)
         try:
             return {
@@ -127,22 +155,23 @@ def check_empty(device=None):
 def init_run(nr_of_std_low, nr_of_std_high, concentration, working_dir=".", filename=None, device=None, no_air=False):
     working_dir, data_file, state_file = resolve_run_paths(working_dir, filename, device)
     with _acquire_lock("run", state_file):
-        run = Run(
-            nr_of_std_low,
-            nr_of_std_high,
-            concentration,
-            path=working_dir if data_file is None else None,
-            filename=data_file,
-            device=device,
-            no_air=no_air,
-        )
-        try:
-            run.save_state(state_file)
-            snapshot = _run_snapshot(run, state_file)
-            snapshot["state"] = _read_json_if_exists(state_file)
-            return snapshot
-        finally:
-            run.close()
+        with _acquire_lock("device", _device_lock_value(device)):
+            run = Run(
+                nr_of_std_low,
+                nr_of_std_high,
+                concentration,
+                path=working_dir if data_file is None else None,
+                filename=data_file,
+                device=device,
+                no_air=no_air,
+            )
+            try:
+                run.save_state(state_file)
+                snapshot = _run_snapshot(run, state_file)
+                snapshot["state"] = _read_json_if_exists(state_file)
+                return snapshot
+            finally:
+                run.close()
 
 
 def load_run_state(state_file):
@@ -164,16 +193,68 @@ def measure_run(working_dir=".", filename=None, device=None, comment=None):
 
 def measure_run_state(state_file, comment=None):
     with _acquire_lock("run", state_file):
-        run = Run.load_state(state_file)
-        try:
-            run.measure(comment)
-            run.save_state(state_file)
-            snapshot = _run_snapshot(run, state_file)
-            snapshot["state"] = _read_json_if_exists(state_file)
-            snapshot["data"] = _read_json_if_exists(snapshot["data_file"])
-            return snapshot
-        finally:
-            run.close()
+        device = _device_from_state_file(state_file)
+        with _acquire_lock("device", _device_lock_value(device)):
+            run = Run.load_state(state_file)
+            try:
+                run.measure(comment)
+                run.save_state(state_file)
+                snapshot = _run_snapshot(run, state_file)
+                snapshot["state"] = _read_json_if_exists(state_file)
+                snapshot["data"] = _read_json_if_exists(snapshot["data_file"])
+                return snapshot
+            finally:
+                run.close()
+
+
+def get_device_status(device=None):
+    devices = list_devices()
+    if device is None:
+        if _device_lock_is_busy():
+            return {
+                "device_id": None,
+                "status": "busy",
+                "error": None,
+            }
+        for entry in devices:
+            if _device_lock_is_busy(entry["device_id"]):
+                return {
+                    "device_id": entry["device_id"],
+                    "status": "busy",
+                    "error": None,
+                }
+        if len(devices) > 0:
+            return {
+                "device_id": devices[0]["device_id"],
+                "status": "idle",
+                "error": None,
+            }
+        return {
+            "device_id": None,
+            "status": "error",
+            "error": "No available device found",
+        }
+
+    if _device_lock_is_busy(device):
+        return {
+            "device_id": device,
+            "status": "busy",
+            "error": None,
+        }
+
+    for entry in devices:
+        if entry["device_id"] == device:
+            return {
+                "device_id": device,
+                "status": "idle",
+                "error": None,
+            }
+
+    return {
+        "device_id": device,
+        "status": "error",
+        "error": f"Device '{device}' not found in available devices",
+    }
 
 
 def export_run(working_dir=".", filename=None, device=None):
