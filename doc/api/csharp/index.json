@@ -74,10 +74,25 @@
     "title": "Class Default | eviFluor",
     "summary": "Class Default Namespace Hse.EviFluor.Kits Assembly Hseagcom.EviFluor.dll Default implementation of the IKit interface using linear interpolation. public class Default : IKit Inheritance object Default Implements IKit Derived Quant_iT_dsDNA_HS Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) Constructors Default() Creates a linear interpolation kit using two standard points (low/high). public Default() Methods ToString() Returns a textual description of the default kit. public override string ToString() Returns string Kit description string. fit(Point, Point, double) Performs a calibration fit using two standard reference points. public double fit(Point stdLow, Point stdHigh, double value) Parameters stdLow Point Low concentration standard point. stdHigh Point High concentration standard point. value double The raw measured value to convert. Returns double Calculated concentration based on interpolation. Remarks Implementations may assume that stdLow and stdHigh define a valid calibration range and that the measured signal increases monotonically with concentration. Units of Concentration are kit-specific."
   },
+  "api/Hse.EviFluor.Kits.FitAlgorithm.html": {
+    "href": "api/Hse.EviFluor.Kits.FitAlgorithm.html",
+    "title": "Enum FitAlgorithm | eviFluor",
+    "summary": "Enum FitAlgorithm Namespace Hse.EviFluor.Kits Assembly Hseagcom.EviFluor.dll Selects the mathematical model used to convert the interpolated signal into a concentration. public enum FitAlgorithm Fields Linear = 1 Uses a linear function k1 * x + k2. Power = 2 Uses a power-law function k1 * x^k2. Quadratic = 3 Uses a quadratic function k1 * x^2 + k2 * x + k3."
+  },
   "api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.html": {
     "href": "api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.html",
     "title": "Class Quant_iT_dsDNA_HS | eviFluor",
     "summary": "Class Quant_iT_dsDNA_HS Namespace Hse.EviFluor.Kits Assembly Hseagcom.EviFluor.dll Linear kit preset for Thermo Fisher Quant-iT™ dsDNA HS Assay (Q33120). public class Quant_iT_dsDNA_HS : Default, IKit Inheritance object Default Quant_iT_dsDNA_HS Implements IKit Inherited Members Default.fit(Point, Point, double) object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) Constructors Quant_iT_dsDNA_HS() Linear kit preset for Thermo Fisher Quant-iT™ dsDNA HS Assay (Q33120). public Quant_iT_dsDNA_HS() Methods ToString() Returns a textual description of this specific kit. public override string ToString() Returns string Kit description string."
+  },
+  "api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.html": {
+    "href": "api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.html",
+    "title": "Class QubitTM_1X_dsDNA_Broad_Range_BR | eviFluor",
+    "summary": "Class QubitTM_1X_dsDNA_Broad_Range_BR Namespace Hse.EviFluor.Kits Assembly Hseagcom.EviFluor.dll Predefined kit for the Qubit 1X dsDNA broad-range assay. public class QubitTM_1X_dsDNA_Broad_Range_BR : Default, IKit Inheritance object Default QubitTM_1X_dsDNA_Broad_Range_BR Implements IKit Inherited Members Default.ToString() Default.ToJson() Default.FromJson(JsonNode) Default.Factory(string) Default.fit(Point, Point, double) Default.SettlingTime() Default.StdHighTargetSignalFactor() object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) Constructors QubitTM_1X_dsDNA_Broad_Range_BR() Initializes the Qubit 1X dsDNA broad-range preset. public QubitTM_1X_dsDNA_Broad_Range_BR()"
+  },
+  "api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.html": {
+    "href": "api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.html",
+    "title": "Class QubitTM_1X_dsDNA_High_Sensitivity_HS | eviFluor",
+    "summary": "Class QubitTM_1X_dsDNA_High_Sensitivity_HS Namespace Hse.EviFluor.Kits Assembly Hseagcom.EviFluor.dll Predefined kit for the Qubit 1X dsDNA high-sensitivity assay. public class QubitTM_1X_dsDNA_High_Sensitivity_HS : Default, IKit Inheritance object Default QubitTM_1X_dsDNA_High_Sensitivity_HS Implements IKit Inherited Members Default.ToString() Default.ToJson() Default.FromJson(JsonNode) Default.Factory(string) Default.fit(Point, Point, double) Default.SettlingTime() Default.StdHighTargetSignalFactor() object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) Constructors QubitTM_1X_dsDNA_High_Sensitivity_HS() Initializes the Qubit 1X dsDNA high-sensitivity preset. public QubitTM_1X_dsDNA_High_Sensitivity_HS()"
   },
   "api/Hse.EviFluor.Kits.html": {
     "href": "api/Hse.EviFluor.Kits.html",

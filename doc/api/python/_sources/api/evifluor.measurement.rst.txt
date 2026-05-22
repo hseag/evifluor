@@ -1,7 +1,0 @@
-evifluor.measurement module
-===========================
-
-.. automodule:: evifluor.measurement
-   :members:
-   :show-inheritance:
-   :undoc-members:

@@ -9,7 +9,7 @@ from enum import IntEnum
 
 from hse.simulator.compare import compare_measurement_files
 
-SIMULATOR_HOST = "0.0.0.0"
+SIMULATOR_HOST = "127.0.0.1"
 SIMULATOR_PORT = 5000
 
 

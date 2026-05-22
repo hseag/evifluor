@@ -1,7 +1,0 @@
-evifluor.rest\_client module
-============================
-
-.. automodule:: evifluor.rest_client
-   :members:
-   :show-inheritance:
-   :undoc-members:

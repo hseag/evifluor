@@ -1282,6 +1282,30 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Kits.Default.fit
   nameWithType: Default.fit
+- uid: Hse.EviFluor.Kits.FitAlgorithm
+  name: FitAlgorithm
+  href: api/Hse.EviFluor.Kits.FitAlgorithm.html
+  commentId: T:Hse.EviFluor.Kits.FitAlgorithm
+  fullName: Hse.EviFluor.Kits.FitAlgorithm
+  nameWithType: FitAlgorithm
+- uid: Hse.EviFluor.Kits.FitAlgorithm.Linear
+  name: Linear
+  href: api/Hse.EviFluor.Kits.FitAlgorithm.html#Hse_EviFluor_Kits_FitAlgorithm_Linear
+  commentId: F:Hse.EviFluor.Kits.FitAlgorithm.Linear
+  fullName: Hse.EviFluor.Kits.FitAlgorithm.Linear
+  nameWithType: FitAlgorithm.Linear
+- uid: Hse.EviFluor.Kits.FitAlgorithm.Power
+  name: Power
+  href: api/Hse.EviFluor.Kits.FitAlgorithm.html#Hse_EviFluor_Kits_FitAlgorithm_Power
+  commentId: F:Hse.EviFluor.Kits.FitAlgorithm.Power
+  fullName: Hse.EviFluor.Kits.FitAlgorithm.Power
+  nameWithType: FitAlgorithm.Power
+- uid: Hse.EviFluor.Kits.FitAlgorithm.Quadratic
+  name: Quadratic
+  href: api/Hse.EviFluor.Kits.FitAlgorithm.html#Hse_EviFluor_Kits_FitAlgorithm_Quadratic
+  commentId: F:Hse.EviFluor.Kits.FitAlgorithm.Quadratic
+  fullName: Hse.EviFluor.Kits.FitAlgorithm.Quadratic
+  nameWithType: FitAlgorithm.Quadratic
 - uid: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS
   name: Quant_iT_dsDNA_HS
   href: api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.html
@@ -1320,6 +1344,56 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.ToString
   nameWithType: Quant_iT_dsDNA_HS.ToString
+- uid: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR
+  name: QubitTM_1X_dsDNA_Broad_Range_BR
+  href: api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.html
+  commentId: T:Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR
+  fullName: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR
+  nameWithType: QubitTM_1X_dsDNA_Broad_Range_BR
+- uid: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.#ctor
+  name: QubitTM_1X_dsDNA_Broad_Range_BR()
+  href: api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.html#Hse_EviFluor_Kits_QubitTM_1X_dsDNA_Broad_Range_BR__ctor
+  commentId: M:Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.#ctor
+  name.vb: New()
+  fullName: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.QubitTM_1X_dsDNA_Broad_Range_BR()
+  fullName.vb: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.New()
+  nameWithType: QubitTM_1X_dsDNA_Broad_Range_BR.QubitTM_1X_dsDNA_Broad_Range_BR()
+  nameWithType.vb: QubitTM_1X_dsDNA_Broad_Range_BR.New()
+- uid: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.#ctor*
+  name: QubitTM_1X_dsDNA_Broad_Range_BR
+  href: api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.html#Hse_EviFluor_Kits_QubitTM_1X_dsDNA_Broad_Range_BR__ctor_
+  commentId: Overload:Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.QubitTM_1X_dsDNA_Broad_Range_BR
+  fullName.vb: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.New
+  nameWithType: QubitTM_1X_dsDNA_Broad_Range_BR.QubitTM_1X_dsDNA_Broad_Range_BR
+  nameWithType.vb: QubitTM_1X_dsDNA_Broad_Range_BR.New
+- uid: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS
+  name: QubitTM_1X_dsDNA_High_Sensitivity_HS
+  href: api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.html
+  commentId: T:Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS
+  fullName: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS
+  nameWithType: QubitTM_1X_dsDNA_High_Sensitivity_HS
+- uid: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.#ctor
+  name: QubitTM_1X_dsDNA_High_Sensitivity_HS()
+  href: api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.html#Hse_EviFluor_Kits_QubitTM_1X_dsDNA_High_Sensitivity_HS__ctor
+  commentId: M:Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.#ctor
+  name.vb: New()
+  fullName: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.QubitTM_1X_dsDNA_High_Sensitivity_HS()
+  fullName.vb: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.New()
+  nameWithType: QubitTM_1X_dsDNA_High_Sensitivity_HS.QubitTM_1X_dsDNA_High_Sensitivity_HS()
+  nameWithType.vb: QubitTM_1X_dsDNA_High_Sensitivity_HS.New()
+- uid: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.#ctor*
+  name: QubitTM_1X_dsDNA_High_Sensitivity_HS
+  href: api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.html#Hse_EviFluor_Kits_QubitTM_1X_dsDNA_High_Sensitivity_HS__ctor_
+  commentId: Overload:Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.QubitTM_1X_dsDNA_High_Sensitivity_HS
+  fullName.vb: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.New
+  nameWithType: QubitTM_1X_dsDNA_High_Sensitivity_HS.QubitTM_1X_dsDNA_High_Sensitivity_HS
+  nameWithType.vb: QubitTM_1X_dsDNA_High_Sensitivity_HS.New
 - uid: Hse.EviFluor.Measurement
   name: Measurement
   href: api/Hse.EviFluor.Measurement.html

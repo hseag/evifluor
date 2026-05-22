@@ -222,6 +222,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Kits.FitAlgorithm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Kits.FitAlgorithm.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Kits.FitAlgorithm",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Kits.FitAlgorithm.yml\" sourcestartlinenumber=\"1\">Selects the mathematical model used to convert the interpolated signal into a concentration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.yml",
       "output": {
         ".html": {
@@ -233,6 +247,34 @@
       "IsMRef": true,
       "Title": "Hse.EviFluor.Kits.Quant_iT_dsDNA_HS",
       "Summary": "<p sourcefile=\"api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.yml\" sourcestartlinenumber=\"1\">Linear kit preset for Thermo Fisher Quant-iT™ dsDNA HS Assay (Q33120).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.yml\" sourcestartlinenumber=\"1\">Predefined kit for the Qubit 1X dsDNA broad-range assay.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.yml\" sourcestartlinenumber=\"1\">Predefined kit for the Qubit 1X dsDNA high-sensitivity assay.</p>\n"
     },
     {
       "type": "ManagedReference",

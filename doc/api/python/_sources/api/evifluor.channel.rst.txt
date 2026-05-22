@@ -1,7 +1,0 @@
-evifluor.channel module
-=======================
-
-.. automodule:: evifluor.channel
-   :members:
-   :show-inheritance:
-   :undoc-members:

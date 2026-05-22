@@ -1,7 +1,0 @@
-evifluor.run module
-===================
-
-.. automodule:: evifluor.run
-   :members:
-   :show-inheritance:
-   :undoc-members:

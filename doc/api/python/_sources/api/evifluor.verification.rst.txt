@@ -1,7 +1,0 @@
-evifluor.verification module
-============================
-
-.. automodule:: evifluor.verification
-   :members:
-   :show-inheritance:
-   :undoc-members:

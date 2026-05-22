@@ -241,10 +241,11 @@ class EviDenseSimulation(SimulationBase):
             self.last_measurement_count = 0
             value = self.next_measurement_response("G")
             self.last_measurement_count += 1
+            self.last_measurements.insert(0, "M" + value[1:])
+
             if len(self.last_measurements) > 20:
                 del self.last_measurements[-1]
-            else:
-                self.last_measurements.insert(0, "M" + value[1:])
+
             return value
         return f"E {Error.EVI_INVALID_PARAMETER}"
 

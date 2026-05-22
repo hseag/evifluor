@@ -4,4 +4,4 @@ hse
 .. toctree::
    :maxdepth: 4
 
-   evifluor
+   hse
