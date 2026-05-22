@@ -235,6 +235,13 @@ def get_device_status(device=None):
             "error": "No available device found",
         }
 
+    if device == "SIMULATION":
+        return {
+            "device_id": device,
+            "status": "busy" if _device_lock_is_busy(device) else "idle",
+            "error": None,
+        }
+
     if _device_lock_is_busy(device):
         return {
             "device_id": device,

@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-#define VERSION_DLL "0.2.1"
+#define VERSION_DLL "0.2.0"
 
 typedef struct
 {
@@ -346,89 +346,66 @@ static int getlineInternal(char **lineptr, size_t *n, FILE *stream) {
 
 Error_t eviFwUpdate(Evi_t * self, const char * file)
 {
-    Error_t ret = ERROR_EVI_FILE_NOT_FOUND;
+    Error_t ret = ERROR_EVI_OK;
     FILE * f = fopen(file, "r");
-    size_t n = 0;
-    char * line = NULL;
-    int length = 0;
-    char cmd[255];
-    char portNameBuffer[1024];
-    size_t portNameBufferSize = sizeof(portNameBuffer);
-    EvieResponse_t *response = NULL;
-    EVI_HANDLE hComm = {0};
-    bool hCommOpened = false;
-
-    if(f == NULL)
+    if(f != NULL)
     {
-        return ret;
-    }
+        size_t n;
+        char * line = NULL;
+        int length = 0;
+        Error_t ret;
+        char cmd[255];
+        char portNameBuffer[1024];
+        size_t portNameBufferSize = sizeof(portNameBuffer);
+        
+        if(self->portName == 0)
+        {
+            ret = eviFindDevice(portNameBuffer, &portNameBufferSize, self->verbose);
+            if(ret != ERROR_EVI_OK)
+            {
+                fclose(f);
+                return ret;
+            }
+        }
+        else
+        {
+            strcpy_s(portNameBuffer, portNameBufferSize, self->portName);
+        }
 
-    ret = ERROR_EVI_OK;
-    if(self->portName == 0)
-    {
-        ret = eviFindDevice(portNameBuffer, &portNameBufferSize, self->verbose);
+        EvieResponse_t *response = eviCreateResponse();
+        EVI_HANDLE hComm = eviPortOpen(portNameBuffer);
+        ret = eviCommandComm(self, hComm, "F", response);
+        do
+        {
+            length = getlineInternal(&line, &n, f);
+            if(length != -1)
+            {
+                snprintf(cmd, sizeof(cmd), "S %s", line);
+                ret = eviCommandComm(self, hComm, cmd, response);
+                if(ret != ERROR_EVI_OK)
+                {
+                    return ret;
+                }
+            }
+        }
+        while(length != -1 && ret == ERROR_EVI_OK);
+
+        ret = eviCommandComm(self, hComm, "R", response);
         if(ret != ERROR_EVI_OK)
         {
-            goto cleanup;
+            return ret;
         }
+
+        Sleep(30000);
+
+        free(line);
+        fclose(f);
+        eviFreeResponse(response);
+        eviPortClose(hComm);
     }
     else
     {
-        strcpy_s(portNameBuffer, portNameBufferSize, self->portName);
-    }
-
-    response = eviCreateResponse();
-    if(response == NULL)
-    {
-        ret = ERROR_EVI_FILE_IO_ERROR;
-        goto cleanup;
-    }
-
-    hComm = eviPortOpen(portNameBuffer);
-    hCommOpened = true;
-
-    ret = eviCommandComm(self, hComm, "F", response);
-    if(ret != ERROR_EVI_OK)
-    {
-        goto cleanup;
-    }
-
-    do
-    {
-        length = getlineInternal(&line, &n, f);
-        if(length != -1)
-        {
-            snprintf(cmd, sizeof(cmd), "S %s", line);
-            ret = eviCommandComm(self, hComm, cmd, response);
-            if(ret != ERROR_EVI_OK)
-            {
-                goto cleanup;
-            }
-        }
-    }
-    while(length != -1 && ret == ERROR_EVI_OK);
-
-    ret = eviCommandComm(self, hComm, "R", response);
-    if(ret != ERROR_EVI_OK)
-    {
-        goto cleanup;
-    }
-
-    Sleep(30000);
-
-cleanup:
-    free(line);
-    if(f != NULL)
-    {
-        fclose(f);
-    }
-    if(response != NULL)
-    {
-        eviFreeResponse(response);
-    }
-    if(hCommOpened)
-    {
-        eviPortClose(hComm);
+        ret = ERROR_EVI_FILE_NOT_FOUND;
     }
 
     return ret;

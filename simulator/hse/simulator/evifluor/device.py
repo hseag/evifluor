@@ -42,7 +42,6 @@ class EviFluorSimulation(SimulationBase):
         self.current_led625_power = 64
         self.current_led470_power_max = 200
         self.no_air = self._initial_no_air
-        self.measure_always_zero = False
 
     def append_measurement_data(self, data):
         self._data.append(
@@ -96,11 +95,10 @@ class EviFluorSimulation(SimulationBase):
         if len(args) == 1:
             value = self.next_measurement_response()
             self.last_measurement_count += 1
-            self.last_measurements.insert(0, value)
-
             if len(self.last_measurements) > 20:
                 del self.last_measurements[-1]
-
+            else:
+                self.last_measurements.insert(0, value)
             return value
         if len(args) == 2:
             return self.last_measurements[int(args[1])]
@@ -114,7 +112,7 @@ class EviFluorSimulation(SimulationBase):
     def handle_baseline_command(self, args) -> str:
         if len(args) == 1:
             self.last_measurement_count = 0
-            return "G"
+            return "G "
         return f"E {Error.EVI_INVALID_PARAMETER}"
 
     def handle_status_led_command(self, args) -> str:

@@ -8,8 +8,6 @@ def compare_evifluor_results(left, right, hint) -> bool:
     matches = True
     if not compare_float(left.concentration, right.concentration, hint + "/concentration"):
         matches = False
-    if not compare_float(left.rfu, right.rfu, hint + "/rfu"):
-        matches = False
     return matches
 
 

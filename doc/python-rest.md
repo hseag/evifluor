@@ -29,7 +29,7 @@ The current REST API covers:
 To install the published wheel directly from the documentation site, use:
 
 ```bash
-python -m pip install https://hseag.github.io/evifluor/pre-release/python/dist/hse_evifluor-0.12.0b1-py3-none-any.whl
+python -m pip install https://hseag.github.io/evifluor/pre-release/python/dist/hse_evifluor-0.12.0b2-py3-none-any.whl
 ```
 
 Start the REST API with:
