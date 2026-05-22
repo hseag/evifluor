@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>hse.evifluor.verification module &#8212; eviFluor Python API  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="hse.evifluor.version module" href="hse.evifluor.version.html" />
+    <link rel="prev" title="hse.evifluor.storage module" href="hse.evifluor.storage.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-hse.evifluor.verification">
+<span id="hse-evifluor-verification-module"></span><h1>hse.evifluor.verification module<a class="headerlink" href="#module-hse.evifluor.verification" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.verification.</span></span><span class="sig-name descname"><span class="pre">Verification</span></span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Provides verification checks for various measurement types and conditions.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.Entry">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.Entry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.Entry" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.Entry.from_json">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.Entry.from_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.Entry.from_json" title="Link to this definition">¶</a></dt>
+<dd><p>Restores a verification entry from JSON data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.Entry.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.Entry.to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.Entry.to_json" title="Link to this definition">¶</a></dt>
+<dd><p>Converts the entry to a JSON-friendly dictionary.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.Hints">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Hints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.Hints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.Hints" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Flag</span></code></p>
+<p>Context-sensitive hints that adjust verification checks.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.Hints.MUST_HAVE_CUVETTE">
+<span class="sig-name descname"><span class="pre">MUST_HAVE_CUVETTE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.Hints.MUST_HAVE_CUVETTE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.Hints.NONE">
+<span class="sig-name descname"><span class="pre">NONE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.Hints.NONE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.Hints.STD_HIGH">
+<span class="sig-name descname"><span class="pre">STD_HIGH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.Hints.STD_HIGH" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.ProblemId">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ProblemId</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.ProblemId"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.ProblemId" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Problem identifiers tracked during verification.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.ProblemId.AUTO_GAIN_RESULT">
+<span class="sig-name descname"><span class="pre">AUTO_GAIN_RESULT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.ProblemId.AUTO_GAIN_RESULT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.ProblemId.CUVETTE_MISSING">
+<span class="sig-name descname"><span class="pre">CUVETTE_MISSING</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.ProblemId.CUVETTE_MISSING" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.ProblemId.MAX_LED_POWER">
+<span class="sig-name descname"><span class="pre">MAX_LED_POWER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.ProblemId.MAX_LED_POWER" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.ProblemId.MIN_LED_POWER">
+<span class="sig-name descname"><span class="pre">MIN_LED_POWER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.ProblemId.MIN_LED_POWER" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.ProblemId.NEGATIVE_CONCENTRATION">
+<span class="sig-name descname"><span class="pre">NEGATIVE_CONCENTRATION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.ProblemId.NEGATIVE_CONCENTRATION" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.ProblemId.SATURATION">
+<span class="sig-name descname"><span class="pre">SATURATION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.ProblemId.SATURATION" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.ProblemId.WRONG_LEVEL">
+<span class="sig-name descname"><span class="pre">WRONG_LEVEL</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.ProblemId.WRONG_LEVEL" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.add_problem_id">
+<span class="sig-name descname"><span class="pre">add_problem_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.add_problem_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.add_problem_id" title="Link to this definition">¶</a></dt>
+<dd><p>Adds a problem entry if it has not been recorded already.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.check">
+<span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.check" title="Link to this definition">¶</a></dt>
+<dd><p>Dispatches verification based on the type of sample provided.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.check_auto_gain_result">
+<span class="sig-name descname"><span class="pre">check_auto_gain_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auto_gain_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.check_auto_gain_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.check_auto_gain_result" title="Link to this definition">¶</a></dt>
+<dd><p>Checks the result of the auto-gain procedure for errors.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.check_first_air_measurement_result">
+<span class="sig-name descname"><span class="pre">check_first_air_measurement_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.check_first_air_measurement_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.check_first_air_measurement_result" title="Link to this definition">¶</a></dt>
+<dd><p>Verifies the bounds of a first air measurement result.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.check_first_sample_measurement_result">
+<span class="sig-name descname"><span class="pre">check_first_sample_measurement_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fsm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.check_first_sample_measurement_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.check_first_sample_measurement_result" title="Link to this definition">¶</a></dt>
+<dd><p>Verifies a first sample measurement result including auto-gain and standard high checks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.check_measurement">
+<span class="sig-name descname"><span class="pre">check_measurement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measurement</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.check_measurement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.check_measurement" title="Link to this definition">¶</a></dt>
+<dd><p>Verifies a full air/sample measurement pair.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.check_result">
+<span class="sig-name descname"><span class="pre">check_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.check_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.check_result" title="Link to this definition">¶</a></dt>
+<dd><p>Validates computed results against negative concentration thresholds.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.check_single_measurement">
+<span class="sig-name descname"><span class="pre">check_single_measurement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">single_measurement</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.check_single_measurement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.check_single_measurement" title="Link to this definition">¶</a></dt>
+<dd><p>Checks a single measurement for saturation, cuvette presence, and expected levels.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.expected_value">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">expected_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">led_power</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.expected_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.expected_value" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the expected RFU value for a given LED power using configured thresholds.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.failed">
+<span class="sig-name descname"><span class="pre">failed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.failed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.failed" title="Link to this definition">¶</a></dt>
+<dd><p>Indicates whether any verification issues were recorded.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.from_json">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.from_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.from_json" title="Link to this definition">¶</a></dt>
+<dd><p>Restores verification entries from JSON.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.has_cuvette">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">has_cuvette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="hse.evifluor.singlemeasurement.html#hse.evifluor.singlemeasurement.SingleMeasurement" title="hse.evifluor.singlemeasurement.SingleMeasurement"><span class="pre">SingleMeasurement</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.has_cuvette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.has_cuvette" title="Link to this definition">¶</a></dt>
+<dd><p>Heuristic test for cuvette presence based on LED power and RFU.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.has_problem">
+<span class="sig-name descname"><span class="pre">has_problem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.has_problem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.has_problem" title="Link to this definition">¶</a></dt>
+<dd><p>Checks whether a specific problem has already been recorded.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.max_led">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">max_led</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.max_led" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the current maximum expected LED power.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.max_rfu">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">max_rfu</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.max_rfu" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the current maximum expected RFU value.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.max_signal">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">max_signal</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.max_signal" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the maximum allowed signal value before saturation.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.min_led">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">min_led</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.min_led" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the current minimum expected LED power.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.min_rfu">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">min_rfu</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.min_rfu" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the current minimum expected RFU value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.set_max_led">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">set_max_led</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.set_max_led"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.set_max_led" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the maximum expected LED power or resets to the default.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.set_max_rfu">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">set_max_rfu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.set_max_rfu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.set_max_rfu" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the maximum expected RFU value or resets to the default.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.set_max_signal">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">set_max_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.set_max_signal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.set_max_signal" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the maximum allowed signal value before saturation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.set_min_led">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">set_min_led</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.set_min_led"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.set_min_led" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the minimum expected LED power or resets to the default.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.set_min_rfu">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">set_min_rfu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.set_min_rfu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.set_min_rfu" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the minimum expected RFU value or resets to the default.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.set_std_high_delta">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">set_std_high_delta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.set_std_high_delta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.set_std_high_delta" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the allowed deviation around the standard high target.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.set_std_high_target">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">set_std_high_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.set_std_high_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.set_std_high_target" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the target signal value for standard high checks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.set_threshold_multiplier">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">set_threshold_multiplier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.set_threshold_multiplier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.set_threshold_multiplier" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the RFU threshold multiplier used when detecting cuvette presence.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.set_threshold_negative_concentration">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">set_threshold_negative_concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.set_threshold_negative_concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.set_threshold_negative_concentration" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the threshold used to flag negative concentrations.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.std_high_delta">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">std_high_delta</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.std_high_delta" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the allowed deviation around the standard high target.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.std_high_target">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">std_high_target</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.std_high_target" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the target signal value for standard high checks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.success">
+<span class="sig-name descname"><span class="pre">success</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.success"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.success" title="Link to this definition">¶</a></dt>
+<dd><p>Indicates whether verification completed without findings.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.threshold_multiplier">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">threshold_multiplier</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.threshold_multiplier" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the RFU threshold multiplier used when detecting cuvette presence.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.threshold_negative_concentration">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">threshold_negative_concentration</span></span><a class="headerlink" href="#hse.evifluor.verification.Verification.threshold_negative_concentration" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the threshold used to flag negative concentrations.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.verification.Verification.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.verification.Verification.to_json" title="Link to this definition">¶</a></dt>
+<dd><p>Serializes all verification entries to a JSON-compatible list.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">eviFluor Python API</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">hse</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="hse.html">hse namespace</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">hse</a><ul>
+  <li><a href="hse.html">hse namespace</a><ul>
+  <li><a href="hse.evifluor.html">hse.evifluor package</a><ul>
+      <li>Previous: <a href="hse.evifluor.storage.html" title="previous chapter">hse.evifluor.storage module</a></li>
+      <li>Next: <a href="hse.evifluor.version.html" title="next chapter">hse.evifluor.version module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/api/hse.evifluor.verification.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

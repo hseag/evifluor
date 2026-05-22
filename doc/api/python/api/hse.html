@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>hse namespace &#8212; eviFluor Python API  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="hse.evifluor package" href="hse.evifluor.html" />
+    <link rel="prev" title="hse" href="modules.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-hse">
+<span id="hse-namespace"></span><h1>hse namespace<a class="headerlink" href="#module-hse" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hse.evifluor.html">hse.evifluor package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Algorithm"><code class="docutils literal notranslate"><span class="pre">Algorithm</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Algorithm.V1"><code class="docutils literal notranslate"><span class="pre">Algorithm.V1</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Algorithm.V2"><code class="docutils literal notranslate"><span class="pre">Algorithm.V2</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.AutoGainResult"><code class="docutils literal notranslate"><span class="pre">AutoGainResult</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.AutoGainResult.to_json"><code class="docutils literal notranslate"><span class="pre">AutoGainResult.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Channel"><code class="docutils literal notranslate"><span class="pre">Channel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Channel.delta"><code class="docutils literal notranslate"><span class="pre">Channel.delta()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Channel.from_json"><code class="docutils literal notranslate"><span class="pre">Channel.from_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Channel.to_json"><code class="docutils literal notranslate"><span class="pre">Channel.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Color"><code class="docutils literal notranslate"><span class="pre">Color</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Color.BLUE"><code class="docutils literal notranslate"><span class="pre">Color.BLUE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Color.GREEN"><code class="docutils literal notranslate"><span class="pre">Color.GREEN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Color.OFF"><code class="docutils literal notranslate"><span class="pre">Color.OFF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Color.RED"><code class="docutils literal notranslate"><span class="pre">Color.RED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Color.WHITE"><code class="docutils literal notranslate"><span class="pre">Color.WHITE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Default"><code class="docutils literal notranslate"><span class="pre">Default</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Default.fit"><code class="docutils literal notranslate"><span class="pre">Default.fit()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device"><code class="docutils literal notranslate"><span class="pre">Device</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.autogain"><code class="docutils literal notranslate"><span class="pre">Device.autogain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.baseline"><code class="docutils literal notranslate"><span class="pre">Device.baseline()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.close"><code class="docutils literal notranslate"><span class="pre">Device.close()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.command"><code class="docutils literal notranslate"><span class="pre">Device.command()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.command_serial"><code class="docutils literal notranslate"><span class="pre">Device.command_serial()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.command_socket"><code class="docutils literal notranslate"><span class="pre">Device.command_socket()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.erase"><code class="docutils literal notranslate"><span class="pre">Device.erase()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.error2text"><code class="docutils literal notranslate"><span class="pre">Device.error2text()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.find_device"><code class="docutils literal notranslate"><span class="pre">Device.find_device()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.firmware_version"><code class="docutils literal notranslate"><span class="pre">Device.firmware_version()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.first_air_measurement"><code class="docutils literal notranslate"><span class="pre">Device.first_air_measurement()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.first_sample_measurement"><code class="docutils literal notranslate"><span class="pre">Device.first_sample_measurement()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.fwupdate"><code class="docutils literal notranslate"><span class="pre">Device.fwupdate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.get"><code class="docutils literal notranslate"><span class="pre">Device.get()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.is_cuvette_holder_empty"><code class="docutils literal notranslate"><span class="pre">Device.is_cuvette_holder_empty()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.logging"><code class="docutils literal notranslate"><span class="pre">Device.logging()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.measure"><code class="docutils literal notranslate"><span class="pre">Device.measure()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.production_number"><code class="docutils literal notranslate"><span class="pre">Device.production_number()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.reboot"><code class="docutils literal notranslate"><span class="pre">Device.reboot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.selftest"><code class="docutils literal notranslate"><span class="pre">Device.selftest()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.serial_number"><code class="docutils literal notranslate"><span class="pre">Device.serial_number()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.set"><code class="docutils literal notranslate"><span class="pre">Device.set()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.set_status_led"><code class="docutils literal notranslate"><span class="pre">Device.set_status_led()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.technical_report"><code class="docutils literal notranslate"><span class="pre">Device.technical_report()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.typeof"><code class="docutils literal notranslate"><span class="pre">Device.typeof()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Device.verify"><code class="docutils literal notranslate"><span class="pre">Device.verify()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys"><code class="docutils literal notranslate"><span class="pre">DictKeys</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.AIR"><code class="docutils literal notranslate"><span class="pre">DictKeys.AIR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.AIR_DARK"><code class="docutils literal notranslate"><span class="pre">DictKeys.AIR_DARK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.AIR_LED_POWER"><code class="docutils literal notranslate"><span class="pre">DictKeys.AIR_LED_POWER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.AIR_VALUE"><code class="docutils literal notranslate"><span class="pre">DictKeys.AIR_VALUE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.AUTOGAIN_RESULT_FOUND"><code class="docutils literal notranslate"><span class="pre">DictKeys.AUTOGAIN_RESULT_FOUND</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.AUTOGAIN_RESULT_LED_POWER"><code class="docutils literal notranslate"><span class="pre">DictKeys.AUTOGAIN_RESULT_LED_POWER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.CH_470"><code class="docutils literal notranslate"><span class="pre">DictKeys.CH_470</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.CH_625"><code class="docutils literal notranslate"><span class="pre">DictKeys.CH_625</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.COMMENT"><code class="docutils literal notranslate"><span class="pre">DictKeys.COMMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.CONCENTRATION"><code class="docutils literal notranslate"><span class="pre">DictKeys.CONCENTRATION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.DARK"><code class="docutils literal notranslate"><span class="pre">DictKeys.DARK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.DATE_TIME"><code class="docutils literal notranslate"><span class="pre">DictKeys.DATE_TIME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.ERRORS"><code class="docutils literal notranslate"><span class="pre">DictKeys.ERRORS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.FIRMWAREVERSION"><code class="docutils literal notranslate"><span class="pre">DictKeys.FIRMWAREVERSION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.INFO"><code class="docutils literal notranslate"><span class="pre">DictKeys.INFO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.LED_POWER"><code class="docutils literal notranslate"><span class="pre">DictKeys.LED_POWER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.LOGGING"><code class="docutils literal notranslate"><span class="pre">DictKeys.LOGGING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.MAX_MEASUREMENT"><code class="docutils literal notranslate"><span class="pre">DictKeys.MAX_MEASUREMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.MEASURE"><code class="docutils literal notranslate"><span class="pre">DictKeys.MEASURE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.MEASUREMENTS"><code class="docutils literal notranslate"><span class="pre">DictKeys.MEASUREMENTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.MIN_MEASUREMENT"><code class="docutils literal notranslate"><span class="pre">DictKeys.MIN_MEASUREMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.PRODUCTIONNUMBER"><code class="docutils literal notranslate"><span class="pre">DictKeys.PRODUCTIONNUMBER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.RESULTS"><code class="docutils literal notranslate"><span class="pre">DictKeys.RESULTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.SAMPLE"><code class="docutils literal notranslate"><span class="pre">DictKeys.SAMPLE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.SAMPLE_DARK"><code class="docutils literal notranslate"><span class="pre">DictKeys.SAMPLE_DARK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.SAMPLE_LED_POWER"><code class="docutils literal notranslate"><span class="pre">DictKeys.SAMPLE_LED_POWER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.SAMPLE_VALUE"><code class="docutils literal notranslate"><span class="pre">DictKeys.SAMPLE_VALUE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.SELFTEST"><code class="docutils literal notranslate"><span class="pre">DictKeys.SELFTEST</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.SELFTEST_COMUNICATION_ERROR"><code class="docutils literal notranslate"><span class="pre">DictKeys.SELFTEST_COMUNICATION_ERROR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.SELFTEST_RESULT"><code class="docutils literal notranslate"><span class="pre">DictKeys.SELFTEST_RESULT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.SERIALNUMBER"><code class="docutils literal notranslate"><span class="pre">DictKeys.SERIALNUMBER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.VALID"><code class="docutils literal notranslate"><span class="pre">DictKeys.VALID</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.VALUE"><code class="docutils literal notranslate"><span class="pre">DictKeys.VALUE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.DictKeys.VALUES"><code class="docutils literal notranslate"><span class="pre">DictKeys.VALUES</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Error"><code class="docutils literal notranslate"><span class="pre">Error</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Error.INVALID_PARAMETER"><code class="docutils literal notranslate"><span class="pre">Error.INVALID_PARAMETER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Error.OK"><code class="docutils literal notranslate"><span class="pre">Error.OK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Error.SREC_FLASH_WRITE_ERROR"><code class="docutils literal notranslate"><span class="pre">Error.SREC_FLASH_WRITE_ERROR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Error.SREC_INVALID_CRC"><code class="docutils literal notranslate"><span class="pre">Error.SREC_INVALID_CRC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Error.SREC_INVALID_STRING"><code class="docutils literal notranslate"><span class="pre">Error.SREC_INVALID_STRING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Error.SREC_UNSUPPORTED_TYPE"><code class="docutils literal notranslate"><span class="pre">Error.SREC_UNSUPPORTED_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Error.TIMEOUT"><code class="docutils literal notranslate"><span class="pre">Error.TIMEOUT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Error.UNKNOWN_COMMAND"><code class="docutils literal notranslate"><span class="pre">Error.UNKNOWN_COMMAND</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Factors"><code class="docutils literal notranslate"><span class="pre">Factors</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Factors.from_json"><code class="docutils literal notranslate"><span class="pre">Factors.from_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Factors.to_json"><code class="docutils literal notranslate"><span class="pre">Factors.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.FirstAirMeasurementResult"><code class="docutils literal notranslate"><span class="pre">FirstAirMeasurementResult</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.FirstAirMeasurementResult.adjust_to_led_power"><code class="docutils literal notranslate"><span class="pre">FirstAirMeasurementResult.adjust_to_led_power()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.FirstAirMeasurementResult.to_json"><code class="docutils literal notranslate"><span class="pre">FirstAirMeasurementResult.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.FirstSampleMeasurementResult"><code class="docutils literal notranslate"><span class="pre">FirstSampleMeasurementResult</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index"><code class="docutils literal notranslate"><span class="pre">Index</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index.AUTOGAIN_DELTA"><code class="docutils literal notranslate"><span class="pre">Index.AUTOGAIN_DELTA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index.CURRENT_LED470_POWER"><code class="docutils literal notranslate"><span class="pre">Index.CURRENT_LED470_POWER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index.CURRENT_LED470_POWER_MAX"><code class="docutils literal notranslate"><span class="pre">Index.CURRENT_LED470_POWER_MAX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index.CURRENT_LED470_POWER_MIN"><code class="docutils literal notranslate"><span class="pre">Index.CURRENT_LED470_POWER_MIN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index.CURRENT_LED625_POWER"><code class="docutils literal notranslate"><span class="pre">Index.CURRENT_LED625_POWER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index.CURRENT_LED625_POWER_MAX"><code class="docutils literal notranslate"><span class="pre">Index.CURRENT_LED625_POWER_MAX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index.CURRENT_LED625_POWER_MIN"><code class="docutils literal notranslate"><span class="pre">Index.CURRENT_LED625_POWER_MIN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index.CUVETTE_EMPTY_DELTA"><code class="docutils literal notranslate"><span class="pre">Index.CUVETTE_EMPTY_DELTA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index.CUVETTE_EMPTY_LED_POWER"><code class="docutils literal notranslate"><span class="pre">Index.CUVETTE_EMPTY_LED_POWER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index.LAST_MEASUREMENT_COUNT"><code class="docutils literal notranslate"><span class="pre">Index.LAST_MEASUREMENT_COUNT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index.PRODUCTIONNUMBER"><code class="docutils literal notranslate"><span class="pre">Index.PRODUCTIONNUMBER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index.SERIALNUMBER"><code class="docutils literal notranslate"><span class="pre">Index.SERIALNUMBER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Index.VERSION"><code class="docutils literal notranslate"><span class="pre">Index.VERSION</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Measurement"><code class="docutils literal notranslate"><span class="pre">Measurement</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Measurement.calculate_factors"><code class="docutils literal notranslate"><span class="pre">Measurement.calculate_factors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Measurement.comment"><code class="docutils literal notranslate"><span class="pre">Measurement.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Measurement.concentration"><code class="docutils literal notranslate"><span class="pre">Measurement.concentration()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Measurement.from_json"><code class="docutils literal notranslate"><span class="pre">Measurement.from_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Measurement.results"><code class="docutils literal notranslate"><span class="pre">Measurement.results()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Measurement.to_json"><code class="docutils literal notranslate"><span class="pre">Measurement.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Measurement.value"><code class="docutils literal notranslate"><span class="pre">Measurement.value()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Point"><code class="docutils literal notranslate"><span class="pre">Point</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Point.from_json"><code class="docutils literal notranslate"><span class="pre">Point.from_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Point.to_json"><code class="docutils literal notranslate"><span class="pre">Point.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Quant_iT_dsDNA_HS"><code class="docutils literal notranslate"><span class="pre">Quant_iT_dsDNA_HS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Results"><code class="docutils literal notranslate"><span class="pre">Results</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Results.from_json"><code class="docutils literal notranslate"><span class="pre">Results.from_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Results.to_json"><code class="docutils literal notranslate"><span class="pre">Results.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run"><code class="docutils literal notranslate"><span class="pre">Run</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run.State"><code class="docutils literal notranslate"><span class="pre">Run.State</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run.State.AIR"><code class="docutils literal notranslate"><span class="pre">Run.State.AIR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run.State.FIRST_AIR"><code class="docutils literal notranslate"><span class="pre">Run.State.FIRST_AIR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run.State.FIRST_SAMPLE"><code class="docutils literal notranslate"><span class="pre">Run.State.FIRST_SAMPLE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run.State.SAMPLE"><code class="docutils literal notranslate"><span class="pre">Run.State.SAMPLE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run.check_empty"><code class="docutils literal notranslate"><span class="pre">Run.check_empty()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run.close"><code class="docutils literal notranslate"><span class="pre">Run.close()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run.export_as_csv"><code class="docutils literal notranslate"><span class="pre">Run.export_as_csv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run.load_state"><code class="docutils literal notranslate"><span class="pre">Run.load_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run.measure"><code class="docutils literal notranslate"><span class="pre">Run.measure()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run.re_calculate"><code class="docutils literal notranslate"><span class="pre">Run.re_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run.save_state"><code class="docutils literal notranslate"><span class="pre">Run.save_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Run.skip_air"><code class="docutils literal notranslate"><span class="pre">Run.skip_air()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Selftest"><code class="docutils literal notranslate"><span class="pre">Selftest</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Selftest.COMUNICATION_ERROR"><code class="docutils literal notranslate"><span class="pre">Selftest.COMUNICATION_ERROR</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.SelfttestResult"><code class="docutils literal notranslate"><span class="pre">SelfttestResult</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.SelfttestResult.has_communication_error"><code class="docutils literal notranslate"><span class="pre">SelfttestResult.has_communication_error()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.SelfttestResult.has_problems"><code class="docutils literal notranslate"><span class="pre">SelfttestResult.has_problems()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.SelfttestResult.to_json"><code class="docutils literal notranslate"><span class="pre">SelfttestResult.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.SingleMeasurement"><code class="docutils literal notranslate"><span class="pre">SingleMeasurement</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.SingleMeasurement.delta"><code class="docutils literal notranslate"><span class="pre">SingleMeasurement.delta()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.SingleMeasurement.from_json"><code class="docutils literal notranslate"><span class="pre">SingleMeasurement.from_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.SingleMeasurement.to_json"><code class="docutils literal notranslate"><span class="pre">SingleMeasurement.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurement"><code class="docutils literal notranslate"><span class="pre">StorageMeasurement</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurement.add_device_info"><code class="docutils literal notranslate"><span class="pre">StorageMeasurement.add_device_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurement.add_dict"><code class="docutils literal notranslate"><span class="pre">StorageMeasurement.add_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurement.append"><code class="docutils literal notranslate"><span class="pre">StorageMeasurement.append()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurement.append_with_results"><code class="docutils literal notranslate"><span class="pre">StorageMeasurement.append_with_results()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurement.exportAsCsv"><code class="docutils literal notranslate"><span class="pre">StorageMeasurement.exportAsCsv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurement.export_as_csv"><code class="docutils literal notranslate"><span class="pre">StorageMeasurement.export_as_csv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurement.measurements"><code class="docutils literal notranslate"><span class="pre">StorageMeasurement.measurements()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurement.results"><code class="docutils literal notranslate"><span class="pre">StorageMeasurement.results()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurement.save"><code class="docutils literal notranslate"><span class="pre">StorageMeasurement.save()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurementEntry"><code class="docutils literal notranslate"><span class="pre">StorageMeasurementEntry</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurementEntry.apply_results"><code class="docutils literal notranslate"><span class="pre">StorageMeasurementEntry.apply_results()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurementEntry.from_json"><code class="docutils literal notranslate"><span class="pre">StorageMeasurementEntry.from_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.StorageMeasurementEntry.has_results"><code class="docutils literal notranslate"><span class="pre">StorageMeasurementEntry.has_results()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.TypeOf"><code class="docutils literal notranslate"><span class="pre">TypeOf</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.TypeOf.DOUBLE"><code class="docutils literal notranslate"><span class="pre">TypeOf.DOUBLE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.TypeOf.STRING"><code class="docutils literal notranslate"><span class="pre">TypeOf.STRING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.TypeOf.UINT32"><code class="docutils literal notranslate"><span class="pre">TypeOf.UINT32</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification"><code class="docutils literal notranslate"><span class="pre">Verification</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.Entry"><code class="docutils literal notranslate"><span class="pre">Verification.Entry</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.Entry.from_json"><code class="docutils literal notranslate"><span class="pre">Verification.Entry.from_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.Entry.to_json"><code class="docutils literal notranslate"><span class="pre">Verification.Entry.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.Hints"><code class="docutils literal notranslate"><span class="pre">Verification.Hints</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.Hints.MUST_HAVE_CUVETTE"><code class="docutils literal notranslate"><span class="pre">Verification.Hints.MUST_HAVE_CUVETTE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.Hints.NONE"><code class="docutils literal notranslate"><span class="pre">Verification.Hints.NONE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.Hints.STD_HIGH"><code class="docutils literal notranslate"><span class="pre">Verification.Hints.STD_HIGH</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.ProblemId"><code class="docutils literal notranslate"><span class="pre">Verification.ProblemId</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.ProblemId.AUTO_GAIN_RESULT"><code class="docutils literal notranslate"><span class="pre">Verification.ProblemId.AUTO_GAIN_RESULT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.ProblemId.CUVETTE_MISSING"><code class="docutils literal notranslate"><span class="pre">Verification.ProblemId.CUVETTE_MISSING</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.ProblemId.MAX_LED_POWER"><code class="docutils literal notranslate"><span class="pre">Verification.ProblemId.MAX_LED_POWER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.ProblemId.MIN_LED_POWER"><code class="docutils literal notranslate"><span class="pre">Verification.ProblemId.MIN_LED_POWER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.ProblemId.NEGATIVE_CONCENTRATION"><code class="docutils literal notranslate"><span class="pre">Verification.ProblemId.NEGATIVE_CONCENTRATION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.ProblemId.SATURATION"><code class="docutils literal notranslate"><span class="pre">Verification.ProblemId.SATURATION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.ProblemId.WRONG_LEVEL"><code class="docutils literal notranslate"><span class="pre">Verification.ProblemId.WRONG_LEVEL</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.add_problem_id"><code class="docutils literal notranslate"><span class="pre">Verification.add_problem_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.check"><code class="docutils literal notranslate"><span class="pre">Verification.check()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.check_auto_gain_result"><code class="docutils literal notranslate"><span class="pre">Verification.check_auto_gain_result()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.check_first_air_measurement_result"><code class="docutils literal notranslate"><span class="pre">Verification.check_first_air_measurement_result()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.check_first_sample_measurement_result"><code class="docutils literal notranslate"><span class="pre">Verification.check_first_sample_measurement_result()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.check_measurement"><code class="docutils literal notranslate"><span class="pre">Verification.check_measurement()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.check_result"><code class="docutils literal notranslate"><span class="pre">Verification.check_result()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.check_single_measurement"><code class="docutils literal notranslate"><span class="pre">Verification.check_single_measurement()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.expected_value"><code class="docutils literal notranslate"><span class="pre">Verification.expected_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.failed"><code class="docutils literal notranslate"><span class="pre">Verification.failed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.from_json"><code class="docutils literal notranslate"><span class="pre">Verification.from_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.has_cuvette"><code class="docutils literal notranslate"><span class="pre">Verification.has_cuvette()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.has_problem"><code class="docutils literal notranslate"><span class="pre">Verification.has_problem()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.max_led"><code class="docutils literal notranslate"><span class="pre">Verification.max_led</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.max_rfu"><code class="docutils literal notranslate"><span class="pre">Verification.max_rfu</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.max_signal"><code class="docutils literal notranslate"><span class="pre">Verification.max_signal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.min_led"><code class="docutils literal notranslate"><span class="pre">Verification.min_led</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.min_rfu"><code class="docutils literal notranslate"><span class="pre">Verification.min_rfu</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.set_max_led"><code class="docutils literal notranslate"><span class="pre">Verification.set_max_led()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.set_max_rfu"><code class="docutils literal notranslate"><span class="pre">Verification.set_max_rfu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.set_max_signal"><code class="docutils literal notranslate"><span class="pre">Verification.set_max_signal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.set_min_led"><code class="docutils literal notranslate"><span class="pre">Verification.set_min_led()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.set_min_rfu"><code class="docutils literal notranslate"><span class="pre">Verification.set_min_rfu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.set_std_high_delta"><code class="docutils literal notranslate"><span class="pre">Verification.set_std_high_delta()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.set_std_high_target"><code class="docutils literal notranslate"><span class="pre">Verification.set_std_high_target()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.set_threshold_multiplier"><code class="docutils literal notranslate"><span class="pre">Verification.set_threshold_multiplier()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.set_threshold_negative_concentration"><code class="docutils literal notranslate"><span class="pre">Verification.set_threshold_negative_concentration()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.std_high_delta"><code class="docutils literal notranslate"><span class="pre">Verification.std_high_delta</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.std_high_target"><code class="docutils literal notranslate"><span class="pre">Verification.std_high_target</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.success"><code class="docutils literal notranslate"><span class="pre">Verification.success()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.threshold_multiplier"><code class="docutils literal notranslate"><span class="pre">Verification.threshold_multiplier</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.threshold_negative_concentration"><code class="docutils literal notranslate"><span class="pre">Verification.threshold_negative_concentration</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.html#hse.evifluor.Verification.to_json"><code class="docutils literal notranslate"><span class="pre">Verification.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.channel.html">hse.evifluor.channel module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.channel.html#hse.evifluor.channel.Channel"><code class="docutils literal notranslate"><span class="pre">Channel</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.cli.html">hse.evifluor.cli module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.cli.html#hse.evifluor.cli.build_parser"><code class="docutils literal notranslate"><span class="pre">build_parser()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.cli.html#hse.evifluor.cli.cmd_checkempty"><code class="docutils literal notranslate"><span class="pre">cmd_checkempty()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.cli.html#hse.evifluor.cli.cmd_info"><code class="docutils literal notranslate"><span class="pre">cmd_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.cli.html#hse.evifluor.cli.cmd_run"><code class="docutils literal notranslate"><span class="pre">cmd_run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.cli.html#hse.evifluor.cli.cmd_selftest"><code class="docutils literal notranslate"><span class="pre">cmd_selftest()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.cli.html#hse.evifluor.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.constants.html">hse.evifluor.constants module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.Color"><code class="docutils literal notranslate"><span class="pre">Color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.DictKeys"><code class="docutils literal notranslate"><span class="pre">DictKeys</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.Error"><code class="docutils literal notranslate"><span class="pre">Error</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.Index"><code class="docutils literal notranslate"><span class="pre">Index</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.Selftest"><code class="docutils literal notranslate"><span class="pre">Selftest</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.TypeOf"><code class="docutils literal notranslate"><span class="pre">TypeOf</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.USB"><code class="docutils literal notranslate"><span class="pre">USB</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.device.html">hse.evifluor.device module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.device.html#hse.evifluor.device.AutoGainResult"><code class="docutils literal notranslate"><span class="pre">AutoGainResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.device.html#hse.evifluor.device.Device"><code class="docutils literal notranslate"><span class="pre">Device</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.device.html#hse.evifluor.device.FirstAirMeasurementResult"><code class="docutils literal notranslate"><span class="pre">FirstAirMeasurementResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.device.html#hse.evifluor.device.FirstSampleMeasurementResult"><code class="docutils literal notranslate"><span class="pre">FirstSampleMeasurementResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.device.html#hse.evifluor.device.SelfttestResult"><code class="docutils literal notranslate"><span class="pre">SelfttestResult</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.kits.html">hse.evifluor.kits module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.Default"><code class="docutils literal notranslate"><span class="pre">Default</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.Quant_iT_dsDNA_HS"><code class="docutils literal notranslate"><span class="pre">Quant_iT_dsDNA_HS</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.measurement.html">hse.evifluor.measurement module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Algorithm"><code class="docutils literal notranslate"><span class="pre">Algorithm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Factors"><code class="docutils literal notranslate"><span class="pre">Factors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Measurement"><code class="docutils literal notranslate"><span class="pre">Measurement</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Point"><code class="docutils literal notranslate"><span class="pre">Point</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Results"><code class="docutils literal notranslate"><span class="pre">Results</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.rest_client.html">hse.evifluor.rest_client module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.rest_client.html#hse.evifluor.rest_client.RestApiError"><code class="docutils literal notranslate"><span class="pre">RestApiError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.rest_client.html#hse.evifluor.rest_client.RestClient"><code class="docutils literal notranslate"><span class="pre">RestClient</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.rest_server.html">hse.evifluor.rest_server module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.RunInitRequest"><code class="docutils literal notranslate"><span class="pre">RunInitRequest</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.RunMeasureRequest"><code class="docutils literal notranslate"><span class="pre">RunMeasureRequest</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.build_parser"><code class="docutils literal notranslate"><span class="pre">build_parser()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.create_app"><code class="docutils literal notranslate"><span class="pre">create_app()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.run.html">hse.evifluor.run module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.run.html#hse.evifluor.run.Run"><code class="docutils literal notranslate"><span class="pre">Run</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.service.html">hse.evifluor.service module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.service.html#hse.evifluor.service.check_empty"><code class="docutils literal notranslate"><span class="pre">check_empty()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.service.html#hse.evifluor.service.export_run"><code class="docutils literal notranslate"><span class="pre">export_run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.service.html#hse.evifluor.service.export_run_state"><code class="docutils literal notranslate"><span class="pre">export_run_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.service.html#hse.evifluor.service.get_device_info"><code class="docutils literal notranslate"><span class="pre">get_device_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.service.html#hse.evifluor.service.get_device_status"><code class="docutils literal notranslate"><span class="pre">get_device_status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.service.html#hse.evifluor.service.init_run"><code class="docutils literal notranslate"><span class="pre">init_run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.service.html#hse.evifluor.service.list_devices"><code class="docutils literal notranslate"><span class="pre">list_devices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.service.html#hse.evifluor.service.load_run_state"><code class="docutils literal notranslate"><span class="pre">load_run_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.service.html#hse.evifluor.service.measure_run"><code class="docutils literal notranslate"><span class="pre">measure_run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.service.html#hse.evifluor.service.measure_run_state"><code class="docutils literal notranslate"><span class="pre">measure_run_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.service.html#hse.evifluor.service.resolve_run_paths"><code class="docutils literal notranslate"><span class="pre">resolve_run_paths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.service.html#hse.evifluor.service.resolve_state_path"><code class="docutils literal notranslate"><span class="pre">resolve_state_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.service.html#hse.evifluor.service.run_selftest"><code class="docutils literal notranslate"><span class="pre">run_selftest()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.singlemeasurement.html">hse.evifluor.singlemeasurement module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.singlemeasurement.html#hse.evifluor.singlemeasurement.SingleMeasurement"><code class="docutils literal notranslate"><span class="pre">SingleMeasurement</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.storage.html">hse.evifluor.storage module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement"><code class="docutils literal notranslate"><span class="pre">StorageMeasurement</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurementEntry"><code class="docutils literal notranslate"><span class="pre">StorageMeasurementEntry</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.verification.html">hse.evifluor.verification module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification"><code class="docutils literal notranslate"><span class="pre">Verification</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.version.html">hse.evifluor.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">eviFluor Python API</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">hse</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">hse namespace</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">hse</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">hse</a></li>
+      <li>Next: <a href="hse.evifluor.html" title="next chapter">hse.evifluor package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/api/hse.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

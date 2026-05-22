@@ -1,0 +1,7 @@
+hse.evifluor.channel module
+===========================
+
+.. automodule:: hse.evifluor.channel
+   :members:
+   :show-inheritance:
+   :undoc-members:

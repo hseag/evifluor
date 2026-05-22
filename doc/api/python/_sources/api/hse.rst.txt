@@ -1,0 +1,12 @@
+hse namespace
+=============
+
+.. py:module:: hse
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   hse.evifluor
