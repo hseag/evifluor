@@ -97,6 +97,11 @@ public class Dict
     public const string CONCENTRATION = "concentration";
 
     /// <summary>
+    /// JSON key 'rfu'.
+    /// </summary>
+    public const string RFU = "rfu";
+
+    /// <summary>
     /// JSON key 'air'.
     /// </summary>
     public const string AIR = "air";

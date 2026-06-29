@@ -357,7 +357,7 @@ class Device:
             try:
                 response = self.command("Q")
                 messages.append(response[1])
-            except:
+            except Exception:
                 break
         return messages
         

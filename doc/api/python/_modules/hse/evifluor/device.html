@@ -499,7 +499,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
                 <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">break</span>
         <span class="k">return</span> <span class="n">messages</span></div>
 </div>

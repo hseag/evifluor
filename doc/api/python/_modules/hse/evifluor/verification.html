@@ -49,6 +49,7 @@
 <a class="viewcode-back" href="../../../api/hse.evifluor.verification.html#hse.evifluor.Verification">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Verification</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Provides verification checks for various measurement types and conditions.&quot;&quot;&quot;</span>
+    <span class="n">_DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR</span>      <span class="o">=</span> <span class="mf">0.8</span>
     <span class="n">_DEFAULT_MIN_RFU</span>                          <span class="o">=</span> <span class="mf">4.5</span>
     <span class="n">_min_rfu</span>                                  <span class="o">=</span> <span class="n">_DEFAULT_MIN_RFU</span>
     <span class="n">_DEFAULT_MAX_RFU</span>                          <span class="o">=</span> <span class="mf">35.0</span>
@@ -61,8 +62,6 @@
     <span class="n">_threshold_multiplier</span>                     <span class="o">=</span> <span class="n">_DEFAULT_THRESHOLD_MULTIPLIER</span>
     <span class="n">_DEFAULT_MAX_SIGNAL</span>                       <span class="o">=</span> <span class="mf">2499.0</span>
     <span class="n">_max_signal</span>                               <span class="o">=</span> <span class="n">_DEFAULT_MAX_SIGNAL</span>
-    <span class="n">_DEFAULT_STD_HIGH_TARGET</span>                  <span class="o">=</span> <span class="mf">2000.0</span>
-    <span class="n">_std_high_target</span>                          <span class="o">=</span> <span class="n">_DEFAULT_STD_HIGH_TARGET</span>
     <span class="n">_DEFAULT_STD_HIGH_DELTA</span>                   <span class="o">=</span> <span class="mi">300</span>
     <span class="n">_std_high_delta</span>                           <span class="o">=</span> <span class="n">_DEFAULT_STD_HIGH_DELTA</span>
     <span class="n">_DEFAULT_THRESHOLD_NEGATIVE_CONCENTRATION</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span>
@@ -193,27 +192,6 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">max_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the maximum allowed signal value before saturation.&quot;&quot;&quot;</span>
         <span class="n">Verification</span><span class="o">.</span><span class="n">set_max_signal</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-
-<div class="viewcode-block" id="Verification.set_std_high_target">
-<a class="viewcode-back" href="../../../api/hse.evifluor.verification.html#hse.evifluor.Verification.set_std_high_target">[docs]</a>
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_std_high_target</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the target signal value for standard high checks.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">Verification</span><span class="o">.</span><span class="n">_std_high_target</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_DEFAULT_STD_HIGH_TARGET</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">Verification</span><span class="o">.</span><span class="n">_std_high_target</span> <span class="o">=</span> <span class="n">value</span></div>
-
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">std_high_target</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the target signal value for standard high checks.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_std_high_target</span>
-
-    <span class="nd">@std_high_target</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">std_high_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the target signal value for standard high checks.&quot;&quot;&quot;</span>
-        <span class="n">Verification</span><span class="o">.</span><span class="n">set_std_high_target</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Verification.set_std_high_delta">
 <a class="viewcode-back" href="../../../api/hse.evifluor.verification.html#hse.evifluor.Verification.set_std_high_delta">[docs]</a>
@@ -386,9 +364,12 @@
 
 <div class="viewcode-block" id="Verification.check_single_measurement">
 <a class="viewcode-back" href="../../../api/hse.evifluor.verification.html#hse.evifluor.Verification.check_single_measurement">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">check_single_measurement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">single_measurement</span><span class="p">,</span> <span class="n">hints</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>      
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_single_measurement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">single_measurement</span><span class="p">,</span> <span class="n">hints</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="n">_DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR</span><span class="p">):</span>      
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks a single measurement for saturation, cuvette presence, and expected levels.&quot;&quot;&quot;</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">std_high_target_signal_factor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR</span>
         
         <span class="k">if</span> <span class="n">single_measurement</span><span class="o">.</span><span class="n">channel_470</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_signal</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_problem_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ProblemId</span><span class="o">.</span><span class="n">SATURATION</span><span class="p">,</span> <span class="n">single_measurement</span><span class="p">)</span>
@@ -400,7 +381,8 @@
                 <span class="n">ret</span> <span class="o">=</span> <span class="kc">False</span>
                 
         <span class="k">if</span> <span class="n">hints</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">STD_HIGH</span> <span class="ow">in</span> <span class="n">hints</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">single_measurement</span><span class="o">.</span><span class="n">channel_470</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">Verification</span><span class="o">.</span><span class="n">_std_high_target</span> <span class="o">-</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_std_high_delta</span><span class="p">)</span> <span class="ow">and</span> <span class="n">single_measurement</span><span class="o">.</span><span class="n">channel_470</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">Verification</span><span class="o">.</span><span class="n">_std_high_target</span> <span class="o">+</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_std_high_delta</span><span class="p">)):</span>
+            <span class="n">std_high_target</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_max_signal</span> <span class="o">*</span> <span class="n">std_high_target_signal_factor</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">single_measurement</span><span class="o">.</span><span class="n">channel_470</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">std_high_target</span> <span class="o">-</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_std_high_delta</span><span class="p">)</span> <span class="ow">and</span> <span class="n">single_measurement</span><span class="o">.</span><span class="n">channel_470</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">std_high_target</span> <span class="o">+</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_std_high_delta</span><span class="p">)):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_problem_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ProblemId</span><span class="o">.</span><span class="n">WRONG_LEVEL</span><span class="p">,</span> <span class="n">single_measurement</span><span class="p">)</span>
                 <span class="n">ret</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -439,25 +421,25 @@
         
 <div class="viewcode-block" id="Verification.check_first_sample_measurement_result">
 <a class="viewcode-back" href="../../../api/hse.evifluor.verification.html#hse.evifluor.Verification.check_first_sample_measurement_result">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">check_first_sample_measurement_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fsm</span><span class="p">,</span> <span class="n">hints</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_first_sample_measurement_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fsm</span><span class="p">,</span> <span class="n">hints</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Verifies a first sample measurement result including auto-gain and standard high checks.&quot;&quot;&quot;</span>
         <span class="n">ret1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_auto_gain_result</span><span class="p">(</span><span class="n">fsm</span><span class="o">.</span><span class="n">auto_gain_result</span><span class="p">,</span> <span class="n">hints</span><span class="p">)</span>
-        <span class="n">ret2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_single_measurement</span><span class="p">(</span><span class="n">fsm</span><span class="o">.</span><span class="n">measurement</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">MUST_HAVE_CUVETTE</span> <span class="o">|</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">STD_HIGH</span><span class="p">)</span>
+        <span class="n">ret2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_single_measurement</span><span class="p">(</span><span class="n">fsm</span><span class="o">.</span><span class="n">measurement</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">MUST_HAVE_CUVETTE</span> <span class="o">|</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">STD_HIGH</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="n">std_high_target_signal_factor</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ret1</span> <span class="ow">and</span> <span class="n">ret2</span></div>
 
         
 <div class="viewcode-block" id="Verification.check">
 <a class="viewcode-back" href="../../../api/hse.evifluor.verification.html#hse.evifluor.Verification.check">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">hints</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">hints</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="n">_DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Dispatches verification based on the type of sample provided.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">SingleMeasurement</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_single_measurement</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">hints</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_single_measurement</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">hints</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="n">std_high_target_signal_factor</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">AutoGainResult</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_auto_gain_result</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">hints</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">FirstAirMeasurementResult</span><span class="p">):</span>    
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_first_air_measurement_result</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">hints</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">FirstSampleMeasurementResult</span><span class="p">):</span>    
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_first_sample_measurement_result</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">hints</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_first_sample_measurement_result</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">hints</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">Measurement</span><span class="p">):</span>    
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_measurement</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">hints</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">Results</span><span class="p">):</span>

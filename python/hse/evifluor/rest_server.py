@@ -15,6 +15,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from . import service
+from .kits import Default as DefaultKit
 from .version import VERSION
 
 
@@ -56,12 +57,21 @@ def _encode_run_id(state_file: str) -> str:
     return base64.urlsafe_b64encode(state_file.encode("utf-8")).decode("ascii").rstrip("=")
 
 
-def _decode_run_id(run_id: str) -> str:
+def _decode_run_id(run_id: str, storage_dir: str) -> str:
     padding = "=" * (-len(run_id) % 4)
     try:
-        return base64.urlsafe_b64decode((run_id + padding).encode("ascii")).decode("utf-8")
+        state_file = base64.urlsafe_b64decode((run_id + padding).encode("ascii")).decode("utf-8")
     except Exception as exc:
         raise HTTPException(status_code=400, detail="Invalid run_id") from exc
+
+    state_file_path = Path(state_file).resolve()
+    storage_dir_path = Path(storage_dir).resolve()
+    try:
+        state_file_path.relative_to(storage_dir_path)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail="Invalid run_id") from exc
+
+    return str(state_file_path)
 
 
 def _with_run_id(snapshot: dict) -> dict:
@@ -102,6 +112,8 @@ class RunInitRequest(BaseModel):
     nr_of_std_low: int
     nr_of_std_high: int
     concentration: float
+    kit: str = "Default"
+    settling_time: Optional[float] = None
     no_air: bool = False
 
 
@@ -111,6 +123,10 @@ class RunMeasureRequest(BaseModel):
 
 def create_app(working_dir: Optional[str] = None) -> FastAPI:
     storage_dir = _storage_dir(working_dir)
+
+    def decode_run_id(run_id: str) -> str:
+        return _decode_run_id(run_id, storage_dir)
+
     app = FastAPI(
         title="eviFluor REST API",
         version=VERSION,
@@ -172,39 +188,41 @@ def create_app(working_dir: Optional[str] = None) -> FastAPI:
             filename=None,
             device=device_id,
             no_air=request.no_air,
+            kit=DefaultKit.factory(request.kit),
+            settling_time=request.settling_time,
         )
         return _with_run_id(snapshot)
 
     @app.get("/api/v1/runs/{run_id}")
     def run_get(run_id: str):
-        return _with_run_id(service.load_run_state(_decode_run_id(run_id)))
+        return _with_run_id(service.load_run_state(decode_run_id(run_id)))
 
     @app.post("/api/v1/runs/{run_id}/measure")
     def run_measure(run_id: str, request: RunMeasureRequest):
-        return _with_run_id(service.measure_run_state(_decode_run_id(run_id), comment=request.comment))
+        return _with_run_id(service.measure_run_state(decode_run_id(run_id), comment=request.comment))
 
     @app.post("/api/v1/runs/{run_id}/export/csv")
     def run_export(run_id: str):
-        snapshot = service.export_run_state(_decode_run_id(run_id))
+        snapshot = service.export_run_state(decode_run_id(run_id))
         csv_file = _resolve_existing_file(snapshot.get("csv_file"), "Run CSV file not found")
         return FileResponse(csv_file, media_type="text/csv", filename=Path(csv_file).name)
 
     @app.get("/api/v1/runs/{run_id}/data")
     def run_data(run_id: str):
-        snapshot = service.load_run_state(_decode_run_id(run_id))
+        snapshot = service.load_run_state(decode_run_id(run_id))
         if snapshot["data"] is None:
             raise HTTPException(status_code=404, detail="Run data file not found")
         return snapshot["data"]
 
     @app.get("/api/v1/runs/{run_id}/file/json")
     def run_json_file(run_id: str):
-        snapshot = service.load_run_state(_decode_run_id(run_id))
+        snapshot = service.load_run_state(decode_run_id(run_id))
         data_file = _resolve_existing_file(snapshot.get("data_file"), "Run data file not found")
         return FileResponse(data_file, media_type="application/json", filename=Path(data_file).name)
 
     @app.get("/api/v1/runs/{run_id}/file/csv")
     def run_csv_file(run_id: str):
-        snapshot = service.export_run_state(_decode_run_id(run_id))
+        snapshot = service.export_run_state(decode_run_id(run_id))
         csv_file = _resolve_existing_file(snapshot.get("csv_file"), "Run CSV file not found")
         return FileResponse(csv_file, media_type="text/csv", filename=Path(csv_file).name)
 

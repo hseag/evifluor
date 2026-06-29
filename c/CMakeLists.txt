@@ -47,6 +47,8 @@ target_sources(evifluor PRIVATE
   src/singlemeasurement.h
   src/measurement.c
   src/measurement.h
+  src/kit.c
+  src/kit.h
   src/verification.c
   src/verification.h
 )

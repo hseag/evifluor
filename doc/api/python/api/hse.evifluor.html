@@ -123,13 +123,43 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hse.evifluor.Default">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.</span></span><span class="sig-name descname"><span class="pre">Default</span></span><a class="reference internal" href="../_modules/hse/evifluor/kits.html#Default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Default" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.</span></span><span class="sig-name descname"><span class="pre">Default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fit_algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FitAlgorithm.Linear</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settling_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_high_target_signal_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/kits.html#Default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Default" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Default kit implementation using linear interpolation between standards.</p>
+<p>Base kit configuration combining standard interpolation with an optional fit curve.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.Default.factory">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">factory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/kits.html#Default.factory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Default.factory" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a predefined kit instance from a string name.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="hse.evifluor.Default.fit">
 <span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">std_low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_high</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/kits.html#Default.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Default.fit" title="Link to this definition">¶</a></dt>
-<dd><p>Fits a value using linear interpolation between standard low and high.</p>
+<dd><p>Maps a measured signal to concentration using the calibrated standards and fit curve.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.Default.from_json">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/kits.html#Default.from_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Default.from_json" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a kit instance from a JSON node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.Default.settling_time">
+<span class="sig-name descname"><span class="pre">settling_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/kits.html#Default.settling_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Default.settling_time" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the time in seconds to wait after adding the reagent before measuring.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.Default.std_high_target_signal_factor">
+<span class="sig-name descname"><span class="pre">std_high_target_signal_factor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/kits.html#Default.std_high_target_signal_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Default.std_high_target_signal_factor" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the autogain factor for the high standard signal.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.Default.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/kits.html#Default.to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Default.to_json" title="Link to this definition">¶</a></dt>
+<dd><p>Converts the kit configuration to a JSON representation.</p>
 </dd></dl>
 
 </dd></dl>
@@ -418,6 +448,11 @@
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="hse.evifluor.DictKeys.RFU">
+<span class="sig-name descname"><span class="pre">RFU</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rfu'</span></span><a class="headerlink" href="#hse.evifluor.DictKeys.RFU" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="hse.evifluor.DictKeys.SAMPLE">
 <span class="sig-name descname"><span class="pre">SAMPLE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sample'</span></span><a class="headerlink" href="#hse.evifluor.DictKeys.SAMPLE" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -655,7 +690,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hse.evifluor.Measurement.concentration">
-<span class="sig-name descname"><span class="pre">concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Default</span> <span class="pre">kit</span> <span class="pre">with</span> <span class="pre">linear</span> <span class="pre">interpolation</span> <span class="pre">between</span> <span class="pre">std</span> <span class="pre">low</span> <span class="pre">and</span> <span class="pre">std</span> <span class="pre">high</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/measurement.html#Measurement.concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Measurement.concentration" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Default</span> <span class="pre">kit</span> <span class="pre">with</span> <span class="pre">linear</span> <span class="pre">fit</span> <span class="pre">fit_algorithm=Linear</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settling_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_high_target_signal_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/measurement.html#Measurement.concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Measurement.concentration" title="Link to this definition">¶</a></dt>
 <dd><p>Calculates the concentration using the provided calibration factors and kit.</p>
 </dd></dl>
 
@@ -667,8 +702,14 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hse.evifluor.Measurement.results">
-<span class="sig-name descname"><span class="pre">results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Default</span> <span class="pre">kit</span> <span class="pre">with</span> <span class="pre">linear</span> <span class="pre">interpolation</span> <span class="pre">between</span> <span class="pre">std</span> <span class="pre">low</span> <span class="pre">and</span> <span class="pre">std</span> <span class="pre">high</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/measurement.html#Measurement.results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Measurement.results" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Default</span> <span class="pre">kit</span> <span class="pre">with</span> <span class="pre">linear</span> <span class="pre">fit</span> <span class="pre">fit_algorithm=Linear</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settling_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_high_target_signal_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/measurement.html#Measurement.results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Measurement.results" title="Link to this definition">¶</a></dt>
 <dd><p>Computes the measurement results using calibration factors and kit.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.Measurement.rfu">
+<span class="sig-name descname"><span class="pre">rfu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factors</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/measurement.html#Measurement.rfu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Measurement.rfu" title="Link to this definition">¶</a></dt>
+<dd><p>Calculates the RFU used as input for concentration calculation.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -705,17 +746,24 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="hse.evifluor.Quant_iT_dsDNA_HS">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.</span></span><span class="sig-name descname"><span class="pre">Quant_iT_dsDNA_HS</span></span><a class="reference internal" href="../_modules/hse/evifluor/kits.html#Quant_iT_dsDNA_HS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Quant_iT_dsDNA_HS" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="hse.evifluor.QubitTM_1X_dsDNA_Broad_Range_BR">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.</span></span><span class="sig-name descname"><span class="pre">QubitTM_1X_dsDNA_Broad_Range_BR</span></span><a class="reference internal" href="../_modules/hse/evifluor/kits.html#QubitTM_1X_dsDNA_Broad_Range_BR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.QubitTM_1X_dsDNA_Broad_Range_BR" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.Default" title="hse.evifluor.kits.Default"><code class="xref py py-class docutils literal notranslate"><span class="pre">Default</span></code></a></p>
-<p>Linear kit preset for the Thermo Fisher Quant-iT dsDNA HS Assay (Q33120).</p>
+<p>Preset for the QubitTM 1X dsDNA Broad Range (BR) Assay Kit.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hse.evifluor.QubitTM_1X_dsDNA_High_Sensitivity_HS">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.</span></span><span class="sig-name descname"><span class="pre">QubitTM_1X_dsDNA_High_Sensitivity_HS</span></span><a class="reference internal" href="../_modules/hse/evifluor/kits.html#QubitTM_1X_dsDNA_High_Sensitivity_HS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.QubitTM_1X_dsDNA_High_Sensitivity_HS" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.Default" title="hse.evifluor.kits.Default"><code class="xref py py-class docutils literal notranslate"><span class="pre">Default</span></code></a></p>
+<p>Preset for the QubitTM 1X dsDNA High Sensitivity (HS) Assay Kit.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hse.evifluor.Results">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.</span></span><span class="sig-name descname"><span class="pre">Results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">concentration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/measurement.html#Results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Results" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.</span></span><span class="sig-name descname"><span class="pre">Results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rfu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/measurement.html#Results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Results" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Represents the concentration result of a measurement.</p>
+<p>Represents the concentration result of a measurement, including RFU.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hse.evifluor.Results.from_json">
 <span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/measurement.html#Results.from_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Results.from_json" title="Link to this definition">¶</a></dt>
@@ -732,7 +780,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hse.evifluor.Run">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.</span></span><span class="sig-name descname"><span class="pre">Run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nr_of_std_low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr_of_std_high</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_air</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/run.html#Run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Run" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.</span></span><span class="sig-name descname"><span class="pre">Run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nr_of_std_low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr_of_std_high</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_air</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Default</span> <span class="pre">kit</span> <span class="pre">with</span> <span class="pre">linear</span> <span class="pre">fit</span> <span class="pre">fit_algorithm=Linear</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settling_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_high_target_signal_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settling_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/run.html#Run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Run" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Coordinates guided measurement runs including acquisition, verification, and storage.</p>
 <dl class="py class">
@@ -941,7 +989,7 @@
 <p>Represents a stored measurement with optional comment, results, and raw JSON node.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hse.evifluor.StorageMeasurementEntry.apply_results">
-<span class="sig-name descname"><span class="pre">apply_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factors</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/storage.html#StorageMeasurementEntry.apply_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.StorageMeasurementEntry.apply_results" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">apply_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Default</span> <span class="pre">kit</span> <span class="pre">with</span> <span class="pre">linear</span> <span class="pre">fit</span> <span class="pre">fit_algorithm=Linear</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settling_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_high_target_signal_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/storage.html#StorageMeasurementEntry.apply_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.StorageMeasurementEntry.apply_results" title="Link to this definition">¶</a></dt>
 <dd><p>Applies calibration factors to compute results and updates the JSON node.</p>
 </dd></dl>
 
@@ -1075,7 +1123,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hse.evifluor.Verification.check">
-<span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Verification.check" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_high_target_signal_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Verification.check" title="Link to this definition">¶</a></dt>
 <dd><p>Dispatches verification based on the type of sample provided.</p>
 </dd></dl>
 
@@ -1093,7 +1141,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hse.evifluor.Verification.check_first_sample_measurement_result">
-<span class="sig-name descname"><span class="pre">check_first_sample_measurement_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fsm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.check_first_sample_measurement_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Verification.check_first_sample_measurement_result" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_first_sample_measurement_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fsm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_high_target_signal_factor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.check_first_sample_measurement_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Verification.check_first_sample_measurement_result" title="Link to this definition">¶</a></dt>
 <dd><p>Verifies a first sample measurement result including auto-gain and standard high checks.</p>
 </dd></dl>
 
@@ -1111,7 +1159,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hse.evifluor.Verification.check_single_measurement">
-<span class="sig-name descname"><span class="pre">check_single_measurement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">single_measurement</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.check_single_measurement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Verification.check_single_measurement" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_single_measurement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">single_measurement</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_high_target_signal_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.check_single_measurement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Verification.check_single_measurement" title="Link to this definition">¶</a></dt>
 <dd><p>Checks a single measurement for saturation, cuvette presence, and expected levels.</p>
 </dd></dl>
 
@@ -1212,12 +1260,6 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="hse.evifluor.Verification.set_std_high_target">
-<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">set_std_high_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.set_std_high_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Verification.set_std_high_target" title="Link to this definition">¶</a></dt>
-<dd><p>Sets the target signal value for standard high checks.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="hse.evifluor.Verification.set_threshold_multiplier">
 <span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">set_threshold_multiplier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hse/evifluor/verification.html#Verification.set_threshold_multiplier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.Verification.set_threshold_multiplier" title="Link to this definition">¶</a></dt>
 <dd><p>Sets the RFU threshold multiplier used when detecting cuvette presence.</p>
@@ -1233,12 +1275,6 @@
 <dt class="sig sig-object py" id="hse.evifluor.Verification.std_high_delta">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">std_high_delta</span></span><a class="headerlink" href="#hse.evifluor.Verification.std_high_delta" title="Link to this definition">¶</a></dt>
 <dd><p>Gets the allowed deviation around the standard high target.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="hse.evifluor.Verification.std_high_target">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">std_high_target</span></span><a class="headerlink" href="#hse.evifluor.Verification.std_high_target" title="Link to this definition">¶</a></dt>
-<dd><p>Gets the target signal value for standard high checks.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1322,6 +1358,7 @@
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.DictKeys.MIN_MEASUREMENT"><code class="docutils literal notranslate"><span class="pre">DictKeys.MIN_MEASUREMENT</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.DictKeys.PRODUCTIONNUMBER"><code class="docutils literal notranslate"><span class="pre">DictKeys.PRODUCTIONNUMBER</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.DictKeys.RESULTS"><code class="docutils literal notranslate"><span class="pre">DictKeys.RESULTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.DictKeys.RFU"><code class="docutils literal notranslate"><span class="pre">DictKeys.RFU</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.DictKeys.SAMPLE"><code class="docutils literal notranslate"><span class="pre">DictKeys.SAMPLE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.DictKeys.SAMPLE_DARK"><code class="docutils literal notranslate"><span class="pre">DictKeys.SAMPLE_DARK</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.constants.html#hse.evifluor.constants.DictKeys.SAMPLE_LED_POWER"><code class="docutils literal notranslate"><span class="pre">DictKeys.SAMPLE_LED_POWER</span></code></a></li>
@@ -1429,10 +1466,22 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="hse.evifluor.kits.html">hse.evifluor.kits module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.Default"><code class="docutils literal notranslate"><span class="pre">Default</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.Default.factory"><code class="docutils literal notranslate"><span class="pre">Default.factory()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.Default.fit"><code class="docutils literal notranslate"><span class="pre">Default.fit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.Default.from_json"><code class="docutils literal notranslate"><span class="pre">Default.from_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.Default.settling_time"><code class="docutils literal notranslate"><span class="pre">Default.settling_time()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.Default.std_high_target_signal_factor"><code class="docutils literal notranslate"><span class="pre">Default.std_high_target_signal_factor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.Default.to_json"><code class="docutils literal notranslate"><span class="pre">Default.to_json()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.Quant_iT_dsDNA_HS"><code class="docutils literal notranslate"><span class="pre">Quant_iT_dsDNA_HS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.FitAlgorithm"><code class="docutils literal notranslate"><span class="pre">FitAlgorithm</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.FitAlgorithm.Linear"><code class="docutils literal notranslate"><span class="pre">FitAlgorithm.Linear</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.FitAlgorithm.Power"><code class="docutils literal notranslate"><span class="pre">FitAlgorithm.Power</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.FitAlgorithm.Quadratic"><code class="docutils literal notranslate"><span class="pre">FitAlgorithm.Quadratic</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.QubitTM_1X_dsDNA_Broad_Range_BR"><code class="docutils literal notranslate"><span class="pre">QubitTM_1X_dsDNA_Broad_Range_BR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hse.evifluor.kits.html#hse.evifluor.kits.QubitTM_1X_dsDNA_High_Sensitivity_HS"><code class="docutils literal notranslate"><span class="pre">QubitTM_1X_dsDNA_High_Sensitivity_HS</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="hse.evifluor.measurement.html">hse.evifluor.measurement module</a><ul>
@@ -1452,6 +1501,7 @@
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Measurement.concentration"><code class="docutils literal notranslate"><span class="pre">Measurement.concentration()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Measurement.from_json"><code class="docutils literal notranslate"><span class="pre">Measurement.from_json()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Measurement.results"><code class="docutils literal notranslate"><span class="pre">Measurement.results()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Measurement.rfu"><code class="docutils literal notranslate"><span class="pre">Measurement.rfu()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Measurement.to_json"><code class="docutils literal notranslate"><span class="pre">Measurement.to_json()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Measurement.value"><code class="docutils literal notranslate"><span class="pre">Measurement.value()</span></code></a></li>
 </ul>
@@ -1491,10 +1541,12 @@
 <li class="toctree-l2"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.RunInitRequest"><code class="docutils literal notranslate"><span class="pre">RunInitRequest</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.RunInitRequest.concentration"><code class="docutils literal notranslate"><span class="pre">RunInitRequest.concentration</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.RunInitRequest.device_id"><code class="docutils literal notranslate"><span class="pre">RunInitRequest.device_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.RunInitRequest.kit"><code class="docutils literal notranslate"><span class="pre">RunInitRequest.kit</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.RunInitRequest.model_config"><code class="docutils literal notranslate"><span class="pre">RunInitRequest.model_config</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.RunInitRequest.no_air"><code class="docutils literal notranslate"><span class="pre">RunInitRequest.no_air</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.RunInitRequest.nr_of_std_high"><code class="docutils literal notranslate"><span class="pre">RunInitRequest.nr_of_std_high</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.RunInitRequest.nr_of_std_low"><code class="docutils literal notranslate"><span class="pre">RunInitRequest.nr_of_std_low</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.RunInitRequest.settling_time"><code class="docutils literal notranslate"><span class="pre">RunInitRequest.settling_time</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="hse.evifluor.rest_server.html#hse.evifluor.rest_server.RunMeasureRequest"><code class="docutils literal notranslate"><span class="pre">RunMeasureRequest</span></code></a><ul>
@@ -1621,11 +1673,9 @@
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification.set_min_led"><code class="docutils literal notranslate"><span class="pre">Verification.set_min_led()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification.set_min_rfu"><code class="docutils literal notranslate"><span class="pre">Verification.set_min_rfu()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification.set_std_high_delta"><code class="docutils literal notranslate"><span class="pre">Verification.set_std_high_delta()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification.set_std_high_target"><code class="docutils literal notranslate"><span class="pre">Verification.set_std_high_target()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification.set_threshold_multiplier"><code class="docutils literal notranslate"><span class="pre">Verification.set_threshold_multiplier()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification.set_threshold_negative_concentration"><code class="docutils literal notranslate"><span class="pre">Verification.set_threshold_negative_concentration()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification.std_high_delta"><code class="docutils literal notranslate"><span class="pre">Verification.std_high_delta</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification.std_high_target"><code class="docutils literal notranslate"><span class="pre">Verification.std_high_target</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification.success"><code class="docutils literal notranslate"><span class="pre">Verification.success()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification.threshold_multiplier"><code class="docutils literal notranslate"><span class="pre">Verification.threshold_multiplier</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification.threshold_negative_concentration"><code class="docutils literal notranslate"><span class="pre">Verification.threshold_negative_concentration</span></code></a></li>

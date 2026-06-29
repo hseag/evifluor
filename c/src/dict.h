@@ -35,3 +35,4 @@
 /** @name Calculated result fields */
 #define DICT_CALCULATED      "results"       /**< Root node for calculated values. */
 #define DICT_CONCENTRATION   "concentration" /**< Calculated concentration entry. */
+#define DICT_RFU             "rfu"           /**< Relative fluorescence units entry. */

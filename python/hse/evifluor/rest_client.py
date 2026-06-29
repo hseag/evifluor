@@ -90,12 +90,14 @@ class RestClient:
         """Return the service-side device status (`idle`, `busy`, or `error`)."""
         return self._request_json("GET", self._device_path("status"))
 
-    def run_init(self, nr_of_std_low, nr_of_std_high, concentration, no_air=False):
+    def run_init(self, nr_of_std_low, nr_of_std_high, concentration, no_air=False, kit="Default", settling_time=None):
         payload = {
             "nr_of_std_low": nr_of_std_low,
             "nr_of_std_high": nr_of_std_high,
             "concentration": concentration,
             "no_air": no_air,
+            "kit": kit,
+            "settling_time": settling_time,
         }
         if self.serial_number:
             payload["device_id"] = self.serial_number

@@ -64,13 +64,9 @@ namespace Hse.EviFluor
         public static double MaxSignal = DefaultMaxSignal;
 
         /// <summary>
-        /// Default target signal value for standard high checks.
+        /// Default factor applied to <see cref="MaxSignal"/> for standard high checks.
         /// </summary>
-        public static readonly double DefaultStdHighTarget = 2000.0;
-        /// <summary>
-        /// Target signal value for standard high checks.
-        /// </summary>
-        public static double StdHighTarget = DefaultStdHighTarget;
+        public const double DefaultStdHighTargetSignalFactor = 0.8;
 
         /// <summary>
         /// Default allowed deviation from the standard high target.
@@ -247,7 +243,10 @@ namespace Hse.EviFluor
         /// <summary>
         /// Checks the validity of a single measurement based on saturation and expected behavior.
         /// </summary>
-        public bool Check(SingleMeasurement sm, Hints hints = Hints.NONE)
+        public bool Check(
+            SingleMeasurement sm,
+            Hints hints = Hints.NONE,
+            double stdHighTargetSignalFactor = DefaultStdHighTargetSignalFactor)
         {
             bool result = true;
 
@@ -268,7 +267,8 @@ namespace Hse.EviFluor
 
             if (hints.HasFlag(Hints.STD_HIGH))
             {
-                if (sm.Channel470.Value < (StdHighTarget - StdHighDelta) || sm.Channel470.Value > (StdHighTarget + StdHighDelta))
+                double stdHighTarget = MaxSignal * stdHighTargetSignalFactor;
+                if (sm.Channel470.Value < (stdHighTarget - StdHighDelta) || sm.Channel470.Value > (stdHighTarget + StdHighDelta))
                 {
                     entries.Add(new Entry(ProblemId.WRONG_LEVEL, sm));
                     result = false;
@@ -291,10 +291,16 @@ namespace Hse.EviFluor
         /// <summary>
         /// Checks the validity of a first sample measurement result.
         /// </summary>
-        public bool Check(FirstSampleMeasurementResult fsm, Hints hints = Hints.NONE)
+        public bool Check(
+            FirstSampleMeasurementResult fsm,
+            Hints hints = Hints.NONE,
+            double stdHighTargetSignalFactor = DefaultStdHighTargetSignalFactor)
         {
             bool r1 = Check(fsm.AutoGainResult, hints);
-            bool r2 = Check(fsm.Measurement, Hints.MUST_HAVE_CUVETTE | Hints.STD_HIGH);
+            bool r2 = Check(
+                fsm.Measurement,
+                Hints.MUST_HAVE_CUVETTE | Hints.STD_HIGH,
+                stdHighTargetSignalFactor);
             return r1 && r2;
         }
 
@@ -325,14 +331,17 @@ namespace Hse.EviFluor
         /// <summary>
         /// Generic check dispatcher that routes different types to the appropriate check method.
         /// </summary>
-        public bool Check(object obj, Hints hints = Hints.NONE)
+        public bool Check(
+            object obj,
+            Hints hints = Hints.NONE,
+            double stdHighTargetSignalFactor = DefaultStdHighTargetSignalFactor)
         {
             return obj switch
             {
                 AutoGainResult agr => Check(agr, hints),
-                SingleMeasurement sm => Check(sm, hints),
+                SingleMeasurement sm => Check(sm, hints, stdHighTargetSignalFactor),
                 FirstAirMeasurementResult fam => Check(fam, hints),
-                FirstSampleMeasurementResult fsm => Check(fsm, hints),
+                FirstSampleMeasurementResult fsm => Check(fsm, hints, stdHighTargetSignalFactor),
                 Measurement m => Check(m, hints),
                 Results r => Check(r, hints),
                 _ => throw new ArgumentException($"Unsupported class {obj.GetType()}")

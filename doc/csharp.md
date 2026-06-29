@@ -13,7 +13,7 @@ For the full generated C# API reference, see the [C# API documentation][csharp-a
 
 ## 2. Version
 
-This documentation describes C# package version `0.14.0-pre1`.
+This documentation describes C# package version `0.14.0-pre2`.
 
 ## 3. Setup
 
@@ -76,5 +76,6 @@ For most users, the best order is:
 1. Read this document first.
 2. Continue with [C# High-Level API](./csharp-high-level.md) if you want the guided workflow.
 3. Continue with [C# Low-Level API](./csharp-low-level.md) if you need direct control.
+4. Use [Kit Reference](./kit.md) for predefined kits, fit models, and kit-specific settings.
 
 [csharp-api-docs]: https://hseag.github.io/evifluor/pre-release/api/csharp/api/Hse.EviFluor.html

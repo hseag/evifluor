@@ -9,6 +9,7 @@ import sys
 import traceback
 from logging.handlers import RotatingFileHandler
 
+from hse.evifluor.kits import Default as DefaultKit
 from hse.evifluor import service
 
 
@@ -74,6 +75,8 @@ def build_parser():
     run_init_parser.add_argument("nr_of_std_low", type=int, help="Number of standard-low measurements")
     run_init_parser.add_argument("nr_of_std_high", type=int, help="Number of standard-high measurements")
     run_init_parser.add_argument("concentration", type=float, help="Standard-high concentration")
+    run_init_parser.add_argument("--kit", default="Default", help="Kit name (default: Default)")
+    run_init_parser.add_argument("--settling_time", type=float, help="Override settling time in seconds")
     run_init_parser.add_argument("--no-air", action="store_true", help="Initialize the run without air measurements")
 
     run_measure_parser = run_subparsers.add_parser("measure", help="Execute a measurement step")
@@ -142,6 +145,8 @@ def cmd_run(args):
             filename=args.file,
             device=args.device,
             no_air=args.no_air,
+            kit=DefaultKit.factory(args.kit),
+            settling_time=args.settling_time,
         )
         return 0
 

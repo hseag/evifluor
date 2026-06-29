@@ -153,8 +153,8 @@ Class Results
 
   <a id="Hse_EviFluor_Results__ctor_" data-uid="Hse.EviFluor.Results.#ctor*"></a>
 
-  <h3 id="Hse_EviFluor_Results__ctor_System_Double_" data-uid="Hse.EviFluor.Results.#ctor(System.Double)">
-  Results(double)
+  <h3 id="Hse_EviFluor_Results__ctor_System_Double_System_Nullable_System_Double__" data-uid="Hse.EviFluor.Results.#ctor(System.Double,System.Nullable{System.Double})">
+  Results(double, double?)
   
   </h3>
 
@@ -163,13 +163,16 @@ Class Results
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Results(double concentration)</code></pre>
+    <pre><code class="lang-csharp hljs">public Results(double concentration, double? rfu = null)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>concentration</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
     <dd><p>The unit of the concentration depends on the used standard high.</p>
+</dd>
+    <dt><code>rfu</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd><p>The RFU used as input for concentration calculation.</p>
 </dd>
   </dl>
 
@@ -210,6 +213,38 @@ Class Results
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Results_Rfu_" data-uid="Hse.EviFluor.Results.Rfu*"></a>
+
+  <h3 id="Hse_EviFluor_Results_Rfu" data-uid="Hse.EviFluor.Results.Rfu">
+  Rfu
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the RFU used as input for concentration calculation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? Rfu { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
     <dd></dd>
   </dl>
 

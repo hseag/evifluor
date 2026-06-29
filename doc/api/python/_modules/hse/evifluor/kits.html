@@ -34,42 +34,161 @@
 <span></span><span class="c1"># SPDX-License-Identifier: MIT</span>
 <span class="c1"># SPDX-FileCopyrightText: © 2025 HSE AG, &lt;opensource@hseag.com&gt;</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntEnum</span>
+
+
+<span class="n">_KIT_FIT_ALGORITHM</span> <span class="o">=</span> <span class="s2">&quot;fitAlgorithm&quot;</span>
+<span class="n">_KIT_K1</span> <span class="o">=</span> <span class="s2">&quot;k1&quot;</span>
+<span class="n">_KIT_K2</span> <span class="o">=</span> <span class="s2">&quot;k2&quot;</span>
+<span class="n">_KIT_K3</span> <span class="o">=</span> <span class="s2">&quot;k3&quot;</span>
+<span class="n">_KIT_SETTLING_TIME</span> <span class="o">=</span> <span class="s2">&quot;settlingTime&quot;</span>
+<span class="n">_KIT_STD_HIGH_TARGET_SIGNAL_FACTOR</span> <span class="o">=</span> <span class="s2">&quot;stdHighTargetSignalFactor&quot;</span>
+<span class="n">_KIT_DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;description&quot;</span>
+
+
+<div class="viewcode-block" id="FitAlgorithm">
+<a class="viewcode-back" href="../../../api/hse.evifluor.kits.html#hse.evifluor.FitAlgorithm">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FitAlgorithm</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Supported post-calibration fit curves for kit-specific concentration mapping.&quot;&quot;&quot;</span>
+    <span class="n">Linear</span>                                        <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">Power</span>                                         <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">Quadratic</span>                                     <span class="o">=</span> <span class="mi">3</span></div>
+
+
 <div class="viewcode-block" id="Default">
 <a class="viewcode-back" href="../../../api/hse.evifluor.kits.html#hse.evifluor.Default">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Default</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Default kit implementation using linear interpolation between standards.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base kit configuration combining standard interpolation with an optional fit curve.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a linear interpolation kit using two standard points.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fit_algorithm</span> <span class="o">=</span> <span class="n">FitAlgorithm</span><span class="o">.</span><span class="n">Linear</span><span class="p">,</span> <span class="n">k1</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">k3</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">settling_time</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span> <span class="o">=</span> <span class="n">FitAlgorithm</span><span class="p">(</span><span class="n">fit_algorithm</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown fit algorithm: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fit_algorithm</span><span class="p">))</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_k1</span> <span class="o">=</span> <span class="n">k1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_k2</span> <span class="o">=</span> <span class="n">k2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_k3</span> <span class="o">=</span> <span class="n">k3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_settling_time</span> <span class="o">=</span> <span class="n">settling_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_std_high_target_signal_factor</span> <span class="o">=</span> <span class="n">std_high_target_signal_factor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">description</span> <span class="ow">or</span> <span class="s2">&quot;Default kit with linear fit&quot;</span>
         
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a textual description of the default kit.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;Default kit with linear interpolation between std low and std high&quot;</span>
-        
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a textual description of the kit.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="si">}</span><span class="s2"> fit_algorithm=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, k1=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_k1</span><span class="si">}</span><span class="s2">, k2=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_k2</span><span class="si">}</span><span class="s2">, k3=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_k3</span><span class="si">}</span><span class="s2">, settling_time=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_settling_time</span><span class="si">}</span><span class="s2">, std_high_target_signal_factor=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_std_high_target_signal_factor</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<div class="viewcode-block" id="Default.to_json">
+<a class="viewcode-back" href="../../../api/hse.evifluor.kits.html#hse.evifluor.Default.to_json">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts the kit configuration to a JSON representation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">_KIT_FIT_ALGORITHM</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span><span class="p">),</span>
+            <span class="n">_KIT_K1</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k1</span><span class="p">,</span>
+            <span class="n">_KIT_K2</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k2</span><span class="p">,</span>
+            <span class="n">_KIT_K3</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k3</span><span class="p">,</span>
+            <span class="n">_KIT_SETTLING_TIME</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settling_time</span><span class="p">,</span>
+            <span class="n">_KIT_STD_HIGH_TARGET_SIGNAL_FACTOR</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_std_high_target_signal_factor</span><span class="p">,</span>
+            <span class="n">_KIT_DESCRIPTION</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="Default.factory">
+<a class="viewcode-back" href="../../../api/hse.evifluor.kits.html#hse.evifluor.Default.factory">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">factory</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a predefined kit instance from a string name.&quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Default</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;qubittm_1x_dsdna_broad_range_br&quot;</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;qubit_br&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">QubitTM_1X_dsDNA_Broad_Range_BR</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;qubittm_1x_dsdna_high_sensitivity_hs&quot;</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;qubit_hs&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">QubitTM_1X_dsDNA_High_Sensitivity_HS</span><span class="p">()</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown kit: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Default.from_json">
+<a class="viewcode-back" href="../../../api/hse.evifluor.kits.html#hse.evifluor.Default.from_json">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a kit instance from a JSON node.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Default</span><span class="p">(</span>
+            <span class="n">fit_algorithm</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="n">_KIT_FIT_ALGORITHM</span><span class="p">],</span>
+            <span class="n">k1</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="n">_KIT_K1</span><span class="p">],</span>
+            <span class="n">k2</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="n">_KIT_K2</span><span class="p">],</span>
+            <span class="n">k3</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_KIT_K3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">settling_time</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_KIT_SETTLING_TIME</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_KIT_STD_HIGH_TARGET_SIGNAL_FACTOR</span><span class="p">),</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_KIT_DESCRIPTION</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="Default.fit">
 <a class="viewcode-back" href="../../../api/hse.evifluor.kits.html#hse.evifluor.Default.fit">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">std_low</span><span class="p">,</span> <span class="n">std_high</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fits a value using linear interpolation between standard low and high.&quot;&quot;&quot;</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">std_high</span><span class="o">.</span><span class="n">concentration</span> <span class="o">-</span> <span class="n">std_low</span><span class="o">.</span><span class="n">concentration</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">std_high</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="n">std_low</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Maps a measured signal to concentration using the calibrated standards and fit curve.&quot;&quot;&quot;</span>
+        <span class="c1"># First interpolate between the two measured standards to get the raw concentration.</span>
+        <span class="n">delta_signal</span> <span class="o">=</span> <span class="n">std_high</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="n">std_low</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">if</span> <span class="n">delta_signal</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Standard low and high must have different signal values for calibration&quot;</span><span class="p">)</span>
+
+        <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">std_high</span><span class="o">.</span><span class="n">concentration</span> <span class="o">-</span> <span class="n">std_low</span><span class="o">.</span><span class="n">concentration</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta_signal</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">std_high</span><span class="o">.</span><span class="n">concentration</span> <span class="o">-</span> <span class="n">m</span> <span class="o">*</span> <span class="n">std_high</span><span class="o">.</span><span class="n">value</span>
-        <span class="k">return</span> <span class="n">m</span> <span class="o">*</span> <span class="n">value</span> <span class="o">+</span> <span class="n">b</span></div>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">value</span> <span class="o">+</span> <span class="n">b</span>
+        
+        <span class="c1"># Then apply the kit-specific correction curve on top of the raw interpolation result.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span> <span class="o">==</span> <span class="n">FitAlgorithm</span><span class="o">.</span><span class="n">Linear</span><span class="p">:</span>
+            <span class="n">x_fitted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k1</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k2</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span> <span class="o">==</span> <span class="n">FitAlgorithm</span><span class="o">.</span><span class="n">Power</span><span class="p">:</span>
+            <span class="c1"># Negative concentrations are clamped to zero before exponentiation.</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">x_fitted</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x_fitted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k1</span> <span class="o">*</span> <span class="n">x</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k2</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span> <span class="o">==</span> <span class="n">FitAlgorithm</span><span class="o">.</span><span class="n">Quadratic</span><span class="p">:</span>
+            <span class="c1"># Negative concentrations are clamped to zero before the quadratic correction.</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">x_fitted</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x_fitted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k1</span> <span class="o">*</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k3</span>
+        <span class="k">return</span> <span class="n">x_fitted</span></div>
+
+    
+<div class="viewcode-block" id="Default.settling_time">
+<a class="viewcode-back" href="../../../api/hse.evifluor.kits.html#hse.evifluor.Default.settling_time">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">settling_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the time in seconds to wait after adding the reagent before measuring.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settling_time</span></div>
+
+
+<div class="viewcode-block" id="Default.std_high_target_signal_factor">
+<a class="viewcode-back" href="../../../api/hse.evifluor.kits.html#hse.evifluor.Default.std_high_target_signal_factor">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">std_high_target_signal_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the autogain factor for the high standard signal.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_std_high_target_signal_factor</span></div>
 </div>
 
-        
 
-<div class="viewcode-block" id="Quant_iT_dsDNA_HS">
-<a class="viewcode-back" href="../../../api/hse.evifluor.kits.html#hse.evifluor.Quant_iT_dsDNA_HS">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">Quant_iT_dsDNA_HS</span><span class="p">(</span><span class="n">Default</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Linear kit preset for the Thermo Fisher Quant-iT dsDNA HS Assay (Q33120).&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="QubitTM_1X_dsDNA_High_Sensitivity_HS">
+<a class="viewcode-back" href="../../../api/hse.evifluor.kits.html#hse.evifluor.QubitTM_1X_dsDNA_High_Sensitivity_HS">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QubitTM_1X_dsDNA_High_Sensitivity_HS</span><span class="p">(</span><span class="n">Default</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Preset for the QubitTM 1X dsDNA High Sensitivity (HS) Assay Kit.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the Quant-iT dsDNA HS kit preset.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-    
-    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a textual description of this specific kit.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;Quant-iT dsDNA Assay Kit, High Sensitivity (Q33120)&quot;</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the QubitTM 1X dsDNA High Sensitivity (HS) Assay Kit preset.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fit_algorithm</span> <span class="o">=</span> <span class="n">FitAlgorithm</span><span class="o">.</span><span class="n">Linear</span><span class="p">,</span> <span class="n">k1</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;QubitTM 1X dsDNA High Sensitivity (HS) Assay Kit&quot;</span><span class="p">,</span> <span class="n">settling_time</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="QubitTM_1X_dsDNA_Broad_Range_BR">
+<a class="viewcode-back" href="../../../api/hse.evifluor.kits.html#hse.evifluor.QubitTM_1X_dsDNA_Broad_Range_BR">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QubitTM_1X_dsDNA_Broad_Range_BR</span><span class="p">(</span><span class="n">Default</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Preset for the QubitTM 1X dsDNA Broad Range (BR) Assay Kit.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fit_algorithm</span> <span class="o">=</span> <span class="n">FitAlgorithm</span><span class="o">.</span><span class="n">Power</span><span class="p">,</span> <span class="n">k1</span> <span class="o">=</span> <span class="mf">1.011658</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="mf">1.014932</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;QubitTM 1X dsDNA Broad Range (BR) Assay Kit&quot;</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">settling_time</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">pass</span></div>
 
 </pre></div>
 

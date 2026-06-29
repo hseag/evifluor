@@ -251,7 +251,7 @@ Performs a guided workflow on top of the low-level commands.
 Supported forms:
 
 ```text
-evifluor-cli run [OPTIONS] init NR_STD_LOW NR_STD_HIGH CONCENTRATION [--no-air]
+evifluor-cli run [OPTIONS] init NR_STD_LOW NR_STD_HIGH CONCENTRATION [--no-air] [--kit=NAME] [--settling-time=SECONDS]
 evifluor-cli run [OPTIONS] measure [COMMENT]
 evifluor-cli run [OPTIONS] checkempty
 evifluor-cli run [OPTIONS] export
@@ -262,14 +262,25 @@ Run options:
 - `--working-dir=DIR`
 - `--file=FILE`
 - `--no-air` only with `run init`
+- `--kit=NAME` only with `run init`
+- `--settling-time=SECONDS` only with `run init`
 
 Behavior:
 
 - `init` creates the run state file and selects the data file
 - `init ... --no-air` initializes a sample-only run without separate air measurements, aligned with the Python CLI
+- `init ... --kit=...` applies a predefined kit fit model during result calculation
+- `init ... --settling-time=...` overrides the settling time stored in the selected kit
 - `measure` advances the workflow state machine
 - `checkempty` returns exit code `0` when the cuvette guide is empty and exit code `57` when it is not empty
 - `export` creates a CSV file next to the active run JSON file
+
+Supported predefined kit names:
+
+- `Default`
+- `QubitTM_1X_dsDNA_High_Sensitivity_HS`
+- `QubitTM_1X_dsDNA_Broad_Range_BR`
+- aliases: `qubit_hs`, `qubit_br`
 
 ## 6. Exit Codes
 
@@ -361,7 +372,7 @@ evifluor-cli export data.json data.csv
 Initialize and use a guided run:
 
 ```text
-evifluor-cli run init 1 1 10
+evifluor-cli run init 1 1 10 --kit=Default
 evifluor-cli run checkempty
 evifluor-cli run measure
 evifluor-cli run measure "std high 1"
@@ -380,7 +391,7 @@ evifluor-cli run export
 Initialize and use a guided run without air measurements:
 
 ```text
-evifluor-cli run init 1 1 10 --no-air
+evifluor-cli run init 1 1 10 --no-air --kit=QubitTM_1X_dsDNA_Broad_Range_BR --settling-time=5
 evifluor-cli run checkempty
 evifluor-cli run measure "std high 1"
 evifluor-cli run checkempty

@@ -5,6 +5,7 @@
 #include "cmdsave.h"
 #include "commonindex.h"
 #include "measurement.h"
+#include "kit.h"
 #include "cmdexport.h"
 #include "verification.h"
 #include "cJSON.h"
@@ -29,6 +30,9 @@ typedef struct
     char * filename_state;
 	char * filename_data;
     bool noAir;
+    bool hasSettlingTimeOverride;
+    double settlingTimeOverride;
+    Kit_t kit;
 } Options_t;
 
 typedef enum
@@ -59,6 +63,12 @@ typedef enum
 
 #define DICT_CONTEXT_DATA_AIR             "air"
 #define DICT_CONTEXT_NO_AIR               "noAir"
+#define DICT_CONTEXT_KIT                  "kit"
+#define DICT_CONTEXT_SETTLING_TIME        "settlingTime"
+
+#define RUN_INIT_NO_AIR_OPTION            "--no-air"
+#define RUN_INIT_KIT_OPTION               "--kit="
+#define RUN_INIT_SETTLING_TIME_OPTION     "--settling-time="
 
 
 
@@ -270,6 +280,48 @@ static bool contextGetNoAir(cJSON * context)
     return contextGetNumber(context, DICT_CONTEXT_NO_AIR) != 0;
 }
 
+static void contextSetKit(cJSON * context, const Kit_t * kit)
+{
+    cJSON * obj = cJSON_GetObjectItem(context, DICT_CONTEXT_KIT);
+    if(obj == NULL)
+    {
+        cJSON_AddItemToObject(context, DICT_CONTEXT_KIT, kit_toJson(kit));
+    }
+    else
+    {
+        cJSON_ReplaceItemInObject(context, DICT_CONTEXT_KIT, kit_toJson(kit));
+    }
+}
+
+static Kit_t contextGetKit(cJSON * context)
+{
+    Kit_t kit = kit_default();
+    cJSON * obj = cJSON_GetObjectItem(context, DICT_CONTEXT_KIT);
+    if(obj != NULL)
+    {
+        if(!kit_fromJson(obj, &kit))
+        {
+            kit = kit_default();
+        }
+    }
+    return kit;
+}
+
+static void contextSetSettlingTime(cJSON * context, double settlingTime)
+{
+    contextSetNumber(context, DICT_CONTEXT_SETTLING_TIME, settlingTime);
+}
+
+static double contextGetSettlingTime(cJSON * context)
+{
+    cJSON * obj = cJSON_GetObjectItem(context, DICT_CONTEXT_SETTLING_TIME);
+    if(obj == NULL)
+    {
+        return contextGetKit(context).settlingTime;
+    }
+    return cJSON_GetNumberValue(obj);
+}
+
 static void contextSetFirstAir(cJSON * context, const MeasurementFirstAir_t * firstAir)
 {
     cJSON * oData = cJSON_GetObjectItem(context, DICT_CONTEXT_DATA);
@@ -463,19 +515,63 @@ static char * createComment(cJSON * context)
     }
 }
 
+static void delayForSettlingTime(cJSON * context)
+{
+    double settlingTime = contextGetSettlingTime(context);
+    if(settlingTime > 0.0)
+    {
+        Sleep((uint32_t)(settlingTime * 1000.0));
+    }
+}
+
+static uint32_t stdHighTargetFromKit(const Kit_t * kit)
+{
+    double factor = DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR;
+    if(kit != NULL && kit->hasStdHighTargetSignalFactor)
+    {
+        factor = kit->stdHighTargetSignalFactor;
+    }
+
+    return (uint32_t)(verification_getMaxSignal() * factor);
+}
+
+static Error_t measureFirstSampleWithKit(Evi_t * self, const Kit_t * kit, MeasurementFirstSample_t * measurement)
+{
+    Error_t ret = eviFluorAutogain(self, stdHighTargetFromKit(kit), &(measurement->autogain));
+    if(ret != ERROR_EVI_OK)
+    {
+        return ret;
+    }
+
+    return eviFluorMeasure(self, &(measurement->measurement));
+}
+
+static double stdHighTargetSignalFactorForKit(const Kit_t * kit)
+{
+    if(kit != NULL && kit->hasStdHighTargetSignalFactor)
+    {
+        return kit->stdHighTargetSignalFactor;
+    }
+
+    return DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR;
+}
+
 static void reCalculate(cJSON * context, Options_t * options)
 {
+    (void)options;
     cJSON *json = json_loadFromFile(contextGetDataFile(context));
     if (json != NULL)
     {
         cJSON *oMeasurements = cJSON_GetObjectItem(json, DICT_MEASUREMENTS);
-        bool ret = measurement_calculate(
+        Kit_t kit = contextGetKit(context);
+        bool ret = measurement_calculateWithKit(
             oMeasurements,
             contextGetConcentrationStdLow(context),
             contextGetConcentrationStdHigh(context),
             contextGetNrOfStdLow(context),
             contextGetNrOfStdHigh(context),
-            contextGetNoAir(context) ? MeasurementAlgorithmV2 : MeasurementAlgorithmV1
+            contextGetNoAir(context) ? MeasurementAlgorithmV2 : MeasurementAlgorithmV1,
+            &kit
         );
         if(ret == true)
         {
@@ -517,11 +613,13 @@ static Error_t measure(Evi_t* self, cJSON * context, Options_t * options, const 
             MeasurementFirstAir_t firstAir;
             SingleMeasurement_t air;
             MeasurementFirstSample_t sample;
-            ret = eviFluorMeasureFirstSample(self, &sample);
+            Kit_t kit = contextGetKit(context);
+            delayForSettlingTime(context);
+            ret = measureFirstSampleWithKit(self, &kit, &sample);
             if(ret == ERROR_EVI_OK)
             {
                 Verification_t verification = contextGetVerification(context);
-                verification_checkFirstSampleMeasurementResult(&verification, &sample, HINTS_NONE);
+                verification_checkFirstSampleMeasurementResult(&verification, &sample, HINTS_NONE, stdHighTargetSignalFactorForKit(&kit));
                 contextSetVerification(context, &verification);
                 contextGetFirstAir(context, &firstAir);
                 if(contextGetNoAir(context))
@@ -565,7 +663,7 @@ static Error_t measure(Evi_t* self, cJSON * context, Options_t * options, const 
             ret = eviFluorMeasure(self, &measurement);
             if(ret == ERROR_EVI_OK)
             {
-                verification_checkSingleMeasurement(&verification, &measurement, HINTS_NONE);
+                verification_checkSingleMeasurement(&verification, &measurement, HINTS_NONE, DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR);
                 contextSetVerification(context, &verification);
                 contextSetSingleMeasurement(context, DICT_CONTEXT_DATA_AIR, &measurement);
                 fprintf_s(stdout, "Air: %.03f %.03f %d\n", measurement.channel470.dark, measurement.channel470.value, measurement.channel470.ledPower);
@@ -584,11 +682,12 @@ static Error_t measure(Evi_t* self, cJSON * context, Options_t * options, const 
             Verification_t verification = contextGetVerification(context);
             SingleMeasurement_t air;
             SingleMeasurement_t sample;
+            delayForSettlingTime(context);
             ret = eviFluorMeasure(self, &sample);
 
             if(ret == ERROR_EVI_OK)
             {
-                verification_checkSingleMeasurement(&verification, &sample, HINTS_NONE);
+                verification_checkSingleMeasurement(&verification, &sample, HINTS_NONE, DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR);
                 contextSetVerification(context, &verification);
 
                 if(!contextGetNoAir(context))
@@ -636,6 +735,7 @@ Error_t cmdRun(Evi_t* self, int argcCmd, char** argvCmd)
     Error_t ret  = ERROR_EVI_OK;
 
     Options_t options = { 0 };
+    options.kit = kit_default();
 
     int argcCmdSave = argcCmd;
     char **argvCmdSave = argvCmd;
@@ -698,13 +798,34 @@ Error_t cmdRun(Evi_t* self, int argcCmd, char** argvCmd)
             if(strcmp(argvCmdSave[0], "init") == 0)
             {
                 bool noAir = false;
-                if(argcCmdSave == 5 && strcmp(argvCmdSave[4], "--no-air") == 0)
+                if(argcCmdSave >= 4)
                 {
-                    noAir = true;
-                }
+                    for(int argIndex = 4; argIndex < argcCmdSave; argIndex++)
+                    {
+                        if(strcmp(argvCmdSave[argIndex], RUN_INIT_NO_AIR_OPTION) == 0)
+                        {
+                            noAir = true;
+                        }
+                        else if(strncmp(argvCmdSave[argIndex], RUN_INIT_KIT_OPTION, strlen(RUN_INIT_KIT_OPTION)) == 0)
+                        {
+                            if(!kit_factory(argvCmdSave[argIndex] + strlen(RUN_INIT_KIT_OPTION), &options.kit))
+                            {
+                                ret = printError(ERROR_EVI_UNKOWN_COMMAND_LINE_ARGUMENT, "Unknown kit: %s", argvCmdSave[argIndex] + strlen(RUN_INIT_KIT_OPTION));
+                                goto cleanup_context;
+                            }
+                        }
+                        else if(strncmp(argvCmdSave[argIndex], RUN_INIT_SETTLING_TIME_OPTION, strlen(RUN_INIT_SETTLING_TIME_OPTION)) == 0)
+                        {
+                            options.hasSettlingTimeOverride = true;
+                            options.settlingTimeOverride = atof(argvCmdSave[argIndex] + strlen(RUN_INIT_SETTLING_TIME_OPTION));
+                        }
+                        else
+                        {
+                            ret = printError(ERROR_EVI_UNKOWN_COMMAND_LINE_ARGUMENT, "Unknown run init option: %s", argvCmdSave[argIndex]);
+                            goto cleanup_context;
+                        }
+                    }
 
-                if(argcCmdSave == 4 || noAir)
-                {
                     char sn[100] = {};
                     context = contextCreate(context);
                     contextSetNrOfStdLow(context, atoi(argvCmdSave[1]));
@@ -713,6 +834,8 @@ Error_t cmdRun(Evi_t* self, int argcCmd, char** argvCmd)
                     contextSetConcentrationStdLow(context, 0.0);
                     contextSetCount(context, 0);
                     contextSetNoAir(context, noAir);
+                    contextSetKit(context, &options.kit);
+                    contextSetSettlingTime(context, options.hasSettlingTimeOverride ? options.settlingTimeOverride : options.kit.settlingTime);
                     contextSetState(context, noAir ? StateFirstSample : StateFirstAir);
 
                     if(options.filename_data == NULL)
@@ -741,6 +864,8 @@ Error_t cmdRun(Evi_t* self, int argcCmd, char** argvCmd)
                     contextAddLog(context, "Created");
                     loggingClear(self);
                     fprintf_s(stdout, "Run initialized with %i stdandard high (%.1f ng/ul) and %i stdandard low.\n", contextGetNrOfStdHigh(context), contextGetConcentrationStdHigh(context), contextGetNrOfStdLow(context));
+                    fprintf_s(stdout, "Kit: %s.\n", contextGetKit(context).description);
+                    fprintf_s(stdout, "Settling time: %.2f s.\n", contextGetSettlingTime(context));
                     if(noAir)
                     {
                         fprintf_s(stdout, "Air measurements are disabled for this run.\n");
@@ -796,6 +921,7 @@ Error_t cmdRun(Evi_t* self, int argcCmd, char** argvCmd)
         }
 
         contextSave(context, options.filename_state);
+cleanup_context:
         cJSON_Delete(context);
     }
 

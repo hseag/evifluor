@@ -18,7 +18,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define VERSION_TOOL "0.8.0-pre1"
+#define VERSION_TOOL "0.8.0-pre2"
 
 void help(int argcCmd, char **argvCmd)
 {
@@ -142,7 +142,7 @@ void help(int argcCmd, char **argvCmd)
 			}
             else if(strcmp(argvCmd[1], "run") == 0)
             {
-                fprintf_s(stdout, "Usage: evifluor run [OPTIONS] init NR_STD_LOW NR_STD_HIGH CONCENTRATION [--no-air]\n");
+                fprintf_s(stdout, "Usage: evifluor run [OPTIONS] init NR_STD_LOW NR_STD_HIGH CONCENTRATION [--no-air] [--kit=NAME] [--settling-time=SECONDS]\n");
                 fprintf_s(stdout, "  Initializes a run.\n");
                 fprintf_s(stdout, "Usage: evifluor run [OPTIONS] measure [COMMENT]\n");
                 fprintf_s(stdout, "  Executes a measurement.\n");
@@ -155,6 +155,8 @@ void help(int argcCmd, char **argvCmd)
                 fprintf_s(stdout, "  --working-dir=DIR      : working directory (default: .)\n");
                 fprintf_s(stdout, "  --file=FILE            : data file\n");
                 fprintf_s(stdout, "  --no-air               : only for 'run init'; initialize the run without air measurements\n");
+                fprintf_s(stdout, "  --kit=NAME             : only for 'run init'; kit preset (Default, qubit_hs, qubit_br)\n");
+                fprintf_s(stdout, "  --settling-time=SECONDS: only for 'run init'; override kit settling time\n");
             }
             else if(strcmp(argvCmd[1], "baseline") == 0)
             {

@@ -18,6 +18,7 @@ class DictKeys:
     COMMENT                                  = "comment"
     RESULTS                                  = "results"
     CONCENTRATION                            = "concentration"
+    RFU                                      = "rfu"
     AIR                                      = "air"
     SAMPLE                                   = "sample"
     VALID                                    = "valid"

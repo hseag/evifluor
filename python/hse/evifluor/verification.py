@@ -14,6 +14,7 @@ from hse.evifluor.singlemeasurement import SingleMeasurement
 
 class Verification:
     """Provides verification checks for various measurement types and conditions."""
+    _DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR      = 0.8
     _DEFAULT_MIN_RFU                          = 4.5
     _min_rfu                                  = _DEFAULT_MIN_RFU
     _DEFAULT_MAX_RFU                          = 35.0
@@ -26,8 +27,6 @@ class Verification:
     _threshold_multiplier                     = _DEFAULT_THRESHOLD_MULTIPLIER
     _DEFAULT_MAX_SIGNAL                       = 2499.0
     _max_signal                               = _DEFAULT_MAX_SIGNAL
-    _DEFAULT_STD_HIGH_TARGET                  = 2000.0
-    _std_high_target                          = _DEFAULT_STD_HIGH_TARGET
     _DEFAULT_STD_HIGH_DELTA                   = 300
     _std_high_delta                           = _DEFAULT_STD_HIGH_DELTA
     _DEFAULT_THRESHOLD_NEGATIVE_CONCENTRATION = -0.1
@@ -140,24 +139,6 @@ class Verification:
     def max_signal(self, value):
         """Sets the maximum allowed signal value before saturation."""
         Verification.set_max_signal(value)
-
-    @staticmethod
-    def set_std_high_target(value):
-        """Sets the target signal value for standard high checks."""
-        if value is None:
-            Verification._std_high_target = Verification._DEFAULT_STD_HIGH_TARGET
-        else:
-            Verification._std_high_target = value
-
-    @property
-    def std_high_target(self):
-        """Gets the target signal value for standard high checks."""
-        return Verification._std_high_target
-
-    @std_high_target.setter
-    def std_high_target(self, value):
-        """Sets the target signal value for standard high checks."""
-        Verification.set_std_high_target(value)
 
     @staticmethod
     def set_std_high_delta(value):
@@ -286,9 +267,12 @@ class Verification:
         expected = Verification.expected_value(sm.channel_470.led_power)
         return sm.delta() > expected * Verification._threshold_multiplier
 
-    def check_single_measurement(self, single_measurement, hints = None):      
+    def check_single_measurement(self, single_measurement, hints = None, std_high_target_signal_factor = _DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR):      
         """Checks a single measurement for saturation, cuvette presence, and expected levels."""
         ret = True
+
+        if std_high_target_signal_factor is None:
+            std_high_target_signal_factor = Verification._DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR
         
         if single_measurement.channel_470.value >= self._max_signal:
             self.add_problem_id(self.ProblemId.SATURATION, single_measurement)
@@ -300,7 +284,8 @@ class Verification:
                 ret = False
                 
         if hints != None and self.Hints.STD_HIGH in hints:
-            if not (single_measurement.channel_470.value >= (Verification._std_high_target - Verification._std_high_delta) and single_measurement.channel_470.value <= (Verification._std_high_target + Verification._std_high_delta)):
+            std_high_target = Verification._max_signal * std_high_target_signal_factor
+            if not (single_measurement.channel_470.value >= (std_high_target - Verification._std_high_delta) and single_measurement.channel_470.value <= (std_high_target + Verification._std_high_delta)):
                 self.add_problem_id(self.ProblemId.WRONG_LEVEL, single_measurement)
                 ret = False
 
@@ -327,22 +312,22 @@ class Verification:
         ret2 = self.check_single_measurement(fam.max_measurement, self.Hints.MUST_HAVE_CUVETTE)
         return ret1 and ret2
         
-    def check_first_sample_measurement_result(self, fsm, hints):
+    def check_first_sample_measurement_result(self, fsm, hints, std_high_target_signal_factor):
         """Verifies a first sample measurement result including auto-gain and standard high checks."""
         ret1 = self.check_auto_gain_result(fsm.auto_gain_result, hints)
-        ret2 = self.check_single_measurement(fsm.measurement,  self.Hints.MUST_HAVE_CUVETTE | self.Hints.STD_HIGH)
+        ret2 = self.check_single_measurement(fsm.measurement,  self.Hints.MUST_HAVE_CUVETTE | self.Hints.STD_HIGH, std_high_target_signal_factor = std_high_target_signal_factor)
         return ret1 and ret2
         
-    def check(self, sample, hints = None):
+    def check(self, sample, hints = None, std_high_target_signal_factor = _DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR):
         """Dispatches verification based on the type of sample provided."""
         if isinstance(sample, SingleMeasurement):
-            return self.check_single_measurement(sample, hints)
+            return self.check_single_measurement(sample, hints, std_high_target_signal_factor = std_high_target_signal_factor)
         elif isinstance(sample, AutoGainResult):
             return self.check_auto_gain_result(sample, hints)
         elif isinstance(sample, FirstAirMeasurementResult):    
             return self.check_first_air_measurement_result(sample, hints)
         elif isinstance(sample, FirstSampleMeasurementResult):    
-            return self.check_first_sample_measurement_result(sample, hints)
+            return self.check_first_sample_measurement_result(sample, hints, std_high_target_signal_factor)
         elif isinstance(sample, Measurement):    
             return self.check_measurement(sample, hints)
         elif isinstance(sample, Results):

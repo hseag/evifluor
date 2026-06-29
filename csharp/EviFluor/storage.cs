@@ -76,15 +76,17 @@ public class StorageMeasurementEntry
     /// Updates the JSON node representation if available.
     /// </summary>
     /// <param name="factors">The correction factors to apply.</param>
+    /// <param name="kit">Optional kit used to calculate concentrations from the corrected values.</param>
     /// <remarks>
     /// When the entry was loaded from JSON (<see cref="Node"/> != <c>null</c>), the computed results are
     /// written back into that JSON node under <c>"results"</c>.
     /// </remarks> 
-    public void ApplyResults(Factors factors)
+    public void ApplyResults(Factors factors, IKit? kit = null)
     {
+        Results = Measurement.GetResults(factors, kit);
         if (Node != null)
         {
-            Node[Dict.RESULTS] = Measurement.GetResults(factors).ToJson();
+            Node[Dict.RESULTS] = Results.ToJson();
         }
     }
 
@@ -265,7 +267,7 @@ public class StorageMeasurement
         string csvFilename = Path.ChangeExtension(filename, ".csv");
         using var writer = new StreamWriter(csvFilename);
 
-        writer.WriteLine("comment;air dark;air value;air ledPower;sample dark;sample value;sample ledPower;concentration");
+        writer.WriteLine("comment;air dark;air value;air ledPower;sample dark;sample value;sample ledPower;concentration;rfu");
 
         foreach (var node in data[Dict.MEASUREMENTS]?.AsArray() ?? new JsonArray())
         {
@@ -282,6 +284,7 @@ public class StorageMeasurement
             string sampleValue = node[Dict.SAMPLE]?[Dict.VALUE]?.GetValue<double>().ToString(CultureInfo.InvariantCulture) ?? string.Empty;
             string sampleLedPower = node[Dict.SAMPLE]?[Dict.LED_POWER]?.ToString() ?? string.Empty;
             string concentration = node[Dict.RESULTS]?[Dict.CONCENTRATION]?.GetValue<double>().ToString(CultureInfo.InvariantCulture) ?? string.Empty;
+            string rfu = node[Dict.RESULTS]?[Dict.RFU]?.GetValue<double>().ToString(CultureInfo.InvariantCulture) ?? string.Empty;
 
             writer.WriteLine(string.Join(";", new[]
             {
@@ -292,7 +295,8 @@ public class StorageMeasurement
                 sampleDark,
                 sampleValue,
                 sampleLedPower,
-                concentration
+                concentration,
+                rfu
             }));
         }
     }

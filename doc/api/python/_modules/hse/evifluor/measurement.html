@@ -56,15 +56,16 @@
 <div class="viewcode-block" id="Results">
 <a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Results">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Results</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the concentration result of a measurement.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the concentration result of a measurement, including RFU.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">concentration</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the result with the specified concentration.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span>              <span class="o">=</span> <span class="n">concentration</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">concentration</span><span class="p">,</span> <span class="n">rfu</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the result with the specified concentration and optional RFU.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span> <span class="o">=</span> <span class="n">concentration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rfu</span> <span class="o">=</span> <span class="n">rfu</span>
         
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a string representation of the concentration result.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;concentration:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;concentration:</span><span class="si">{}</span><span class="s2"> rfu:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rfu</span><span class="p">)</span>
         
 <div class="viewcode-block" id="Results.to_json">
 <a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Results.to_json">[docs]</a>
@@ -73,20 +74,26 @@
         <span class="n">m</span> <span class="o">=</span> <span class="p">{</span>
             <span class="n">DictKeys</span><span class="o">.</span><span class="n">CONCENTRATION</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span>
         <span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rfu</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">m</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">RFU</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rfu</span>
         <span class="k">return</span> <span class="n">m</span></div>
 
         
     <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Compares two results with a tolerance to account for floating-point rounding.&quot;&quot;&quot;</span>
         <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.0000000000001</span>
-        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span> <span class="n">rhs</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span> <span class="n">rel_tol</span> <span class="o">=</span> <span class="n">delta</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span> <span class="n">rhs</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span> <span class="n">rel_tol</span><span class="o">=</span><span class="n">delta</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rfu</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">rhs</span><span class="o">.</span><span class="n">rfu</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rfu</span><span class="p">,</span> <span class="n">rhs</span><span class="o">.</span><span class="n">rfu</span><span class="p">,</span> <span class="n">rel_tol</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Results.from_json">
 <a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Results.from_json">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a Results instance from a JSON node.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Results</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">CONCENTRATION</span><span class="p">])</span></div>
+        <span class="k">return</span> <span class="n">Results</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">CONCENTRATION</span><span class="p">],</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">RFU</span><span class="p">))</span></div>
 </div>
 
 
@@ -224,14 +231,21 @@
 <a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Measurement.concentration">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">concentration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">kit</span> <span class="o">=</span> <span class="n">kits</span><span class="o">.</span><span class="n">Default</span><span class="p">()):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the concentration using the provided calibration factors and kit.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">kit</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">factors</span><span class="o">.</span><span class="n">std_low</span><span class="p">,</span> <span class="n">factors</span><span class="o">.</span><span class="n">std_high</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">factors</span><span class="o">.</span><span class="n">algorithm</span><span class="p">)</span> <span class="o">-</span> <span class="n">factors</span><span class="o">.</span><span class="n">measurement_std_low</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">kit</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">factors</span><span class="o">.</span><span class="n">std_low</span><span class="p">,</span> <span class="n">factors</span><span class="o">.</span><span class="n">std_high</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rfu</span><span class="p">(</span><span class="n">factors</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Measurement.rfu">
+<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Measurement.rfu">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rfu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factors</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the RFU used as input for concentration calculation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">factors</span><span class="o">.</span><span class="n">algorithm</span><span class="p">)</span> <span class="o">-</span> <span class="n">factors</span><span class="o">.</span><span class="n">measurement_std_low</span></div>
 
         
 <div class="viewcode-block" id="Measurement.results">
 <a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Measurement.results">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">kit</span> <span class="o">=</span> <span class="n">kits</span><span class="o">.</span><span class="n">Default</span><span class="p">()):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the measurement results using calibration factors and kit.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Results</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">kit</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">Results</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">kit</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">rfu</span><span class="p">(</span><span class="n">factors</span><span class="p">))</span></div>
 
         
 <div class="viewcode-block" id="Measurement.to_json">

@@ -22,5 +22,15 @@ public interface IKit
     /// </remarks>
     ///
     double fit(Point stdLow, Point stdHigh, double value);
+
+    /// <summary>
+    /// Returns the time in seconds to wait after adding the reagent before measuring.
+    /// </summary>
+    double SettlingTime();
+
+    /// <summary>
+    /// Returns the autogain factor for the high standard signal, or <c>null</c> to use the device default.
+    /// </summary>
+    double? StdHighTargetSignalFactor();
 }
 

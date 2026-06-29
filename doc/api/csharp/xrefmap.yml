@@ -732,6 +732,12 @@ references:
   commentId: F:Hse.EviFluor.Dict.RESULTS
   fullName: Hse.EviFluor.Dict.RESULTS
   nameWithType: Dict.RESULTS
+- uid: Hse.EviFluor.Dict.RFU
+  name: RFU
+  href: api/Hse.EviFluor.Dict.html#Hse_EviFluor_Dict_RFU
+  commentId: F:Hse.EviFluor.Dict.RFU
+  fullName: Hse.EviFluor.Dict.RFU
+  nameWithType: Dict.RFU
 - uid: Hse.EviFluor.Dict.SAMPLE
   name: SAMPLE
   href: api/Hse.EviFluor.Dict.html#Hse_EviFluor_Dict_SAMPLE
@@ -1122,6 +1128,32 @@ references:
   commentId: T:Hse.EviFluor.IKit
   fullName: Hse.EviFluor.IKit
   nameWithType: IKit
+- uid: Hse.EviFluor.IKit.SettlingTime
+  name: SettlingTime()
+  href: api/Hse.EviFluor.IKit.html#Hse_EviFluor_IKit_SettlingTime
+  commentId: M:Hse.EviFluor.IKit.SettlingTime
+  fullName: Hse.EviFluor.IKit.SettlingTime()
+  nameWithType: IKit.SettlingTime()
+- uid: Hse.EviFluor.IKit.SettlingTime*
+  name: SettlingTime
+  href: api/Hse.EviFluor.IKit.html#Hse_EviFluor_IKit_SettlingTime_
+  commentId: Overload:Hse.EviFluor.IKit.SettlingTime
+  isSpec: "True"
+  fullName: Hse.EviFluor.IKit.SettlingTime
+  nameWithType: IKit.SettlingTime
+- uid: Hse.EviFluor.IKit.StdHighTargetSignalFactor
+  name: StdHighTargetSignalFactor()
+  href: api/Hse.EviFluor.IKit.html#Hse_EviFluor_IKit_StdHighTargetSignalFactor
+  commentId: M:Hse.EviFluor.IKit.StdHighTargetSignalFactor
+  fullName: Hse.EviFluor.IKit.StdHighTargetSignalFactor()
+  nameWithType: IKit.StdHighTargetSignalFactor()
+- uid: Hse.EviFluor.IKit.StdHighTargetSignalFactor*
+  name: StdHighTargetSignalFactor
+  href: api/Hse.EviFluor.IKit.html#Hse_EviFluor_IKit_StdHighTargetSignalFactor_
+  commentId: Overload:Hse.EviFluor.IKit.StdHighTargetSignalFactor
+  isSpec: "True"
+  fullName: Hse.EviFluor.IKit.StdHighTargetSignalFactor
+  nameWithType: IKit.StdHighTargetSignalFactor
 - uid: Hse.EviFluor.IKit.fit(Hse.EviFluor.Point,Hse.EviFluor.Point,System.Double)
   name: fit(Point, Point, double)
   href: api/Hse.EviFluor.IKit.html#Hse_EviFluor_IKit_fit_Hse_EviFluor_Point_Hse_EviFluor_Point_System_Double_
@@ -1234,15 +1266,15 @@ references:
   commentId: T:Hse.EviFluor.Kits.Default
   fullName: Hse.EviFluor.Kits.Default
   nameWithType: Default
-- uid: Hse.EviFluor.Kits.Default.#ctor
-  name: Default()
-  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default__ctor
-  commentId: M:Hse.EviFluor.Kits.Default.#ctor
-  name.vb: New()
-  fullName: Hse.EviFluor.Kits.Default.Default()
-  fullName.vb: Hse.EviFluor.Kits.Default.New()
-  nameWithType: Default.Default()
-  nameWithType.vb: Default.New()
+- uid: Hse.EviFluor.Kits.Default.#ctor(Hse.EviFluor.Kits.FitAlgorithm,System.Double,System.Double,System.Double,System.Double,System.Nullable{System.Double},System.String)
+  name: Default(FitAlgorithm, double, double, double, double, double?, string?)
+  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default__ctor_Hse_EviFluor_Kits_FitAlgorithm_System_Double_System_Double_System_Double_System_Double_System_Nullable_System_Double__System_String_
+  commentId: M:Hse.EviFluor.Kits.Default.#ctor(Hse.EviFluor.Kits.FitAlgorithm,System.Double,System.Double,System.Double,System.Double,System.Nullable{System.Double},System.String)
+  name.vb: New(FitAlgorithm, Double, Double, Double, Double, Double?, String)
+  fullName: Hse.EviFluor.Kits.Default.Default(Hse.EviFluor.Kits.FitAlgorithm, double, double, double, double, double?, string?)
+  fullName.vb: Hse.EviFluor.Kits.Default.New(Hse.EviFluor.Kits.FitAlgorithm, Double, Double, Double, Double, Double?, String)
+  nameWithType: Default.Default(FitAlgorithm, double, double, double, double, double?, string?)
+  nameWithType.vb: Default.New(FitAlgorithm, Double, Double, Double, Double, Double?, String)
 - uid: Hse.EviFluor.Kits.Default.#ctor*
   name: Default
   href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default__ctor_
@@ -1253,6 +1285,74 @@ references:
   fullName.vb: Hse.EviFluor.Kits.Default.New
   nameWithType: Default.Default
   nameWithType.vb: Default.New
+- uid: Hse.EviFluor.Kits.Default.Factory(System.String)
+  name: Factory(string)
+  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_Factory_System_String_
+  commentId: M:Hse.EviFluor.Kits.Default.Factory(System.String)
+  name.vb: Factory(String)
+  fullName: Hse.EviFluor.Kits.Default.Factory(string)
+  fullName.vb: Hse.EviFluor.Kits.Default.Factory(String)
+  nameWithType: Default.Factory(string)
+  nameWithType.vb: Default.Factory(String)
+- uid: Hse.EviFluor.Kits.Default.Factory*
+  name: Factory
+  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_Factory_
+  commentId: Overload:Hse.EviFluor.Kits.Default.Factory
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.Default.Factory
+  nameWithType: Default.Factory
+- uid: Hse.EviFluor.Kits.Default.FromJson(System.Text.Json.Nodes.JsonNode)
+  name: FromJson(JsonNode)
+  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_FromJson_System_Text_Json_Nodes_JsonNode_
+  commentId: M:Hse.EviFluor.Kits.Default.FromJson(System.Text.Json.Nodes.JsonNode)
+  fullName: Hse.EviFluor.Kits.Default.FromJson(System.Text.Json.Nodes.JsonNode)
+  nameWithType: Default.FromJson(JsonNode)
+- uid: Hse.EviFluor.Kits.Default.FromJson*
+  name: FromJson
+  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_FromJson_
+  commentId: Overload:Hse.EviFluor.Kits.Default.FromJson
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.Default.FromJson
+  nameWithType: Default.FromJson
+- uid: Hse.EviFluor.Kits.Default.SettlingTime
+  name: SettlingTime()
+  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_SettlingTime
+  commentId: M:Hse.EviFluor.Kits.Default.SettlingTime
+  fullName: Hse.EviFluor.Kits.Default.SettlingTime()
+  nameWithType: Default.SettlingTime()
+- uid: Hse.EviFluor.Kits.Default.SettlingTime*
+  name: SettlingTime
+  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_SettlingTime_
+  commentId: Overload:Hse.EviFluor.Kits.Default.SettlingTime
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.Default.SettlingTime
+  nameWithType: Default.SettlingTime
+- uid: Hse.EviFluor.Kits.Default.StdHighTargetSignalFactor
+  name: StdHighTargetSignalFactor()
+  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_StdHighTargetSignalFactor
+  commentId: M:Hse.EviFluor.Kits.Default.StdHighTargetSignalFactor
+  fullName: Hse.EviFluor.Kits.Default.StdHighTargetSignalFactor()
+  nameWithType: Default.StdHighTargetSignalFactor()
+- uid: Hse.EviFluor.Kits.Default.StdHighTargetSignalFactor*
+  name: StdHighTargetSignalFactor
+  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_StdHighTargetSignalFactor_
+  commentId: Overload:Hse.EviFluor.Kits.Default.StdHighTargetSignalFactor
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.Default.StdHighTargetSignalFactor
+  nameWithType: Default.StdHighTargetSignalFactor
+- uid: Hse.EviFluor.Kits.Default.ToJson
+  name: ToJson()
+  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_ToJson
+  commentId: M:Hse.EviFluor.Kits.Default.ToJson
+  fullName: Hse.EviFluor.Kits.Default.ToJson()
+  nameWithType: Default.ToJson()
+- uid: Hse.EviFluor.Kits.Default.ToJson*
+  name: ToJson
+  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_ToJson_
+  commentId: Overload:Hse.EviFluor.Kits.Default.ToJson
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.Default.ToJson
+  nameWithType: Default.ToJson
 - uid: Hse.EviFluor.Kits.Default.ToString
   name: ToString()
   href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_ToString
@@ -1523,6 +1623,19 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Measurement.GetResults
   nameWithType: Measurement.GetResults
+- uid: Hse.EviFluor.Measurement.RfuValue(Hse.EviFluor.Factors)
+  name: RfuValue(Factors)
+  href: api/Hse.EviFluor.Measurement.html#Hse_EviFluor_Measurement_RfuValue_Hse_EviFluor_Factors_
+  commentId: M:Hse.EviFluor.Measurement.RfuValue(Hse.EviFluor.Factors)
+  fullName: Hse.EviFluor.Measurement.RfuValue(Hse.EviFluor.Factors)
+  nameWithType: Measurement.RfuValue(Factors)
+- uid: Hse.EviFluor.Measurement.RfuValue*
+  name: RfuValue
+  href: api/Hse.EviFluor.Measurement.html#Hse_EviFluor_Measurement_RfuValue_
+  commentId: Overload:Hse.EviFluor.Measurement.RfuValue
+  isSpec: "True"
+  fullName: Hse.EviFluor.Measurement.RfuValue
+  nameWithType: Measurement.RfuValue
 - uid: Hse.EviFluor.Measurement.SetComment(System.String)
   name: SetComment(string)
   href: api/Hse.EviFluor.Measurement.html#Hse_EviFluor_Measurement_SetComment_System_String_
@@ -1695,15 +1808,15 @@ references:
   commentId: T:Hse.EviFluor.Results
   fullName: Hse.EviFluor.Results
   nameWithType: Results
-- uid: Hse.EviFluor.Results.#ctor(System.Double)
-  name: Results(double)
-  href: api/Hse.EviFluor.Results.html#Hse_EviFluor_Results__ctor_System_Double_
-  commentId: M:Hse.EviFluor.Results.#ctor(System.Double)
-  name.vb: New(Double)
-  fullName: Hse.EviFluor.Results.Results(double)
-  fullName.vb: Hse.EviFluor.Results.New(Double)
-  nameWithType: Results.Results(double)
-  nameWithType.vb: Results.New(Double)
+- uid: Hse.EviFluor.Results.#ctor(System.Double,System.Nullable{System.Double})
+  name: Results(double, double?)
+  href: api/Hse.EviFluor.Results.html#Hse_EviFluor_Results__ctor_System_Double_System_Nullable_System_Double__
+  commentId: M:Hse.EviFluor.Results.#ctor(System.Double,System.Nullable{System.Double})
+  name.vb: New(Double, Double?)
+  fullName: Hse.EviFluor.Results.Results(double, double?)
+  fullName.vb: Hse.EviFluor.Results.New(Double, Double?)
+  nameWithType: Results.Results(double, double?)
+  nameWithType.vb: Results.New(Double, Double?)
 - uid: Hse.EviFluor.Results.#ctor*
   name: Results
   href: api/Hse.EviFluor.Results.html#Hse_EviFluor_Results__ctor_
@@ -1781,6 +1894,19 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Results.GetHashCode
   nameWithType: Results.GetHashCode
+- uid: Hse.EviFluor.Results.Rfu
+  name: Rfu
+  href: api/Hse.EviFluor.Results.html#Hse_EviFluor_Results_Rfu
+  commentId: P:Hse.EviFluor.Results.Rfu
+  fullName: Hse.EviFluor.Results.Rfu
+  nameWithType: Results.Rfu
+- uid: Hse.EviFluor.Results.Rfu*
+  name: Rfu
+  href: api/Hse.EviFluor.Results.html#Hse_EviFluor_Results_Rfu_
+  commentId: Overload:Hse.EviFluor.Results.Rfu
+  isSpec: "True"
+  fullName: Hse.EviFluor.Results.Rfu
+  nameWithType: Results.Rfu
 - uid: Hse.EviFluor.Results.ToJson
   name: ToJson()
   href: api/Hse.EviFluor.Results.html#Hse_EviFluor_Results_ToJson
@@ -1813,15 +1939,15 @@ references:
   commentId: T:Hse.EviFluor.Run
   fullName: Hse.EviFluor.Run
   nameWithType: Run
-- uid: Hse.EviFluor.Run.#ctor(System.Int32,System.Int32,System.Double,System.String,System.String,System.String,System.Boolean)
-  name: Run(int, int, double, string?, string?, string?, bool)
-  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run__ctor_System_Int32_System_Int32_System_Double_System_String_System_String_System_String_System_Boolean_
-  commentId: M:Hse.EviFluor.Run.#ctor(System.Int32,System.Int32,System.Double,System.String,System.String,System.String,System.Boolean)
-  name.vb: New(Integer, Integer, Double, String, String, String, Boolean)
-  fullName: Hse.EviFluor.Run.Run(int, int, double, string?, string?, string?, bool)
-  fullName.vb: Hse.EviFluor.Run.New(Integer, Integer, Double, String, String, String, Boolean)
-  nameWithType: Run.Run(int, int, double, string?, string?, string?, bool)
-  nameWithType.vb: Run.New(Integer, Integer, Double, String, String, String, Boolean)
+- uid: Hse.EviFluor.Run.#ctor(System.Int32,System.Int32,System.Double,System.String,System.String,System.String,System.Boolean,Hse.EviFluor.IKit,System.Nullable{System.Double})
+  name: Run(int, int, double, string?, string?, string?, bool, IKit?, double?)
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run__ctor_System_Int32_System_Int32_System_Double_System_String_System_String_System_String_System_Boolean_Hse_EviFluor_IKit_System_Nullable_System_Double__
+  commentId: M:Hse.EviFluor.Run.#ctor(System.Int32,System.Int32,System.Double,System.String,System.String,System.String,System.Boolean,Hse.EviFluor.IKit,System.Nullable{System.Double})
+  name.vb: New(Integer, Integer, Double, String, String, String, Boolean, IKit, Double?)
+  fullName: Hse.EviFluor.Run.Run(int, int, double, string?, string?, string?, bool, Hse.EviFluor.IKit?, double?)
+  fullName.vb: Hse.EviFluor.Run.New(Integer, Integer, Double, String, String, String, Boolean, Hse.EviFluor.IKit, Double?)
+  nameWithType: Run.Run(int, int, double, string?, string?, string?, bool, IKit?, double?)
+  nameWithType.vb: Run.New(Integer, Integer, Double, String, String, String, Boolean, IKit, Double?)
 - uid: Hse.EviFluor.Run.#ctor*
   name: Run
   href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run__ctor_
@@ -1861,6 +1987,54 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Run.~Run
   nameWithType: Run.~Run
+- uid: Hse.EviFluor.Run.LoadState(System.String)
+  name: LoadState(string?)
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_LoadState_System_String_
+  commentId: M:Hse.EviFluor.Run.LoadState(System.String)
+  name.vb: LoadState(String)
+  fullName: Hse.EviFluor.Run.LoadState(string?)
+  fullName.vb: Hse.EviFluor.Run.LoadState(String)
+  nameWithType: Run.LoadState(string?)
+  nameWithType.vb: Run.LoadState(String)
+- uid: Hse.EviFluor.Run.LoadState*
+  name: LoadState
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_LoadState_
+  commentId: Overload:Hse.EviFluor.Run.LoadState
+  isSpec: "True"
+  fullName: Hse.EviFluor.Run.LoadState
+  nameWithType: Run.LoadState
+- uid: Hse.EviFluor.Run.ResolveStateFilename(System.String,System.String)
+  name: ResolveStateFilename(string?, string?)
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_ResolveStateFilename_System_String_System_String_
+  commentId: M:Hse.EviFluor.Run.ResolveStateFilename(System.String,System.String)
+  name.vb: ResolveStateFilename(String, String)
+  fullName: Hse.EviFluor.Run.ResolveStateFilename(string?, string?)
+  fullName.vb: Hse.EviFluor.Run.ResolveStateFilename(String, String)
+  nameWithType: Run.ResolveStateFilename(string?, string?)
+  nameWithType.vb: Run.ResolveStateFilename(String, String)
+- uid: Hse.EviFluor.Run.ResolveStateFilename*
+  name: ResolveStateFilename
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_ResolveStateFilename_
+  commentId: Overload:Hse.EviFluor.Run.ResolveStateFilename
+  isSpec: "True"
+  fullName: Hse.EviFluor.Run.ResolveStateFilename
+  nameWithType: Run.ResolveStateFilename
+- uid: Hse.EviFluor.Run.SaveState(System.String)
+  name: SaveState(string?)
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_SaveState_System_String_
+  commentId: M:Hse.EviFluor.Run.SaveState(System.String)
+  name.vb: SaveState(String)
+  fullName: Hse.EviFluor.Run.SaveState(string?)
+  fullName.vb: Hse.EviFluor.Run.SaveState(String)
+  nameWithType: Run.SaveState(string?)
+  nameWithType.vb: Run.SaveState(String)
+- uid: Hse.EviFluor.Run.SaveState*
+  name: SaveState
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_SaveState_
+  commentId: Overload:Hse.EviFluor.Run.SaveState
+  isSpec: "True"
+  fullName: Hse.EviFluor.Run.SaveState
+  nameWithType: Run.SaveState
 - uid: Hse.EviFluor.Run.checkEmpty
   name: checkEmpty()
   href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_checkEmpty
@@ -2316,12 +2490,15 @@ references:
   fullName.vb: Hse.EviFluor.StorageMeasurementEntry.New
   nameWithType: StorageMeasurementEntry.StorageMeasurementEntry
   nameWithType.vb: StorageMeasurementEntry.New
-- uid: Hse.EviFluor.StorageMeasurementEntry.ApplyResults(Hse.EviFluor.Factors)
-  name: ApplyResults(Factors)
-  href: api/Hse.EviFluor.StorageMeasurementEntry.html#Hse_EviFluor_StorageMeasurementEntry_ApplyResults_Hse_EviFluor_Factors_
-  commentId: M:Hse.EviFluor.StorageMeasurementEntry.ApplyResults(Hse.EviFluor.Factors)
-  fullName: Hse.EviFluor.StorageMeasurementEntry.ApplyResults(Hse.EviFluor.Factors)
-  nameWithType: StorageMeasurementEntry.ApplyResults(Factors)
+- uid: Hse.EviFluor.StorageMeasurementEntry.ApplyResults(Hse.EviFluor.Factors,Hse.EviFluor.IKit)
+  name: ApplyResults(Factors, IKit?)
+  href: api/Hse.EviFluor.StorageMeasurementEntry.html#Hse_EviFluor_StorageMeasurementEntry_ApplyResults_Hse_EviFluor_Factors_Hse_EviFluor_IKit_
+  commentId: M:Hse.EviFluor.StorageMeasurementEntry.ApplyResults(Hse.EviFluor.Factors,Hse.EviFluor.IKit)
+  name.vb: ApplyResults(Factors, IKit)
+  fullName: Hse.EviFluor.StorageMeasurementEntry.ApplyResults(Hse.EviFluor.Factors, Hse.EviFluor.IKit?)
+  fullName.vb: Hse.EviFluor.StorageMeasurementEntry.ApplyResults(Hse.EviFluor.Factors, Hse.EviFluor.IKit)
+  nameWithType: StorageMeasurementEntry.ApplyResults(Factors, IKit?)
+  nameWithType.vb: StorageMeasurementEntry.ApplyResults(Factors, IKit)
 - uid: Hse.EviFluor.StorageMeasurementEntry.ApplyResults*
   name: ApplyResults
   href: api/Hse.EviFluor.StorageMeasurementEntry.html#Hse_EviFluor_StorageMeasurementEntry_ApplyResults_
@@ -2480,12 +2657,15 @@ references:
   commentId: M:Hse.EviFluor.Verification.Check(Hse.EviFluor.FirstAirMeasurementResult,Hse.EviFluor.Verification.Hints)
   fullName: Hse.EviFluor.Verification.Check(Hse.EviFluor.FirstAirMeasurementResult, Hse.EviFluor.Verification.Hints)
   nameWithType: Verification.Check(FirstAirMeasurementResult, Verification.Hints)
-- uid: Hse.EviFluor.Verification.Check(Hse.EviFluor.FirstSampleMeasurementResult,Hse.EviFluor.Verification.Hints)
-  name: Check(FirstSampleMeasurementResult, Hints)
-  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Check_Hse_EviFluor_FirstSampleMeasurementResult_Hse_EviFluor_Verification_Hints_
-  commentId: M:Hse.EviFluor.Verification.Check(Hse.EviFluor.FirstSampleMeasurementResult,Hse.EviFluor.Verification.Hints)
-  fullName: Hse.EviFluor.Verification.Check(Hse.EviFluor.FirstSampleMeasurementResult, Hse.EviFluor.Verification.Hints)
-  nameWithType: Verification.Check(FirstSampleMeasurementResult, Verification.Hints)
+- uid: Hse.EviFluor.Verification.Check(Hse.EviFluor.FirstSampleMeasurementResult,Hse.EviFluor.Verification.Hints,System.Double)
+  name: Check(FirstSampleMeasurementResult, Hints, double)
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Check_Hse_EviFluor_FirstSampleMeasurementResult_Hse_EviFluor_Verification_Hints_System_Double_
+  commentId: M:Hse.EviFluor.Verification.Check(Hse.EviFluor.FirstSampleMeasurementResult,Hse.EviFluor.Verification.Hints,System.Double)
+  name.vb: Check(FirstSampleMeasurementResult, Hints, Double)
+  fullName: Hse.EviFluor.Verification.Check(Hse.EviFluor.FirstSampleMeasurementResult, Hse.EviFluor.Verification.Hints, double)
+  fullName.vb: Hse.EviFluor.Verification.Check(Hse.EviFluor.FirstSampleMeasurementResult, Hse.EviFluor.Verification.Hints, Double)
+  nameWithType: Verification.Check(FirstSampleMeasurementResult, Verification.Hints, double)
+  nameWithType.vb: Verification.Check(FirstSampleMeasurementResult, Verification.Hints, Double)
 - uid: Hse.EviFluor.Verification.Check(Hse.EviFluor.Measurement,Hse.EviFluor.Verification.Hints)
   name: Check(Measurement, Hints)
   href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Check_Hse_EviFluor_Measurement_Hse_EviFluor_Verification_Hints_
@@ -2498,21 +2678,24 @@ references:
   commentId: M:Hse.EviFluor.Verification.Check(Hse.EviFluor.Results,Hse.EviFluor.Verification.Hints)
   fullName: Hse.EviFluor.Verification.Check(Hse.EviFluor.Results, Hse.EviFluor.Verification.Hints)
   nameWithType: Verification.Check(Results, Verification.Hints)
-- uid: Hse.EviFluor.Verification.Check(Hse.EviFluor.SingleMeasurement,Hse.EviFluor.Verification.Hints)
-  name: Check(SingleMeasurement, Hints)
-  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Check_Hse_EviFluor_SingleMeasurement_Hse_EviFluor_Verification_Hints_
-  commentId: M:Hse.EviFluor.Verification.Check(Hse.EviFluor.SingleMeasurement,Hse.EviFluor.Verification.Hints)
-  fullName: Hse.EviFluor.Verification.Check(Hse.EviFluor.SingleMeasurement, Hse.EviFluor.Verification.Hints)
-  nameWithType: Verification.Check(SingleMeasurement, Verification.Hints)
-- uid: Hse.EviFluor.Verification.Check(System.Object,Hse.EviFluor.Verification.Hints)
-  name: Check(object, Hints)
-  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Check_System_Object_Hse_EviFluor_Verification_Hints_
-  commentId: M:Hse.EviFluor.Verification.Check(System.Object,Hse.EviFluor.Verification.Hints)
-  name.vb: Check(Object, Hints)
-  fullName: Hse.EviFluor.Verification.Check(object, Hse.EviFluor.Verification.Hints)
-  fullName.vb: Hse.EviFluor.Verification.Check(Object, Hse.EviFluor.Verification.Hints)
-  nameWithType: Verification.Check(object, Verification.Hints)
-  nameWithType.vb: Verification.Check(Object, Verification.Hints)
+- uid: Hse.EviFluor.Verification.Check(Hse.EviFluor.SingleMeasurement,Hse.EviFluor.Verification.Hints,System.Double)
+  name: Check(SingleMeasurement, Hints, double)
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Check_Hse_EviFluor_SingleMeasurement_Hse_EviFluor_Verification_Hints_System_Double_
+  commentId: M:Hse.EviFluor.Verification.Check(Hse.EviFluor.SingleMeasurement,Hse.EviFluor.Verification.Hints,System.Double)
+  name.vb: Check(SingleMeasurement, Hints, Double)
+  fullName: Hse.EviFluor.Verification.Check(Hse.EviFluor.SingleMeasurement, Hse.EviFluor.Verification.Hints, double)
+  fullName.vb: Hse.EviFluor.Verification.Check(Hse.EviFluor.SingleMeasurement, Hse.EviFluor.Verification.Hints, Double)
+  nameWithType: Verification.Check(SingleMeasurement, Verification.Hints, double)
+  nameWithType.vb: Verification.Check(SingleMeasurement, Verification.Hints, Double)
+- uid: Hse.EviFluor.Verification.Check(System.Object,Hse.EviFluor.Verification.Hints,System.Double)
+  name: Check(object, Hints, double)
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Check_System_Object_Hse_EviFluor_Verification_Hints_System_Double_
+  commentId: M:Hse.EviFluor.Verification.Check(System.Object,Hse.EviFluor.Verification.Hints,System.Double)
+  name.vb: Check(Object, Hints, Double)
+  fullName: Hse.EviFluor.Verification.Check(object, Hse.EviFluor.Verification.Hints, double)
+  fullName.vb: Hse.EviFluor.Verification.Check(Object, Hse.EviFluor.Verification.Hints, Double)
+  nameWithType: Verification.Check(object, Verification.Hints, double)
+  nameWithType.vb: Verification.Check(Object, Verification.Hints, Double)
 - uid: Hse.EviFluor.Verification.Check*
   name: Check
   href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Check_
@@ -2562,12 +2745,12 @@ references:
   commentId: F:Hse.EviFluor.Verification.DefaultStdHighDelta
   fullName: Hse.EviFluor.Verification.DefaultStdHighDelta
   nameWithType: Verification.DefaultStdHighDelta
-- uid: Hse.EviFluor.Verification.DefaultStdHighTarget
-  name: DefaultStdHighTarget
-  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_DefaultStdHighTarget
-  commentId: F:Hse.EviFluor.Verification.DefaultStdHighTarget
-  fullName: Hse.EviFluor.Verification.DefaultStdHighTarget
-  nameWithType: Verification.DefaultStdHighTarget
+- uid: Hse.EviFluor.Verification.DefaultStdHighTargetSignalFactor
+  name: DefaultStdHighTargetSignalFactor
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_DefaultStdHighTargetSignalFactor
+  commentId: F:Hse.EviFluor.Verification.DefaultStdHighTargetSignalFactor
+  fullName: Hse.EviFluor.Verification.DefaultStdHighTargetSignalFactor
+  nameWithType: Verification.DefaultStdHighTargetSignalFactor
 - uid: Hse.EviFluor.Verification.DefaultThresholdNegativeConcentration
   name: DefaultThresholdNegativeConcentration
   href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_DefaultThresholdNegativeConcentration
@@ -2792,12 +2975,6 @@ references:
   commentId: F:Hse.EviFluor.Verification.StdHighDelta
   fullName: Hse.EviFluor.Verification.StdHighDelta
   nameWithType: Verification.StdHighDelta
-- uid: Hse.EviFluor.Verification.StdHighTarget
-  name: StdHighTarget
-  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_StdHighTarget
-  commentId: F:Hse.EviFluor.Verification.StdHighTarget
-  fullName: Hse.EviFluor.Verification.StdHighTarget
-  nameWithType: Verification.StdHighTarget
 - uid: Hse.EviFluor.Verification.Success
   name: Success()
   href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_Success

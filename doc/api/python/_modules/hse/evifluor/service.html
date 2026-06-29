@@ -43,6 +43,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">USB</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.device</span><span class="w"> </span><span class="kn">import</span> <span class="n">Device</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.kits</span><span class="w"> </span><span class="kn">import</span> <span class="n">Default</span> <span class="k">as</span> <span class="n">DefaultKit</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">Run</span>
 
 <span class="n">_LOCKS</span> <span class="o">=</span> <span class="p">{}</span>
@@ -95,11 +96,14 @@
         <span class="s2">&quot;nr_of_std_low&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">nr_of_std_low</span><span class="p">,</span>
         <span class="s2">&quot;nr_of_std_high&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">nr_of_std_high</span><span class="p">,</span>
         <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span>
+        <span class="s2">&quot;kit&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
+        <span class="s2">&quot;settling_time&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">settling_time</span><span class="p">,</span>
         <span class="s2">&quot;no_air&quot;</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">_algorithm</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;V2&quot;</span><span class="p">,</span>
         <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">_count</span><span class="p">,</span>
         <span class="s2">&quot;next_state&quot;</span><span class="p">:</span> <span class="n">_run_state_name</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">_state</span><span class="p">),</span>
         <span class="s2">&quot;measurement_count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">storage</span><span class="p">),</span>
         <span class="s2">&quot;has_factors&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">_factors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;verification&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">verification</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
     <span class="p">}</span>
 
 
@@ -205,7 +209,9 @@
 
 <div class="viewcode-block" id="init_run">
 <a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.init_run">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">init_run</span><span class="p">(</span><span class="n">nr_of_std_low</span><span class="p">,</span> <span class="n">nr_of_std_high</span><span class="p">,</span> <span class="n">concentration</span><span class="p">,</span> <span class="n">working_dir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">no_air</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">init_run</span><span class="p">(</span><span class="n">nr_of_std_low</span><span class="p">,</span> <span class="n">nr_of_std_high</span><span class="p">,</span> <span class="n">concentration</span><span class="p">,</span> <span class="n">working_dir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">no_air</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">settling_time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">kit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">kit</span> <span class="o">=</span> <span class="n">DefaultKit</span><span class="p">()</span>
     <span class="n">working_dir</span><span class="p">,</span> <span class="n">data_file</span><span class="p">,</span> <span class="n">state_file</span> <span class="o">=</span> <span class="n">resolve_run_paths</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">_acquire_lock</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="n">state_file</span><span class="p">):</span>
         <span class="k">with</span> <span class="n">_acquire_lock</span><span class="p">(</span><span class="s2">&quot;device&quot;</span><span class="p">,</span> <span class="n">_device_lock_value</span><span class="p">(</span><span class="n">device</span><span class="p">)):</span>
@@ -217,6 +223,8 @@
                 <span class="n">filename</span><span class="o">=</span><span class="n">data_file</span><span class="p">,</span>
                 <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>
                 <span class="n">no_air</span><span class="o">=</span><span class="n">no_air</span><span class="p">,</span>
+                <span class="n">kit</span><span class="o">=</span><span class="n">kit</span><span class="p">,</span>
+                <span class="n">settling_time</span><span class="o">=</span><span class="n">settling_time</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">run</span><span class="o">.</span><span class="n">save_state</span><span class="p">(</span><span class="n">state_file</span><span class="p">)</span>

@@ -6,7 +6,10 @@ using System.Diagnostics.Metrics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Nodes;
+using System.Threading;
 using System.Threading.Tasks;
+using Hse.EviFluor.Kits;
 using static Hse.EviFluor.Verification;
 
 namespace Hse.EviFluor;
@@ -43,6 +46,9 @@ public class Run
     private Verification Verification_ = new Verification();
     private StorageMeasurement Storage_ = new StorageMeasurement();
     private Factors? Factors_ = null;
+    private readonly IKit Kit_;
+    private readonly double SettlingTime_;
+    private readonly string? DeviceIdentifier_;
     private State State_ = State.FIRST_AIR;
     private FirstAirMeasurementResult? FirstAirMeasurementResult_ = null;
     private FirstSampleMeasurementResult? FirstSampleMeasurementResult_ = null;
@@ -59,13 +65,18 @@ public class Run
     /// <param name="filename">Optional file name; generated if <c>null</c>.</param>
     /// <param name="device">Optional device serial or "SIMULATION" for socket mode.</param>
     /// <param name="noAir">If set to <c>true</c>, the run will skip air measurements.</param>
-    public Run(int nrOfStdLow, int nrOfStdHigh, double concentration, string? path = null, string? filename = null, string? device = null, bool noAir = false)
+    /// <param name="kit">Optional kit overriding the default fit model and measurement settings.</param>
+    /// <param name="settlingTime">Optional explicit settling time override in seconds.</param>
+    public Run(int nrOfStdLow, int nrOfStdHigh, double concentration, string? path = null, string? filename = null, string? device = null, bool noAir = false, IKit? kit = null, double? settlingTime = null)
     {
         Filename = null;
         NoAir_ = noAir;
         NrOfStdLow_ = nrOfStdLow;
         NrOfStdHigh_ = nrOfStdHigh;
         Concentration_ = concentration;
+        Kit_ = kit ?? new Default();
+        SettlingTime_ = settlingTime ?? Kit_.SettlingTime();
+        DeviceIdentifier_ = device;
         if (device == null)
         {
             Device_ = new Device();
@@ -91,6 +102,87 @@ public class Run
         }
 
         State_ = NoAir_ ? State.FIRST_SAMPLE : State.FIRST_AIR;
+    }
+
+    private static JsonNode? FirstAirToJson(FirstAirMeasurementResult? firstAir)
+    {
+        return firstAir?.ToJson();
+    }
+
+    private static FirstAirMeasurementResult? FirstAirFromJson(JsonNode? node)
+    {
+        if (node == null)
+        {
+            return null;
+        }
+
+        return new FirstAirMeasurementResult(
+            SingleMeasurement.FromJson(node[Dict.MIN_MEASUREMENT] ?? throw new InvalidOperationException($"{Dict.MIN_MEASUREMENT} is missing or null")),
+            SingleMeasurement.FromJson(node[Dict.MAX_MEASUREMENT] ?? throw new InvalidOperationException($"{Dict.MAX_MEASUREMENT} is missing or null")));
+    }
+
+    private static JsonNode? FirstSampleToJson(FirstSampleMeasurementResult? firstSample)
+    {
+        if (firstSample == null)
+        {
+            return null;
+        }
+
+        JsonObject autoGain = new JsonObject
+        {
+            ["found"] = firstSample.AutoGainResult.Found,
+            ["led_power"] = firstSample.AutoGainResult.LedPower,
+        };
+
+        return new JsonObject
+        {
+            ["autoGainResult"] = autoGain,
+            ["measurement"] = firstSample.Measurement.ToJson(),
+        };
+    }
+
+    private static FirstSampleMeasurementResult? FirstSampleFromJson(JsonNode? node)
+    {
+        if (node == null)
+        {
+            return null;
+        }
+
+        JsonNode autoGain = node["autoGainResult"] ?? throw new InvalidOperationException("autoGainResult is missing or null");
+        return new FirstSampleMeasurementResult(
+            new AutoGainResult(
+                autoGain["found"]?.GetValue<bool>() ?? throw new InvalidOperationException("found is missing or null"),
+                autoGain["led_power"]?.GetValue<int>() ?? throw new InvalidOperationException("led_power is missing or null")),
+            SingleMeasurement.FromJson(node["measurement"] ?? throw new InvalidOperationException("measurement is missing or null")));
+    }
+
+    private static JsonNode? SingleMeasurementToJson(SingleMeasurement? measurement)
+    {
+        return measurement?.ToJson();
+    }
+
+    private static SingleMeasurement? SingleMeasurementFromJson(JsonNode? node)
+    {
+        return node == null ? null : SingleMeasurement.FromJson(node);
+    }
+
+    /// <summary>
+    /// Resolves the JSON state filename for a run.
+    /// </summary>
+    /// <param name="device">Optional device identifier used when no explicit filename is given.</param>
+    /// <param name="filename">Optional explicit state filename.</param>
+    /// <returns>Resolved state filename.</returns>
+    public static string ResolveStateFilename(string? device = null, string? filename = null)
+    {
+        if (!string.IsNullOrEmpty(filename))
+        {
+            return filename;
+        }
+        if (!string.IsNullOrEmpty(device))
+        {
+            return $"evifluor-{device}-state.json";
+        }
+        return "state.json";
     }
 
     /// <summary>
@@ -127,7 +219,7 @@ public class Run
             {
                 if (!Storage_[i].HasResults())
                 {
-                    Storage_[i].ApplyResults(Factors_);
+                    Storage_[i].ApplyResults(Factors_, Kit_);
                 }
             }
         }
@@ -170,8 +262,23 @@ public class Run
                         throw new Exception("FirstAirMeasurementResult cant be null!");
                     }
 
-                    FirstSampleMeasurementResult_ = Device_.FirstSampleMeasurement();
-                    Verification_.Check(FirstSampleMeasurementResult_);
+                    if (SettlingTime_ > 0.0)
+                    {
+                        Thread.Sleep((int)(SettlingTime_ * 1000.0));
+                    }
+
+                    if (Kit_.StdHighTargetSignalFactor() is double factor)
+                    {
+                        FirstSampleMeasurementResult_ = Device_.FirstSampleMeasurement(factor);
+                    }
+                    else
+                    {
+                        FirstSampleMeasurementResult_ = Device_.FirstSampleMeasurement();
+                    }
+                    Verification_.Check(
+                        FirstSampleMeasurementResult_,
+                        stdHighTargetSignalFactor: Kit_.StdHighTargetSignalFactor()
+                            ?? Verification.DefaultStdHighTargetSignalFactor);
                     Measurement measurement;
 
                     if (NoAir_)
@@ -203,6 +310,11 @@ public class Run
                     if (!NoAir_ && Air_ == null)
                     {
                         throw new Exception("Air cant be null!");
+                    }
+
+                    if (SettlingTime_ > 0.0)
+                    {
+                        Thread.Sleep((int)(SettlingTime_ * 1000.0));
                     }
 
                     Sample_ = Device_.Measure();
@@ -244,6 +356,92 @@ public class Run
             throw new Exception("Filename cant be null!");
         }
         Storage_.ExportAsCsv(Filename);
+    }
+
+    /// <summary>
+    /// Persists the current run state to a JSON file.
+    /// </summary>
+    /// <param name="filename">Optional explicit state filename overriding the default naming.</param>
+    public void SaveState(string? filename = null)
+    {
+        string stateFilename = ResolveStateFilename(DeviceIdentifier_ ?? (Device_ != null && DeviceIdentifier_ != "SIMULATION" ? Device_.SerialNumber() : null), filename);
+
+        if (Filename == null)
+        {
+            throw new Exception("Filename cant be null!");
+        }
+
+        if (Kit_ is not Default defaultKit)
+        {
+            throw new InvalidOperationException("Only Default-based kits can be saved");
+        }
+
+        string deviceValue = DeviceIdentifier_ ?? (Device_ == null ? "SIMULATION" : Device_.SerialNumber());
+
+        JsonObject state = new JsonObject
+        {
+            ["filename"] = Filename,
+            ["nr_of_std_low"] = NrOfStdLow_,
+            ["nr_of_std_high"] = NrOfStdHigh_,
+            ["concentration"] = Concentration_,
+            ["kit"] = defaultKit.ToJson(),
+            ["settling_time"] = SettlingTime_,
+            ["no_air"] = NoAir_,
+            ["count"] = Count_,
+            ["state"] = (int)State_,
+            ["device"] = deviceValue,
+            ["first_air"] = FirstAirToJson(FirstAirMeasurementResult_),
+            ["first_sample"] = FirstSampleToJson(FirstSampleMeasurementResult_),
+            ["air"] = SingleMeasurementToJson(Air_),
+            ["sample"] = SingleMeasurementToJson(Sample_),
+            ["factors"] = Factors_?.ToJson(),
+        };
+
+        File.WriteAllText(stateFilename, state.ToJsonString());
+        Storage_.Save(Filename);
+    }
+
+    /// <summary>
+    /// Restores a run from a JSON state file previously written by <see cref="SaveState"/>.
+    /// </summary>
+    /// <param name="filename">Optional explicit state filename overriding the default naming.</param>
+    /// <returns>Reconstructed run with restored in-memory state and persisted measurements.</returns>
+    public static Run LoadState(string? filename = null)
+    {
+        string stateFilename = ResolveStateFilename(filename: filename);
+        JsonNode state = JsonNode.Parse(File.ReadAllText(stateFilename)) ?? throw new InvalidOperationException("State JSON could not be parsed");
+
+        var run = new Run(
+            state["nr_of_std_low"]?.GetValue<int>() ?? throw new InvalidOperationException("nr_of_std_low is missing or null"),
+            state["nr_of_std_high"]?.GetValue<int>() ?? throw new InvalidOperationException("nr_of_std_high is missing or null"),
+            state["concentration"]?.GetValue<double>() ?? throw new InvalidOperationException("concentration is missing or null"),
+            filename: state["filename"]?.GetValue<string>(),
+            device: state["device"]?.GetValue<string>(),
+            noAir: state["no_air"]?.GetValue<bool>() ?? false,
+            kit: state["kit"] is null ? new Default() : Default.FromJson(state["kit"]!),
+            settlingTime: state["settling_time"]?.GetValue<double>());
+
+        run.Count_ = state["count"]?.GetValue<int>() ?? throw new InvalidOperationException("count is missing or null");
+        run.State_ = (State)(state["state"]?.GetValue<int>() ?? throw new InvalidOperationException("state is missing or null"));
+        if (state["factors"] != null)
+        {
+            run.Factors_ = Factors.FromJson(state["factors"]);
+        }
+        run.FirstAirMeasurementResult_ = FirstAirFromJson(state["first_air"]);
+        run.FirstSampleMeasurementResult_ = FirstSampleFromJson(state["first_sample"]);
+        run.Air_ = SingleMeasurementFromJson(state["air"]);
+        run.Sample_ = SingleMeasurementFromJson(state["sample"]);
+
+        if (!string.IsNullOrEmpty(run.Filename) && File.Exists(run.Filename))
+        {
+            run.Storage_ = new StorageMeasurement(run.Filename);
+        }
+        else
+        {
+            run.Storage_ = new StorageMeasurement();
+        }
+
+        return run;
     }
 }
 

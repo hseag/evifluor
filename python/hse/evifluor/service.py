@@ -10,6 +10,7 @@ import serial.tools.list_ports
 
 from .constants import USB
 from .device import Device
+from .kits import Default as DefaultKit
 from .run import Run
 
 _LOCKS = {}
@@ -56,11 +57,14 @@ def _run_snapshot(run, state_file):
         "nr_of_std_low": run.nr_of_std_low,
         "nr_of_std_high": run.nr_of_std_high,
         "concentration": run.concentration,
+        "kit": run.kit.to_json(),
+        "settling_time": run.settling_time,
         "no_air": getattr(run._algorithm, "name", None) == "V2",
         "count": run._count,
         "next_state": _run_state_name(run._state),
         "measurement_count": len(run.storage),
         "has_factors": run._factors is not None,
+        "verification": run.verification.to_json(),
     }
 
 
@@ -152,7 +156,9 @@ def check_empty(device=None):
             evifluor.close()
 
 
-def init_run(nr_of_std_low, nr_of_std_high, concentration, working_dir=".", filename=None, device=None, no_air=False):
+def init_run(nr_of_std_low, nr_of_std_high, concentration, working_dir=".", filename=None, device=None, no_air=False, kit=None, settling_time=None):
+    if kit is None:
+        kit = DefaultKit()
     working_dir, data_file, state_file = resolve_run_paths(working_dir, filename, device)
     with _acquire_lock("run", state_file):
         with _acquire_lock("device", _device_lock_value(device)):
@@ -164,6 +170,8 @@ def init_run(nr_of_std_low, nr_of_std_high, concentration, working_dir=".", file
                 filename=data_file,
                 device=device,
                 no_air=no_air,
+                kit=kit,
+                settling_time=settling_time,
             )
             try:
                 run.save_state(state_file)

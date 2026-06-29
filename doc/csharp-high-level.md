@@ -95,13 +95,18 @@ Important constructor arguments:
 - `path`: optional directory for the measurement file
 - `filename`: optional measurement JSON file name
 - `device`: optional serial number or `"SIMULATION"`
+- `kit`: optional kit object, for example `new Hse.EviFluor.Kits.Default()` or `new Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR()`
+- `settlingTime`: optional override in seconds for the wait time before sample measurements
 
 Behavior:
 
 - if no filename is given, a timestamped JSON filename is generated
 - the [`Run`][run-api] instance creates a [`StorageMeasurement`][storage-measurement-api] internally
+- if no `settlingTime` is given, the selected kit provides the default wait time
 - after enough standards are available, factors are calculated automatically
 - stored measurements without results are recalculated automatically
+
+For predefined kits, string names, fit models, and JSON serialization, see [Kit Reference](./kit.md), especially section 2.
 
 ## 6. Run State Model
 
@@ -140,6 +145,9 @@ The measurement JSON file contains:
 - optional calculated results
 - optional comments, logging, and verification data
 
+You can also persist and later restore the workflow state with `Run.SaveState(...)` and `Run.LoadState(...)`.
+The persisted state includes the selected kit and the active `settlingTime`.
+
 ## 9. Checking the Cuvette Holder
 
 Use [`run.checkEmpty()`][run-checkempty-api]:
@@ -153,11 +161,6 @@ This forwards to the underlying device and returns `true` when the cuvette holde
 ## 10. Exporting Data
 
 Export the active measurement file as CSV with [`StorageMeasurement.ExportAsCsv(...)`][storage-exportcsv-api] after the run data has been saved.
-
-## 11. Notes
-
-The current `Run` implementation in `evifluor` focuses on guided acquisition and persistence.
-It does not currently expose the state persistence and kit-management methods that exist in `evidense`.
 
 [run-api]: https://hseag.github.io/evifluor/pre-release/api/csharp/api/Hse.EviFluor.Run.html
 [storage-measurement-api]: https://hseag.github.io/evifluor/pre-release/api/csharp/api/Hse.EviFluor.StorageMeasurement.html

@@ -15,6 +15,7 @@
 #endif
 
 #define MAX_ENTRIES 10 /**< Maximum number of verification entries tracked. */
+#define DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR 0.8
 
 /**
  * @brief Enumerates possible problems detected during verification.
@@ -110,7 +111,7 @@ DLLEXPORT bool verification_checkAutoGainResult(Verification_t *self, const Auto
  * @param hints Optional hints to adapt thresholds.
  * @return true when the measurement passes all checks.
  */
-DLLEXPORT bool verification_checkSingleMeasurement(Verification_t *self, const SingleMeasurement_t * singleMeasurement, Hints_t hints);
+DLLEXPORT bool verification_checkSingleMeasurement(Verification_t *self, const SingleMeasurement_t * singleMeasurement, Hints_t hints, double stdHighTargetSignalFactor);
 /**
  * @brief Validates an air/sample pair measurement.
  *
@@ -146,7 +147,7 @@ DLLEXPORT bool verification_checkFirstAirMasurementResult(Verification_t *self, 
  * @param hints Optional hints to adapt thresholds.
  * @return true when the result is acceptable.
  */
-DLLEXPORT bool verification_checkFirstSampleMeasurementResult(Verification_t *self, const MeasurementFirstSample_t * fsm, Hints_t hints);
+DLLEXPORT bool verification_checkFirstSampleMeasurementResult(Verification_t *self, const MeasurementFirstSample_t * fsm, Hints_t hints, double stdHighTargetSignalFactor);
 
 /**
  * @name Threshold configuration helpers
@@ -171,9 +172,6 @@ DLLEXPORT void   verification_resetThresholdMultiplier();
 DLLEXPORT void   verification_setMaxSignal(double value);
 DLLEXPORT double verification_getMaxSignal();
 DLLEXPORT void   verification_resetMaxSignal();
-DLLEXPORT void   verification_setStdHighTarget(double value);
-DLLEXPORT double verification_getStdHighTarget();
-DLLEXPORT void   verification_resetStdHighTarget();
 DLLEXPORT void   verification_setStdHighDelta(double value);
 DLLEXPORT double verification_getStdHighDelta();
 DLLEXPORT void   verification_resetStdHighDelta();

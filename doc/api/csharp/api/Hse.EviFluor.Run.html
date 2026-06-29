@@ -156,8 +156,8 @@ verification, logging, on-the-fly factor calculation, and JSON persistence.</p>
 
   <a id="Hse_EviFluor_Run__ctor_" data-uid="Hse.EviFluor.Run.#ctor*"></a>
 
-  <h3 id="Hse_EviFluor_Run__ctor_System_Int32_System_Int32_System_Double_System_String_System_String_System_String_System_Boolean_" data-uid="Hse.EviFluor.Run.#ctor(System.Int32,System.Int32,System.Double,System.String,System.String,System.String,System.Boolean)">
-  Run(int, int, double, string?, string?, string?, bool)
+  <h3 id="Hse_EviFluor_Run__ctor_System_Int32_System_Int32_System_Double_System_String_System_String_System_String_System_Boolean_Hse_EviFluor_IKit_System_Nullable_System_Double__" data-uid="Hse.EviFluor.Run.#ctor(System.Int32,System.Int32,System.Double,System.String,System.String,System.String,System.Boolean,Hse.EviFluor.IKit,System.Nullable{System.Double})">
+  Run(int, int, double, string?, string?, string?, bool, IKit?, double?)
   
   </h3>
 
@@ -166,7 +166,7 @@ verification, logging, on-the-fly factor calculation, and JSON persistence.</p>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Run(int nrOfStdLow, int nrOfStdHigh, double concentration, string? path = null, string? filename = null, string? device = null, bool noAir = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public Run(int nrOfStdLow, int nrOfStdHigh, double concentration, string? path = null, string? filename = null, string? device = null, bool noAir = false, IKit? kit = null, double? settlingTime = null)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -191,6 +191,12 @@ verification, logging, on-the-fly factor calculation, and JSON persistence.</p>
 </dd>
     <dt><code>noAir</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
     <dd><p>If set to <code>true</code>, the run will skip air measurements.</p>
+</dd>
+    <dt><code>kit</code> <a class="xref" href="Hse.EviFluor.IKit.html">IKit</a></dt>
+    <dd><p>Optional kit overriding the default fit model and measurement settings.</p>
+</dd>
+    <dt><code>settlingTime</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd><p>Optional explicit settling time override in seconds.</p>
 </dd>
   </dl>
 
@@ -260,6 +266,120 @@ verification, logging, on-the-fly factor calculation, and JSON persistence.</p>
     <pre><code class="lang-csharp hljs">protected ~Run()</code></pre>
   </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Run_LoadState_" data-uid="Hse.EviFluor.Run.LoadState*"></a>
+
+  <h3 id="Hse_EviFluor_Run_LoadState_System_String_" data-uid="Hse.EviFluor.Run.LoadState(System.String)">
+  LoadState(string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restores a run from a JSON state file previously written by <a class="xref" href="Hse.EviFluor.Run.html#Hse_EviFluor_Run_SaveState_System_String_">SaveState(string?)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Run LoadState(string? filename = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>filename</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Optional explicit state filename overriding the default naming.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Hse.EviFluor.Run.html">Run</a></dt>
+    <dd><p>Reconstructed run with restored in-memory state and persisted measurements.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Run_ResolveStateFilename_" data-uid="Hse.EviFluor.Run.ResolveStateFilename*"></a>
+
+  <h3 id="Hse_EviFluor_Run_ResolveStateFilename_System_String_System_String_" data-uid="Hse.EviFluor.Run.ResolveStateFilename(System.String,System.String)">
+  ResolveStateFilename(string?, string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Resolves the JSON state filename for a run.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ResolveStateFilename(string? device = null, string? filename = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>device</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Optional device identifier used when no explicit filename is given.</p>
+</dd>
+    <dt><code>filename</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Optional explicit state filename.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Resolved state filename.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Run_SaveState_" data-uid="Hse.EviFluor.Run.SaveState*"></a>
+
+  <h3 id="Hse_EviFluor_Run_SaveState_System_String_" data-uid="Hse.EviFluor.Run.SaveState(System.String)">
+  SaveState(string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Persists the current run state to a JSON file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SaveState(string? filename = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>filename</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Optional explicit state filename overriding the default naming.</p>
+</dd>
+  </dl>
 
 
 

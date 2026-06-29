@@ -24,12 +24,14 @@ The current REST API covers:
 - retrieval of generated JSON run data
 - download of generated JSON and CSV files
 
+Run initialization supports the same kit selection and settling-time override as the Python CLI. For supported kit names and serialized kit fields, see [Kit Reference](./kit.md), especially section 2.
+
 ## 3. Installation and Startup
 
 To install the published wheel directly from the documentation site, use:
 
 ```bash
-python -m pip install https://hseag.github.io/evifluor/pre-release/python/dist/hse_evifluor-0.12.0b2-py3-none-any.whl
+python -m pip install "hse-evifluor[rest] @ https://hseag.github.io/evifluor/pre-release/python/dist/hse_evifluor-0.12.0b4-py3-none-any.whl"
 ```
 
 Start the REST API with:
@@ -365,6 +367,8 @@ Request:
   "nr_of_std_low": 2,
   "nr_of_std_high": 2,
   "concentration": 10.0,
+  "kit": "Default",
+  "settling_time": null,
   "no_air": false
 }
 ```
@@ -375,6 +379,8 @@ Request fields:
 - `nr_of_std_low`: number of `standard low` measurements at the beginning of the run
 - `nr_of_std_high`: number of `standard high` measurements at the beginning of the run
 - `concentration`: concentration assigned to the `standard high`
+- `kit`: optional predefined kit name, default `Default`; see [Kit Reference](./kit.md), section 2
+- `settling_time`: optional settling-time override in seconds; `null` means use the kit default
 - `no_air`: optional boolean flag that omits separate air measurements
 
 Response:
@@ -386,6 +392,16 @@ Response:
   "nr_of_std_low": 2,
   "nr_of_std_high": 2,
   "concentration": 10.0,
+  "kit": {
+    "fitAlgorithm": 1,
+    "k1": 1.0,
+    "k2": 0.0,
+    "k3": 0.0,
+    "settlingTime": 5.0,
+    "stdHighTargetSignalFactor": null,
+    "description": "Default kit with linear fit"
+  },
+  "settling_time": 5.0,
   "no_air": false,
   "count": 0,
   "next_state": "first_air",
@@ -395,6 +411,16 @@ Response:
     "nr_of_std_low": 2,
     "nr_of_std_high": 2,
     "concentration": 10.0,
+    "kit": {
+      "fitAlgorithm": 1,
+      "k1": 1.0,
+      "k2": 0.0,
+      "k3": 0.0,
+      "settlingTime": 5.0,
+      "stdHighTargetSignalFactor": null,
+      "description": "Default kit with linear fit"
+    },
+    "settling_time": 5.0,
     "count": 0,
     "state": 0,
     "no_air": false
@@ -409,11 +435,14 @@ Response fields:
 - `nr_of_std_low`: configured number of `standard low` measurements
 - `nr_of_std_high`: configured number of `standard high` measurements
 - `concentration`: configured concentration of the `standard high`
+- `kit`: serialized active kit configuration as documented in [Kit Reference](./kit.md), section 7
+- `settling_time`: active settling time used by the run
 - `no_air`: whether the run omits separate air measurements
 - `count`: number of completed `run measure` steps
 - `next_state`: next expected state in the run state machine
 - `measurement_count`: number of completed stored measurements
 - `has_factors`: whether standard-derived factors are available
+- `verification`: verification result of the most recently executed measurement step; see [Verification Reference](./verification.md)
 - `state`: current serialized run state without internal server-side file paths
 
 Behavior:
@@ -465,6 +494,7 @@ Request fields:
 Response:
 
 - same general structure as `GET /api/v1/runs/{run_id}`
+- includes `verification` for the measurement step that was just executed; see [Verification Reference](./verification.md)
 
 Behavior in normal mode:
 
@@ -587,6 +617,8 @@ def main():
         nr_of_std_low=1,
         nr_of_std_high=1,
         concentration=10.0,
+        kit="qubit_br",
+        settling_time=0.0,
     )
     run_id = run["run_id"]
 

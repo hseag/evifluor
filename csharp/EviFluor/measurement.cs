@@ -34,12 +34,19 @@ public class Results : IEquatable<Results>, IJsonSerializable
     public double Concentration { get; set; }
 
     /// <summary>
+    /// Gets or sets the RFU used as input for concentration calculation.
+    /// </summary>
+    public double? Rfu { get; set; }
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Results"/> class with specified concentration.
     /// </summary>
     /// <param name="concentration"> The unit of the concentration depends on the used standard high.</param>
-    public Results(double concentration)
+    /// <param name="rfu">The RFU used as input for concentration calculation.</param>
+    public Results(double concentration, double? rfu = null)
     {
         Concentration = concentration;
+        Rfu = rfu;
     }
 
     /// <summary>
@@ -48,7 +55,7 @@ public class Results : IEquatable<Results>, IJsonSerializable
     /// <returns>A formatted string with the concentration</returns>
     public override string ToString()
     {
-        return $"Concentration:{Concentration}";
+        return $"Concentration:{Concentration} Rfu:{Rfu}";
     }
 
     /// <summary>
@@ -60,6 +67,10 @@ public class Results : IEquatable<Results>, IJsonSerializable
         JsonObject obj = new JsonObject();
 
         obj[Dict.CONCENTRATION] = JsonValue.Create(Concentration);
+        if (Rfu.HasValue)
+        {
+            obj[Dict.RFU] = JsonValue.Create(Rfu.Value);
+        }
 
         return obj;
     }
@@ -75,7 +86,8 @@ public class Results : IEquatable<Results>, IJsonSerializable
     {
         if (node == null) throw new ArgumentNullException(nameof(node));
         return new Results(
-            node[Dict.CONCENTRATION]?.GetValue<double>() ?? throw new InvalidOperationException($"{Dict.CONCENTRATION} is missing or null")
+            node[Dict.CONCENTRATION]?.GetValue<double>() ?? throw new InvalidOperationException($"{Dict.CONCENTRATION} is missing or null"),
+            node[Dict.RFU]?.GetValue<double>()
         );
     }
 
@@ -93,7 +105,18 @@ public class Results : IEquatable<Results>, IJsonSerializable
         if (other is null) return false;
 
         const double delta = 1e-13;
-        return Math.Abs(Concentration - other.Concentration) <= delta * Math.Max(Math.Abs(Concentration), Math.Abs(other.Concentration));
+        bool concentrationEqual = Math.Abs(Concentration - other.Concentration) <= delta * Math.Max(Math.Abs(Concentration), Math.Abs(other.Concentration));
+        if (!concentrationEqual)
+        {
+            return false;
+        }
+
+        if (!Rfu.HasValue || !other.Rfu.HasValue)
+        {
+            return true;
+        }
+
+        return Math.Abs(Rfu.Value - other.Rfu.Value) <= delta * Math.Max(Math.Abs(Rfu.Value), Math.Abs(other.Rfu.Value));
     }
 
     /// <summary>
@@ -116,7 +139,7 @@ public class Results : IEquatable<Results>, IJsonSerializable
     /// </remarks>
     public override int GetHashCode()
     {
-        return HashCode.Combine(Concentration);
+        return HashCode.Combine(Concentration, Rfu);
     }
 }
 
@@ -376,7 +399,17 @@ public class Measurement : IJsonSerializable
     public double Concentration(Factors factors, IKit ? kit = null)
     {
         kit = kit ?? new Kits.Default();
-        return kit.fit(factors.StdLow, factors.StdHigh, Value(factors.Algorithm ?? Algorithm.V1) - factors.MeasurementStdLow);
+        return kit.fit(factors.StdLow, factors.StdHigh, RfuValue(factors));
+    }
+
+    /// <summary>
+    /// Calculates the RFU used as input for concentration fitting.
+    /// </summary>
+    /// <param name="factors">Correction factors for the measurement.</param>
+    /// <returns>The RFU value.</returns>
+    public double RfuValue(Factors factors)
+    {
+        return Value(factors.Algorithm ?? Algorithm.V1) - factors.MeasurementStdLow;
     }
 
     /// <summary>
@@ -387,7 +420,7 @@ public class Measurement : IJsonSerializable
     /// <returns>A <see cref="Results"/> object with computed values.</returns>
     public Results GetResults(Factors factors, IKit ? kit = null)
     {
-        return new Results(Concentration(factors, kit));
+        return new Results(Concentration(factors, kit), RfuValue(factors));
     }
 
     /// <summary>

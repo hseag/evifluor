@@ -11,7 +11,7 @@ from .device import (
     FirstSampleMeasurementResult,
     SelfttestResult,
 )
-from .kits import Default, Quant_iT_dsDNA_HS
+from .kits import Default, QubitTM_1X_dsDNA_High_Sensitivity_HS, QubitTM_1X_dsDNA_Broad_Range_BR
 from .measurement import Algorithm, Factors, Measurement, Point, Results
 from .run import Run
 from .singlemeasurement import SingleMeasurement
@@ -32,7 +32,8 @@ __all__ = [
     "Measurement",
     "Algorithm",
     "Default",
-    "Quant_iT_dsDNA_HS",
+    "QubitTM_1X_dsDNA_High_Sensitivity_HS",
+    "QubitTM_1X_dsDNA_Broad_Range_BR",
     "AutoGainResult",
     "FirstAirMeasurementResult",
     "FirstSampleMeasurementResult",

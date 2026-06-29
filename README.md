@@ -1,4 +1,4 @@
-# eviFluor Duo Fluorometer User Manual
+# eviFluor Duo Fluorometer Integration Manual
 
 ## 0. Pre-Release Status
 
@@ -26,7 +26,16 @@ The eviFluor Duo Fluorometer software stack provides three interface groups:
 - Command line tools in [C](./doc/c-cli.md) and [Python](./doc/python-cli.md), for scripting, automation, and operational workflows without writing a custom application.
 - A Python-based [REST API server](./doc/python-rest.md), for controlling the eviFluor Duo Fluorometer from external software over HTTP.
 
-### 1.3 Typical Measurement Workflow
+### 1.3 Liquid Handler Integrations
+
+The eviFluor software interfaces are intended to be integrated into liquid-handler-specific workflows.
+To keep these integrations maintainable, the robot-specific motion logic should be separated from the fluorometer control logic so that multiple liquid handler platforms can be documented and supported consistently.
+
+Available integration guides:
+
+- [Opentrons OT-2 integration](./doc/liquid-handler-ot2.md)
+
+### 1.4 Typical Measurement Workflow
 
 The workflow below is limited to fluorescence measurement and assumes that sample and reagents were mixed in a preceding step. For reference, a typical preparation uses Qubit 1X dsDNA High Sensitivity (HS) Assay Kit with a sample to working solution ratio of 2:38 (2 µl of sample + 38 µl of working solution). Follow the assay kit manufacturer guidelines on storage and incubation times.
 
@@ -171,6 +180,9 @@ The file typically contains:
 
 A measurement entry typically contains the air and sample values relevant for the eviFluor Duo Fluorometer workflow.
 If results have already been calculated, the corresponding result values are stored together with the raw measurement data.
+The calculated result block contains the concentration and, if available, the RFU value used as input for the concentration fit.
+In the eviFluor context, RFU is the measured signal voltage in mV after subtracting the `dark` values and the `std_low` baseline contribution already included in the selected workflow.
+The typical RFU range is 0 to 2500 mV.
 
 Typical top-level fields:
 
@@ -185,6 +197,11 @@ Typical measurement entry fields:
 - `date_time`: timestamp
 - `results`: optional calculated result values
 - `logging`: optional device log messages
+
+Typical `results` fields:
+
+- `concentration`: calculated concentration in the unit of the selected standard high
+- `rfu`: corrected signal voltage in mV used for concentration fitting; `dark` and `std_low` are already subtracted
 
 Example:
 
@@ -229,7 +246,8 @@ Example:
         }
       ],
       "results": {
-        "concentration": 10.0
+        "concentration": 10.0,
+        "rfu": 1885.0761086956522
       }
     }
   ]

@@ -4,6 +4,7 @@
 #pragma once
 
 #include "singlemeasurement.h"
+#include "kit.h"
 #include "cJSON.h"
 #include <stdbool.h>
 
@@ -80,6 +81,15 @@ DLLEXPORT void measurement_print(const Measurement_t * self, FILE * stream, bool
 DLLEXPORT double measurement_value(const Measurement_t * self, MeasurementAlgorithm_t algorithm);
 
 /**
+ * @brief Calculates the RFU used as input for concentration calculation.
+ *
+ * @param self Pointer to the Measurement_t structure.
+ * @param factors Factors that define algorithm and baseline subtraction.
+ * @return RFU value.
+ */
+DLLEXPORT double measurement_rfu(const Measurement_t * self, const Factors_t * factors);
+
+/**
  * @brief Returns the difference between air- and sample measurement.
  *
  * @param concentrationLow The known low concentration standard.
@@ -98,6 +108,7 @@ DLLEXPORT Factors_t measurement_calculateFactors(double concentrationLow, double
  * @return Concentration.
  */
 DLLEXPORT double measurement_concentration(const Measurement_t * self, const Factors_t * factors);
+DLLEXPORT double measurement_concentrationWithKit(const Measurement_t * self, const Factors_t * factors, const Kit_t * kit);
 
 /**
  * @brief Parses a JSON object to construct a measurement, returning validity.
@@ -134,3 +145,4 @@ DLLEXPORT bool measurement_fromJson(cJSON * obj, Measurement_t * measurement);
  * @return true on success when all data could be processed.
  */
 DLLEXPORT bool measurement_calculate(cJSON * oMeasurements, double concentrationLow, double concentrationHigh, int nrOfStdLow, int nrOfStdLHigh, MeasurementAlgorithm_t algorithm);
+DLLEXPORT bool measurement_calculateWithKit(cJSON * oMeasurements, double concentrationLow, double concentrationHigh, int nrOfStdLow, int nrOfStdLHigh, MeasurementAlgorithm_t algorithm, const Kit_t * kit);

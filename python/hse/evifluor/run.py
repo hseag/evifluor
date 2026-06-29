@@ -6,13 +6,14 @@ import json
 import logging
 from datetime import datetime
 from enum import IntEnum
+import time
 
 from hse.evifluor.device import AutoGainResult, Device, FirstAirMeasurementResult, FirstSampleMeasurementResult
 from hse.evifluor.measurement import Algorithm, Factors, Measurement
 from hse.evifluor.singlemeasurement import SingleMeasurement
 from hse.evifluor.storage import StorageMeasurement
 from hse.evifluor.verification import Verification
-
+from hse.evifluor.kits  import Default as DefaultKit
 logger = logging.getLogger(__name__)
 
 class Run:
@@ -79,10 +80,10 @@ class Run:
             return device
         return type(device).__name__
     
-    def __init__(self, nr_of_std_low, nr_of_std_high, concentration, path = None, filename = None, device = None, no_air = False):
+    def __init__(self, nr_of_std_low, nr_of_std_high, concentration, path = None, filename = None, device = None, no_air = False, kit = DefaultKit(), settling_time = None):
         """Initializes a new measurement run and opens the device if needed."""
         logger.debug(
-            "Run.__init__ entry: nr_of_std_low=%s nr_of_std_high=%s concentration=%s path=%r filename=%r device=%r no_air=%s",
+            "Run.__init__ entry: nr_of_std_low=%s nr_of_std_high=%s concentration=%s path=%r filename=%r device=%r no_air=%s, kit=%s, settling_time=%s",
             nr_of_std_low,
             nr_of_std_high,
             concentration,
@@ -90,11 +91,19 @@ class Run:
             filename,
             self._safe_device_log_value(device),
             no_air,
+            kit,
+            settling_time
         )
         self.nr_of_std_low  = nr_of_std_low
         self.nr_of_std_high = nr_of_std_high
         self.concentration  = concentration
         self._owns_device   = False
+        self.kit            = kit
+        if settling_time is not None:
+            self.settling_time = settling_time
+        else:
+            self.settling_time  = self.kit.settling_time()
+
         if device is not None:
             if type(device) is str:
                 self.device     = Device(device)
@@ -156,13 +165,7 @@ class Run:
         if isinstance(device, str):
             return "evifluor-{}-state.json".format(device)
         if device is None:
-            try:
-                device = Device()
-                ret = "evifluor-{}-state.json".format(device.serial_number())
-                device.close()
-            except Exception:
-                ret = "state.json"
-            return ret
+            return "state.json"
         try:
             return "evifluor-{}-state.json".format(device.serial_number())
         except Exception:
@@ -183,6 +186,8 @@ class Run:
             filename=state.get("filename"),
             device=state.get("device"),
             no_air=state.get("no_air", False),
+            kit=DefaultKit.from_json(state["kit"]) if state.get("kit") is not None else DefaultKit(),
+            settling_time=state.get("settling_time"),
         )
         run._count = state["count"]
         run._state = Run.State(state["state"])
@@ -226,6 +231,8 @@ class Run:
             "nr_of_std_low": self.nr_of_std_low,
             "nr_of_std_high": self.nr_of_std_high,
             "concentration": self.concentration,
+            "kit": self.kit.to_json(),
+            "settling_time": self.settling_time,
             "no_air": self._algorithm == Algorithm.V2,
             "count": self._count,
             "state": int(self._state),
@@ -263,7 +270,7 @@ class Run:
         if self._factors is not None:
             for entry in self.storage:
                 if not entry.has_results():
-                    entry.apply_results(self._factors)
+                    entry.apply_results(self._factors, kit = self.kit)
         logger.debug(
             "Run.re_calculate exit: has_factors=%s storage_len=%s",
             self._factors is not None,
@@ -286,8 +293,14 @@ class Run:
             self.verification.check(self._first_air)
             self._state = self.State.FIRST_SAMPLE                        
         elif self._state == self.State.FIRST_SAMPLE:
-            self._first_sample = self.device.first_sample_measurement()
-            self.verification.check(self._first_sample)
+            time.sleep(self.settling_time)
+            
+            if self.kit.std_high_target_signal_factor() is not None:
+                self._first_sample = self.device.first_sample_measurement(self.kit.std_high_target_signal_factor())
+            else:
+                self._first_sample = self.device.first_sample_measurement()
+            self.verification.check(self._first_sample, std_high_target_signal_factor = self.kit.std_high_target_signal_factor())
+           
             if self._algorithm == Algorithm.V1:
                 measurement = Measurement(self._first_air, self._first_sample)
                 self._state = self.State.AIR
@@ -302,8 +315,11 @@ class Run:
             self.verification.check(self._air)
             self._state = self.State.SAMPLE
         elif self._state == self.State.SAMPLE:
+            time.sleep(self.settling_time)
+            
             self._sample = self.device.measure()
             self.verification.check(self._sample)
+            
             if self._algorithm == Algorithm.V1:
                 measurement = Measurement(self._air, self._sample)
                 self._state = self.State.AIR

@@ -119,14 +119,20 @@ Run options:
 
 - `--working-dir DIR`
 - `--file FILE`
+- `--kit NAME` for `run init` only, default `Default`
+- `--settling_time SECONDS` for `run init` only, optional
 - `--no-air` for `run init` only
 
 Behavior:
 
 - `init` initializes a run state and selects the measurement file
+- `init --kit NAME` selects the predefined kit preset used for result calculation and timing
+- `init --settling_time SECONDS` overrides the kit-specific wait time before sample measurements
 - `init --no-air` initializes a run that skips air measurements and stores sample-only entries
 - `measure` advances the workflow state machine by one step
 - `export` creates a CSV file from the active run JSON file
+
+Supported kit names are listed in [Kit Reference](./kit.md), section 2.
 
 ## 6. Output and Files
 
@@ -162,7 +168,7 @@ python -m hse.evifluor checkempty
 Initialize and use a guided run:
 
 ```bash
-python -m hse.evifluor run init 1 1 10
+python -m hse.evifluor run init 1 1 10 --kit Default
 # The liquid handler picks up a cuvette with the tip and moves above the cuvette guide.
 python -m hse.evifluor checkempty
 # Move the empty cuvette into the cuvette guide and start the air measurement.
@@ -195,6 +201,18 @@ python -m hse.evifluor run measure
 python -m hse.evifluor run measure "sample 2"
 # Aspirate the liquid back into the tip, leave the cuvette guide, and discard tip plus cuvette.
 python -m hse.evifluor run export
+```
+
+Initialize a run with a different predefined kit:
+
+```bash
+python -m hse.evifluor run init 1 1 10 --kit qubit_br
+```
+
+Initialize a run with an explicit settling time override:
+
+```bash
+python -m hse.evifluor run init 1 1 10 --settling_time 0.0
 ```
 
 Initialize and use a guided no-air run:

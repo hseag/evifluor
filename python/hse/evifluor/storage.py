@@ -10,6 +10,7 @@ from hse.evifluor import version
 from hse.evifluor.constants import DictKeys
 from hse.evifluor.measurement import Measurement, Results
 from hse.evifluor.verification import Verification
+from . import kits
 
 
 class StorageMeasurementEntry:
@@ -33,9 +34,9 @@ class StorageMeasurementEntry:
         else:
             return True
             
-    def apply_results(self, factors):
+    def apply_results(self, factors, kit = kits.Default()):
         """Applies calibration factors to compute results and updates the JSON node."""
-        results = self.measurement.results(factors)
+        results = self.measurement.results(factors, kit)
         self.node[DictKeys.RESULTS] = results.to_json()
         if DictKeys.ERRORS in self.node:
             v = Verification.from_json(self.node[DictKeys.ERRORS])
@@ -200,6 +201,7 @@ class StorageMeasurement:
                     DictKeys.SAMPLE_VALUE,
                     DictKeys.SAMPLE_LED_POWER,
                     DictKeys.CONCENTRATION,
+                    DictKeys.RFU,
                 ]
 
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=";")
@@ -208,8 +210,10 @@ class StorageMeasurement:
                     if measurement.get(DictKeys.SAMPLE) != None:
                         if DictKeys.RESULTS in measurement:
                             concentration = measurement[DictKeys.RESULTS][DictKeys.CONCENTRATION]
+                            rfu = measurement[DictKeys.RESULTS].get(DictKeys.RFU, "")
                         else:
                             concentration = ""
+                            rfu = ""
 
                         if DictKeys.AIR in measurement:
                             air_dark      = measurement[DictKeys.AIR][DictKeys.DARK]
@@ -248,6 +252,7 @@ class StorageMeasurement:
                             DictKeys.SAMPLE_VALUE:    sample_value,
                             DictKeys.SAMPLE_LED_POWER: sample_led_power,
                             DictKeys.CONCENTRATION:   concentration,
+                            DictKeys.RFU:             rfu,
                         })
 
     @staticmethod

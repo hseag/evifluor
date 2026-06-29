@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class Default | eviFluor ">
       
-      <meta name="description" content="Default implementation of the IKit interface using linear interpolation.">
+      <meta name="description" content="Generic configurable kit implementation used directly or as base class for predefined kits.">
       <link rel="icon" href="../images/favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -97,7 +97,7 @@ Class Default
   <dl><dt>Assembly</dt><dd>Hseagcom.EviFluor.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Default implementation of the IKit interface using linear interpolation.</p>
+  <div class="markdown summary"><p>Generic configurable kit implementation used directly or as base class for predefined kits.</p>
 </div>
   <div class="markdown conceptual"></div>
 
@@ -126,7 +126,8 @@ Class Default
   <dl class="typelist derived">
     <dt>Derived</dt>
     <dd>
-      <div><a class="xref" href="Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.html">Quant_iT_dsDNA_HS</a></div>
+      <div><a class="xref" href="Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.html">QubitTM_1X_dsDNA_Broad_Range_BR</a></div>
+      <div><a class="xref" href="Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.html">QubitTM_1X_dsDNA_High_Sensitivity_HS</a></div>
     </dd>
   </dl>
 
@@ -164,19 +165,43 @@ Class Default
 
   <a id="Hse_EviFluor_Kits_Default__ctor_" data-uid="Hse.EviFluor.Kits.Default.#ctor*"></a>
 
-  <h3 id="Hse_EviFluor_Kits_Default__ctor" data-uid="Hse.EviFluor.Kits.Default.#ctor">
-  Default()
+  <h3 id="Hse_EviFluor_Kits_Default__ctor_Hse_EviFluor_Kits_FitAlgorithm_System_Double_System_Double_System_Double_System_Double_System_Nullable_System_Double__System_String_" data-uid="Hse.EviFluor.Kits.Default.#ctor(Hse.EviFluor.Kits.FitAlgorithm,System.Double,System.Double,System.Double,System.Double,System.Nullable{System.Double},System.String)">
+  Default(FitAlgorithm, double, double, double, double, double?, string?)
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Creates a linear interpolation kit using two standard points (low/high).</p>
+  <div class="markdown level1 summary"><p>Initializes a kit with explicit fit parameters and optional measurement behavior.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Default()</code></pre>
+    <pre><code class="lang-csharp hljs">public Default(FitAlgorithm fitAlgorithm = FitAlgorithm.Linear, double k1 = 1, double k2 = 0, double k3 = 0, double settlingTime = 0, double? stdHighTargetSignalFactor = null, string? description = null)</code></pre>
   </div>
 
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fitAlgorithm</code> <a class="xref" href="Hse.EviFluor.Kits.FitAlgorithm.html">FitAlgorithm</a></dt>
+    <dd><p>Fit algorithm applied after the standard-based interpolation step.</p>
+</dd>
+    <dt><code>k1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>Primary fit parameter.</p>
+</dd>
+    <dt><code>k2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>Secondary fit parameter.</p>
+</dd>
+    <dt><code>k3</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>Third fit parameter used by the quadratic model.</p>
+</dd>
+    <dt><code>settlingTime</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>Delay in seconds before a sample measurement is acquired.</p>
+</dd>
+    <dt><code>stdHighTargetSignalFactor</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd><p>Optional target factor used during first-sample auto-gain.</p>
+</dd>
+    <dt><code>description</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Human-readable kit description.</p>
+</dd>
+  </dl>
 
 
 
@@ -193,6 +218,189 @@ Class Default
 </h2>
 
 
+  <a id="Hse_EviFluor_Kits_Default_Factory_" data-uid="Hse.EviFluor.Kits.Default.Factory*"></a>
+
+  <h3 id="Hse_EviFluor_Kits_Default_Factory_System_String_" data-uid="Hse.EviFluor.Kits.Default.Factory(System.String)">
+  Factory(string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a predefined kit instance from a string name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Default Factory(string name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Case-insensitive kit name.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Hse.EviFluor.Kits.Default.html">Default</a></dt>
+    <dd><p>Matching predefined kit instance.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>Thrown when the name does not match a known kit.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Hse_EviFluor_Kits_Default_FromJson_" data-uid="Hse.EviFluor.Kits.Default.FromJson*"></a>
+
+  <h3 id="Hse_EviFluor_Kits_Default_FromJson_System_Text_Json_Nodes_JsonNode_" data-uid="Hse.EviFluor.Kits.Default.FromJson(System.Text.Json.Nodes.JsonNode)">
+  FromJson(JsonNode)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Deserializes a configurable kit from JSON created by <a class="xref" href="Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_ToJson">ToJson()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Default FromJson(JsonNode node)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>node</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.nodes.jsonnode">JsonNode</a></dt>
+    <dd><p>JSON node containing the kit fields.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Hse.EviFluor.Kits.Default.html">Default</a></dt>
+    <dd><p>Deserialized <a class="xref" href="Hse.EviFluor.Kits.Default.html">Default</a> instance.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Kits_Default_SettlingTime_" data-uid="Hse.EviFluor.Kits.Default.SettlingTime*"></a>
+
+  <h3 id="Hse_EviFluor_Kits_Default_SettlingTime" data-uid="Hse.EviFluor.Kits.Default.SettlingTime">
+  SettlingTime()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the default settling time for the kit in seconds.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double SettlingTime()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>Configured settling time in seconds.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Kits_Default_StdHighTargetSignalFactor_" data-uid="Hse.EviFluor.Kits.Default.StdHighTargetSignalFactor*"></a>
+
+  <h3 id="Hse_EviFluor_Kits_Default_StdHighTargetSignalFactor" data-uid="Hse.EviFluor.Kits.Default.StdHighTargetSignalFactor">
+  StdHighTargetSignalFactor()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the optional target signal factor used during first-sample auto-gain.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? StdHighTargetSignalFactor()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd><p>Configured factor, or <code>null</code> when no override is defined.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Kits_Default_ToJson_" data-uid="Hse.EviFluor.Kits.Default.ToJson*"></a>
+
+  <h3 id="Hse_EviFluor_Kits_Default_ToJson" data-uid="Hse.EviFluor.Kits.Default.ToJson">
+  ToJson()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Serializes the kit configuration to JSON.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonNode ToJson()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.nodes.jsonnode">JsonNode</a></dt>
+    <dd><p>JSON node containing the configurable kit fields.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Hse_EviFluor_Kits_Default_ToString_" data-uid="Hse.EviFluor.Kits.Default.ToString*"></a>
 
   <h3 id="Hse_EviFluor_Kits_Default_ToString" data-uid="Hse.EviFluor.Kits.Default.ToString">
@@ -200,7 +408,7 @@ Class Default
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Returns a textual description of the default kit.</p>
+  <div class="markdown level1 summary"><p>Returns a diagnostic string containing the kit description and parameters.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -212,7 +420,7 @@ Class Default
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>Kit description string.</p>
+    <dd><p>Text representation of the configured kit.</p>
 </dd>
   </dl>
 
@@ -233,7 +441,7 @@ Class Default
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Performs a calibration fit using two standard reference points.</p>
+  <div class="markdown level1 summary"><p>Calculates the concentration for a measured signal value using the configured fit model.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -244,20 +452,20 @@ Class Default
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>stdLow</code> <a class="xref" href="Hse.EviFluor.Point.html">Point</a></dt>
-    <dd><p>Low concentration standard point.</p>
+    <dd><p>Measured low standard.</p>
 </dd>
     <dt><code>stdHigh</code> <a class="xref" href="Hse.EviFluor.Point.html">Point</a></dt>
-    <dd><p>High concentration standard point.</p>
+    <dd><p>Measured high standard.</p>
 </dd>
     <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
-    <dd><p>The raw measured value to convert.</p>
+    <dd><p>Measured sample signal.</p>
 </dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
-    <dd><p>Calculated concentration based on interpolation.</p>
+    <dd><p>Calculated concentration.</p>
 </dd>
   </dl>
 
@@ -267,11 +475,6 @@ Class Default
 
 
 
-  <h4 class="section" id="Hse_EviFluor_Kits_Default_fit_Hse_EviFluor_Point_Hse_EviFluor_Point_System_Double__remarks">Remarks</h4>
-  <div class="markdown level1 remarks"><p>Implementations may assume that <code class="paramref">stdLow</code> and <code class="paramref">stdHigh</code> define a valid
-calibration range and that the measured signal increases monotonically with concentration.
-Units of <a class="xref" href="Hse.EviFluor.Point.html#Hse_EviFluor_Point_Concentration">Concentration</a> are kit-specific.</p>
-</div>
 
 
 

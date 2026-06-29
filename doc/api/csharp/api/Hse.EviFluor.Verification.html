@@ -368,17 +368,17 @@ Class Verification
 
 
 
-  <h3 id="Hse_EviFluor_Verification_DefaultStdHighTarget" data-uid="Hse.EviFluor.Verification.DefaultStdHighTarget">
-  DefaultStdHighTarget
+  <h3 id="Hse_EviFluor_Verification_DefaultStdHighTargetSignalFactor" data-uid="Hse.EviFluor.Verification.DefaultStdHighTargetSignalFactor">
+  DefaultStdHighTargetSignalFactor
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Default target signal value for standard high checks.</p>
+  <div class="markdown level1 summary"><p>Default factor applied to <a class="xref" href="Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_MaxSignal">MaxSignal</a> for standard high checks.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly double DefaultStdHighTarget</code></pre>
+    <pre><code class="lang-csharp hljs">public const double DefaultStdHighTargetSignalFactor = 0.8</code></pre>
   </div>
 
 
@@ -647,37 +647,6 @@ Class Verification
 
 
 
-  <h3 id="Hse_EviFluor_Verification_StdHighTarget" data-uid="Hse.EviFluor.Verification.StdHighTarget">
-  StdHighTarget
-  
-  </h3>
-
-  <div class="markdown level1 summary"><p>Target signal value for standard high checks.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static double StdHighTarget</code></pre>
-  </div>
-
-
-
-
-  <h4 class="section">Field Value</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
   <h3 id="Hse_EviFluor_Verification_ThresholdNegativeConcentration" data-uid="Hse.EviFluor.Verification.ThresholdNegativeConcentration">
   ThresholdNegativeConcentration
   
@@ -828,8 +797,8 @@ Class Verification
 
   <a id="Hse_EviFluor_Verification_Check_" data-uid="Hse.EviFluor.Verification.Check*"></a>
 
-  <h3 id="Hse_EviFluor_Verification_Check_Hse_EviFluor_FirstSampleMeasurementResult_Hse_EviFluor_Verification_Hints_" data-uid="Hse.EviFluor.Verification.Check(Hse.EviFluor.FirstSampleMeasurementResult,Hse.EviFluor.Verification.Hints)">
-  Check(FirstSampleMeasurementResult, Hints)
+  <h3 id="Hse_EviFluor_Verification_Check_Hse_EviFluor_FirstSampleMeasurementResult_Hse_EviFluor_Verification_Hints_System_Double_" data-uid="Hse.EviFluor.Verification.Check(Hse.EviFluor.FirstSampleMeasurementResult,Hse.EviFluor.Verification.Hints,System.Double)">
+  Check(FirstSampleMeasurementResult, Hints, double)
   
   </h3>
 
@@ -838,7 +807,7 @@ Class Verification
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool Check(FirstSampleMeasurementResult fsm, Verification.Hints hints = Hints.NONE)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool Check(FirstSampleMeasurementResult fsm, Verification.Hints hints = Hints.NONE, double stdHighTargetSignalFactor = 0.8)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -846,6 +815,8 @@ Class Verification
     <dt><code>fsm</code> <a class="xref" href="Hse.EviFluor.FirstSampleMeasurementResult.html">FirstSampleMeasurementResult</a></dt>
     <dd></dd>
     <dt><code>hints</code> <a class="xref" href="Hse.EviFluor.Verification.html">Verification</a>.<a class="xref" href="Hse.EviFluor.Verification.Hints.html">Hints</a></dt>
+    <dd></dd>
+    <dt><code>stdHighTargetSignalFactor</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
     <dd></dd>
   </dl>
 
@@ -946,8 +917,8 @@ Class Verification
 
   <a id="Hse_EviFluor_Verification_Check_" data-uid="Hse.EviFluor.Verification.Check*"></a>
 
-  <h3 id="Hse_EviFluor_Verification_Check_Hse_EviFluor_SingleMeasurement_Hse_EviFluor_Verification_Hints_" data-uid="Hse.EviFluor.Verification.Check(Hse.EviFluor.SingleMeasurement,Hse.EviFluor.Verification.Hints)">
-  Check(SingleMeasurement, Hints)
+  <h3 id="Hse_EviFluor_Verification_Check_Hse_EviFluor_SingleMeasurement_Hse_EviFluor_Verification_Hints_System_Double_" data-uid="Hse.EviFluor.Verification.Check(Hse.EviFluor.SingleMeasurement,Hse.EviFluor.Verification.Hints,System.Double)">
+  Check(SingleMeasurement, Hints, double)
   
   </h3>
 
@@ -956,7 +927,7 @@ Class Verification
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool Check(SingleMeasurement sm, Verification.Hints hints = Hints.NONE)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool Check(SingleMeasurement sm, Verification.Hints hints = Hints.NONE, double stdHighTargetSignalFactor = 0.8)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -964,6 +935,8 @@ Class Verification
     <dt><code>sm</code> <a class="xref" href="Hse.EviFluor.SingleMeasurement.html">SingleMeasurement</a></dt>
     <dd></dd>
     <dt><code>hints</code> <a class="xref" href="Hse.EviFluor.Verification.html">Verification</a>.<a class="xref" href="Hse.EviFluor.Verification.Hints.html">Hints</a></dt>
+    <dd></dd>
+    <dt><code>stdHighTargetSignalFactor</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
     <dd></dd>
   </dl>
 
@@ -985,8 +958,8 @@ Class Verification
 
   <a id="Hse_EviFluor_Verification_Check_" data-uid="Hse.EviFluor.Verification.Check*"></a>
 
-  <h3 id="Hse_EviFluor_Verification_Check_System_Object_Hse_EviFluor_Verification_Hints_" data-uid="Hse.EviFluor.Verification.Check(System.Object,Hse.EviFluor.Verification.Hints)">
-  Check(object, Hints)
+  <h3 id="Hse_EviFluor_Verification_Check_System_Object_Hse_EviFluor_Verification_Hints_System_Double_" data-uid="Hse.EviFluor.Verification.Check(System.Object,Hse.EviFluor.Verification.Hints,System.Double)">
+  Check(object, Hints, double)
   
   </h3>
 
@@ -995,7 +968,7 @@ Class Verification
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool Check(object obj, Verification.Hints hints = Hints.NONE)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool Check(object obj, Verification.Hints hints = Hints.NONE, double stdHighTargetSignalFactor = 0.8)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -1003,6 +976,8 @@ Class Verification
     <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
     <dd></dd>
     <dt><code>hints</code> <a class="xref" href="Hse.EviFluor.Verification.html">Verification</a>.<a class="xref" href="Hse.EviFluor.Verification.Hints.html">Hints</a></dt>
+    <dd></dd>
+    <dt><code>stdHighTargetSignalFactor</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
     <dd></dd>
   </dl>
 

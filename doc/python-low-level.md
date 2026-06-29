@@ -266,10 +266,10 @@ Notes:
 
 - the standard order must be `std high` first, then `std low`
 - the concentration of `std low` is typically `0.0`
-- the concentration of `std high` depends on the used assay kit
+- the concentration of `std high` depends on the used assay kit; see [Kit Reference](./kit.md), section 2
 - the default calculation uses linear interpolation between the two standard levels
 
-If you need a different fitting model, pass a different kit object to [`measurement.results(...)`][measurement-results-api].
+If you need a different fitting model, pass a different kit object to [`measurement.results(...)`][measurement-results-api]. The available presets and configurable fit models are described in [Kit Reference](./kit.md).
 
 ## 10. Persisting Data
 

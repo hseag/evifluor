@@ -103,13 +103,18 @@ Important constructor arguments:
 - `path`: optional directory for the measurement file
 - `filename`: optional measurement JSON file name
 - `device`: optional serial number, `"SIMULATION"`, or an existing `Device` instance
+- `kit`: optional kit object, for example `evifluor.kits.Default()` or `evifluor.kits.QubitTM_1X_dsDNA_Broad_Range_BR()`
+- `settling_time`: optional override in seconds for the wait time before sample measurements
 
 Behavior:
 
 - if no filename is given, a timestamped JSON filename is generated
 - the [`Run`][run-api] instance creates a [`StorageMeasurement`][storage-api] internally
+- if no `settling_time` is given, the selected kit provides the default wait time
 - after enough standards are available, factors are calculated automatically
 - stored measurements without results are recalculated automatically
+
+For predefined kits, string names, fit models, and JSON serialization, see [Kit Reference](./kit.md), especially section 2.
 
 ## 6. Run State Model
 
@@ -166,7 +171,7 @@ The measurement JSON file contains:
 - optional comments, logging, and verification data
 
 You can also persist the workflow state separately with [`run.save_state()`][run-save-api].
-This stores the current state machine position, temporary measurement data, factors, and the active measurement filename.
+This stores the current state machine position, temporary measurement data, factors, the active measurement filename, the selected kit, and the active `settling_time`.
 
 ## 9. Checking the Cuvette Holder
 

@@ -218,7 +218,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Hse.EviFluor.Kits.Default",
-      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Kits.Default.yml\" sourcestartlinenumber=\"1\">Default implementation of the IKit interface using linear interpolation.</p>\n"
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Kits.Default.yml\" sourcestartlinenumber=\"1\">Generic configurable kit implementation used directly or as base class for predefined kits.</p>\n"
     },
     {
       "type": "ManagedReference",

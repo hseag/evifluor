@@ -18,32 +18,39 @@ class Algorithm(IntEnum):
     
 
 class Results:
-    """Represents the concentration result of a measurement."""
+    """Represents the concentration result of a measurement, including RFU."""
 
-    def __init__(self, concentration):
-        """Initializes the result with the specified concentration."""
-        self.concentration              = concentration
+    def __init__(self, concentration, rfu=None):
+        """Initializes the result with the specified concentration and optional RFU."""
+        self.concentration = concentration
+        self.rfu = rfu
         
     def __repr__(self):
         """Returns a string representation of the concentration result."""
-        return "concentration:{}".format(self.concentration)
+        return "concentration:{} rfu:{}".format(self.concentration, self.rfu)
         
     def to_json(self):
         """Converts the result to a JSON representation."""
         m = {
             DictKeys.CONCENTRATION: self.concentration
         }
+        if self.rfu is not None:
+            m[DictKeys.RFU] = self.rfu
         return m
         
     def __eq__(self, rhs):
         """Compares two results with a tolerance to account for floating-point rounding."""
         delta = 0.0000000000001
-        return math.isclose(self.concentration, rhs.concentration, rel_tol = delta)
+        if not math.isclose(self.concentration, rhs.concentration, rel_tol=delta):
+            return False
+        if self.rfu is None or rhs.rfu is None:
+            return True
+        return math.isclose(self.rfu, rhs.rfu, rel_tol=delta)
 
     @staticmethod
     def from_json(node):
         """Creates a Results instance from a JSON node."""
-        return Results(node[DictKeys.CONCENTRATION])
+        return Results(node[DictKeys.CONCENTRATION], node.get(DictKeys.RFU))
 
 
 class Point:
@@ -154,11 +161,15 @@ class Measurement:
         
     def concentration(self, factors, kit = kits.Default()):
         """Calculates the concentration using the provided calibration factors and kit."""
-        return kit.fit(factors.std_low, factors.std_high, self.value(factors.algorithm) - factors.measurement_std_low)
+        return kit.fit(factors.std_low, factors.std_high, self.rfu(factors))
+
+    def rfu(self, factors):
+        """Calculates the RFU used as input for concentration calculation."""
+        return self.value(factors.algorithm) - factors.measurement_std_low
         
     def results(self, factors, kit = kits.Default()):
         """Computes the measurement results using calibration factors and kit."""
-        return Results(self.concentration(factors, kit))
+        return Results(self.concentration(factors, kit), self.rfu(factors))
         
     def to_json(self):
         """Converts the measurement to a JSON representation."""

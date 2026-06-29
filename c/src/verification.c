@@ -11,7 +11,6 @@
 #define DEFAULT_MAX_LED                          222
 #define DEFAULT_THRESHOLD_MULTIPLIER             2.0
 #define DEFAULT_MAX_SIGNAL                       2499.0
-#define DEFAULT_STD_HIGH_TARGET                  2000.0
 #define DEFAULT_STD_HIGH_DELTA                   300
 #define DEFAULT_THRESHOLD_NEGATIVE_CONCENTRATION -0.1
 
@@ -21,7 +20,6 @@ static double min_led                          = DEFAULT_MIN_LED;
 static double max_led                          = DEFAULT_MAX_LED;
 static double threshold_multiplier             = DEFAULT_THRESHOLD_MULTIPLIER;
 static double max_signal                       = DEFAULT_MAX_SIGNAL;
-static double std_high_target                  = DEFAULT_STD_HIGH_TARGET;
 static double std_high_delta                   = DEFAULT_STD_HIGH_DELTA;
 static double threshold_negative_concentration = DEFAULT_THRESHOLD_NEGATIVE_CONCENTRATION;
 
@@ -82,7 +80,7 @@ double verification_getMaxLed()
 
 void   verification_resetMaxLed()
 {
-    min_led = DEFAULT_MAX_LED;
+    max_led = DEFAULT_MAX_LED;
 }
 
 void   verification_setThresholdMultiplier(double value)
@@ -113,21 +111,6 @@ double verification_getMaxSignal()
 void   verification_resetMaxSignal()
 {
     max_signal = DEFAULT_MAX_SIGNAL;
-}
-
-void   verification_setStdHighTarget(double value)
-{
-    std_high_target = value;
-}
-
-double verification_getStdHighTarget()
-{
-    return std_high_target;
-}
-
-void   verification_resetStdHighTarget()
-{
-    std_high_target = DEFAULT_STD_HIGH_TARGET;
 }
 
 void   verification_setStdHighDelta(double value)
@@ -261,9 +244,14 @@ bool verification_checkAutoGainResult(Verification_t * self, const Autogain_t * 
     return ret;
 }
 
-DLLEXPORT bool verification_checkSingleMeasurement(Verification_t *self, const SingleMeasurement_t * singleMeasurement, Hints_t hints)
+DLLEXPORT bool verification_checkSingleMeasurement(Verification_t *self, const SingleMeasurement_t * singleMeasurement, Hints_t hints, double stdHighTargetSignalFactor)
 {
     bool ret = true;
+
+    if(stdHighTargetSignalFactor <= 0.0)
+    {
+        stdHighTargetSignalFactor = DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR;
+    }
 
     if(singleMeasurement->channel470.value >= max_signal)
     {
@@ -282,6 +270,7 @@ DLLEXPORT bool verification_checkSingleMeasurement(Verification_t *self, const S
 
     if((HINTS_STD_HIGH & hints) != 0)
     {
+        double std_high_target = max_signal * stdHighTargetSignalFactor;
         if (!(singleMeasurement->channel470.value >= (std_high_target - std_high_delta) && singleMeasurement->channel470.value <= (std_high_target + std_high_delta)))
         {
             verification_addProblemId(self, PROBLEM_ID_WRONG_LEVEL);
@@ -294,8 +283,8 @@ DLLEXPORT bool verification_checkSingleMeasurement(Verification_t *self, const S
 
 bool verification_checkMeasurement(Verification_t *self, const Measurement_t * measurement, Hints_t hints)
 {
-    bool ret1 = verification_checkSingleMeasurement(self, &measurement->air, HINTS_MUST_HAVE_CUVETTE );
-    bool ret2 = verification_checkSingleMeasurement(self, &measurement->sample, (hints | HINTS_MUST_HAVE_CUVETTE));
+    bool ret1 = verification_checkSingleMeasurement(self, &measurement->air, HINTS_MUST_HAVE_CUVETTE, DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR);
+    bool ret2 = verification_checkSingleMeasurement(self, &measurement->sample, (hints | HINTS_MUST_HAVE_CUVETTE), DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR);
     return ret1 && ret2;
 }
 
@@ -317,15 +306,15 @@ bool verification_checkResult(Verification_t *self, double concentration, Hints_
 
 bool verification_checkFirstAirMasurementResult(Verification_t *self, const MeasurementFirstAir_t * fam, Hints_t hints)
 {
-    bool ret1 = verification_checkSingleMeasurement(self, &fam->min, HINTS_MUST_HAVE_CUVETTE);
-    bool ret2 = verification_checkSingleMeasurement(self, &fam->max, HINTS_MUST_HAVE_CUVETTE);
+    bool ret1 = verification_checkSingleMeasurement(self, &fam->min, HINTS_MUST_HAVE_CUVETTE, DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR);
+    bool ret2 = verification_checkSingleMeasurement(self, &fam->max, HINTS_MUST_HAVE_CUVETTE, DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR);
     return ret1 && ret2;
 }
 
-bool verification_checkFirstSampleMeasurementResult(Verification_t *self, const MeasurementFirstSample_t * fsm, Hints_t hints)
+bool verification_checkFirstSampleMeasurementResult(Verification_t *self, const MeasurementFirstSample_t * fsm, Hints_t hints, double stdHighTargetSignalFactor)
 {
     bool ret1 = verification_checkAutoGainResult(self, &fsm->autogain, hints);
-    bool ret2 = verification_checkSingleMeasurement(self, &fsm->measurement,  HINTS_MUST_HAVE_CUVETTE | HINTS_STD_HIGH);
+    bool ret2 = verification_checkSingleMeasurement(self, &fsm->measurement,  HINTS_MUST_HAVE_CUVETTE | HINTS_STD_HIGH, stdHighTargetSignalFactor);
     return ret1 && ret2;
 }
 

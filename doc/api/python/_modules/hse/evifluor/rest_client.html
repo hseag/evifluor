@@ -151,12 +151,14 @@
 
 <div class="viewcode-block" id="RestClient.run_init">
 <a class="viewcode-back" href="../../../api/hse.evifluor.rest_client.html#hse.evifluor.rest_client.RestClient.run_init">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">run_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nr_of_std_low</span><span class="p">,</span> <span class="n">nr_of_std_high</span><span class="p">,</span> <span class="n">concentration</span><span class="p">,</span> <span class="n">no_air</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nr_of_std_low</span><span class="p">,</span> <span class="n">nr_of_std_high</span><span class="p">,</span> <span class="n">concentration</span><span class="p">,</span> <span class="n">no_air</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kit</span><span class="o">=</span><span class="s2">&quot;Default&quot;</span><span class="p">,</span> <span class="n">settling_time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;nr_of_std_low&quot;</span><span class="p">:</span> <span class="n">nr_of_std_low</span><span class="p">,</span>
             <span class="s2">&quot;nr_of_std_high&quot;</span><span class="p">:</span> <span class="n">nr_of_std_high</span><span class="p">,</span>
             <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="n">concentration</span><span class="p">,</span>
             <span class="s2">&quot;no_air&quot;</span><span class="p">:</span> <span class="n">no_air</span><span class="p">,</span>
+            <span class="s2">&quot;kit&quot;</span><span class="p">:</span> <span class="n">kit</span><span class="p">,</span>
+            <span class="s2">&quot;settling_time&quot;</span><span class="p">:</span> <span class="n">settling_time</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">serial_number</span><span class="p">:</span>
             <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;device_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serial_number</span>

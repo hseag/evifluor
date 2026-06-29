@@ -15,9 +15,17 @@
 void exportCalculated(ExportOptions_t * options, cJSON *object, FILE * csv, bool last)
 {
     cJSON * oConcentration = cJSON_GetObjectItem(object, DICT_CONCENTRATION);
+    cJSON * oRfu = cJSON_GetObjectItem(object, DICT_RFU);
     if(oConcentration)
     {
         fprintf_s(csv, "%f", cJSON_GetNumberValue(oConcentration));
+    }
+
+    fprintf_s(csv, "%c", options->delimiter);
+
+    if(oRfu)
+    {
+        fprintf_s(csv, "%f", cJSON_GetNumberValue(oRfu));
     }
 
     if(!last)
@@ -112,7 +120,8 @@ void exportMeasurementHeader(ExportOptions_t * options, FILE * csv)
     fprintf_s(csv, "%s%c", DICT_SAMPLE_DARK, options->delimiter);
     fprintf_s(csv, "%s%c", DICT_SAMPLE_VALUE, options->delimiter);
     fprintf_s(csv, "%s%c", DICT_SAMPLE_LED_POWER, options->delimiter);
-    fprintf_s(csv, "%s",   DICT_CONCENTRATION);
+    fprintf_s(csv, "%s%c", DICT_CONCENTRATION, options->delimiter);
+    fprintf_s(csv, "%s",   DICT_RFU);
     fprintf_s(csv, "\n");
 }
 

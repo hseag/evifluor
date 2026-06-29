@@ -55,7 +55,18 @@ double measurement_concentration(const Measurement_t * self, const Factors_t * f
 {
     double m = (factors->stdHigh.concentration - factors->stdLow.concentration) / (factors->stdHigh.value - factors->stdLow.value);
     double b = factors->stdHigh.concentration - m * factors->stdHigh.value;
-    return m * (measurement_value(self, (MeasurementAlgorithm_t)factors->algorithm) - factors->measurementStdLow) + b;
+    return m * measurement_rfu(self, factors) + b;
+}
+
+double measurement_concentrationWithKit(const Measurement_t * self, const Factors_t * factors, const Kit_t * kit)
+{
+    double interpolated = measurement_concentration(self, factors);
+    return kit_apply(kit, interpolated);
+}
+
+double measurement_rfu(const Measurement_t * self, const Factors_t * factors)
+{
+    return measurement_value(self, (MeasurementAlgorithm_t)factors->algorithm) - factors->measurementStdLow;
 }
 
 double measurement_value(const Measurement_t * self, MeasurementAlgorithm_t algorithm)
@@ -180,7 +191,7 @@ bool measurement_calculatePoint(cJSON *oMeasurments, double concentration, uint3
     return true;
 }
 
-static cJSON *calculate(cJSON *obj, Factors_t * factors, double * concentration)
+static cJSON *calculate(cJSON *obj, Factors_t * factors, const Kit_t * kit, double * concentration, double * rfu)
 {
     cJSON *ret = cJSON_CreateObject();
     bool valid;
@@ -189,15 +200,22 @@ static cJSON *calculate(cJSON *obj, Factors_t * factors, double * concentration)
 
     if(valid)
     {
-        *concentration = measurement_concentration(&measurement, factors);
+        *rfu = measurement_rfu(&measurement, factors);
+        *concentration = measurement_concentrationWithKit(&measurement, factors, kit);
 
         cJSON_AddNumberToObject(ret, DICT_CONCENTRATION, *concentration);
+        cJSON_AddNumberToObject(ret, DICT_RFU, *rfu);
     }
 
     return ret;
 }
 
 bool measurement_calculate(cJSON * oMeasurements, double concentrationLow, double concentrationHigh, int nrOfStdLow, int nrOfStdLHigh, MeasurementAlgorithm_t algorithm)
+{
+    return measurement_calculateWithKit(oMeasurements, concentrationLow, concentrationHigh, nrOfStdLow, nrOfStdLHigh, algorithm, NULL);
+}
+
+bool measurement_calculateWithKit(cJSON * oMeasurements, double concentrationLow, double concentrationHigh, int nrOfStdLow, int nrOfStdLHigh, MeasurementAlgorithm_t algorithm, const Kit_t * kit)
 {
     bool ret = false;
 
@@ -222,8 +240,9 @@ bool measurement_calculate(cJSON * oMeasurements, double concentrationLow, doubl
                 cJSON_ArrayForEach(iterator, oMeasurements)
                 {
                     double concentration = 0.0;
+                    double rfu = 0.0;
                     cJSON_DeleteItemFromObject(iterator, DICT_CALCULATED);                    
-                    cJSON_AddItemToObject(iterator, DICT_CALCULATED, calculate(iterator, &factors, &concentration));
+                    cJSON_AddItemToObject(iterator, DICT_CALCULATED, calculate(iterator, &factors, kit, &concentration, &rfu));
 
                     cJSON * oErrors = cJSON_GetObjectItem(iterator, DICT_ERRORS);
                     Verification_t v;

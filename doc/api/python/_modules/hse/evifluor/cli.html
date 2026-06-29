@@ -42,6 +42,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">logging.handlers</span><span class="w"> </span><span class="kn">import</span> <span class="n">RotatingFileHandler</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">hse.evifluor.kits</span><span class="w"> </span><span class="kn">import</span> <span class="n">Default</span> <span class="k">as</span> <span class="n">DefaultKit</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hse.evifluor</span><span class="w"> </span><span class="kn">import</span> <span class="n">service</span>
 
 
@@ -109,6 +110,8 @@
     <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;nr_of_std_low&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of standard-low measurements&quot;</span><span class="p">)</span>
     <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;nr_of_std_high&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of standard-high measurements&quot;</span><span class="p">)</span>
     <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;concentration&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Standard-high concentration&quot;</span><span class="p">)</span>
+    <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--kit&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;Default&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Kit name (default: Default)&quot;</span><span class="p">)</span>
+    <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--settling_time&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Override settling time in seconds&quot;</span><span class="p">)</span>
     <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--no-air&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Initialize the run without air measurements&quot;</span><span class="p">)</span>
 
     <span class="n">run_measure_parser</span> <span class="o">=</span> <span class="n">run_subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;measure&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Execute a measurement step&quot;</span><span class="p">)</span>
@@ -189,6 +192,8 @@
             <span class="n">filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">file</span><span class="p">,</span>
             <span class="n">device</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
             <span class="n">no_air</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">no_air</span><span class="p">,</span>
+            <span class="n">kit</span><span class="o">=</span><span class="n">DefaultKit</span><span class="o">.</span><span class="n">factory</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">kit</span><span class="p">),</span>
+            <span class="n">settling_time</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">settling_time</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span>
 
