@@ -18,6 +18,7 @@ class FitAlgorithm(IntEnum):
     Linear                                        = 1
     Power                                         = 2
     Quadratic                                     = 3
+    HillFit                                       = 4
 
 class Default:
     """Base kit configuration combining standard interpolation with an optional fit curve."""
@@ -77,7 +78,7 @@ class Default:
             description = node.get(_KIT_DESCRIPTION),
         )
 
-    def fit(self, std_low, std_high, value):
+    def fit(self, std_low, std_high, rfu):
         """Maps a measured signal to concentration using the calibrated standards and fit curve."""
         # First interpolate between the two measured standards to get the raw concentration.
         delta_signal = std_high.value - std_low.value
@@ -86,7 +87,7 @@ class Default:
 
         m = (std_high.concentration - std_low.concentration) / delta_signal
         b = std_high.concentration - m * std_high.value
-        x = m * value + b
+        x = m * rfu + b
         
         # Then apply the kit-specific correction curve on top of the raw interpolation result.
         if self._fit_algorithm == FitAlgorithm.Linear:
@@ -103,6 +104,25 @@ class Default:
                 x_fitted = 0
             else:
                 x_fitted = self._k1 * x ** 2 + self._k2 * x + self._k3
+        elif self._fit_algorithm == FitAlgorithm.HillFit:
+            # Negative concentrations are clamped to zero before the correction.
+            # k1 : VMAX
+            # k2 : K
+            # k3 : n
+            
+            num = std_high.value * (std_high.concentration - std_low.concentration)
+            den = (std_high.concentration - std_low.concentration) ** 2
+
+            if den == 0:
+                raise ValueError("All concentrations are zero")
+
+            S = num / den
+            
+            if rfu < 0:
+                x_fitted = 0
+            else:
+                x = rfu / S
+                x_fitted = (self._k1 * x ** self._k3) / (self._k2 ** self._k3 + x ** self._k3)
         return x_fitted
     
     def settling_time(self):
@@ -125,5 +145,5 @@ class QubitTM_1X_dsDNA_Broad_Range_BR(Default):
     """Preset for the QubitTM 1X dsDNA Broad Range (BR) Assay Kit."""
 
     def __init__(self):
-        super().__init__(fit_algorithm = FitAlgorithm.Power, k1 = 1.011658, k2 = 1.014932, description = "QubitTM 1X dsDNA Broad Range (BR) Assay Kit", std_high_target_signal_factor = 0.4, settling_time = 0.0)
+        super().__init__(fit_algorithm = FitAlgorithm.HillFit, k1 = 52452044.021155454, k2 = 3342216.695097067 , k3 = 1.2623036398450653, description = "QubitTM 1X dsDNA Broad Range (BR) Assay Kit", std_high_target_signal_factor = 0.4, settling_time = 0.0)
         pass

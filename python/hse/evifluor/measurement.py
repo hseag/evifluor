@@ -83,10 +83,10 @@ class Factors:
 
     def __init__(self, std_low, std_high, measurement_std_low = 0.0, algorithm = None):
         """Initializes the factors with standard low/high points and metadata."""
-        self.std_low             = std_low
-        self.std_high            = std_high
-        self.measurement_std_low = measurement_std_low
-        self.algorithm           = algorithm
+        self.std_low               = std_low
+        self.std_high              = std_high
+        self.measurement_std_low   = measurement_std_low
+        self.algorithm             = algorithm
 
     def __repr__(self):
         """Returns a textual representation of the calibration factors."""
@@ -231,6 +231,6 @@ class Measurement:
             std_high = 1
             
         if algorithm == Algorithm.V2:
-            return Factors(Point(concentration_low, std_low - std_low), Point(concentration_high, std_high - std_low), std_low, algorithm)
+            return Factors(std_low = Point(concentration_low, std_low - std_low), std_high = Point(concentration_high, std_high - std_low), measurement_std_low = std_low, algorithm = algorithm)
         else:
-            return Factors(Point(concentration_low, std_low), Point(concentration_high, std_high), algorithm = algorithm)
+            return Factors(std_low = Point(concentration_low, std_low), std_high = Point(concentration_high, std_high), algorithm = algorithm)

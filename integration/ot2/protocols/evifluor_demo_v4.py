@@ -10,7 +10,7 @@ class dotdict(dict):
     __delattr__ = dict.__delitem__
 
 metadata = {'apiLevel': '2.24', 
-            'protocolName': 'eviFluor Demo V3',
+            'protocolName': 'eviFluor Demo V4',
             'author': 'DaZw'}
             
 safety_height = 40
@@ -33,7 +33,7 @@ class Instrument:
         
 
         self.workdeck   = { 'sample_plate'    : protocol.load_labware('corning_96_wellplate_360ul_flat',    '5'),
-                            'evifluor'        : protocol.load_labware('hse_evifluor_pilot_left_20ul_tip_v1','4'),
+                            'evifluor'        : protocol.load_labware('hse_evifluor_pilot_left_20ul_tip_v2','4'),
                             'tiprack_20'      : protocol.load_labware('opentrons_96_filtertiprack_20ul',    '6'),
                           }
         
