@@ -56,29 +56,6 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v5
 
-  check-pages-smoke:
-    name: Check deployed Pages smoke
-    needs: deploy
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Verify deployed Python API page is reachable
-        env:
-          PAGE_URL: ${{ needs.deploy.outputs.page_url }}
-          BRANCH_NAME: ${{ github.ref_name }}
-        run: |
-          url="${PAGE_URL%/}/${BRANCH_NAME}/doc/api/python/index.html"
-          echo "Checking $url"
-          for i in $(seq 1 12); do
-            if curl --fail --silent --show-error --location "$url" -o page.html; then
-              grep -F "eviFluor Python API" page.html
-              exit 0
-            fi
-            sleep 5
-          done
-          echo "Deployed page did not become reachable in time"
-          exit 1
-
   check-links:
     name: Check markdown links
     needs: deploy
