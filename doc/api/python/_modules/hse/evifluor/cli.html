@@ -47,6 +47,14 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_log_file</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolves the CLI log file path.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: Parsed CLI arguments. ``working_dir`` is used when available.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Absolute path to the CLI log file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s2">&quot;working_dir&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">args</span><span class="o">.</span><span class="n">working_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">log_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">working_dir</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -56,6 +64,11 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_configure_logging</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configures logging for the CLI process.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: Parsed CLI arguments controlling debug mode and working directory.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;hse.evifluor&quot;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">logger</span><span class="o">.</span><span class="n">handlers</span><span class="p">):</span>
@@ -81,8 +94,13 @@
 
 
 <div class="viewcode-block" id="build_parser">
-<a class="viewcode-back" href="../../../api/hse.evifluor.cli.html#hse.evifluor.cli.build_parser">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.cli.html#hse.evifluor.cli.build_parser">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">build_parser</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Builds the top-level argument parser for the CLI.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Configured :class:`argparse.ArgumentParser` instance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
         <span class="n">prog</span><span class="o">=</span><span class="s2">&quot;python -m hse.evifluor&quot;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Command line interface for HSE eviFluor devices.&quot;</span><span class="p">,</span>
@@ -101,6 +119,14 @@
 
     <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;checkempty&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Check if the cuvette holder is empty&quot;</span><span class="p">)</span>
 
+    <span class="n">normalized_rfu_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+        <span class="s2">&quot;normalize-rfu-csv&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Convert a result JSON file into a normalized RFU CSV&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">normalized_rfu_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;json_file&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to the result JSON file&quot;</span><span class="p">)</span>
+    <span class="n">normalized_rfu_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;replicates&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of replicates per calibration block&quot;</span><span class="p">)</span>
+    <span class="n">normalized_rfu_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output CSV path&quot;</span><span class="p">)</span>
+
     <span class="n">run_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Manage measurement runs&quot;</span><span class="p">)</span>
     <span class="n">run_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--working-dir&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Working directory (default: .)&quot;</span><span class="p">)</span>
     <span class="n">run_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--file&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Data file&quot;</span><span class="p">)</span>
@@ -111,6 +137,10 @@
     <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;nr_of_std_high&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of standard-high measurements&quot;</span><span class="p">)</span>
     <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;concentration&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Standard-high concentration&quot;</span><span class="p">)</span>
     <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--kit&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;Default&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Kit name (default: Default)&quot;</span><span class="p">)</span>
+    <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--k1&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Optional kit parameter k1&quot;</span><span class="p">)</span>
+    <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--k2&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Optional kit parameter k2&quot;</span><span class="p">)</span>
+    <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--k3&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Optional kit parameter k3&quot;</span><span class="p">)</span>
+    <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--lookup_table&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Optional lookup-table JSON file&quot;</span><span class="p">)</span>
     <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--settling_time&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Override settling time in seconds&quot;</span><span class="p">)</span>
     <span class="n">run_init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--no-air&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Initialize the run without air measurements&quot;</span><span class="p">)</span>
 
@@ -124,6 +154,13 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_write_output</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Writes command output to stdout or a file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text: Text content to write.</span>
+<span class="sd">        filename: Optional destination filename. When omitted, the output is</span>
+<span class="sd">            written to stdout.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
             <span class="n">handle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
@@ -137,8 +174,16 @@
 
 
 <div class="viewcode-block" id="cmd_info">
-<a class="viewcode-back" href="../../../api/hse.evifluor.cli.html#hse.evifluor.cli.cmd_info">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.cli.html#hse.evifluor.cli.cmd_info">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">cmd_info</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles the ``info`` command.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: Parsed CLI arguments for the ``info`` command.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Process exit code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">get_device_info</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">json</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
@@ -151,8 +196,16 @@
 
 
 <div class="viewcode-block" id="cmd_selftest">
-<a class="viewcode-back" href="../../../api/hse.evifluor.cli.html#hse.evifluor.cli.cmd_selftest">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.cli.html#hse.evifluor.cli.cmd_selftest">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">cmd_selftest</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles the ``selftest`` command.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: Parsed CLI arguments for the ``selftest`` command.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Process exit code. Non-zero indicates detected self-test problems.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">payload</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">run_selftest</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
     <span class="n">has_problems</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;hasProblems&quot;</span><span class="p">]</span>
 
@@ -170,8 +223,16 @@
 
 
 <div class="viewcode-block" id="cmd_checkempty">
-<a class="viewcode-back" href="../../../api/hse.evifluor.cli.html#hse.evifluor.cli.cmd_checkempty">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.cli.html#hse.evifluor.cli.cmd_checkempty">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">cmd_checkempty</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles the ``checkempty`` command.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: Parsed CLI arguments for the ``checkempty`` command.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Process exit code. Zero means the cuvette holder is empty.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">service</span><span class="o">.</span><span class="n">check_empty</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">device</span><span class="p">)[</span><span class="s2">&quot;empty&quot;</span><span class="p">]:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Empty&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span>
@@ -180,10 +241,50 @@
 
 
 
+<div class="viewcode-block" id="cmd_normalize_rfu_csv">
+<a class="viewcode-back" href="../../../hse.evifluor.cli.html#hse.evifluor.cli.cmd_normalize_rfu_csv">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cmd_normalize_rfu_csv</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles the ``normalize-rfu-csv`` command.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: Parsed CLI arguments containing the source JSON file and replicate</span>
+<span class="sd">            count.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Process exit code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">service</span><span class="o">.</span><span class="n">export_normalized_rfu_csv</span><span class="p">(</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">json_file</span><span class="p">,</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">replicates</span><span class="p">,</span>
+        <span class="n">csv_file</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="mi">0</span></div>
+
+
+
 <div class="viewcode-block" id="cmd_run">
-<a class="viewcode-back" href="../../../api/hse.evifluor.cli.html#hse.evifluor.cli.cmd_run">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.cli.html#hse.evifluor.cli.cmd_run">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">cmd_run</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles the ``run`` command group.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: Parsed CLI arguments for run initialization, measurement, or</span>
+<span class="sd">            export.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Process exit code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">run_command</span> <span class="o">==</span> <span class="s2">&quot;init&quot;</span><span class="p">:</span>
+        <span class="n">factory_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">k1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">factory_kwargs</span><span class="p">[</span><span class="s2">&quot;k1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">k1</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">k2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">factory_kwargs</span><span class="p">[</span><span class="s2">&quot;k2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">k2</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">k3</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">factory_kwargs</span><span class="p">[</span><span class="s2">&quot;k3&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">k3</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">lookup_table</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">factory_kwargs</span><span class="p">[</span><span class="s2">&quot;lookup_table&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">lookup_table</span>
+
         <span class="n">service</span><span class="o">.</span><span class="n">init_run</span><span class="p">(</span>
             <span class="n">args</span><span class="o">.</span><span class="n">nr_of_std_low</span><span class="p">,</span>
             <span class="n">args</span><span class="o">.</span><span class="n">nr_of_std_high</span><span class="p">,</span>
@@ -192,7 +293,7 @@
             <span class="n">filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">file</span><span class="p">,</span>
             <span class="n">device</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
             <span class="n">no_air</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">no_air</span><span class="p">,</span>
-            <span class="n">kit</span><span class="o">=</span><span class="n">DefaultKit</span><span class="o">.</span><span class="n">factory</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">kit</span><span class="p">),</span>
+            <span class="n">kit</span><span class="o">=</span><span class="n">DefaultKit</span><span class="o">.</span><span class="n">factory</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">kit</span><span class="p">,</span> <span class="o">**</span><span class="n">factory_kwargs</span><span class="p">),</span>
             <span class="n">settling_time</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">settling_time</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span>
@@ -216,8 +317,17 @@
 
 
 <div class="viewcode-block" id="main">
-<a class="viewcode-back" href="../../../api/hse.evifluor.cli.html#hse.evifluor.cli.main">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.cli.html#hse.evifluor.cli.main">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;CLI entry point.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        argv: Optional argument list. When omitted, arguments are read from</span>
+<span class="sd">            ``sys.argv``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Process exit code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">build_parser</span><span class="p">()</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
     <span class="n">_configure_logging</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
@@ -229,6 +339,8 @@
             <span class="k">return</span> <span class="n">cmd_selftest</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;checkempty&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">cmd_checkempty</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;normalize-rfu-csv&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cmd_normalize_rfu_csv</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">cmd_run</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
@@ -244,7 +356,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../../index.html">eviFluor Python API</a></h1>
+<h1 class="logo"><a href="../../../modules.html">eviFluor Python API</a></h1>
 
 
 
@@ -263,15 +375,14 @@
     </div>
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/modules.html">hse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hse.html">hse namespace</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../modules.html">Documentation overview</a><ul>
   <li><a href="../../index.html">Module code</a><ul>
   </ul></li>
   </ul></li>

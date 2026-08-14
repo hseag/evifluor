@@ -138,7 +138,7 @@ Class QubitTM_1X_dsDNA_Broad_Range_BR
       <a class="xref" href="Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_FromJson_System_Text_Json_Nodes_JsonNode_">Default.FromJson(JsonNode)</a>
     </div>
     <div>
-      <a class="xref" href="Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_Factory_System_String_">Default.Factory(string)</a>
+      <a class="xref" href="Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_Factory_System_String_System_Nullable_System_Double__System_Nullable_System_Double__System_Nullable_System_Double__Hse_EviFluor_Kits_LookupTable_">Default.Factory(string, double?, double?, double?, LookupTable)</a>
     </div>
     <div>
       <a class="xref" href="Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_fit_Hse_EviFluor_Point_Hse_EviFluor_Point_System_Double_">Default.fit(Point, Point, double)</a>
@@ -172,6 +172,9 @@ Class QubitTM_1X_dsDNA_Broad_Range_BR
 
 
 
+  <h2 id="Hse_EviFluor_Kits_QubitTM_1X_dsDNA_Broad_Range_BR_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Initializes the Qubit 1X dsDNA broad-range preset.</p>
+</div>
 
 
   <h2 class="section" id="constructors">Constructors
@@ -180,19 +183,31 @@ Class QubitTM_1X_dsDNA_Broad_Range_BR
 
   <a id="Hse_EviFluor_Kits_QubitTM_1X_dsDNA_Broad_Range_BR__ctor_" data-uid="Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.#ctor*"></a>
 
-  <h3 id="Hse_EviFluor_Kits_QubitTM_1X_dsDNA_Broad_Range_BR__ctor" data-uid="Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.#ctor">
-  QubitTM_1X_dsDNA_Broad_Range_BR()
+  <h3 id="Hse_EviFluor_Kits_QubitTM_1X_dsDNA_Broad_Range_BR__ctor_System_Double_System_Double_Hse_EviFluor_Kits_LookupTable_" data-uid="Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.#ctor(System.Double,System.Double,Hse.EviFluor.Kits.LookupTable)">
+  QubitTM_1X_dsDNA_Broad_Range_BR(double, double, LookupTable?)
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes the Qubit 1X dsDNA broad-range preset.</p>
+  <div class="markdown level1 summary"><p>Predefined kit for the Qubit 1X dsDNA broad-range assay.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public QubitTM_1X_dsDNA_Broad_Range_BR()</code></pre>
+    <pre><code class="lang-csharp hljs">public QubitTM_1X_dsDNA_Broad_Range_BR(double k1 = 1, double k2 = 0, LookupTable? lookupTable = null)</code></pre>
   </div>
 
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>k1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>Optional override for the preset's primary scale factor.</p>
+</dd>
+    <dt><code>k2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>Optional override for the preset's additive concentration offset.</p>
+</dd>
+    <dt><code>lookupTable</code> <a class="xref" href="Hse.EviFluor.Kits.LookupTable.html">LookupTable</a></dt>
+    <dd><p>Optional replacement for the preset lookup table.</p>
+</dd>
+  </dl>
 
 
 
@@ -201,6 +216,9 @@ Class QubitTM_1X_dsDNA_Broad_Range_BR
 
 
 
+  <h4 class="section" id="Hse_EviFluor_Kits_QubitTM_1X_dsDNA_Broad_Range_BR__ctor_System_Double_System_Double_Hse_EviFluor_Kits_LookupTable__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Initializes the Qubit 1X dsDNA broad-range preset.</p>
+</div>
 
 
 

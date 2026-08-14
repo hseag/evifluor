@@ -31,7 +31,7 @@ Run initialization supports the same kit selection and settling-time override as
 To install the published wheel directly from the documentation site, use:
 
 ```bash
-python -m pip install "hse-evifluor[rest] @ https://hseag.github.io/evifluor/pre-release/python/dist/hse_evifluor-0.12.0b4-py3-none-any.whl"
+python -m pip install "hse-evifluor[rest] @ https://hseag.github.io/evi-test/pre-release/python/dist/hse_evifluor-0.12.0rc1-py3-none-any.whl"
 ```
 
 Start the REST API with:
@@ -368,6 +368,10 @@ Request:
   "nr_of_std_high": 2,
   "concentration": 10.0,
   "kit": "Default",
+  "k1": null,
+  "k2": null,
+  "k3": null,
+  "lookup_table": null,
   "settling_time": null,
   "no_air": false
 }
@@ -380,8 +384,17 @@ Request fields:
 - `nr_of_std_high`: number of `standard high` measurements at the beginning of the run
 - `concentration`: concentration assigned to the `standard high`
 - `kit`: optional predefined kit name, default `Default`; see [Kit Reference](./kit.md), section 2
+- `k1`: optional kit parameter passed to the selected kit factory; `null` means use the kit default
+- `k2`: optional kit parameter passed to the selected kit factory; `null` means use the kit default
+- `k3`: optional kit parameter passed to the selected kit factory; `null` means use the kit default
+- `lookup_table`: optional lookup-table payload as a JSON list of `{ "concentration": ..., "signal": ... }` entries; `null` means use the kit default
 - `settling_time`: optional settling-time override in seconds; `null` means use the kit default
 - `no_air`: optional boolean flag that omits separate air measurements
+
+Notes:
+
+- For Python callers using [`hse.evifluor.rest_client`][rest-client-api], `lookup_table` may be passed either as a JSON-compatible list or as a local `.csv`/`.json` file path. File paths are resolved on the client side and sent to the REST server as lookup-table content, not as server-side file paths.
+- The REST server itself accepts only the JSON lookup-table content in the request body.
 
 Response:
 
@@ -689,7 +702,7 @@ if __name__ == "__main__":
 
 This example uses the Python REST client in:
 
-- [module/python/hse/evifluor/rest_client.py](/abs/c:/scm/hse/colibri/evifluor/module/python/hse/evifluor/rest_client.py:1)
+- [module/python/hse/evifluor/rest_client.py](../api/python/src/hse/evifluor/rest_client.py)
 
 ## 8. Error Handling
 
@@ -712,5 +725,5 @@ Typical categories are:
 - The `--working-dir` option controls both generated data files and the default log file location.
 - The `--debug` option enables stderr logging for easier interactive troubleshooting.
 
-[rest-server-api]: https://hseag.github.io/evifluor/pre-release/api/python/api/hse.evifluor.rest_server.html
-[rest-client-api]: https://hseag.github.io/evifluor/pre-release/api/python/api/hse.evifluor.rest_client.html
+[rest-server-api]: https://hseag.github.io/evi-test/pre-release/doc/api/python/hse.evifluor.rest_server.html
+[rest-client-api]: https://hseag.github.io/evi-test/pre-release/doc/api/python/hse.evifluor.rest_client.html

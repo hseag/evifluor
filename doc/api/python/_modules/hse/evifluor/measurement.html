@@ -44,7 +44,7 @@
 
 
 <div class="viewcode-block" id="Algorithm">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Algorithm">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Algorithm">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Algorithm</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Measurement algorithms for converting signals to concentrations.&quot;&quot;&quot;</span>
 
@@ -54,12 +54,19 @@
     
 
 <div class="viewcode-block" id="Results">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Results">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Results">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Results</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the concentration result of a measurement, including RFU.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">concentration</span><span class="p">,</span> <span class="n">rfu</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the result with the specified concentration and optional RFU.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes a result instance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            concentration: Calculated concentration. The unit depends on the</span>
+<span class="sd">                configured calibration standard.</span>
+<span class="sd">            rfu: RFU value used as input for concentration calculation. Defaults</span>
+<span class="sd">                to ``None``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span> <span class="o">=</span> <span class="n">concentration</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rfu</span> <span class="o">=</span> <span class="n">rfu</span>
         
@@ -68,7 +75,7 @@
         <span class="k">return</span> <span class="s2">&quot;concentration:</span><span class="si">{}</span><span class="s2"> rfu:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rfu</span><span class="p">)</span>
         
 <div class="viewcode-block" id="Results.to_json">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Results.to_json">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Results.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts the result to a JSON representation.&quot;&quot;&quot;</span>
         <span class="n">m</span> <span class="o">=</span> <span class="p">{</span>
@@ -89,22 +96,34 @@
         <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rfu</span><span class="p">,</span> <span class="n">rhs</span><span class="o">.</span><span class="n">rfu</span><span class="p">,</span> <span class="n">rel_tol</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Results.from_json">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Results.from_json">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Results.from_json">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a Results instance from a JSON node.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a results instance from JSON data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            node: JSON object containing ``concentration`` and optionally ``rfu``.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A new :class:`Results` instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Results</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">CONCENTRATION</span><span class="p">],</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">RFU</span><span class="p">))</span></div>
 </div>
 
 
 
 <div class="viewcode-block" id="Point">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Point">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Point">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a calibration point with concentration and signal value.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">concentration</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes a Point with the given concentration and measured value.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes a calibration point.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            concentration: Concentration represented by the point.</span>
+<span class="sd">            value: Measured signal value corresponding to ``concentration``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span> <span class="o">=</span> <span class="n">concentration</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span>         <span class="o">=</span> <span class="n">value</span>
         
@@ -113,7 +132,7 @@
         <span class="k">return</span> <span class="s2">&quot;concentration:</span><span class="si">{}</span><span class="s2"> value:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Point.to_json">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Point.to_json">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Point.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts the point to a JSON representation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
@@ -123,22 +142,38 @@
 
 
 <div class="viewcode-block" id="Point.from_json">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Point.from_json">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Point.from_json">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a Point instance from JSON data.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a point instance from JSON data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            node: JSON object containing ``concentration`` and ``value``.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A new :class:`Point` instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;concentration&quot;</span><span class="p">],</span> <span class="n">node</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span></div>
 </div>
 
         
 
 <div class="viewcode-block" id="Factors">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Factors">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Factors">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Factors</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Holds calibration factors derived from standard measurements.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">std_low</span><span class="p">,</span> <span class="n">std_high</span><span class="p">,</span> <span class="n">measurement_std_low</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">algorithm</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the factors with standard low/high points and metadata.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes factor data derived from standard measurements.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            std_low: Calibration point for the low standard.</span>
+<span class="sd">            std_high: Calibration point for the high standard.</span>
+<span class="sd">            measurement_std_low: Averaged standard-low measurement used as</span>
+<span class="sd">                sample-only baseline for algorithm ``V2``. Defaults to 0.0.</span>
+<span class="sd">            algorithm: Algorithm used to derive the factors. Defaults to</span>
+<span class="sd">                ``None``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">std_low</span>               <span class="o">=</span> <span class="n">std_low</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">std_high</span>              <span class="o">=</span> <span class="n">std_high</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">measurement_std_low</span>   <span class="o">=</span> <span class="n">measurement_std_low</span>
@@ -149,7 +184,7 @@
         <span class="k">return</span> <span class="s2">&quot;std_low:</span><span class="si">{}</span><span class="s2"> std_high:</span><span class="si">{}</span><span class="s2"> measurement_std_low:</span><span class="si">{}</span><span class="s2"> algorithm:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">std_low</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">std_high</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurement_std_low</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Factors.to_json">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Factors.to_json">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Factors.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts the factors to a JSON representation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
@@ -161,10 +196,17 @@
 
 
 <div class="viewcode-block" id="Factors.from_json">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Factors.from_json">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Factors.from_json">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a Factors instance from JSON data.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates factors from JSON data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            node: JSON object containing serialized factor data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A new :class:`Factors` instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">algorithm</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;algorithm&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">algorithm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">algorithm</span> <span class="o">=</span> <span class="n">Algorithm</span><span class="p">(</span><span class="n">algorithm</span><span class="p">)</span>
@@ -179,12 +221,21 @@
 
 
 <div class="viewcode-block" id="Measurement">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Measurement">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Measurement">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Measurement</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a measurement consisting of optional air and sample components.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">air</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">comment</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the measurement from air and sample data or their aggregated results.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes a measurement from air/sample data or aggregate results.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            air: Air reference measurement, or a</span>
+<span class="sd">                :class:`FirstAirMeasurementResult`, or ``None`` when using the</span>
+<span class="sd">                sample-only algorithm.</span>
+<span class="sd">            sample: Sample measurement, or a</span>
+<span class="sd">                :class:`FirstSampleMeasurementResult`.</span>
+<span class="sd">            comment: Optional annotation stored with the measurement.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">air</span><span class="p">,</span> <span class="n">FirstAirMeasurementResult</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">FirstSampleMeasurementResult</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">air</span>             <span class="o">=</span> <span class="n">air</span><span class="o">.</span><span class="n">adjust_to_led_power</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">auto_gain_result</span><span class="o">.</span><span class="n">led_power</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sample</span>          <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">measurement</span>
@@ -218,9 +269,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_comment</span> <span class="o">=</span> <span class="n">value</span>
              
 <div class="viewcode-block" id="Measurement.value">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Measurement.value">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Measurement.value">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">algorithm</span> <span class="o">=</span> <span class="n">Algorithm</span><span class="o">.</span><span class="n">V1</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the measurement value, optionally subtracting the air baseline.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the measurement value.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            algorithm: Measurement algorithm. ``Algorithm.V1`` subtracts the air</span>
+<span class="sd">                baseline, while ``Algorithm.V2`` uses the sample value only.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The background-corrected measurement signal.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">algorithm</span> <span class="o">==</span> <span class="n">Algorithm</span><span class="o">.</span><span class="n">V1</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">air</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
@@ -228,28 +287,54 @@
 
         
 <div class="viewcode-block" id="Measurement.concentration">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Measurement.concentration">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Measurement.concentration">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">concentration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">kit</span> <span class="o">=</span> <span class="n">kits</span><span class="o">.</span><span class="n">Default</span><span class="p">()):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the concentration using the provided calibration factors and kit.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates concentration for this measurement.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            factors: Calibration factors used for correction.</span>
+<span class="sd">            kit: Kit used to convert the calibrated signal into concentration.</span>
+<span class="sd">                Defaults to :class:`hse.evifluor.kits.Default`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The calculated concentration value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">kit</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">factors</span><span class="o">.</span><span class="n">std_low</span><span class="p">,</span> <span class="n">factors</span><span class="o">.</span><span class="n">std_high</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rfu</span><span class="p">(</span><span class="n">factors</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="Measurement.rfu">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Measurement.rfu">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Measurement.rfu">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">rfu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factors</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the RFU used as input for concentration calculation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the RFU used for concentration fitting.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            factors: Calibration factors containing the algorithm and optional</span>
+<span class="sd">                sample-only baseline.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The RFU value used as input for kit fitting.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">factors</span><span class="o">.</span><span class="n">algorithm</span><span class="p">)</span> <span class="o">-</span> <span class="n">factors</span><span class="o">.</span><span class="n">measurement_std_low</span></div>
 
         
 <div class="viewcode-block" id="Measurement.results">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Measurement.results">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Measurement.results">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">kit</span> <span class="o">=</span> <span class="n">kits</span><span class="o">.</span><span class="n">Default</span><span class="p">()):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the measurement results using calibration factors and kit.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes measurement results using calibration factors and a kit.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            factors: Factors used for calibration or adjustment.</span>
+<span class="sd">            kit: Kit used for the final concentration fit. Defaults to</span>
+<span class="sd">                :class:`hse.evifluor.kits.Default`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A :class:`Results` instance with concentration and RFU.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Results</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">kit</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">rfu</span><span class="p">(</span><span class="n">factors</span><span class="p">))</span></div>
 
         
 <div class="viewcode-block" id="Measurement.to_json">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Measurement.to_json">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Measurement.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts the measurement to a JSON representation.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">air</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -267,10 +352,17 @@
 
         
 <div class="viewcode-block" id="Measurement.from_json">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Measurement.from_json">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Measurement.from_json">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Restores a Measurement from its JSON representation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Restores a measurement from JSON data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            node: JSON object containing serialized air/sample measurement data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A reconstructed :class:`Measurement` instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">DictKeys</span><span class="o">.</span><span class="n">AIR</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Measurement</span><span class="p">(</span>
                 <span class="n">SingleMeasurement</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">AIR</span><span class="p">]),</span>
@@ -286,10 +378,23 @@
 
 
 <div class="viewcode-block" id="Measurement.calculate_factors">
-<a class="viewcode-back" href="../../../api/hse.evifluor.measurement.html#hse.evifluor.Measurement.calculate_factors">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.measurement.html#hse.evifluor.Measurement.calculate_factors">[docs]</a>
     <span class="nd">@staticmethod</span>     
     <span class="k">def</span><span class="w"> </span><span class="nf">calculate_factors</span><span class="p">(</span><span class="n">concentration_low</span><span class="p">,</span> <span class="n">concentration_high</span><span class="p">,</span> <span class="n">measurements_std_low</span><span class="p">,</span> <span class="n">measurements_std_high</span><span class="p">,</span> <span class="n">algorithm</span> <span class="o">=</span> <span class="n">Algorithm</span><span class="o">.</span><span class="n">V1</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Derives calibration factors from standard low and high measurements.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Derives calibration factors from standard measurements.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            concentration_low: Known concentration of the low standard.</span>
+<span class="sd">            concentration_high: Known concentration of the high standard.</span>
+<span class="sd">            measurements_std_low: One measurement or a list of measurements for</span>
+<span class="sd">                the low standard.</span>
+<span class="sd">            measurements_std_high: One measurement or a list of measurements for</span>
+<span class="sd">                the high standard.</span>
+<span class="sd">            algorithm: Algorithm used to evaluate the measurement values.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A :class:`Factors` instance containing the derived calibration data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">measurements_std_low</span><span class="p">,</span> <span class="n">Measurement</span><span class="p">):</span>
             <span class="n">measurements_std_low</span> <span class="o">=</span> <span class="p">[</span> <span class="n">measurements_std_low</span> <span class="p">]</span>
 
@@ -329,7 +434,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../../index.html">eviFluor Python API</a></h1>
+<h1 class="logo"><a href="../../../modules.html">eviFluor Python API</a></h1>
 
 
 
@@ -348,15 +453,14 @@
     </div>
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/modules.html">hse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hse.html">hse namespace</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../modules.html">Documentation overview</a><ul>
   <li><a href="../../index.html">Module code</a><ul>
   </ul></li>
   </ul></li>

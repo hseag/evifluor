@@ -16,19 +16,19 @@ On the [Opentrons OT-2](https://opentrons.com/robots/ot-2), a [Single-Channel Pi
 2. Install the Python package with:
 
 ```bash
-python -m pip install https://hseag.github.io/evifluor/pre-release/python/dist/hse_evifluor-0.12.0b4-py3-none-any.whl
+python -m pip install https://hseag.github.io/evi-test/pre-release/python/dist/hse_evifluor-0.12.0rc1-py3-none-any.whl
 ```
 
 If the OT-2 has no internet connection, copy the Python wheel to the device with:
 
 ```bash
-scp -i ot2_ssh_key hse_evifluor-0.12.0b4-py3-none-any.whl root@YOUR_IP:
+scp -i ot2_ssh_key hse_evifluor-0.12.0rc1-py3-none-any.whl root@YOUR_IP:
 ```
 
 Then install it locally on the OT-2 with:
 
 ```bash
-python -m pip install hse_evifluor-0.12.0b4-py3-none-any.whl
+python -m pip install hse_evifluor-0.12.0rc1-py3-none-any.whl
 ```
 
 After the installation, restart the OT-2.
@@ -50,11 +50,11 @@ The samples on the plate must be prepared in this order:
 
 The standard high wells must start at `A1`, followed directly by the standard low wells, followed directly by the sample wells.
 
-![Setup](doc/images/evifluor-ot2-setup.jpg)
+![Setup](images/evifluor-ot2-setup.jpg)
 
 ### 3.3 Labware and Protocol
 
-Install the custom labware [hse_evifluor_pilot_left_20ul_tip_v1.json](../integration/ot2/labware/hse_evifluor_pilot_left_20ul_tip_v1.json) and the protocol [evifluor_demo_v3.py](../integration/ot2/protocols/evifluor_demo_v3.py) in the Opentrons App.
+Install the custom labware [hse_evifluor_pilot_left_20ul_tip_v2.json](../integration_kits/opentrons-ot2/labware/hse_evifluor_pilot_left_20ul_tip_v2.json) and the protocol [evifluor_demo_v4.py](../integration_kits/opentrons-ot2/protocol/evifluor_demo_v4.py) in the Opentrons App.
 
 The demo protocol uses the following deck layout:
 

@@ -38,12 +38,17 @@
 
 
 <div class="viewcode-block" id="SingleMeasurement">
-<a class="viewcode-back" href="../../../api/hse.evifluor.singlemeasurement.html#hse.evifluor.SingleMeasurement">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.singlemeasurement.html#hse.evifluor.SingleMeasurement">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SingleMeasurement</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a single measurement consisting of the 470 nm wavelength channel.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_470</span> <span class="o">=</span> <span class="n">Channel</span><span class="p">()):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the measurement with an optional 470 nm channel.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes a single measurement.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            channel_470: Channel data for the 470 nm measurement channel. Defaults</span>
+<span class="sd">                to a new empty :class:`Channel`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">channel_470</span> <span class="o">=</span> <span class="n">channel_470</span>
         
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -51,24 +56,31 @@
         <span class="k">return</span> <span class="s2">&quot;470: [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel_470</span><span class="p">)</span>
         
 <div class="viewcode-block" id="SingleMeasurement.to_json">
-<a class="viewcode-back" href="../../../api/hse.evifluor.singlemeasurement.html#hse.evifluor.SingleMeasurement.to_json">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.singlemeasurement.html#hse.evifluor.SingleMeasurement.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts the measurement data to a JSON representation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_470</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span></div>
 
         
 <div class="viewcode-block" id="SingleMeasurement.delta">
-<a class="viewcode-back" href="../../../api/hse.evifluor.singlemeasurement.html#hse.evifluor.SingleMeasurement.delta">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.singlemeasurement.html#hse.evifluor.SingleMeasurement.delta">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">delta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the difference between sample signal and dark signal.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_470</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span></div>
 
                
 <div class="viewcode-block" id="SingleMeasurement.from_json">
-<a class="viewcode-back" href="../../../api/hse.evifluor.singlemeasurement.html#hse.evifluor.SingleMeasurement.from_json">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.singlemeasurement.html#hse.evifluor.SingleMeasurement.from_json">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a SingleMeasurement instance from a JSON node.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a single measurement from a JSON node.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            node: JSON object containing the serialized 470 nm channel data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A new :class:`SingleMeasurement` instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">SingleMeasurement</span><span class="p">(</span><span class="n">Channel</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">))</span></div>
 </div>
 
@@ -80,7 +92,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../../index.html">eviFluor Python API</a></h1>
+<h1 class="logo"><a href="../../../modules.html">eviFluor Python API</a></h1>
 
 
 
@@ -99,15 +111,14 @@
     </div>
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/modules.html">hse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hse.html">hse namespace</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../modules.html">Documentation overview</a><ul>
   <li><a href="../../index.html">Module code</a><ul>
   </ul></li>
   </ul></li>

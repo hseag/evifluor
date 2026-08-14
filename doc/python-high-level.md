@@ -220,10 +220,10 @@ run.close()
 The current `Run` implementation in `evifluor` focuses on guided acquisition, persistence, and resumable workflow state.
 It additionally exposes `save_state` and `load_state`, which are useful for longer-running automation scenarios.
 
-[run-api]: https://hseag.github.io/evifluor/pre-release/api/python/api/hse.evifluor.run.html#hse.evifluor.run.Run
-[storage-api]: https://hseag.github.io/evifluor/pre-release/api/python/api/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement
-[run-measure-api]: https://hseag.github.io/evifluor/pre-release/api/python/api/hse.evifluor.run.html#hse.evifluor.run.Run.measure
-[run-checkempty-api]: https://hseag.github.io/evifluor/pre-release/api/python/api/hse.evifluor.run.html#hse.evifluor.run.Run.check_empty
-[run-export-api]: https://hseag.github.io/evifluor/pre-release/api/python/api/hse.evifluor.run.html#hse.evifluor.run.Run.export_as_csv
-[run-save-api]: https://hseag.github.io/evifluor/pre-release/api/python/api/hse.evifluor.run.html#hse.evifluor.run.Run.save_state
-[run-load-api]: https://hseag.github.io/evifluor/pre-release/api/python/api/hse.evifluor.run.html#hse.evifluor.run.Run.load_state
+[run-api]: https://hseag.github.io/evi-test/pre-release/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run
+[storage-api]: https://hseag.github.io/evi-test/pre-release/doc/api/python/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement
+[run-measure-api]: https://hseag.github.io/evi-test/pre-release/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.measure
+[run-checkempty-api]: https://hseag.github.io/evi-test/pre-release/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.check_empty
+[run-export-api]: https://hseag.github.io/evi-test/pre-release/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.export_as_csv
+[run-save-api]: https://hseag.github.io/evi-test/pre-release/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.save_state
+[run-load-api]: https://hseag.github.io/evi-test/pre-release/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.load_state

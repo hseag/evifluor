@@ -1,5 +1,5 @@
 {
-  "source_base_path": "C:/scm/hse/colibri/evifluor/module/csharp/EviFluor/doc",
+  "source_base_path": "/builds/pro/colibri/evifluor/evifluor-project/api/csharp/doc/api",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -236,17 +236,31 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.yml",
+      "source_relative_path": "api/Hse.EviFluor.Kits.LookupTable.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.html"
+          "relative_path": "api/Hse.EviFluor.Kits.LookupTable.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Hse.EviFluor.Kits.Quant_iT_dsDNA_HS",
-      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.yml\" sourcestartlinenumber=\"1\">Linear kit preset for Thermo Fisher Quant-iT™ dsDNA HS Assay (Q33120).</p>\n"
+      "Title": "Hse.EviFluor.Kits.LookupTable",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Kits.LookupTable.yml\" sourcestartlinenumber=\"1\">Stores lookup-table points and converts between CSV and JSON representations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.Kits.LookupTableEntry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.Kits.LookupTableEntry.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.Kits.LookupTableEntry",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.Kits.LookupTableEntry.yml\" sourcestartlinenumber=\"1\">Single lookup-table point mapping normalized signal to concentration.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -532,11 +546,11 @@
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "api/toc.html"
-        },
         ".json": {
           "relative_path": "api/toc.json"
+        },
+        ".html": {
+          "relative_path": "api/toc.html"
         }
       },
       "version": ""
@@ -555,11 +569,11 @@
       "type": "Toc",
       "source_relative_path": "docs/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "docs/toc.html"
-        },
         ".json": {
           "relative_path": "docs/toc.json"
+        },
+        ".html": {
+          "relative_path": "docs/toc.html"
         }
       },
       "version": ""
@@ -598,11 +612,11 @@
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "toc.html"
-        },
         ".json": {
           "relative_path": "toc.json"
+        },
+        ".html": {
+          "relative_path": "toc.html"
         }
       },
       "version": ""

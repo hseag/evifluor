@@ -1,0 +1,29 @@
+hse.evifluor package
+====================
+
+.. automodule:: hse.evifluor
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   hse.evifluor.channel
+   hse.evifluor.cli
+   hse.evifluor.constants
+   hse.evifluor.device
+   hse.evifluor.kits
+   hse.evifluor.lookup_table
+   hse.evifluor.measurement
+   hse.evifluor.normalized_rfu_csv_exporter
+   hse.evifluor.rest_client
+   hse.evifluor.rest_server
+   hse.evifluor.run
+   hse.evifluor.service
+   hse.evifluor.singlemeasurement
+   hse.evifluor.storage
+   hse.evifluor.verification

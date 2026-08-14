@@ -38,12 +38,19 @@
 
 
 <div class="viewcode-block" id="Channel">
-<a class="viewcode-back" href="../../../api/hse.evifluor.channel.html#hse.evifluor.Channel">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.channel.html#hse.evifluor.Channel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Channel</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a measurement channel with sample and reference values, measured in mV.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dark</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">led_power</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes a new Channel with optional dark/value values and LED power.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes a new channel instance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dark: The dark value in mV. Defaults to 0.0.</span>
+<span class="sd">            value: The measured value in mV. Defaults to 0.0.</span>
+<span class="sd">            led_power: The LED power without unit, typically in the range 0..255.</span>
+<span class="sd">                Defaults to 0.0.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dark</span>      <span class="o">=</span> <span class="n">dark</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span>     <span class="o">=</span> <span class="n">value</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">led_power</span> <span class="o">=</span> <span class="n">led_power</span>
@@ -53,14 +60,14 @@
         <span class="k">return</span> <span class="s2">&quot;dark:</span><span class="si">{}</span><span class="s2"> value:</span><span class="si">{}</span><span class="s2"> led_power:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dark</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led_power</span><span class="p">)</span>
         
 <div class="viewcode-block" id="Channel.delta">
-<a class="viewcode-back" href="../../../api/hse.evifluor.channel.html#hse.evifluor.Channel.delta">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.channel.html#hse.evifluor.Channel.delta">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">delta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the difference between illuminated value and dark signal.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">dark</span></div>
 
 
 <div class="viewcode-block" id="Channel.to_json">
-<a class="viewcode-back" href="../../../api/hse.evifluor.channel.html#hse.evifluor.Channel.to_json">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.channel.html#hse.evifluor.Channel.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts the channel values to a JSON representation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
@@ -71,10 +78,17 @@
 
      
 <div class="viewcode-block" id="Channel.from_json">
-<a class="viewcode-back" href="../../../api/hse.evifluor.channel.html#hse.evifluor.Channel.from_json">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.channel.html#hse.evifluor.Channel.from_json">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a Channel instance from a JSON node.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a Channel instance from a JSON node.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            node: JSON object containing ``dark``, ``value``, and ``led_power``.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A new :class:`Channel` instance populated from ``node``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Channel</span><span class="p">(</span>
             <span class="n">node</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">DARK</span><span class="p">],</span>
             <span class="n">node</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">VALUE</span><span class="p">],</span>
@@ -90,7 +104,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../../index.html">eviFluor Python API</a></h1>
+<h1 class="logo"><a href="../../../modules.html">eviFluor Python API</a></h1>
 
 
 
@@ -109,15 +123,14 @@
     </div>
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/modules.html">hse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hse.html">hse namespace</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../modules.html">Documentation overview</a><ul>
   <li><a href="../../index.html">Module code</a><ul>
   </ul></li>
   </ul></li>

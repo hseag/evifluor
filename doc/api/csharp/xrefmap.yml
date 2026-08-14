@@ -1266,15 +1266,15 @@ references:
   commentId: T:Hse.EviFluor.Kits.Default
   fullName: Hse.EviFluor.Kits.Default
   nameWithType: Default
-- uid: Hse.EviFluor.Kits.Default.#ctor(Hse.EviFluor.Kits.FitAlgorithm,System.Double,System.Double,System.Double,System.Double,System.Nullable{System.Double},System.String)
-  name: Default(FitAlgorithm, double, double, double, double, double?, string?)
-  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default__ctor_Hse_EviFluor_Kits_FitAlgorithm_System_Double_System_Double_System_Double_System_Double_System_Nullable_System_Double__System_String_
-  commentId: M:Hse.EviFluor.Kits.Default.#ctor(Hse.EviFluor.Kits.FitAlgorithm,System.Double,System.Double,System.Double,System.Double,System.Nullable{System.Double},System.String)
-  name.vb: New(FitAlgorithm, Double, Double, Double, Double, Double?, String)
-  fullName: Hse.EviFluor.Kits.Default.Default(Hse.EviFluor.Kits.FitAlgorithm, double, double, double, double, double?, string?)
-  fullName.vb: Hse.EviFluor.Kits.Default.New(Hse.EviFluor.Kits.FitAlgorithm, Double, Double, Double, Double, Double?, String)
-  nameWithType: Default.Default(FitAlgorithm, double, double, double, double, double?, string?)
-  nameWithType.vb: Default.New(FitAlgorithm, Double, Double, Double, Double, Double?, String)
+- uid: Hse.EviFluor.Kits.Default.#ctor(Hse.EviFluor.Kits.FitAlgorithm,System.Double,System.Double,System.Double,Hse.EviFluor.Kits.LookupTable,System.Double,System.Nullable{System.Double},System.String)
+  name: Default(FitAlgorithm, double, double, double, LookupTable?, double, double?, string?)
+  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default__ctor_Hse_EviFluor_Kits_FitAlgorithm_System_Double_System_Double_System_Double_Hse_EviFluor_Kits_LookupTable_System_Double_System_Nullable_System_Double__System_String_
+  commentId: M:Hse.EviFluor.Kits.Default.#ctor(Hse.EviFluor.Kits.FitAlgorithm,System.Double,System.Double,System.Double,Hse.EviFluor.Kits.LookupTable,System.Double,System.Nullable{System.Double},System.String)
+  name.vb: New(FitAlgorithm, Double, Double, Double, LookupTable, Double, Double?, String)
+  fullName: Hse.EviFluor.Kits.Default.Default(Hse.EviFluor.Kits.FitAlgorithm, double, double, double, Hse.EviFluor.Kits.LookupTable?, double, double?, string?)
+  fullName.vb: Hse.EviFluor.Kits.Default.New(Hse.EviFluor.Kits.FitAlgorithm, Double, Double, Double, Hse.EviFluor.Kits.LookupTable, Double, Double?, String)
+  nameWithType: Default.Default(FitAlgorithm, double, double, double, LookupTable?, double, double?, string?)
+  nameWithType.vb: Default.New(FitAlgorithm, Double, Double, Double, LookupTable, Double, Double?, String)
 - uid: Hse.EviFluor.Kits.Default.#ctor*
   name: Default
   href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default__ctor_
@@ -1285,15 +1285,15 @@ references:
   fullName.vb: Hse.EviFluor.Kits.Default.New
   nameWithType: Default.Default
   nameWithType.vb: Default.New
-- uid: Hse.EviFluor.Kits.Default.Factory(System.String)
-  name: Factory(string)
-  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_Factory_System_String_
-  commentId: M:Hse.EviFluor.Kits.Default.Factory(System.String)
-  name.vb: Factory(String)
-  fullName: Hse.EviFluor.Kits.Default.Factory(string)
-  fullName.vb: Hse.EviFluor.Kits.Default.Factory(String)
-  nameWithType: Default.Factory(string)
-  nameWithType.vb: Default.Factory(String)
+- uid: Hse.EviFluor.Kits.Default.Factory(System.String,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double},Hse.EviFluor.Kits.LookupTable)
+  name: Factory(string, double?, double?, double?, LookupTable?)
+  href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_Factory_System_String_System_Nullable_System_Double__System_Nullable_System_Double__System_Nullable_System_Double__Hse_EviFluor_Kits_LookupTable_
+  commentId: M:Hse.EviFluor.Kits.Default.Factory(System.String,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double},Hse.EviFluor.Kits.LookupTable)
+  name.vb: Factory(String, Double?, Double?, Double?, LookupTable)
+  fullName: Hse.EviFluor.Kits.Default.Factory(string, double?, double?, double?, Hse.EviFluor.Kits.LookupTable?)
+  fullName.vb: Hse.EviFluor.Kits.Default.Factory(String, Double?, Double?, Double?, Hse.EviFluor.Kits.LookupTable)
+  nameWithType: Default.Factory(string, double?, double?, double?, LookupTable?)
+  nameWithType.vb: Default.Factory(String, Double?, Double?, Double?, LookupTable)
 - uid: Hse.EviFluor.Kits.Default.Factory*
   name: Factory
   href: api/Hse.EviFluor.Kits.Default.html#Hse_EviFluor_Kits_Default_Factory_
@@ -1394,71 +1394,222 @@ references:
   commentId: F:Hse.EviFluor.Kits.FitAlgorithm.Linear
   fullName: Hse.EviFluor.Kits.FitAlgorithm.Linear
   nameWithType: FitAlgorithm.Linear
-- uid: Hse.EviFluor.Kits.FitAlgorithm.Power
-  name: Power
-  href: api/Hse.EviFluor.Kits.FitAlgorithm.html#Hse_EviFluor_Kits_FitAlgorithm_Power
-  commentId: F:Hse.EviFluor.Kits.FitAlgorithm.Power
-  fullName: Hse.EviFluor.Kits.FitAlgorithm.Power
-  nameWithType: FitAlgorithm.Power
-- uid: Hse.EviFluor.Kits.FitAlgorithm.Quadratic
-  name: Quadratic
-  href: api/Hse.EviFluor.Kits.FitAlgorithm.html#Hse_EviFluor_Kits_FitAlgorithm_Quadratic
-  commentId: F:Hse.EviFluor.Kits.FitAlgorithm.Quadratic
-  fullName: Hse.EviFluor.Kits.FitAlgorithm.Quadratic
-  nameWithType: FitAlgorithm.Quadratic
-- uid: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS
-  name: Quant_iT_dsDNA_HS
-  href: api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.html
-  commentId: T:Hse.EviFluor.Kits.Quant_iT_dsDNA_HS
-  fullName: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS
-  nameWithType: Quant_iT_dsDNA_HS
-- uid: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.#ctor
-  name: Quant_iT_dsDNA_HS()
-  href: api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.html#Hse_EviFluor_Kits_Quant_iT_dsDNA_HS__ctor
-  commentId: M:Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.#ctor
-  name.vb: New()
-  fullName: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.Quant_iT_dsDNA_HS()
-  fullName.vb: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.New()
-  nameWithType: Quant_iT_dsDNA_HS.Quant_iT_dsDNA_HS()
-  nameWithType.vb: Quant_iT_dsDNA_HS.New()
-- uid: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.#ctor*
-  name: Quant_iT_dsDNA_HS
-  href: api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.html#Hse_EviFluor_Kits_Quant_iT_dsDNA_HS__ctor_
-  commentId: Overload:Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.#ctor
+- uid: Hse.EviFluor.Kits.FitAlgorithm.LookupTable
+  name: LookupTable
+  href: api/Hse.EviFluor.Kits.FitAlgorithm.html#Hse_EviFluor_Kits_FitAlgorithm_LookupTable
+  commentId: F:Hse.EviFluor.Kits.FitAlgorithm.LookupTable
+  fullName: Hse.EviFluor.Kits.FitAlgorithm.LookupTable
+  nameWithType: FitAlgorithm.LookupTable
+- uid: Hse.EviFluor.Kits.LookupTable
+  name: LookupTable
+  href: api/Hse.EviFluor.Kits.LookupTable.html
+  commentId: T:Hse.EviFluor.Kits.LookupTable
+  fullName: Hse.EviFluor.Kits.LookupTable
+  nameWithType: LookupTable
+- uid: Hse.EviFluor.Kits.LookupTable.#ctor(System.Collections.Generic.IEnumerable{Hse.EviFluor.Kits.LookupTableEntry})
+  name: LookupTable(IEnumerable<LookupTableEntry>?)
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable__ctor_System_Collections_Generic_IEnumerable_Hse_EviFluor_Kits_LookupTableEntry__
+  commentId: M:Hse.EviFluor.Kits.LookupTable.#ctor(System.Collections.Generic.IEnumerable{Hse.EviFluor.Kits.LookupTableEntry})
+  name.vb: New(IEnumerable(Of LookupTableEntry))
+  fullName: Hse.EviFluor.Kits.LookupTable.LookupTable(System.Collections.Generic.IEnumerable<Hse.EviFluor.Kits.LookupTableEntry>?)
+  fullName.vb: Hse.EviFluor.Kits.LookupTable.New(System.Collections.Generic.IEnumerable(Of Hse.EviFluor.Kits.LookupTableEntry))
+  nameWithType: LookupTable.LookupTable(IEnumerable<LookupTableEntry>?)
+  nameWithType.vb: LookupTable.New(IEnumerable(Of LookupTableEntry))
+- uid: Hse.EviFluor.Kits.LookupTable.#ctor*
+  name: LookupTable
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable__ctor_
+  commentId: Overload:Hse.EviFluor.Kits.LookupTable.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.Quant_iT_dsDNA_HS
-  fullName.vb: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.New
-  nameWithType: Quant_iT_dsDNA_HS.Quant_iT_dsDNA_HS
-  nameWithType.vb: Quant_iT_dsDNA_HS.New
-- uid: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.ToString
-  name: ToString()
-  href: api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.html#Hse_EviFluor_Kits_Quant_iT_dsDNA_HS_ToString
-  commentId: M:Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.ToString
-  fullName: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.ToString()
-  nameWithType: Quant_iT_dsDNA_HS.ToString()
-- uid: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.ToString*
-  name: ToString
-  href: api/Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.html#Hse_EviFluor_Kits_Quant_iT_dsDNA_HS_ToString_
-  commentId: Overload:Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.ToString
+  fullName: Hse.EviFluor.Kits.LookupTable.LookupTable
+  fullName.vb: Hse.EviFluor.Kits.LookupTable.New
+  nameWithType: LookupTable.LookupTable
+  nameWithType.vb: LookupTable.New
+- uid: Hse.EviFluor.Kits.LookupTable.CreateJsonFromCsv(System.String,System.String)
+  name: CreateJsonFromCsv(string, string)
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_CreateJsonFromCsv_System_String_System_String_
+  commentId: M:Hse.EviFluor.Kits.LookupTable.CreateJsonFromCsv(System.String,System.String)
+  name.vb: CreateJsonFromCsv(String, String)
+  fullName: Hse.EviFluor.Kits.LookupTable.CreateJsonFromCsv(string, string)
+  fullName.vb: Hse.EviFluor.Kits.LookupTable.CreateJsonFromCsv(String, String)
+  nameWithType: LookupTable.CreateJsonFromCsv(string, string)
+  nameWithType.vb: LookupTable.CreateJsonFromCsv(String, String)
+- uid: Hse.EviFluor.Kits.LookupTable.CreateJsonFromCsv*
+  name: CreateJsonFromCsv
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_CreateJsonFromCsv_
+  commentId: Overload:Hse.EviFluor.Kits.LookupTable.CreateJsonFromCsv
   isSpec: "True"
-  fullName: Hse.EviFluor.Kits.Quant_iT_dsDNA_HS.ToString
-  nameWithType: Quant_iT_dsDNA_HS.ToString
+  fullName: Hse.EviFluor.Kits.LookupTable.CreateJsonFromCsv
+  nameWithType: LookupTable.CreateJsonFromCsv
+- uid: Hse.EviFluor.Kits.LookupTable.Entries
+  name: Entries
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_Entries
+  commentId: P:Hse.EviFluor.Kits.LookupTable.Entries
+  fullName: Hse.EviFluor.Kits.LookupTable.Entries
+  nameWithType: LookupTable.Entries
+- uid: Hse.EviFluor.Kits.LookupTable.Entries*
+  name: Entries
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_Entries_
+  commentId: Overload:Hse.EviFluor.Kits.LookupTable.Entries
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.LookupTable.Entries
+  nameWithType: LookupTable.Entries
+- uid: Hse.EviFluor.Kits.LookupTable.FromCsv(System.String)
+  name: FromCsv(string)
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_FromCsv_System_String_
+  commentId: M:Hse.EviFluor.Kits.LookupTable.FromCsv(System.String)
+  name.vb: FromCsv(String)
+  fullName: Hse.EviFluor.Kits.LookupTable.FromCsv(string)
+  fullName.vb: Hse.EviFluor.Kits.LookupTable.FromCsv(String)
+  nameWithType: LookupTable.FromCsv(string)
+  nameWithType.vb: LookupTable.FromCsv(String)
+- uid: Hse.EviFluor.Kits.LookupTable.FromCsv*
+  name: FromCsv
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_FromCsv_
+  commentId: Overload:Hse.EviFluor.Kits.LookupTable.FromCsv
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.LookupTable.FromCsv
+  nameWithType: LookupTable.FromCsv
+- uid: Hse.EviFluor.Kits.LookupTable.FromJson(System.Text.Json.Nodes.JsonNode)
+  name: FromJson(JsonNode)
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_FromJson_System_Text_Json_Nodes_JsonNode_
+  commentId: M:Hse.EviFluor.Kits.LookupTable.FromJson(System.Text.Json.Nodes.JsonNode)
+  fullName: Hse.EviFluor.Kits.LookupTable.FromJson(System.Text.Json.Nodes.JsonNode)
+  nameWithType: LookupTable.FromJson(JsonNode)
+- uid: Hse.EviFluor.Kits.LookupTable.FromJson*
+  name: FromJson
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_FromJson_
+  commentId: Overload:Hse.EviFluor.Kits.LookupTable.FromJson
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.LookupTable.FromJson
+  nameWithType: LookupTable.FromJson
+- uid: Hse.EviFluor.Kits.LookupTable.Load(System.String)
+  name: Load(string)
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_Load_System_String_
+  commentId: M:Hse.EviFluor.Kits.LookupTable.Load(System.String)
+  name.vb: Load(String)
+  fullName: Hse.EviFluor.Kits.LookupTable.Load(string)
+  fullName.vb: Hse.EviFluor.Kits.LookupTable.Load(String)
+  nameWithType: LookupTable.Load(string)
+  nameWithType.vb: LookupTable.Load(String)
+- uid: Hse.EviFluor.Kits.LookupTable.Load*
+  name: Load
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_Load_
+  commentId: Overload:Hse.EviFluor.Kits.LookupTable.Load
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.LookupTable.Load
+  nameWithType: LookupTable.Load
+- uid: Hse.EviFluor.Kits.LookupTable.LoadJson(System.String)
+  name: LoadJson(string)
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_LoadJson_System_String_
+  commentId: M:Hse.EviFluor.Kits.LookupTable.LoadJson(System.String)
+  name.vb: LoadJson(String)
+  fullName: Hse.EviFluor.Kits.LookupTable.LoadJson(string)
+  fullName.vb: Hse.EviFluor.Kits.LookupTable.LoadJson(String)
+  nameWithType: LookupTable.LoadJson(string)
+  nameWithType.vb: LookupTable.LoadJson(String)
+- uid: Hse.EviFluor.Kits.LookupTable.LoadJson*
+  name: LoadJson
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_LoadJson_
+  commentId: Overload:Hse.EviFluor.Kits.LookupTable.LoadJson
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.LookupTable.LoadJson
+  nameWithType: LookupTable.LoadJson
+- uid: Hse.EviFluor.Kits.LookupTable.SaveJson(System.String)
+  name: SaveJson(string)
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_SaveJson_System_String_
+  commentId: M:Hse.EviFluor.Kits.LookupTable.SaveJson(System.String)
+  name.vb: SaveJson(String)
+  fullName: Hse.EviFluor.Kits.LookupTable.SaveJson(string)
+  fullName.vb: Hse.EviFluor.Kits.LookupTable.SaveJson(String)
+  nameWithType: LookupTable.SaveJson(string)
+  nameWithType.vb: LookupTable.SaveJson(String)
+- uid: Hse.EviFluor.Kits.LookupTable.SaveJson*
+  name: SaveJson
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_SaveJson_
+  commentId: Overload:Hse.EviFluor.Kits.LookupTable.SaveJson
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.LookupTable.SaveJson
+  nameWithType: LookupTable.SaveJson
+- uid: Hse.EviFluor.Kits.LookupTable.ToJson
+  name: ToJson()
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_ToJson
+  commentId: M:Hse.EviFluor.Kits.LookupTable.ToJson
+  fullName: Hse.EviFluor.Kits.LookupTable.ToJson()
+  nameWithType: LookupTable.ToJson()
+- uid: Hse.EviFluor.Kits.LookupTable.ToJson*
+  name: ToJson
+  href: api/Hse.EviFluor.Kits.LookupTable.html#Hse_EviFluor_Kits_LookupTable_ToJson_
+  commentId: Overload:Hse.EviFluor.Kits.LookupTable.ToJson
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.LookupTable.ToJson
+  nameWithType: LookupTable.ToJson
+- uid: Hse.EviFluor.Kits.LookupTableEntry
+  name: LookupTableEntry
+  href: api/Hse.EviFluor.Kits.LookupTableEntry.html
+  commentId: T:Hse.EviFluor.Kits.LookupTableEntry
+  fullName: Hse.EviFluor.Kits.LookupTableEntry
+  nameWithType: LookupTableEntry
+- uid: Hse.EviFluor.Kits.LookupTableEntry.#ctor(System.Double,System.Double)
+  name: LookupTableEntry(double, double)
+  href: api/Hse.EviFluor.Kits.LookupTableEntry.html#Hse_EviFluor_Kits_LookupTableEntry__ctor_System_Double_System_Double_
+  commentId: M:Hse.EviFluor.Kits.LookupTableEntry.#ctor(System.Double,System.Double)
+  name.vb: New(Double, Double)
+  fullName: Hse.EviFluor.Kits.LookupTableEntry.LookupTableEntry(double, double)
+  fullName.vb: Hse.EviFluor.Kits.LookupTableEntry.New(Double, Double)
+  nameWithType: LookupTableEntry.LookupTableEntry(double, double)
+  nameWithType.vb: LookupTableEntry.New(Double, Double)
+- uid: Hse.EviFluor.Kits.LookupTableEntry.#ctor*
+  name: LookupTableEntry
+  href: api/Hse.EviFluor.Kits.LookupTableEntry.html#Hse_EviFluor_Kits_LookupTableEntry__ctor_
+  commentId: Overload:Hse.EviFluor.Kits.LookupTableEntry.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Hse.EviFluor.Kits.LookupTableEntry.LookupTableEntry
+  fullName.vb: Hse.EviFluor.Kits.LookupTableEntry.New
+  nameWithType: LookupTableEntry.LookupTableEntry
+  nameWithType.vb: LookupTableEntry.New
+- uid: Hse.EviFluor.Kits.LookupTableEntry.Concentration
+  name: Concentration
+  href: api/Hse.EviFluor.Kits.LookupTableEntry.html#Hse_EviFluor_Kits_LookupTableEntry_Concentration
+  commentId: P:Hse.EviFluor.Kits.LookupTableEntry.Concentration
+  fullName: Hse.EviFluor.Kits.LookupTableEntry.Concentration
+  nameWithType: LookupTableEntry.Concentration
+- uid: Hse.EviFluor.Kits.LookupTableEntry.Concentration*
+  name: Concentration
+  href: api/Hse.EviFluor.Kits.LookupTableEntry.html#Hse_EviFluor_Kits_LookupTableEntry_Concentration_
+  commentId: Overload:Hse.EviFluor.Kits.LookupTableEntry.Concentration
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.LookupTableEntry.Concentration
+  nameWithType: LookupTableEntry.Concentration
+- uid: Hse.EviFluor.Kits.LookupTableEntry.Signal
+  name: Signal
+  href: api/Hse.EviFluor.Kits.LookupTableEntry.html#Hse_EviFluor_Kits_LookupTableEntry_Signal
+  commentId: P:Hse.EviFluor.Kits.LookupTableEntry.Signal
+  fullName: Hse.EviFluor.Kits.LookupTableEntry.Signal
+  nameWithType: LookupTableEntry.Signal
+- uid: Hse.EviFluor.Kits.LookupTableEntry.Signal*
+  name: Signal
+  href: api/Hse.EviFluor.Kits.LookupTableEntry.html#Hse_EviFluor_Kits_LookupTableEntry_Signal_
+  commentId: Overload:Hse.EviFluor.Kits.LookupTableEntry.Signal
+  isSpec: "True"
+  fullName: Hse.EviFluor.Kits.LookupTableEntry.Signal
+  nameWithType: LookupTableEntry.Signal
 - uid: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR
   name: QubitTM_1X_dsDNA_Broad_Range_BR
   href: api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.html
   commentId: T:Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR
   fullName: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR
   nameWithType: QubitTM_1X_dsDNA_Broad_Range_BR
-- uid: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.#ctor
-  name: QubitTM_1X_dsDNA_Broad_Range_BR()
-  href: api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.html#Hse_EviFluor_Kits_QubitTM_1X_dsDNA_Broad_Range_BR__ctor
-  commentId: M:Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.#ctor
-  name.vb: New()
-  fullName: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.QubitTM_1X_dsDNA_Broad_Range_BR()
-  fullName.vb: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.New()
-  nameWithType: QubitTM_1X_dsDNA_Broad_Range_BR.QubitTM_1X_dsDNA_Broad_Range_BR()
-  nameWithType.vb: QubitTM_1X_dsDNA_Broad_Range_BR.New()
+- uid: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.#ctor(System.Double,System.Double,Hse.EviFluor.Kits.LookupTable)
+  name: QubitTM_1X_dsDNA_Broad_Range_BR(double, double, LookupTable?)
+  href: api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.html#Hse_EviFluor_Kits_QubitTM_1X_dsDNA_Broad_Range_BR__ctor_System_Double_System_Double_Hse_EviFluor_Kits_LookupTable_
+  commentId: M:Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.#ctor(System.Double,System.Double,Hse.EviFluor.Kits.LookupTable)
+  name.vb: New(Double, Double, LookupTable)
+  fullName: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.QubitTM_1X_dsDNA_Broad_Range_BR(double, double, Hse.EviFluor.Kits.LookupTable?)
+  fullName.vb: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.New(Double, Double, Hse.EviFluor.Kits.LookupTable)
+  nameWithType: QubitTM_1X_dsDNA_Broad_Range_BR.QubitTM_1X_dsDNA_Broad_Range_BR(double, double, LookupTable?)
+  nameWithType.vb: QubitTM_1X_dsDNA_Broad_Range_BR.New(Double, Double, LookupTable)
 - uid: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.#ctor*
   name: QubitTM_1X_dsDNA_Broad_Range_BR
   href: api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR.html#Hse_EviFluor_Kits_QubitTM_1X_dsDNA_Broad_Range_BR__ctor_
@@ -1475,15 +1626,15 @@ references:
   commentId: T:Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS
   fullName: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS
   nameWithType: QubitTM_1X_dsDNA_High_Sensitivity_HS
-- uid: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.#ctor
-  name: QubitTM_1X_dsDNA_High_Sensitivity_HS()
-  href: api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.html#Hse_EviFluor_Kits_QubitTM_1X_dsDNA_High_Sensitivity_HS__ctor
-  commentId: M:Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.#ctor
-  name.vb: New()
-  fullName: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.QubitTM_1X_dsDNA_High_Sensitivity_HS()
-  fullName.vb: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.New()
-  nameWithType: QubitTM_1X_dsDNA_High_Sensitivity_HS.QubitTM_1X_dsDNA_High_Sensitivity_HS()
-  nameWithType.vb: QubitTM_1X_dsDNA_High_Sensitivity_HS.New()
+- uid: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.#ctor(System.Double,System.Double)
+  name: QubitTM_1X_dsDNA_High_Sensitivity_HS(double, double)
+  href: api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.html#Hse_EviFluor_Kits_QubitTM_1X_dsDNA_High_Sensitivity_HS__ctor_System_Double_System_Double_
+  commentId: M:Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.#ctor(System.Double,System.Double)
+  name.vb: New(Double, Double)
+  fullName: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.QubitTM_1X_dsDNA_High_Sensitivity_HS(double, double)
+  fullName.vb: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.New(Double, Double)
+  nameWithType: QubitTM_1X_dsDNA_High_Sensitivity_HS.QubitTM_1X_dsDNA_High_Sensitivity_HS(double, double)
+  nameWithType.vb: QubitTM_1X_dsDNA_High_Sensitivity_HS.New(Double, Double)
 - uid: Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.#ctor*
   name: QubitTM_1X_dsDNA_High_Sensitivity_HS
   href: api/Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS.html#Hse_EviFluor_Kits_QubitTM_1X_dsDNA_High_Sensitivity_HS__ctor_

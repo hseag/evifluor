@@ -251,7 +251,7 @@ Performs a guided workflow on top of the low-level commands.
 Supported forms:
 
 ```text
-evifluor-cli run [OPTIONS] init NR_STD_LOW NR_STD_HIGH CONCENTRATION [--no-air] [--kit=NAME] [--settling-time=SECONDS]
+evifluor-cli run [OPTIONS] init NR_STD_LOW NR_STD_HIGH CONCENTRATION [--no-air] [--kit=NAME] [--k1=VALUE] [--k2=VALUE] [--k3=VALUE] [--lookup_table=FILE] [--settling-time=SECONDS]
 evifluor-cli run [OPTIONS] measure [COMMENT]
 evifluor-cli run [OPTIONS] checkempty
 evifluor-cli run [OPTIONS] export
@@ -262,7 +262,11 @@ Run options:
 - `--working-dir=DIR`
 - `--file=FILE`
 - `--no-air` only with `run init`
-- `--kit=NAME` only with `run init`
+- `--kit=NAME` only with `run init`, see [Kit Reference](./kit.md)
+- `--k1=VALUE` only with `run init`
+- `--k2=VALUE` only with `run init`
+- `--k3=VALUE` only with `run init`
+- `--lookup_table=FILE` only with `run init`
 - `--settling-time=SECONDS` only with `run init`
 
 Behavior:
@@ -270,6 +274,8 @@ Behavior:
 - `init` creates the run state file and selects the data file
 - `init ... --no-air` initializes a sample-only run without separate air measurements, aligned with the Python CLI
 - `init ... --kit=...` applies a predefined kit fit model during result calculation
+- `init ... --k1=...`, `--k2=...`, `--k3=...` override optional kit fit parameters
+- `init ... --lookup_table=...` loads a lookup table from a local `.csv` or `.json` file and stores its content in the run state
 - `init ... --settling-time=...` overrides the settling time stored in the selected kit
 - `measure` advances the workflow state machine
 - `checkempty` returns exit code `0` when the cuvette guide is empty and exit code `57` when it is not empty

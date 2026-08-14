@@ -44,6 +44,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">USB</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.device</span><span class="w"> </span><span class="kn">import</span> <span class="n">Device</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.kits</span><span class="w"> </span><span class="kn">import</span> <span class="n">Default</span> <span class="k">as</span> <span class="n">DefaultKit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.normalized_rfu_csv_exporter</span><span class="w"> </span><span class="kn">import</span> <span class="n">NormalizedRfuCsvExporter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">Run</span>
 
 <span class="n">_LOCKS</span> <span class="o">=</span> <span class="p">{}</span>
@@ -51,21 +52,50 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_path</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolves a filename relative to a working directory.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        working_dir: Base directory used for relative paths.</span>
+<span class="sd">        filename: Optional absolute or relative filename.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ``filename`` unchanged when it is absolute or ``None``, otherwise the</span>
+<span class="sd">        path joined with ``working_dir``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">filename</span>
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="resolve_state_path">
-<a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.resolve_state_path">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.resolve_state_path">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">resolve_state_path</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolves the run-state filename for a working directory and device.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        working_dir: Base working directory.</span>
+<span class="sd">        device: Optional device identifier used in the default state filename.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Absolute or relative path to the state file, depending on inputs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_resolve_path</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">Run</span><span class="o">.</span><span class="n">_resolve_state_filename</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">))</span></div>
 
 
 
 <div class="viewcode-block" id="resolve_run_paths">
-<a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.resolve_run_paths">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.resolve_run_paths">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">resolve_run_paths</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolves the canonical paths used by run workflows.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        working_dir: Base working directory for run state and output files.</span>
+<span class="sd">        filename: Optional explicit measurement JSON filename.</span>
+<span class="sd">        device: Optional device identifier used in the default state filename.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple ``(working_dir, data_file, state_file)`` with resolved paths.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">working_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">working_dir</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">data_file</span> <span class="o">=</span> <span class="n">_resolve_path</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
@@ -81,6 +111,14 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_read_json_if_exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Loads a JSON file if it exists.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename: Optional file path to inspect.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Parsed JSON content, or ``None`` when the file is absent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
@@ -88,6 +126,15 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_run_snapshot</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">state_file</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Builds a serializable snapshot describing the current run state.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        run: Active :class:`Run` instance.</span>
+<span class="sd">        state_file: State filename associated with the run.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary containing summarized run metadata.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data_file</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="s2">&quot;_filename&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="s2">&quot;state_file&quot;</span><span class="p">:</span> <span class="n">state_file</span><span class="p">,</span>
@@ -120,6 +167,12 @@
 
 <span class="nd">@contextmanager</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_acquire_lock</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Acquires a per-device or per-run lock for the duration of the context.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        kind: Lock namespace such as ``&quot;device&quot;`` or ``&quot;run&quot;``.</span>
+<span class="sd">        value: Lock key within the namespace.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lock</span> <span class="o">=</span> <span class="n">_get_lock</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">lock</span><span class="p">:</span>
         <span class="k">yield</span>
@@ -158,16 +211,30 @@
 
 
 <div class="viewcode-block" id="get_device_info">
-<a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.get_device_info">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.get_device_info">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_device_info</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns basic device information.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        device: Optional device identifier or ``&quot;SIMULATION&quot;``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary containing serial number, firmware version, and production</span>
+<span class="sd">        number.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">_acquire_lock</span><span class="p">(</span><span class="s2">&quot;device&quot;</span><span class="p">,</span> <span class="n">_device_lock_value</span><span class="p">(</span><span class="n">device</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">_probe_device_info</span><span class="p">(</span><span class="n">device</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="list_devices">
-<a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.list_devices">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.list_devices">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">list_devices</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lists available connected devices.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of dictionaries containing ``device_id`` and serial ``port``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">devices</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">serial</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">list_ports</span><span class="o">.</span><span class="n">comports</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">port</span><span class="o">.</span><span class="n">vid</span> <span class="o">==</span> <span class="n">USB</span><span class="o">.</span><span class="n">VID</span> <span class="ow">and</span> <span class="n">port</span><span class="o">.</span><span class="n">pid</span> <span class="o">==</span> <span class="n">USB</span><span class="o">.</span><span class="n">PID</span><span class="p">:</span>
@@ -180,8 +247,16 @@
 
 
 <div class="viewcode-block" id="run_selftest">
-<a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.run_selftest">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.run_selftest">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">run_selftest</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Runs the device self-test and returns the serialized result.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        device: Optional device identifier or ``&quot;SIMULATION&quot;``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary containing the raw self-test result and ``hasProblems``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">_acquire_lock</span><span class="p">(</span><span class="s2">&quot;device&quot;</span><span class="p">,</span> <span class="n">_device_lock_value</span><span class="p">(</span><span class="n">device</span><span class="p">)):</span>
         <span class="n">evifluor</span> <span class="o">=</span> <span class="n">Device</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
@@ -194,8 +269,16 @@
 
 
 <div class="viewcode-block" id="check_empty">
-<a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.check_empty">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.check_empty">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">check_empty</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks whether the cuvette holder is empty.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        device: Optional device identifier or ``&quot;SIMULATION&quot;``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary with the boolean ``empty`` flag.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">_acquire_lock</span><span class="p">(</span><span class="s2">&quot;device&quot;</span><span class="p">,</span> <span class="n">_device_lock_value</span><span class="p">(</span><span class="n">device</span><span class="p">)):</span>
         <span class="n">evifluor</span> <span class="o">=</span> <span class="n">Device</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
@@ -208,8 +291,25 @@
 
 
 <div class="viewcode-block" id="init_run">
-<a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.init_run">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.init_run">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">init_run</span><span class="p">(</span><span class="n">nr_of_std_low</span><span class="p">,</span> <span class="n">nr_of_std_high</span><span class="p">,</span> <span class="n">concentration</span><span class="p">,</span> <span class="n">working_dir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">no_air</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">settling_time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes a new guided run and persists its initial state.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        nr_of_std_low: Number of low-standard replicates.</span>
+<span class="sd">        nr_of_std_high: Number of high-standard replicates.</span>
+<span class="sd">        concentration: Concentration assigned to the high standard.</span>
+<span class="sd">        working_dir: Working directory used for generated files.</span>
+<span class="sd">        filename: Optional explicit measurement JSON filename.</span>
+<span class="sd">        device: Optional device identifier or ``&quot;SIMULATION&quot;``.</span>
+<span class="sd">        no_air: If ``True``, the run uses the sample-only workflow.</span>
+<span class="sd">        kit: Optional kit configuration. Defaults to</span>
+<span class="sd">            :class:`hse.evifluor.kits.Default`.</span>
+<span class="sd">        settling_time: Optional explicit settling time override in seconds.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Snapshot dictionary describing the initialized run.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">kit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">kit</span> <span class="o">=</span> <span class="n">DefaultKit</span><span class="p">()</span>
     <span class="n">working_dir</span><span class="p">,</span> <span class="n">data_file</span><span class="p">,</span> <span class="n">state_file</span> <span class="o">=</span> <span class="n">resolve_run_paths</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
@@ -237,8 +337,16 @@
 
 
 <div class="viewcode-block" id="load_run_state">
-<a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.load_run_state">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.load_run_state">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_run_state</span><span class="p">(</span><span class="n">state_file</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Loads a previously persisted run state.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state_file: Path to the saved run-state file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Snapshot dictionary containing run state and persisted data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">_acquire_lock</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="n">state_file</span><span class="p">):</span>
         <span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">load_state</span><span class="p">(</span><span class="n">state_file</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
@@ -252,16 +360,37 @@
 
 
 <div class="viewcode-block" id="measure_run">
-<a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.measure_run">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.measure_run">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">measure_run</span><span class="p">(</span><span class="n">working_dir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Executes the next run step using working-directory based path resolution.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        working_dir: Working directory containing the run-state file.</span>
+<span class="sd">        filename: Optional explicit measurement filename used to resolve paths.</span>
+<span class="sd">        device: Optional device identifier used to resolve the default state</span>
+<span class="sd">            filename.</span>
+<span class="sd">        comment: Optional comment stored with the next completed measurement.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Snapshot dictionary after the measurement step.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">state_file</span> <span class="o">=</span> <span class="n">resolve_run_paths</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">measure_run_state</span><span class="p">(</span><span class="n">state_file</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="n">comment</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="measure_run_state">
-<a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.measure_run_state">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.measure_run_state">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">measure_run_state</span><span class="p">(</span><span class="n">state_file</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Executes the next run step using an explicit state file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state_file: Path to the run-state file.</span>
+<span class="sd">        comment: Optional comment stored with the next completed measurement.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Snapshot dictionary after the measurement step.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">_acquire_lock</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="n">state_file</span><span class="p">):</span>
         <span class="n">device</span> <span class="o">=</span> <span class="n">_device_from_state_file</span><span class="p">(</span><span class="n">state_file</span><span class="p">)</span>
         <span class="k">with</span> <span class="n">_acquire_lock</span><span class="p">(</span><span class="s2">&quot;device&quot;</span><span class="p">,</span> <span class="n">_device_lock_value</span><span class="p">(</span><span class="n">device</span><span class="p">)):</span>
@@ -279,8 +408,17 @@
 
 
 <div class="viewcode-block" id="get_device_status">
-<a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.get_device_status">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.get_device_status">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_device_status</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reports whether a device is idle, busy, or unavailable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        device: Optional explicit device identifier. When omitted, the function</span>
+<span class="sd">            reports the best matching global device status.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary with ``device_id``, ``status``, and optional ``error``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">devices</span> <span class="o">=</span> <span class="n">list_devices</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">device</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">_device_lock_is_busy</span><span class="p">():</span>
@@ -339,16 +477,35 @@
 
 
 <div class="viewcode-block" id="export_run">
-<a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.export_run">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.export_run">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">export_run</span><span class="p">(</span><span class="n">working_dir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exports the active run to CSV using working-directory based path resolution.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        working_dir: Working directory containing the run-state file.</span>
+<span class="sd">        filename: Optional explicit measurement filename used to resolve paths.</span>
+<span class="sd">        device: Optional device identifier used to resolve the default state</span>
+<span class="sd">            filename.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Snapshot dictionary including the generated CSV filename when available.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">state_file</span> <span class="o">=</span> <span class="n">resolve_run_paths</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">export_run_state</span><span class="p">(</span><span class="n">state_file</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="export_run_state">
-<a class="viewcode-back" href="../../../api/hse.evifluor.service.html#hse.evifluor.service.export_run_state">[docs]</a>
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.export_run_state">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">export_run_state</span><span class="p">(</span><span class="n">state_file</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exports a run referenced by an explicit state file to CSV.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state_file: Path to the run-state file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Snapshot dictionary including the generated CSV filename when available.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">_acquire_lock</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="n">state_file</span><span class="p">):</span>
         <span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">load_state</span><span class="p">(</span><span class="n">state_file</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
@@ -360,6 +517,24 @@
         <span class="k">finally</span><span class="p">:</span>
             <span class="n">run</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
+
+
+<div class="viewcode-block" id="export_normalized_rfu_csv">
+<a class="viewcode-back" href="../../../hse.evifluor.service.html#hse.evifluor.service.export_normalized_rfu_csv">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">export_normalized_rfu_csv</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="n">replicates</span><span class="p">,</span> <span class="n">csv_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exports normalized RFU data from a measurement JSON file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_file: Source measurement JSON file.</span>
+<span class="sd">        replicates: Number of replicates per calibration block.</span>
+<span class="sd">        csv_file: Optional destination CSV filename.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Path to the generated CSV file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">exporter</span> <span class="o">=</span> <span class="n">NormalizedRfuCsvExporter</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="n">replicates</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">exporter</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">csv_file</span><span class="p">)</span></div>
+
 </pre></div>
 
           </div>
@@ -368,7 +543,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../../index.html">eviFluor Python API</a></h1>
+<h1 class="logo"><a href="../../../modules.html">eviFluor Python API</a></h1>
 
 
 
@@ -387,15 +562,14 @@
     </div>
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../api/modules.html">hse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hse.html">hse namespace</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../modules.html">Documentation overview</a><ul>
   <li><a href="../../index.html">Module code</a><ul>
   </ul></li>
   </ul></li>

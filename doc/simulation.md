@@ -12,7 +12,7 @@ This is useful for repeating known runs during development, regression tests, an
 If `NO_AIR` is enabled, `LOAD` interprets the loaded file in no-air mode as well.
 In that case, the client workflow must also be started in no-air mode so that the measurement sequence matches the loaded data.
 
-The simulator package is located in [`simulator`](simulator).
+The simulator package is located in [`simulator`](../simulator).
 
 ## 2. Installation
 
@@ -21,7 +21,7 @@ The simulator is provided as a Python package with the console script `hse-simul
 Example installation from the repository root:
 
 ```powershell
-python -m pip install https://hseag.github.io/evifluor/pre-release/simulator/dist/hse_simulator-0.1.0-py3-none-any.whl
+python -m pip install https://hseag.github.io/evi-test/pre-release/simulator/dist/hse_simulator-0.1.0-py3-none-any.whl
 ```
 
 This installs:

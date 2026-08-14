@@ -17,14 +17,14 @@ The Python package provides four different interfaces for working with the eviFl
 
 ## 2. Version
 
-This documentation describes Python package version `0.12.0b4`.
+This documentation describes Python package version `0.12.0-pre1`.
 
 ## 3. Installation
 
 To install the published wheel directly from the documentation site, use:
 
 ```bash
-python -m pip install https://hseag.github.io/evifluor/pre-release/python/dist/hse_evifluor-0.12.0b4-py3-none-any.whl
+python -m pip install https://hseag.github.io/evi-test/pre-release/python/dist/hse_evifluor-0.12.0rc1-py3-none-any.whl
 ```
 
 Runtime dependency:
@@ -51,7 +51,7 @@ python -m hse.evifluor --help
 The REST API can be installed as:
 
 ```bash
-python -m pip install "hse-evifluor[rest] @ https://hseag.github.io/evifluor/pre-release/python/dist/hse_evifluor-0.12.0b4-py3-none-any.whl"
+python -m pip install "hse-evifluor[rest] @ https://hseag.github.io/evi-test/pre-release/python/dist/hse_evifluor-0.12.0rc1-py3-none-any.whl"
 ```
 
 Then start it as:
@@ -167,4 +167,4 @@ For most users, the best order is:
 4. Continue with [Python Command Line Interface](./python-cli.md) or [Python REST API](./python-rest.md) if you need an operational interface instead of an in-process API.
 5. Use [Kit Reference](./kit.md) for predefined kits, fit models, and kit-specific settings.
 
-[python-api-docs]: https://hseag.github.io/evifluor/pre-release/api/python/index.html
+[python-api-docs]: https://hseag.github.io/evi-test/pre-release/doc/api/python/modules.html

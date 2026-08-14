@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>    
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Library for controlling an eviFluor module.</Title>
+    <Company>HSE•AG</Company>
+    <Copyright>© 2025 HSE AG. All rights reserved. </Copyright>
+    <PackageProjectUrl>https://www.hseag.com/evifluor-duo-factsheet</PackageProjectUrl>
+    <Description>The eviFluor module is an ultra-compact 2-channel fluorometer on liquid handlers.</Description>
+    <PackageLicenseFile>LICENSE.TXT</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageId>Hseagcom.$(AssemblyName)</PackageId>
+    <AssemblyName>Hseagcom.$(MSBuildProjectName)</AssemblyName>
+    <RepositoryUrl>https://github.com/hseag/evifluor</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>EviFluor</PackageTags>
+    <IncludeSymbols>False</IncludeSymbols>
+    <PackageIcon>hseag_logo.png</PackageIcon>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\hseag_logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Ports" Version="6.0.0" />
+    <PackageReference Include="System.Management" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="LICENSE.TXT">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
