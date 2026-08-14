@@ -1,0 +1,13 @@
+# Lychee link checker configuration
+# https://github.com/lycheeverse/lychee
+
+timeout = 20
+max_retries = 3
+retry_wait_time = 5
+
+exclude = [
+    "^abs/",
+    "^file://",
+]
+
+accept = [200, 206, 429]
