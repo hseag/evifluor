@@ -71,7 +71,7 @@ jobs:
           echo "Checking $url"
           for i in $(seq 1 12); do
             if curl --fail --silent --show-error --location "$url" -o page.html; then
-              grep -F "eviDense Python API" page.html
+              grep -F "eviFluor Python API" page.html
               exit 0
             fi
             sleep 5
@@ -159,7 +159,7 @@ jobs:
             fi
           }
           trap cleanup EXIT
-          python -m hse.simulator --no-web evidense > simulator.log 2>&1 &
+          python -m hse.simulator --no-web evifluor > simulator.log 2>&1 &
           SIM_PID=$!
           for i in $(seq 1 60); do
             python -c "import socket; socket.create_connection(('127.0.0.1', 5000), timeout=1).close()" && break
@@ -169,7 +169,7 @@ jobs:
             fi
             sleep 0.5
           done
-          ./build/c/evidense-cli --device SIMULATION get 1 | tee c-serial.txt
+          ./build/c/evifluor-cli --device SIMULATION get 1 | tee c-serial.txt
           grep -Fx "SIMULATOR" c-serial.txt
 
       - name: Upload simulator artifacts
@@ -206,7 +206,7 @@ jobs:
             fi
           }
           trap cleanup EXIT
-          python -m hse.simulator --no-web evidense > simulator.log 2>&1 &
+          python -m hse.simulator --no-web evifluor > simulator.log 2>&1 &
           SIM_PID=$!
           for i in $(seq 1 60); do
             python -c "import socket; socket.create_connection(('127.0.0.1', 5000), timeout=1).close()" && break
@@ -216,7 +216,7 @@ jobs:
             fi
             sleep 0.5
           done
-          python -c "from hse.evidense.device import Device; dev = Device('SIMULATION'); print(dev.serial_number()); dev.close()" | tee python-source-serial.txt
+          python -c "from hse.evifluor.device import Device; dev = Device('SIMULATION'); print(dev.serial_number()); dev.close()" | tee python-source-serial.txt
           grep -Fx "SIMULATOR" python-source-serial.txt
 
       - name: Upload simulator artifacts
@@ -252,7 +252,7 @@ jobs:
             fi
           }
           trap cleanup EXIT
-          python -m hse.simulator --no-web evidense > simulator.log 2>&1 &
+          python -m hse.simulator --no-web evifluor > simulator.log 2>&1 &
           SIM_PID=$!
           for i in $(seq 1 60); do
             python -c "import socket; socket.create_connection(('127.0.0.1', 5000), timeout=1).close()" && break
@@ -262,7 +262,7 @@ jobs:
             fi
             sleep 0.5
           done
-          python -c "from hse.evidense.device import Device; dev = Device('SIMULATION'); print(dev.serial_number()); dev.close()" | tee python-wheel-serial.txt
+          python -c "from hse.evifluor.device import Device; dev = Device('SIMULATION'); print(dev.serial_number()); dev.close()" | tee python-wheel-serial.txt
           grep -Fx "SIMULATOR" python-wheel-serial.txt
 
       - name: Upload simulator artifacts
@@ -287,7 +287,7 @@ jobs:
           dotnet-version: "8.0.x"
 
       - name: Restore C# solution
-        run: dotnet restore api/csharp/eviDense.sln
+        run: dotnet restore api/csharp/eviFluor.sln
 
       - name: Build C# solution
-        run: dotnet build api/csharp/eviDense.sln --configuration Release --no-restore
+        run: dotnet build api/csharp/eviFluor.sln --configuration Release --no-restore
