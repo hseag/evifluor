@@ -175,8 +175,8 @@ This forwards to the underlying device and returns `true` when the cuvette holde
 
 Export the active measurement file as CSV with [`StorageMeasurement.ExportAsCsv(...)`][storage-exportcsv-api] after the run data has been saved.
 
-[run-api]: https://hseag.github.io/evi-test/pre-release/doc/api/csharp/api/Hse.EviFluor.Run.html
-[storage-measurement-api]: https://hseag.github.io/evi-test/pre-release/doc/api/csharp/api/Hse.EviFluor.StorageMeasurement.html
-[run-measure-api]: https://hseag.github.io/evi-test/pre-release/doc/api/csharp/api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_measure_System_String_
-[run-checkempty-api]: https://hseag.github.io/evi-test/pre-release/doc/api/csharp/api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_checkEmpty
-[storage-exportcsv-api]: https://hseag.github.io/evi-test/pre-release/doc/api/csharp/api/Hse.EviFluor.StorageMeasurement.html#Hse_EviFluor_StorageMeasurement_ExportAsCsv_System_String_
+[run-api]: https://hseag.github.io/evifluor/pre-release/doc/api/csharp/api/Hse.EviFluor.Run.html
+[storage-measurement-api]: https://hseag.github.io/evifluor/pre-release/doc/api/csharp/api/Hse.EviFluor.StorageMeasurement.html
+[run-measure-api]: https://hseag.github.io/evifluor/pre-release/doc/api/csharp/api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_measure_System_String_
+[run-checkempty-api]: https://hseag.github.io/evifluor/pre-release/doc/api/csharp/api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_checkEmpty
+[storage-exportcsv-api]: https://hseag.github.io/evifluor/pre-release/doc/api/csharp/api/Hse.EviFluor.StorageMeasurement.html#Hse_EviFluor_StorageMeasurement_ExportAsCsv_System_String_

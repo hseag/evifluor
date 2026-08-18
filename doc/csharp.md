@@ -78,4 +78,4 @@ For most users, the best order is:
 3. Continue with [C# Low-Level API](./csharp-low-level.md) if you need direct control.
 4. Use [Kit Reference](./kit.md) for predefined kits, fit models, and kit-specific settings.
 
-[csharp-api-docs]: https://hseag.github.io/evi-test/pre-release/doc/api/csharp/api/Hse.EviFluor.html
+[csharp-api-docs]: https://hseag.github.io/evifluor/pre-release/doc/api/csharp/api/Hse.EviFluor.html

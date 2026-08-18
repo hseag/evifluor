@@ -255,5 +255,5 @@ API links:
 - [`hse.evifluor.cli`][cli-api]
 - [`hse.evifluor.__main__`][main-api]
 
-[cli-api]: https://hseag.github.io/evi-test/pre-release/doc/api/python/hse.evifluor.cli.html
-[main-api]: https://hseag.github.io/evi-test/pre-release/doc/api/python/modules.html
+[cli-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.cli.html
+[main-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/modules.html

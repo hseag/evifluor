@@ -33,7 +33,7 @@ Run initialization supports the same kit selection and settling-time override as
 To install the published wheel directly from the documentation site, use:
 
 ```bash
-python -m pip install "hse-evifluor[rest] @ https://hseag.github.io/evi-test/pre-release/python/dist/hse_evifluor-0.12.0rc2-py3-none-any.whl"
+python -m pip install "hse-evifluor[rest] @ https://hseag.github.io/evifluor/pre-release/python/dist/hse_evifluor-0.12.0rc2-py3-none-any.whl"
 ```
 
 Start the REST API with:
@@ -790,5 +790,5 @@ Typical categories are:
 - The `--working-dir` option controls both generated data files and the default log file location.
 - The `--debug` option enables stderr logging for easier interactive troubleshooting.
 
-[rest-server-api]: https://hseag.github.io/evi-test/pre-release/doc/api/python/hse.evifluor.rest_server.html
-[rest-client-api]: https://hseag.github.io/evi-test/pre-release/doc/api/python/hse.evifluor.rest_client.html
+[rest-server-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.rest_server.html
+[rest-client-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.rest_client.html

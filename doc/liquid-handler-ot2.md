@@ -16,7 +16,7 @@ On the [Opentrons OT-2](https://opentrons.com/robots/ot-2), a [Single-Channel Pi
 2. Install the Python package with:
 
 ```bash
-python -m pip install https://hseag.github.io/evi-test/pre-release/python/dist/hse_evifluor-0.12.0rc2-py3-none-any.whl
+python -m pip install https://hseag.github.io/evifluor/pre-release/python/dist/hse_evifluor-0.12.0rc2-py3-none-any.whl
 ```
 
 If the OT-2 has no internet connection, copy the Python wheel to the device with:

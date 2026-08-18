@@ -92,7 +92,7 @@ The standard high measurement must come first because the detector performs an a
 Starting with the high standard ensures that the gain is adjusted so that the standard high reaches approximately 80% of the maximum detector response.
 
 See a video of a simple workflow on an Opentrons OT-2 Robot:
-[![Simple workflow](doc/images/evifluor-workflow.png)](https://hseag.github.io/evi-test/pre-release/doc/images/evifluor-workflow.mp4)
+[![Simple workflow](doc/images/evifluor-workflow.png)](https://hseag.github.io/evifluor/pre-release/doc/images/evifluor-workflow.mp4)
 
 ## 2. CAD
 
