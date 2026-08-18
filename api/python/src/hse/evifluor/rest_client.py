@@ -7,6 +7,8 @@ import urllib.parse
 import urllib.request
 
 from .lookup_table import LookupTable
+from .measurement import Results
+from .verification import Verification
 
 
 class RestApiError(RuntimeError):
@@ -196,9 +198,37 @@ class RestClient:
             comment: Optional comment stored with the next completed measurement.
 
         Returns:
-            JSON response describing the updated run state.
+            Tuple ``(verification, result)`` matching :meth:`Run.measure`.
+            ``verification`` is returned as :class:`Verification`.
+            ``result`` is returned as :class:`Results` or ``None``.
         """
-        return self._request_json("POST", self._run_path(run_id, "measure"), {"comment": comment})
+        payload = self._request_json("POST", self._run_path(run_id, "measure"), {"comment": comment})
+        result = payload["result"]
+        return Verification.from_json(payload["verification"]), None if result is None else Results.from_json(result)
+
+    def run_results(self, run_id):
+        """Fetches all currently available calculated run results.
+
+        Args:
+            run_id: Encoded run identifier.
+
+        Returns:
+            List of :class:`Results` in measurement order.
+        """
+        payload = self._request_json("GET", self._run_path(run_id, "results"))
+        return [Results.from_json(result) for result in payload]
+
+    def run_verifications(self, run_id):
+        """Fetches all currently stored run verifications.
+
+        Args:
+            run_id: Encoded run identifier.
+
+        Returns:
+            List of :class:`Verification` in measurement order.
+        """
+        payload = self._request_json("GET", self._run_path(run_id, "verifications"))
+        return [Verification.from_json(verification) for verification in payload]
 
     def run_export_csv(self, run_id):
         """Exports a run to CSV and returns the response body.

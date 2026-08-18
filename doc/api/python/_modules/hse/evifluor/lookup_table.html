@@ -42,34 +42,34 @@
 <div class="viewcode-block" id="LookupTable">
 <a class="viewcode-back" href="../../../hse.evifluor.lookup_table.html#hse.evifluor.LookupTable">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LookupTable</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Stores lookup table points and converts between CSV and JSON representations.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Stores lookup table points and converts between CSV and JSON representations."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entries</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the lookup table with optional point entries.</span>
+<span class="w">        </span><span class="sd">"""Initializes the lookup table with optional point entries.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            entries: Iterable of lookup-table entries containing ``concentration``</span>
 <span class="sd">                and ``signal`` values. Defaults to an empty table.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">entries</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">entries</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">entries</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
             <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_normalize_entry</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">],</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">entry</span><span class="p">:</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;signal&quot;</span><span class="p">],</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">entry</span><span class="p">:</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"signal"</span><span class="p">],</span>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a debug representation of the lookup table.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;LookupTable(entries=</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Returns a debug representation of the lookup table."""</span>
+        <span class="k">return</span> <span class="s2">"LookupTable(entries=</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span>
 
 <div class="viewcode-block" id="LookupTable.to_json">
 <a class="viewcode-back" href="../../../hse.evifluor.lookup_table.html#hse.evifluor.LookupTable.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the lookup table as a JSON-serializable list.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Returns the lookup table as a JSON-serializable list."""</span>
         <span class="k">return</span> <span class="p">[</span>
             <span class="p">{</span>
-                <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;concentration&quot;</span><span class="p">],</span>
-                <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;signal&quot;</span><span class="p">],</span>
+                <span class="s2">"concentration"</span><span class="p">:</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"concentration"</span><span class="p">],</span>
+                <span class="s2">"signal"</span><span class="p">:</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"signal"</span><span class="p">],</span>
             <span class="p">}</span>
             <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entries</span>
         <span class="p">]</span></div>
@@ -78,12 +78,12 @@
 <div class="viewcode-block" id="LookupTable.save_json">
 <a class="viewcode-back" href="../../../hse.evifluor.lookup_table.html#hse.evifluor.LookupTable.save_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">save_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_path</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes the lookup table to a JSON file.</span>
+<span class="w">        </span><span class="sd">"""Writes the lookup table to a JSON file.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            json_path: Destination path for the JSON file.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<span class="sd">        """</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
             <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span> <span class="n">handle</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span></div>
 
 
@@ -91,7 +91,7 @@
 <a class="viewcode-back" href="../../../hse.evifluor.lookup_table.html#hse.evifluor.LookupTable.load">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads a lookup table from a CSV or JSON file.</span>
+<span class="w">        </span><span class="sd">"""Loads a lookup table from a CSV or JSON file.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            path: Source file path. The extension decides whether CSV or JSON</span>
@@ -99,23 +99,23 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A populated :class:`LookupTable` instance.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">extension</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="n">extension</span> <span class="o">=</span> <span class="n">extension</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="n">extension</span> <span class="o">==</span> <span class="s2">&quot;.json&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">extension</span> <span class="o">==</span> <span class="s2">".json"</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">load_json</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">extension</span> <span class="o">==</span> <span class="s2">&quot;.csv&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">extension</span> <span class="o">==</span> <span class="s2">".csv"</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unsupported lookup table file extension: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extension</span> <span class="ow">or</span> <span class="s2">&quot;&lt;none&gt;&quot;</span><span class="p">))</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unsupported lookup table file extension: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extension</span> <span class="ow">or</span> <span class="s2">"&lt;none&gt;"</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="LookupTable.load_json">
 <a class="viewcode-back" href="../../../hse.evifluor.lookup_table.html#hse.evifluor.LookupTable.load_json">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">load_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_path</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads a lookup table from a JSON file.</span>
+<span class="w">        </span><span class="sd">"""Loads a lookup table from a JSON file.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            json_path: Path to a JSON file containing a lookup-table list or a</span>
@@ -123,15 +123,15 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A populated :class:`LookupTable` instance.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<span class="sd">        """</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lookupTable&quot;</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lookupTable"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Lookup table JSON must contain a list of entries&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Lookup table JSON must contain a list of entries"</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
@@ -140,7 +140,7 @@
 <a class="viewcode-back" href="../../../hse.evifluor.lookup_table.html#hse.evifluor.LookupTable.from_csv">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_csv</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">csv_path</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Builds a lookup table from a CSV file.</span>
+<span class="w">        </span><span class="sd">"""Builds a lookup table from a CSV file.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            csv_path: Path to a CSV file containing ``RFU`` and</span>
@@ -150,46 +150,46 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A populated :class:`LookupTable` instance.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">newline</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s2">&quot;;&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">newline</span> <span class="o">=</span> <span class="s2">""</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s2">";"</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">reader</span><span class="o">.</span><span class="n">fieldnames</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;CSV file is empty&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"CSV file is empty"</span><span class="p">)</span>
 
-            <span class="n">required_columns</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;RFU&quot;</span><span class="p">,</span> <span class="s2">&quot;Concentration&quot;</span><span class="p">}</span>
+            <span class="n">required_columns</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"RFU"</span><span class="p">,</span> <span class="s2">"Concentration"</span><span class="p">}</span>
             <span class="n">missing_columns</span> <span class="o">=</span> <span class="n">required_columns</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">reader</span><span class="o">.</span><span class="n">fieldnames</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">missing_columns</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;CSV file is missing columns: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">missing_columns</span><span class="p">))))</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"CSV file is missing columns: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">missing_columns</span><span class="p">))))</span>
 
             <span class="k">for</span> <span class="n">row_index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">2</span><span class="p">):</span>
-                <span class="n">concentration_text</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Concentration&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-                <span class="n">rfu_text</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;RFU&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">concentration_text</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Concentration"</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">rfu_text</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"RFU"</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
-                <span class="k">if</span> <span class="n">rfu_text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="n">concentration_text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">rfu_text</span> <span class="o">==</span> <span class="s2">""</span> <span class="ow">and</span> <span class="n">concentration_text</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
                     <span class="k">continue</span>
 
-                <span class="k">if</span> <span class="n">concentration_text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">rfu_text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;CSV row </span><span class="si">{}</span><span class="s2"> must contain RFU and Concentration&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row_index</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">concentration_text</span> <span class="o">==</span> <span class="s2">""</span> <span class="ow">or</span> <span class="n">rfu_text</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"CSV row </span><span class="si">{}</span><span class="s2"> must contain RFU and Concentration"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row_index</span><span class="p">))</span>
 
                 <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-                    <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">concentration_text</span><span class="p">),</span>
-                    <span class="s2">&quot;rfu&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">rfu_text</span><span class="p">),</span>
+                    <span class="s2">"concentration"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">concentration_text</span><span class="p">),</span>
+                    <span class="s2">"rfu"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">rfu_text</span><span class="p">),</span>
                 <span class="p">})</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;CSV file must contain at least two data rows to derive RFU normalization&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"CSV file must contain at least two data rows to derive RFU normalization"</span><span class="p">)</span>
 
-        <span class="n">rfu_std_high</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;rfu&quot;</span><span class="p">]</span>
-        <span class="n">rfu_std_low</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;rfu&quot;</span><span class="p">]</span>
+        <span class="n">rfu_std_high</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"rfu"</span><span class="p">]</span>
+        <span class="n">rfu_std_low</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">"rfu"</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">rfu_std_high</span> <span class="o">==</span> <span class="n">rfu_std_low</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;RFU standard high and standard low must be different&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"RFU standard high and standard low must be different"</span><span class="p">)</span>
 
         <span class="n">entries</span> <span class="o">=</span> <span class="p">[</span>
             <span class="p">{</span>
-                <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;concentration&quot;</span><span class="p">],</span>
-                <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;rfu&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">rfu_std_low</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">rfu_std_high</span> <span class="o">-</span> <span class="n">rfu_std_low</span><span class="p">),</span>
+                <span class="s2">"concentration"</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">"concentration"</span><span class="p">],</span>
+                <span class="s2">"signal"</span><span class="p">:</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"rfu"</span><span class="p">]</span> <span class="o">-</span> <span class="n">rfu_std_low</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">rfu_std_high</span> <span class="o">-</span> <span class="n">rfu_std_low</span><span class="p">),</span>
             <span class="p">}</span>
             <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span>
         <span class="p">]</span>
@@ -201,7 +201,7 @@
 <a class="viewcode-back" href="../../../hse.evifluor.lookup_table.html#hse.evifluor.LookupTable.create_json_from_csv">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_json_from_csv</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">csv_path</span><span class="p">,</span> <span class="n">json_path</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a JSON lookup-table file from an RFU CSV file.</span>
+<span class="w">        </span><span class="sd">"""Creates a JSON lookup-table file from an RFU CSV file.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            csv_path: Path to the RFU CSV file.</span>
@@ -209,7 +209,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            The created :class:`LookupTable` instance.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">lookup_table</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_csv</span><span class="p">(</span><span class="n">csv_path</span><span class="p">)</span>
         <span class="n">lookup_table</span><span class="o">.</span><span class="n">save_json</span><span class="p">(</span><span class="n">json_path</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">lookup_table</span></div>
@@ -217,23 +217,23 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_normalize_entry</span><span class="p">(</span><span class="n">entry</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Normalizes a lookup-table entry to the expected internal schema.</span>
+<span class="w">        </span><span class="sd">"""Normalizes a lookup-table entry to the expected internal schema.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            entry: Mapping containing ``concentration`` and ``signal``.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A normalized dictionary with floating-point values.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Lookup table entries must be objects&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Lookup table entries must be objects"</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;concentration&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">entry</span> <span class="ow">or</span> <span class="s2">&quot;signal&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Lookup table entries must contain concentration and signal&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">"concentration"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">entry</span> <span class="ow">or</span> <span class="s2">"signal"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Lookup table entries must contain concentration and signal"</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;concentration&quot;</span><span class="p">]),</span>
-            <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;signal&quot;</span><span class="p">]),</span>
+            <span class="s2">"concentration"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">"concentration"</span><span class="p">]),</span>
+            <span class="s2">"signal"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">"signal"</span><span class="p">]),</span>
         <span class="p">}</span></div>
 
 </pre></div>

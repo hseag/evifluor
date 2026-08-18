@@ -359,6 +359,39 @@ verification, logging, on-the-fly factor calculation, and JSON persistence.</p>
 
 
 
+  <a id="Hse_EviFluor_Run_Results_" data-uid="Hse.EviFluor.Run.Results*"></a>
+
+  <h3 id="Hse_EviFluor_Run_Results" data-uid="Hse.EviFluor.Run.Results">
+  Results()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns all calculated results currently available in storage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Results&gt; Results()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Hse.EviFluor.Results.html">Results</a>&gt;</dt>
+    <dd><p>A list of <a class="xref" href="Hse.EviFluor.Run.html#Hse_EviFluor_Run_Results">Results()</a> in measurement order.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Hse_EviFluor_Run_SaveState_" data-uid="Hse.EviFluor.Run.SaveState*"></a>
 
   <h3 id="Hse_EviFluor_Run_SaveState_System_String_" data-uid="Hse.EviFluor.Run.SaveState(System.String)">
@@ -381,6 +414,39 @@ verification, logging, on-the-fly factor calculation, and JSON persistence.</p>
 </dd>
   </dl>
 
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Hse_EviFluor_Run_Verifications_" data-uid="Hse.EviFluor.Run.Verifications*"></a>
+
+  <h3 id="Hse_EviFluor_Run_Verifications" data-uid="Hse.EviFluor.Run.Verifications">
+  Verifications()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns all verification results currently available in storage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Verification&gt; Verifications()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Hse.EviFluor.Verification.html">Verification</a>&gt;</dt>
+    <dd><p>A list of <a class="xref" href="Hse.EviFluor.Verification.html">Verification</a> in measurement order.</p>
+</dd>
+  </dl>
 
 
 
@@ -465,7 +531,7 @@ verification, logging, on-the-fly factor calculation, and JSON persistence.</p>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void measure(string comment = &quot;&quot;)</code></pre>
+    <pre><code class="lang-csharp hljs">public (Verification verification, Results? result) measure(string comment = &quot;&quot;)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -475,6 +541,16 @@ verification, logging, on-the-fly factor calculation, and JSON persistence.</p>
 </dd>
   </dl>
 
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>(<a class="xref" href="Hse.EviFluor.Verification.html">Verification</a> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-hse.evifluor.verification,hse.evifluor.results-.verification">verification</a>, <a class="xref" href="Hse.EviFluor.Results.html">Results</a> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-hse.evifluor.verification,hse.evifluor.results-.result">result</a>)</dt>
+    <dd><p>A tuple <code>(verification, result)</code> for the executed step.
+<code>verification</code> contains the checks performed for the current acquisition.
+<code>result</code> is the newly available <a class="xref" href="Hse.EviFluor.Run.html#Hse_EviFluor_Run_Results">Results()</a> for the measurement
+completed by this call, or <code>null</code> if no sample measurement was completed yet
+or no calculated result is available at this point.</p>
+</dd>
+  </dl>
 
 
 

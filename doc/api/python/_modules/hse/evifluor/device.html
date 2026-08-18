@@ -56,26 +56,26 @@
 <div class="viewcode-block" id="AutoGainResult">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.AutoGainResult">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">AutoGainResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the result of an automatic gain adjustment operation.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Represents the result of an automatic gain adjustment operation."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">found</span><span class="p">,</span> <span class="n">led_power</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes an auto-gain result.</span>
+<span class="w">        </span><span class="sd">"""Initializes an auto-gain result.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            found: Indicates whether the optimal gain setting was found.</span>
 <span class="sd">            led_power: LED power level determined during auto-gain.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">found</span>    <span class="o">=</span> <span class="n">found</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">led_power</span> <span class="o">=</span> <span class="n">led_power</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a string representation of the auto-gain result.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;found:</span><span class="si">{}</span><span class="s2"> led_power:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">found</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led_power</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Returns a string representation of the auto-gain result."""</span>
+        <span class="k">return</span> <span class="s2">"found:</span><span class="si">{}</span><span class="s2"> led_power:</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">found</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led_power</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AutoGainResult.to_json">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.AutoGainResult.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts the auto-gain result to a JSON representation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Converts the auto-gain result to a JSON representation."""</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">ret</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">AUTOGAIN_RESULT_FOUND</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">found</span>
         <span class="n">ret</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">AUTOGAIN_RESULT_LED_POWER</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">led_power</span>
@@ -87,33 +87,33 @@
 <div class="viewcode-block" id="FirstAirMeasurementResult">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.FirstAirMeasurementResult">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FirstAirMeasurementResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the first air measurement with minimum and maximum recorded measurements.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Represents the first air measurement with minimum and maximum recorded measurements."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_measurement</span><span class="p">,</span> <span class="n">max_measurement</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes a first-air measurement result.</span>
+<span class="w">        </span><span class="sd">"""Initializes a first-air measurement result.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            min_measurement: Measurement recorded at minimum LED power.</span>
 <span class="sd">            max_measurement: Measurement recorded at maximum LED power.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_measurement</span> <span class="o">=</span> <span class="n">min_measurement</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_measurement</span> <span class="o">=</span> <span class="n">max_measurement</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a string representation of the first air measurement result.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;min:</span><span class="si">{}</span><span class="s2"> max:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min_measurement</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_measurement</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Returns a string representation of the first air measurement result."""</span>
+        <span class="k">return</span> <span class="s2">"min:</span><span class="si">{}</span><span class="s2"> max:</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min_measurement</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_measurement</span><span class="p">)</span>
         
 <div class="viewcode-block" id="FirstAirMeasurementResult.adjust_to_led_power">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.FirstAirMeasurementResult.adjust_to_led_power">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">adjust_to_led_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">led_power</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adjusts the measurement to a given LED power level.</span>
+<span class="w">        </span><span class="sd">"""Adjusts the measurement to a given LED power level.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            led_power: Target LED power level.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A :class:`SingleMeasurement` adjusted to ``led_power``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">denominator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_measurement</span><span class="o">.</span><span class="n">channel_470</span><span class="o">.</span><span class="n">led_power</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_measurement</span><span class="o">.</span><span class="n">channel_470</span><span class="o">.</span><span class="n">led_power</span>
         <span class="k">if</span> <span class="n">denominator</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">SingleMeasurement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min_measurement</span><span class="p">)</span>
@@ -126,7 +126,7 @@
 <div class="viewcode-block" id="FirstAirMeasurementResult.to_json">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.FirstAirMeasurementResult.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts the first air measurement result to a JSON representation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Converts the first air measurement result to a JSON representation."""</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">ret</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">MIN_MEASUREMENT</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_measurement</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
         <span class="n">ret</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">MAX_MEASUREMENT</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_measurement</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
@@ -138,55 +138,55 @@
 <div class="viewcode-block" id="FirstSampleMeasurementResult">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.FirstSampleMeasurementResult">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FirstSampleMeasurementResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the result of the first sample measurement, including auto-gain data.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Represents the result of the first sample measurement, including auto-gain data."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auto_gain_result</span><span class="p">,</span> <span class="n">measurement</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes a first-sample measurement result.</span>
+<span class="w">        </span><span class="sd">"""Initializes a first-sample measurement result.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            auto_gain_result: Auto-gain result of the sample measurement.</span>
 <span class="sd">            measurement: Recorded sample measurement.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auto_gain_result</span> <span class="o">=</span> <span class="n">auto_gain_result</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">measurement</span>    <span class="o">=</span> <span class="n">measurement</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a string representation of the first sample measurement result.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;auto_gain_result:</span><span class="si">{}</span><span class="s2"> measurement:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auto_gain_result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurement</span><span class="p">)</span></div>
+<span class="w">        </span><span class="sd">"""Returns a string representation of the first sample measurement result."""</span>
+        <span class="k">return</span> <span class="s2">"auto_gain_result:</span><span class="si">{}</span><span class="s2"> measurement:</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auto_gain_result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurement</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="SelfttestResult">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.SelfttestResult">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SelfttestResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the aggregated flags resulting from a device self-test.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Represents the aggregated flags resulting from a device self-test."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the self-test result.</span>
+<span class="w">        </span><span class="sd">"""Initializes the self-test result.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            result: Raw result bit mask returned by the device self-test.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">result</span>
         
 <div class="viewcode-block" id="SelfttestResult.has_problems">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.SelfttestResult.has_problems">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">has_problems</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determines whether there are any problems in the self-test.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Determines whether there are any problems in the self-test."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">!=</span> <span class="mi">0</span></div>
 
 
 <div class="viewcode-block" id="SelfttestResult.has_communication_error">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.SelfttestResult.has_communication_error">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">has_communication_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if there is a problem with the communication channel.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Checks if there is a problem with the communication channel."""</span>
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">&amp;</span> <span class="n">Selftest</span><span class="o">.</span><span class="n">COMUNICATION_ERROR</span><span class="p">)</span></div>
 
         
 <div class="viewcode-block" id="SelfttestResult.to_json">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.SelfttestResult.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts the self-test result to a JSON representation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Converts the self-test result to a JSON representation."""</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">ret</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">SELFTEST_RESULT</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
         <span class="k">return</span> <span class="n">ret</span></div>
@@ -197,24 +197,24 @@
 <div class="viewcode-block" id="Device">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Device</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the eviFluor module device API.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Represents the eviFluor module device API."""</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes a device connection.</span>
+<span class="w">        </span><span class="sd">"""Initializes a device connection.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            device: Optional device serial number or ``&quot;SIMULATION&quot;`` for socket</span>
+<span class="sd">            device: Optional device serial number or ``"SIMULATION"`` for socket</span>
 <span class="sd">                mode. If omitted, the implementation auto-detects a device.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">device</span> <span class="o">==</span> <span class="s2">&quot;SIMULATION&quot;</span><span class="p">:</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">device</span> <span class="o">==</span> <span class="s2">"SIMULATION"</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">is_simulation</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;SOCKET&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="s2">"SOCKET"</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_socket</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_rx_buffer</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">is_simulation</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_device</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;eviFluor Module not found!&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"eviFluor Module not found!"</span><span class="p">)</span>
             
             <span class="bp">self</span><span class="o">.</span><span class="n">serial</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="mi">115200</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">serial</span><span class="o">.</span><span class="n">reset_input_buffer</span><span class="p">()</span>
@@ -222,14 +222,14 @@
 <div class="viewcode-block" id="Device.find_device">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.find_device">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">find_device</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Finds a matching serial device.</span>
+<span class="w">        </span><span class="sd">"""Finds a matching serial device.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            device: Optional serial number used to filter matching devices.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            The matching serial port name, or ``None`` if no device was found.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">ports</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">list_ports</span><span class="o">.</span><span class="n">comports</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">vid</span> <span class="o">==</span> <span class="n">USB</span><span class="o">.</span><span class="n">VID</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">pid</span> <span class="o">==</span> <span class="n">USB</span><span class="o">.</span><span class="n">PID</span> <span class="ow">and</span> <span class="p">(</span><span class="n">device</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">device</span> <span class="o">==</span> <span class="n">p</span><span class="o">.</span><span class="n">serial_number</span><span class="p">):</span>
@@ -240,45 +240,45 @@
 <div class="viewcode-block" id="Device.error2text">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.error2text">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">error2text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts a device error code into human-readable text.</span>
+<span class="w">        </span><span class="sd">"""Converts a device error code into human-readable text.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            error: Numeric error code returned by the device protocol.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A human-readable description of the error.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">error</span> <span class="o">==</span> <span class="n">Error</span><span class="o">.</span><span class="n">OK</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;OK&quot;</span>
+            <span class="k">return</span> <span class="s2">"OK"</span>
         <span class="k">elif</span> <span class="n">error</span> <span class="o">==</span> <span class="n">Error</span><span class="o">.</span><span class="n">UNKNOWN_COMMAND</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;Unknown command&quot;</span>
+            <span class="k">return</span> <span class="s2">"Unknown command"</span>
         <span class="k">elif</span> <span class="n">error</span> <span class="o">==</span> <span class="n">Error</span><span class="o">.</span><span class="n">INVALID_PARAMETER</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;Invalid parameter&quot;</span>
+            <span class="k">return</span> <span class="s2">"Invalid parameter"</span>
         <span class="k">elif</span> <span class="n">error</span> <span class="o">==</span> <span class="n">Error</span><span class="o">.</span><span class="n">TIMEOUT</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;Timeout&quot;</span>
+            <span class="k">return</span> <span class="s2">"Timeout"</span>
         <span class="k">elif</span> <span class="n">error</span> <span class="o">==</span> <span class="n">Error</span><span class="o">.</span><span class="n">SREC_FLASH_WRITE_ERROR</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;SREC Flash write error&quot;</span>
+            <span class="k">return</span> <span class="s2">"SREC Flash write error"</span>
         <span class="k">elif</span> <span class="n">error</span> <span class="o">==</span> <span class="n">Error</span><span class="o">.</span><span class="n">SREC_UNSUPPORTED_TYPE</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;SREC Unsupported type&quot;</span>
+            <span class="k">return</span> <span class="s2">"SREC Unsupported type"</span>
         <span class="k">elif</span> <span class="n">error</span> <span class="o">==</span> <span class="n">Error</span><span class="o">.</span><span class="n">SREC_INVALID_CRC</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;SREC Invalid crc&quot;</span>
+            <span class="k">return</span> <span class="s2">"SREC Invalid crc"</span>
         <span class="k">elif</span> <span class="n">error</span> <span class="o">==</span> <span class="n">Error</span><span class="o">.</span><span class="n">SREC_INVALID_STRING</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;SREC Invalid string&quot;</span>
+            <span class="k">return</span> <span class="s2">"SREC Invalid string"</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;?&quot;</span></div>
+            <span class="k">return</span> <span class="s2">"?"</span></div>
 
 
 <div class="viewcode-block" id="Device.command">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.command">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sends a command to the device and returns the tokenized response.</span>
+<span class="w">        </span><span class="sd">"""Sends a command to the device and returns the tokenized response.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            tx: Command string to transmit without prefix or trailing newline.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Parsed response tokens returned by the device.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_simulation</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">command_socket</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -286,19 +286,19 @@
 
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_ensure_simulation_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Opens the simulator TCP connection on first use and keeps it for the device lifetime.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Opens the simulator TCP connection on first use and keeps it for the device lifetime."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_socket</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_socket</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_socket</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="mi">5000</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_socket</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s2">"localhost"</span><span class="p">,</span> <span class="mi">5000</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_rx_buffer</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_simulation_readline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads one newline-terminated response from the persistent simulator socket.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Reads one newline-terminated response from the persistent simulator socket."""</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">newline_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_rx_buffer</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">newline_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_rx_buffer</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="sa">b</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">newline_index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">line</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_simulation_rx_buffer</span><span class="p">[:</span> <span class="n">newline_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
                 <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_rx_buffer</span><span class="p">[:</span> <span class="n">newline_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
@@ -306,39 +306,39 @@
 
             <span class="n">chunk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_socket</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">chunk</span><span class="p">:</span>
-                <span class="k">return</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
+                <span class="k">return</span> <span class="sa">b</span><span class="s2">""</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_rx_buffer</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Device.command_socket">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.command_socket">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">command_socket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Transmits a command to the simulator over TCP.</span>
+<span class="w">        </span><span class="sd">"""Transmits a command to the simulator over TCP.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            tx: Command string to transmit.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Parsed response tokens returned by the simulator.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_simulation_connection</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_socket</span><span class="o">.</span><span class="n">sendall</span><span class="p">((</span><span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">tx</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_socket</span><span class="o">.</span><span class="n">sendall</span><span class="p">((</span><span class="s2">":"</span> <span class="o">+</span> <span class="n">tx</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">rx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_readline</span><span class="p">()</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">rx</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No response within time!&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">rx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"No response within time!"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span><span class="sa">b</span><span class="s1">':'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">((</span><span class="s2">&quot;Response did not start with &#39;:&#39; </span><span class="si">{}</span><span class="s2">!&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rx</span><span class="p">))</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">((</span><span class="s2">"Response did not start with ':' </span><span class="si">{}</span><span class="s2">!"</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rx</span><span class="p">))</span>
             <span class="n">ba</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">rx</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">rx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;#&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span> <span class="n">rx</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="sa">b</span><span class="s1">'#'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"DEBUG"</span><span class="p">,</span> <span class="n">rx</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">del</span> <span class="n">ba</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="c1">#parts = (ba.decode(&quot;utf-8&quot;)).split()</span>
-                <span class="n">parts</span> <span class="o">=</span> <span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
-                <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;E&quot;</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Response of TX:</span><span class="si">{}</span><span class="s2"> has an error: (</span><span class="si">{}</span><span class="s2">) </span><span class="si">{}</span><span class="s2">!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span> <span class="n">rx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">error2text</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]))))</span>
+                <span class="c1">#parts = (ba.decode("utf-8")).split()</span>
+                <span class="n">parts</span> <span class="o">=</span> <span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"E"</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"Response of TX:</span><span class="si">{}</span><span class="s2"> has an error: (</span><span class="si">{}</span><span class="s2">) </span><span class="si">{}</span><span class="s2">!"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span> <span class="n">rx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">error2text</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]))))</span>
                 <span class="k">break</span>
         <span class="k">return</span> <span class="n">parts</span></div>
 
@@ -346,30 +346,30 @@
 <div class="viewcode-block" id="Device.command_serial">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.command_serial">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">command_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Transmits a command over the serial connection.</span>
+<span class="w">        </span><span class="sd">"""Transmits a command over the serial connection.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            tx: Command string to transmit.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Parsed response tokens returned by the device.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">serial</span><span class="o">.</span><span class="n">write</span><span class="p">((</span><span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">tx</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">serial</span><span class="o">.</span><span class="n">write</span><span class="p">((</span><span class="s2">":"</span> <span class="o">+</span> <span class="n">tx</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">rx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serial</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">rx</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-      	        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No response within time!&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">rx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">((</span><span class="s2">&quot;Response did not start with &#39;:&#39; </span><span class="si">{}</span><span class="s2">!&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rx</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">rx</span> <span class="o">==</span> <span class="s1">''</span><span class="p">:</span>
+      	        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"No response within time!"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span><span class="sa">b</span><span class="s1">':'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">((</span><span class="s2">"Response did not start with ':' </span><span class="si">{}</span><span class="s2">!"</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rx</span><span class="p">))</span>
             <span class="n">ba</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">rx</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">rx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;#&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span> <span class="n">rx</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="sa">b</span><span class="s1">'#'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"DEBUG"</span><span class="p">,</span> <span class="n">rx</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">del</span> <span class="n">ba</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="c1">#parts = (ba.decode(&quot;utf-8&quot;)).split()</span>
-                <span class="n">parts</span> <span class="o">=</span> <span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
-                <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;E&quot;</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Response of TX:</span><span class="si">{}</span><span class="s2"> has an error: (</span><span class="si">{}</span><span class="s2">) </span><span class="si">{}</span><span class="s2">!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span> <span class="n">rx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">error2text</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]))))</span>
+                <span class="c1">#parts = (ba.decode("utf-8")).split()</span>
+                <span class="n">parts</span> <span class="o">=</span> <span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"E"</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"Response of TX:</span><span class="si">{}</span><span class="s2"> has an error: (</span><span class="si">{}</span><span class="s2">) </span><span class="si">{}</span><span class="s2">!"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span> <span class="n">rx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">error2text</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]))))</span>
                 <span class="k">break</span>
         <span class="k">return</span> <span class="n">parts</span></div>
 
@@ -377,15 +377,15 @@
 <div class="viewcode-block" id="Device.get">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.get">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves a value from the device at the specified index.</span>
+<span class="w">        </span><span class="sd">"""Retrieves a value from the device at the specified index.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            index: Protocol index to read from the device.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            The value converted to the type reported by the device.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">((</span><span class="s2">&quot;V </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
+<span class="sd">        """</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">((</span><span class="s2">"V </span><span class="si">{}</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
         <span class="n">typeof</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">typeof</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">typeof</span> <span class="o">==</span> <span class="n">TypeOf</span><span class="o">.</span><span class="n">STRING</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -400,96 +400,96 @@
 <div class="viewcode-block" id="Device.set">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.set">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets a value on the device at the specified index.</span>
+<span class="w">        </span><span class="sd">"""Sets a value on the device at the specified index.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            index: Protocol index to update.</span>
 <span class="sd">            value: Value to write at ``index``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">((</span><span class="s2">&quot;V </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span></div>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">((</span><span class="s2">"V </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="Device.typeof">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.typeof">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">typeof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the data type stored at the specified index.</span>
+<span class="w">        </span><span class="sd">"""Returns the data type stored at the specified index.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            index: Protocol index to inspect.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Numeric type identifier reported by the device.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">((</span><span class="s2">&quot;H </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
+<span class="sd">        """</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">((</span><span class="s2">"H </span><span class="si">{}</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="Device.serial_number">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.serial_number">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">serial_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves the serial number of the connected device.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Retrieves the serial number of the connected device."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Index</span><span class="o">.</span><span class="n">SERIALNUMBER</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Device.firmware_version">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.firmware_version">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">firmware_version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves the firmware version of the connected device.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Retrieves the firmware version of the connected device."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Index</span><span class="o">.</span><span class="n">VERSION</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Device.production_number">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.production_number">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">production_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves the production number of the connected device.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Retrieves the production number of the connected device."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Index</span><span class="o">.</span><span class="n">PRODUCTIONNUMBER</span><span class="p">)</span></div>
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a textual representation of the connected device.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;eviFluor Module@</span><span class="si">{}</span><span class="s2"> SN:</span><span class="si">{}</span><span class="s2"> Version:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">serial_number</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware_version</span><span class="p">())</span>
+<span class="w">        </span><span class="sd">"""Returns a textual representation of the connected device."""</span>
+        <span class="k">return</span> <span class="s2">"eviFluor Module@</span><span class="si">{}</span><span class="s2"> SN:</span><span class="si">{}</span><span class="s2"> Version:</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">serial_number</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware_version</span><span class="p">())</span>
 
 <div class="viewcode-block" id="Device.close">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.close">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Closes the serial connection if the device owns one.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Closes the serial connection if the device owns one."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_simulation</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_simulation_socket&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_simulation_socket"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_socket</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_rx_buffer</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">()</span>
             <span class="k">return</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;serial&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"serial"</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">serial</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="Device.baseline">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.baseline">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">baseline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Executes the baseline command to clear internal measurement memory.&quot;&quot;&quot;</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;G&quot;</span><span class="p">)</span></div>
+<span class="w">        </span><span class="sd">"""Executes the baseline command to clear internal measurement memory."""</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">"G"</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Device.is_cuvette_holder_empty">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.is_cuvette_holder_empty">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_cuvette_holder_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks whether the cuvette holder is empty.&quot;&quot;&quot;</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Checks whether the cuvette holder is empty."""</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">"X"</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">((</span><span class="nb">int</span><span class="p">)(</span><span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Device.autogain">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.autogain">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">autogain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Performs an auto-gain operation at the specified level.</span>
+<span class="w">        </span><span class="sd">"""Performs an auto-gain operation at the specified level.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            level: Gain target in the range 0..2500.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            An :class:`AutoGainResult` indicating success and LED power.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;C </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">level</span><span class="p">))</span>
+<span class="sd">        """</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">"C </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">level</span><span class="p">))</span>
         
         <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">AutoGainResult</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
@@ -500,7 +500,7 @@
 <div class="viewcode-block" id="Device.measure">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.measure">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Performs a measurement and retrieves the channel values.</span>
+<span class="w">        </span><span class="sd">"""Performs a measurement and retrieves the channel values.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            last: Optional protocol parameter selecting a previous measurement.</span>
@@ -508,10 +508,10 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A :class:`SingleMeasurement` with the measured channel values.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;M&quot;</span>
+<span class="sd">        """</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="s2">"M"</span>
         <span class="k">if</span> <span class="n">last</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">command</span> <span class="o">=</span> <span class="n">command</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot; </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">last</span><span class="p">)</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="n">command</span> <span class="o">+</span> <span class="p">(</span><span class="s2">" </span><span class="si">{}</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">last</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">channel470</span> <span class="o">=</span> <span class="n">Channel</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
@@ -521,7 +521,7 @@
 <div class="viewcode-block" id="Device.first_air_measurement">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.first_air_measurement">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">first_air_measurement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Performs the first air measurement at minimum and maximum LED power levels.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Performs the first air measurement at minimum and maximum LED power levels."""</span>
         <span class="n">power_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Index</span><span class="o">.</span><span class="n">CURRENT_LED470_POWER_MIN</span><span class="p">)</span>
         <span class="n">power_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Index</span><span class="o">.</span><span class="n">CURRENT_LED470_POWER_MAX</span><span class="p">)</span>
         
@@ -537,7 +537,7 @@
 <div class="viewcode-block" id="Device.first_sample_measurement">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.first_sample_measurement">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">first_sample_measurement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Performs the first sample measurement using auto-gain.</span>
+<span class="w">        </span><span class="sd">"""Performs the first sample measurement using auto-gain.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            factor: Scaling factor used to derive the initial auto-gain target.</span>
@@ -545,7 +545,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            A :class:`FirstSampleMeasurementResult` containing auto-gain and</span>
 <span class="sd">            measurement data.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">auto_gain_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">autogain</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">2500</span> <span class="o">*</span> <span class="n">factor</span><span class="p">))</span>
         <span class="n">measurement</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">measure</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">FirstSampleMeasurementResult</span><span class="p">(</span><span class="n">auto_gain_result</span><span class="p">,</span> <span class="n">measurement</span><span class="p">)</span></div>
@@ -554,39 +554,39 @@
 <div class="viewcode-block" id="Device.verify">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.verify">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verifies the integrity of the current firmware image.&quot;&quot;&quot;</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Verifies the integrity of the current firmware image."""</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">"T"</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">((</span><span class="nb">int</span><span class="p">)(</span><span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Device.reboot">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.reboot">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">reboot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reboots the device.&quot;&quot;&quot;</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">)</span></div>
+<span class="w">        </span><span class="sd">"""Reboots the device."""</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">"R"</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Device.erase">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.erase">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">erase</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Erases the secondary firmware image on the device.&quot;&quot;&quot;</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">)</span></div>
+<span class="w">        </span><span class="sd">"""Erases the secondary firmware image on the device."""</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">"F"</span><span class="p">)</span></div>
 
         
 <div class="viewcode-block" id="Device.fwupdate">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.fwupdate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">fwupdate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Streams an SREC file to the device and performs a firmware update.</span>
+<span class="w">        </span><span class="sd">"""Streams an SREC file to the device and performs a firmware update.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            filename: Path to the firmware image file to send to the device.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<span class="sd">        """</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">erase</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">srecLine</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;S </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">srecLine</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">"S </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">srecLine</span><span class="p">))</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">verify</span><span class="p">():</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Firmware update failed. Image not valid!&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"Firmware update failed. Image not valid!"</span><span class="p">)</span>
                 
             <span class="bp">self</span><span class="o">.</span><span class="n">reboot</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">serial</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -598,21 +598,21 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">serial</span><span class="o">.</span><span class="n">reset_input_buffer</span><span class="p">()</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verify</span><span class="p">():</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Firmware update failed. Image still valid!&quot;</span><span class="p">)</span></div>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"Firmware update failed. Image still valid!"</span><span class="p">)</span></div>
 
             
 <div class="viewcode-block" id="Device.selftest">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.selftest">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">selftest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Runs the device self-test and returns the aggregated result.&quot;&quot;&quot;</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Runs the device self-test and returns the aggregated result."""</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">"Y"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">SelfttestResult</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></div>
 
 
 <div class="viewcode-block" id="Device.technical_report">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.technical_report">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">technical_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Builds a technical report containing measurement and device metadata.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Builds a technical report containing measurement and device metadata."""</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">result</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">MEASURE</span><span class="p">]</span>          <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_air_measurement</span><span class="p">()</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
         <span class="n">result</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">SELFTEST</span><span class="p">]</span>         <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selftest</span><span class="p">()</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
@@ -625,22 +625,22 @@
 <div class="viewcode-block" id="Device.set_status_led">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.set_status_led">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_status_led</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the status LED color.</span>
+<span class="w">        </span><span class="sd">"""Sets the status LED color.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            color: Numeric color value understood by the device firmware.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;Z </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="p">))</span></div>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">"Z </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="p">))</span></div>
 
         
 <div class="viewcode-block" id="Device.logging">
 <a class="viewcode-back" href="../../../hse.evifluor.device.html#hse.evifluor.Device.logging">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">logging</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves log messages accumulated on the device.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Retrieves log messages accumulated on the device."""</span>
         <span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">"Q"</span><span class="p">)</span>
                 <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">break</span>

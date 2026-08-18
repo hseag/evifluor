@@ -42,6 +42,13 @@ class DictKeys:
     DATE_TIME                                = "date_time"
     AUTOGAIN_RESULT_FOUND                    = "found"
     AUTOGAIN_RESULT_LED_POWER                = "led_power"
+    PARAMETERS                               = "parameters_run"
+    NR_OF_STD_LOW                            = "nr_of_std_low"
+    NR_OF_STD_HIGH                           = "nr_of_std_high"   
+    CONCENTRATION                            = "concentration"
+    KIT                                      = "kit"
+    SETTLING_TIME                            = "settling_time"
+    ALGORITHM                                = "algorithm"
 
 class USB(IntEnum):
     VID                                           = 7358

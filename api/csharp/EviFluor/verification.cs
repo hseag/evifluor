@@ -194,6 +194,10 @@ namespace Hse.EviFluor
                 {
                     json["data"] = serializable.ToJson();
                 }
+                else if (Data is JsonNode node)
+                {
+                    json["data"] = node.DeepClone();
+                }
 
                 return json;
             }
@@ -359,6 +363,35 @@ namespace Hse.EviFluor
                 array.Add(entry.ToJson());
             }
             return array;
+        }
+
+        /// <summary>
+        /// Recreates a <see cref="Verification"/> instance from serialized JSON.
+        /// </summary>
+        /// <param name="node">JSON array containing serialized verification entries.</param>
+        /// <returns>A reconstructed <see cref="Verification"/> instance.</returns>
+        public static Verification FromJson(JsonNode? node)
+        {
+            if (node == null)
+            {
+                throw new ArgumentNullException(nameof(node));
+            }
+
+            var verification = new Verification();
+            foreach (JsonNode? entryNode in node.AsArray())
+            {
+                if (entryNode == null)
+                {
+                    continue;
+                }
+
+                var problem = (ProblemId)(entryNode["problem_id"]?.GetValue<int>()
+                    ?? throw new InvalidOperationException("problem_id is missing or null"));
+                JsonNode? data = entryNode["data"];
+                verification.entries.Add(new Entry(problem, data?.DeepClone() ?? new JsonObject()));
+            }
+
+            return verification;
         }
 
         /// <summary>

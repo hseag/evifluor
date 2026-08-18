@@ -115,6 +115,20 @@ def _run_snapshot(run, state_file):
     }
 
 
+def _serialize_result(result):
+    if result is None:
+        return None
+    return result.to_json()
+
+
+def _serialize_results(results):
+    return [result.to_json() for result in results]
+
+
+def _serialize_verifications(verifications):
+    return [verification.to_json() for verification in verifications]
+
+
 def _lock_key(kind, value):
     normalized = os.path.abspath(value) if kind == "run" else value
     return "{}:{}".format(kind, normalized)
@@ -342,6 +356,65 @@ def measure_run_state(state_file, comment=None):
                 return snapshot
             finally:
                 run.close()
+
+
+def measure_run_values_state(state_file, comment=None):
+    """Executes the next run step and returns the direct ``Run.measure()`` values.
+
+    Args:
+        state_file: Path to the run-state file.
+        comment: Optional comment stored with the next completed measurement.
+
+    Returns:
+        Dictionary with serialized ``verification`` and ``result`` fields.
+    """
+    with _acquire_lock("run", state_file):
+        device = _device_from_state_file(state_file)
+        with _acquire_lock("device", _device_lock_value(device)):
+            run = Run.load_state(state_file)
+            try:
+                verification, result = run.measure(comment)
+                run.save_state(state_file)
+                return {
+                    "verification": verification.to_json(),
+                    "result": _serialize_result(result),
+                }
+            finally:
+                run.close()
+
+
+def load_run_results_state(state_file):
+    """Loads all currently available calculated run results.
+
+    Args:
+        state_file: Path to the saved run-state file.
+
+    Returns:
+        List of serialized measurement result objects.
+    """
+    with _acquire_lock("run", state_file):
+        run = Run.load_state(state_file)
+        try:
+            return _serialize_results(run.results())
+        finally:
+            run.close()
+
+
+def load_run_verifications_state(state_file):
+    """Loads all currently stored run verifications.
+
+    Args:
+        state_file: Path to the saved run-state file.
+
+    Returns:
+        List of serialized verification objects.
+    """
+    with _acquire_lock("run", state_file):
+        run = Run.load_state(state_file)
+        try:
+            return _serialize_verifications(run.verifications())
+        finally:
+            run.close()
 
 
 def get_device_status(device=None):

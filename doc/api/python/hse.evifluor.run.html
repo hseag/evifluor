@@ -37,7 +37,7 @@
 <span id="hse-evifluor-run-module"></span><h1>hse.evifluor.run module<a class="headerlink" href="#module-hse.evifluor.run" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="hse.evifluor.run.Run">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.run.</span></span><span class="sig-name descname"><span class="pre">Run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nr_of_std_low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr_of_std_high</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_air</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Default</span> <span class="pre">kit</span> <span class="pre">with</span> <span class="pre">linear</span> <span class="pre">fit</span> <span class="pre">fit_algorithm=Linear</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settling_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_high_target_signal_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settling_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hse/evifluor/run.html#Run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.run.Run" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hse.evifluor.run.</span></span><span class="sig-name descname"><span class="pre">Run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nr_of_std_low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr_of_std_high</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_air</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Default</span> <span class="pre">kit</span> <span class="pre">with</span> <span class="pre">linear</span> <span class="pre">fit</span> <span class="pre">fit_algorithm=Linear</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settling_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_high_target_signal_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settling_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_device_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hse/evifluor/run.html#Run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.run.Run" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Coordinates guided measurement runs including acquisition, verification, and storage.</p>
 <dl class="py class">
@@ -102,12 +102,26 @@ state filename is resolved.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hse.evifluor.run.Run.measure">
-<span class="sig-name descname"><span class="pre">measure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hse/evifluor/run.html#Run.measure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.run.Run.measure" title="Link to this definition">¶</a></dt>
-<dd><p>Executes the next step in the measurement sequence.</p>
+<span class="sig-name descname"><span class="pre">measure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification" title="hse.evifluor.verification.Verification"><span class="pre">Verification</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Results" title="hse.evifluor.measurement.Results"><span class="pre">Results</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="hse.evifluor.verification.html#hse.evifluor.verification.Verification" title="hse.evifluor.verification.Verification"><span class="pre">Verification</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/hse/evifluor/run.html#Run.measure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.run.Run.measure" title="Link to this definition">¶</a></dt>
+<dd><p>Advances the guided run by exactly one measurement step.</p>
+<p>Depending on the internal state, this performs the first air
+measurement, the first sample measurement, a regular air measurement,
+or a regular sample measurement. Completed measurements are stored,
+pending calibration results are recalculated when possible, and the
+updated run state is persisted to disk.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>comment</strong> – Optional annotation stored with the next completed
-measurement.</p>
+measurement entry. It has no effect on intermediate steps that
+do not append a measurement to storage.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple <code class="docutils literal notranslate"><span class="pre">(verification,</span> <span class="pre">result)</span></code> for the executed step.
+<code class="docutils literal notranslate"><span class="pre">verification</span></code> contains the checks performed for the current
+acquisition. <code class="docutils literal notranslate"><span class="pre">result</span></code> is the newly available
+<a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Results" title="hse.evifluor.measurement.Results"><code class="xref py py-class docutils literal notranslate"><span class="pre">hse.evifluor.measurement.Results</span></code></a> for the measurement
+completed by this call, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if no sample measurement was
+completed yet or no calculated result is available at this point.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -116,6 +130,19 @@ measurement.</p>
 <dt class="sig sig-object py" id="hse.evifluor.run.Run.re_calculate">
 <span class="sig-name descname"><span class="pre">re_calculate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hse/evifluor/run.html#Run.re_calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.run.Run.re_calculate" title="Link to this definition">¶</a></dt>
 <dd><p>Recomputes calibration factors when enough standards exist and applies pending results.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.run.Run.results">
+<span class="sig-name descname"><span class="pre">results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hse/evifluor/run.html#Run.results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.run.Run.results" title="Link to this definition">¶</a></dt>
+<dd><p>Returns all calculated results currently available in storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of <a class="reference internal" href="hse.evifluor.measurement.html#hse.evifluor.measurement.Results" title="hse.evifluor.measurement.Results"><code class="xref py py-class docutils literal notranslate"><span class="pre">hse.evifluor.measurement.Results</span></code></a> in measurement
+order. Entries without calculated results are skipped until
+calibration factors have been derived and applied.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -138,6 +165,19 @@ naming.</p>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>Exception</strong> – If the current state does not allow skipping the air
     measurement or no reusable air value is available.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hse.evifluor.run.Run.verifications">
+<span class="sig-name descname"><span class="pre">verifications</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hse/evifluor/run.html#Run.verifications"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hse.evifluor.run.Run.verifications" title="Link to this definition">¶</a></dt>
+<dd><p>Returns all verification results currently available in storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">hse.evifluor.measurement.Verification</span></code> in measurement
+order. Entries without verification results are skipped until
+calibration factors have been derived and applied.</p>
 </dd>
 </dl>
 </dd></dl>

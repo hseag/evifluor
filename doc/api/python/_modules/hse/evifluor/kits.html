@@ -38,19 +38,19 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.lookup_table</span><span class="w"> </span><span class="kn">import</span> <span class="n">LookupTable</span>
 
-<span class="n">_KIT_FIT_ALGORITHM</span> <span class="o">=</span> <span class="s2">&quot;fitAlgorithm&quot;</span>
-<span class="n">_KIT_SETTLING_TIME</span> <span class="o">=</span> <span class="s2">&quot;settlingTime&quot;</span>
-<span class="n">_KIT_LOOKUP_TABLE</span> <span class="o">=</span> <span class="s2">&quot;lookupTable&quot;</span>
-<span class="n">_KIT_STD_HIGH_TARGET_SIGNAL_FACTOR</span> <span class="o">=</span> <span class="s2">&quot;stdHighTargetSignalFactor&quot;</span>
-<span class="n">_KIT_DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;description&quot;</span>
-<span class="n">_KIT_K1</span> <span class="o">=</span> <span class="s2">&quot;k1&quot;</span>
-<span class="n">_KIT_K2</span> <span class="o">=</span> <span class="s2">&quot;k2&quot;</span>
-<span class="n">_KIT_K3</span> <span class="o">=</span> <span class="s2">&quot;k3&quot;</span>
+<span class="n">_KIT_FIT_ALGORITHM</span> <span class="o">=</span> <span class="s2">"fitAlgorithm"</span>
+<span class="n">_KIT_SETTLING_TIME</span> <span class="o">=</span> <span class="s2">"settlingTime"</span>
+<span class="n">_KIT_LOOKUP_TABLE</span> <span class="o">=</span> <span class="s2">"lookupTable"</span>
+<span class="n">_KIT_STD_HIGH_TARGET_SIGNAL_FACTOR</span> <span class="o">=</span> <span class="s2">"stdHighTargetSignalFactor"</span>
+<span class="n">_KIT_DESCRIPTION</span> <span class="o">=</span> <span class="s2">"description"</span>
+<span class="n">_KIT_K1</span> <span class="o">=</span> <span class="s2">"k1"</span>
+<span class="n">_KIT_K2</span> <span class="o">=</span> <span class="s2">"k2"</span>
+<span class="n">_KIT_K3</span> <span class="o">=</span> <span class="s2">"k3"</span>
 
 <div class="viewcode-block" id="FitAlgorithm">
 <a class="viewcode-back" href="../../../hse.evifluor.kits.html#hse.evifluor.FitAlgorithm">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FitAlgorithm</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Supported post-calibration fit curves for kit-specific concentration mapping.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Supported post-calibration fit curves for kit-specific concentration mapping."""</span>
     <span class="n">Linear</span>                                        <span class="o">=</span> <span class="mi">1</span>
     <span class="n">LookupTable</span>                                   <span class="o">=</span> <span class="mi">2</span></div>
 
@@ -58,10 +58,10 @@
 <div class="viewcode-block" id="Default">
 <a class="viewcode-back" href="../../../hse.evifluor.kits.html#hse.evifluor.Default">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Default</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base kit configuration combining standard interpolation with an optional fit curve.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Base kit configuration combining standard interpolation with an optional fit curve."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fit_algorithm</span> <span class="o">=</span> <span class="n">FitAlgorithm</span><span class="o">.</span><span class="n">Linear</span><span class="p">,</span> <span class="n">k1</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">k3</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">lookup_table</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">settling_time</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes a kit with explicit fit parameters and measurement behavior.</span>
+<span class="w">        </span><span class="sd">"""Initializes a kit with explicit fit parameters and measurement behavior.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            fit_algorithm: Fit model used to convert the calibrated signal into a</span>
@@ -78,31 +78,31 @@
 <span class="sd">                standard signal during first-sample auto-gain.</span>
 <span class="sd">            description: Human-readable description used for diagnostics and</span>
 <span class="sd">                serialization.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span> <span class="o">=</span> <span class="n">FitAlgorithm</span><span class="p">(</span><span class="n">fit_algorithm</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown fit algorithm: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fit_algorithm</span><span class="p">))</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown fit algorithm: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fit_algorithm</span><span class="p">))</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_k1</span> <span class="o">=</span> <span class="n">k1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_k2</span> <span class="o">=</span> <span class="n">k2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_k3</span> <span class="o">=</span> <span class="n">k3</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_lookup_table</span> <span class="o">=</span> <span class="n">lookup_table</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_settling_time</span> <span class="o">=</span> <span class="n">settling_time</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_std_high_target_signal_factor</span> <span class="o">=</span> <span class="n">std_high_target_signal_factor</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">description</span> <span class="ow">or</span> <span class="s2">&quot;Default kit with linear fit&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">description</span> <span class="ow">or</span> <span class="s2">"Default kit with linear fit"</span>
         
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a textual description of the kit.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Returns a textual description of the kit."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span> <span class="o">==</span> <span class="n">FitAlgorithm</span><span class="o">.</span><span class="n">LookupTable</span><span class="p">:</span>
-            <span class="n">lookup_table_str</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lookup_table</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;present&quot;</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="si">}</span><span class="s2"> fit_algorithm=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, lookup_table=</span><span class="si">{</span><span class="n">lookup_table_str</span><span class="si">}</span><span class="s2">, settling_time=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_settling_time</span><span class="si">}</span><span class="s2">, std_high_target_signal_factor=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_std_high_target_signal_factor</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">lookup_table_str</span> <span class="o">=</span> <span class="s2">"None"</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lookup_table</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">"present"</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="si">}</span><span class="s2"> fit_algorithm=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, lookup_table=</span><span class="si">{</span><span class="n">lookup_table_str</span><span class="si">}</span><span class="s2">, settling_time=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_settling_time</span><span class="si">}</span><span class="s2">, std_high_target_signal_factor=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_std_high_target_signal_factor</span><span class="si">}</span><span class="s2">"</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="si">}</span><span class="s2"> fit_algorithm=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, k1=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_k1</span><span class="si">}</span><span class="s2">, k2=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_k2</span><span class="si">}</span><span class="s2">, k3=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_k3</span><span class="si">}</span><span class="s2">, settling_time=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_settling_time</span><span class="si">}</span><span class="s2">, std_high_target_signal_factor=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_std_high_target_signal_factor</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="si">}</span><span class="s2"> fit_algorithm=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, k1=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_k1</span><span class="si">}</span><span class="s2">, k2=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_k2</span><span class="si">}</span><span class="s2">, k3=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_k3</span><span class="si">}</span><span class="s2">, settling_time=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_settling_time</span><span class="si">}</span><span class="s2">, std_high_target_signal_factor=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_std_high_target_signal_factor</span><span class="si">}</span><span class="s2">"</span>
 
 <div class="viewcode-block" id="Default.to_json">
 <a class="viewcode-back" href="../../../hse.evifluor.kits.html#hse.evifluor.Default.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts the kit configuration to a JSON representation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Converts the kit configuration to a JSON representation."""</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="n">_KIT_FIT_ALGORITHM</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span><span class="p">),</span>
             <span class="n">_KIT_K1</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k1</span><span class="p">,</span>
@@ -119,7 +119,7 @@
 <a class="viewcode-back" href="../../../hse.evifluor.kits.html#hse.evifluor.Default.factory">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">factory</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">k1</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">k3</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">lookup_table</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a predefined kit instance from a string name.</span>
+<span class="w">        </span><span class="sd">"""Creates a predefined kit instance from a string name.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            name: Preset kit name or alias.</span>
@@ -131,55 +131,55 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            The matching predefined or default kit instance.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"default"</span><span class="p">:</span>
             <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">if</span> <span class="n">k1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;k1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k1</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s2">"k1"</span><span class="p">]</span> <span class="o">=</span> <span class="n">k1</span>
             <span class="k">if</span> <span class="n">k2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;k2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k2</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s2">"k2"</span><span class="p">]</span> <span class="o">=</span> <span class="n">k2</span>
             <span class="k">if</span> <span class="n">k3</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;k3&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k3</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s2">"k3"</span><span class="p">]</span> <span class="o">=</span> <span class="n">k3</span>
             <span class="k">if</span> <span class="n">lookup_table</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;lookup_table&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lookup_table</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s2">"lookup_table"</span><span class="p">]</span> <span class="o">=</span> <span class="n">lookup_table</span>
             <span class="k">return</span> <span class="n">Default</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;qubittm_1x_dsdna_broad_range_br&quot;</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;qubit_br&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"qubittm_1x_dsdna_broad_range_br"</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"qubit_br"</span><span class="p">:</span>
             <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">if</span> <span class="n">k1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;k1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k1</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s2">"k1"</span><span class="p">]</span> <span class="o">=</span> <span class="n">k1</span>
             <span class="k">if</span> <span class="n">k2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;k2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k2</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s2">"k2"</span><span class="p">]</span> <span class="o">=</span> <span class="n">k2</span>
             <span class="k">if</span> <span class="n">k3</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;k3&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k3</span>            
+                <span class="n">kwargs</span><span class="p">[</span><span class="s2">"k3"</span><span class="p">]</span> <span class="o">=</span> <span class="n">k3</span>            
             <span class="k">if</span> <span class="n">lookup_table</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;lookup_table&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lookup_table</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s2">"lookup_table"</span><span class="p">]</span> <span class="o">=</span> <span class="n">lookup_table</span>
             <span class="k">return</span> <span class="n">QubitTM_1X_dsDNA_Broad_Range_BR</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;qubittm_1x_dsdna_high_sensitivity_hs&quot;</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;qubit_hs&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"qubittm_1x_dsdna_high_sensitivity_hs"</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"qubit_hs"</span><span class="p">:</span>
             <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">if</span> <span class="n">k1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;k1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k1</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s2">"k1"</span><span class="p">]</span> <span class="o">=</span> <span class="n">k1</span>
             <span class="k">if</span> <span class="n">k2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;k2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k2</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s2">"k2"</span><span class="p">]</span> <span class="o">=</span> <span class="n">k2</span>
             <span class="k">if</span> <span class="n">k3</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;k3&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k3</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s2">"k3"</span><span class="p">]</span> <span class="o">=</span> <span class="n">k3</span>
             <span class="k">return</span> <span class="n">QubitTM_1X_dsDNA_High_Sensitivity_HS</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown kit: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown kit: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="Default.from_json">
 <a class="viewcode-back" href="../../../hse.evifluor.kits.html#hse.evifluor.Default.from_json">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a kit instance from a JSON node.</span>
+<span class="w">        </span><span class="sd">"""Creates a kit instance from a JSON node.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            node: JSON object containing a serialized kit configuration.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A deserialized :class:`Default` kit instance.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">Default</span><span class="p">(</span>
             <span class="n">fit_algorithm</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="n">_KIT_FIT_ALGORITHM</span><span class="p">],</span>
             <span class="n">k1</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_KIT_K1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
@@ -195,7 +195,7 @@
 <div class="viewcode-block" id="Default.fit">
 <a class="viewcode-back" href="../../../hse.evifluor.kits.html#hse.evifluor.Default.fit">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">std_low</span><span class="p">,</span> <span class="n">std_high</span><span class="p">,</span> <span class="n">rfu</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Maps a measured signal to concentration using the configured fit model.</span>
+<span class="w">        </span><span class="sd">"""Maps a measured signal to concentration using the configured fit model.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            std_low: Low calibration standard used as the lower interpolation</span>
@@ -206,11 +206,11 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            The calculated concentration for the measured signal.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># First interpolate between the two measured standards to get the raw concentration.</span>
         <span class="n">delta_signal</span> <span class="o">=</span> <span class="n">std_high</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="n">std_low</span><span class="o">.</span><span class="n">value</span>
         <span class="k">if</span> <span class="n">delta_signal</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Standard low and high must have different signal values for calibration&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Standard low and high must have different signal values for calibration"</span><span class="p">)</span>
 
         <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">std_high</span><span class="o">.</span><span class="n">concentration</span> <span class="o">-</span> <span class="n">std_low</span><span class="o">.</span><span class="n">concentration</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta_signal</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">std_high</span><span class="o">.</span><span class="n">concentration</span> <span class="o">-</span> <span class="n">m</span> <span class="o">*</span> <span class="n">std_high</span><span class="o">.</span><span class="n">value</span>
@@ -221,11 +221,11 @@
             <span class="n">x_fitted</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k2</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span> <span class="o">==</span> <span class="n">FitAlgorithm</span><span class="o">.</span><span class="n">LookupTable</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lookup_table</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Lookup table fit algorithm requires a non-empty lookup table&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Lookup table fit algorithm requires a non-empty lookup table"</span><span class="p">)</span>
 
-            <span class="n">lookup_table</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lookup_table</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">point</span><span class="p">:</span> <span class="n">point</span><span class="p">[</span><span class="s2">&quot;signal&quot;</span><span class="p">])</span>
+            <span class="n">lookup_table</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lookup_table</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">point</span><span class="p">:</span> <span class="n">point</span><span class="p">[</span><span class="s2">"signal"</span><span class="p">])</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lookup_table</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">x_fitted</span> <span class="o">=</span> <span class="n">lookup_table</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;concentration&quot;</span><span class="p">]</span>
+                <span class="n">x_fitted</span> <span class="o">=</span> <span class="n">lookup_table</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"concentration"</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">rfu_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">rfu</span> <span class="o">-</span> <span class="n">std_low</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta_signal</span>
 
@@ -234,17 +234,17 @@
                 <span class="k">for</span> <span class="n">candidate_lower</span><span class="p">,</span> <span class="n">candidate_upper</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lookup_table</span><span class="p">,</span> <span class="n">lookup_table</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
                     <span class="n">lower</span> <span class="o">=</span> <span class="n">candidate_lower</span>
                     <span class="n">upper</span> <span class="o">=</span> <span class="n">candidate_upper</span>
-                    <span class="k">if</span> <span class="n">rfu_norm</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">[</span><span class="s2">&quot;signal&quot;</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">rfu_norm</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">[</span><span class="s2">"signal"</span><span class="p">]:</span>
                         <span class="k">break</span>
 
-                <span class="n">delta_lookup_signal</span> <span class="o">=</span> <span class="n">upper</span><span class="p">[</span><span class="s2">&quot;signal&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">lower</span><span class="p">[</span><span class="s2">&quot;signal&quot;</span><span class="p">]</span>
+                <span class="n">delta_lookup_signal</span> <span class="o">=</span> <span class="n">upper</span><span class="p">[</span><span class="s2">"signal"</span><span class="p">]</span> <span class="o">-</span> <span class="n">lower</span><span class="p">[</span><span class="s2">"signal"</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">delta_lookup_signal</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Lookup table signal values must be strictly monotonic&quot;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Lookup table signal values must be strictly monotonic"</span><span class="p">)</span>
 
-                <span class="n">fraction</span> <span class="o">=</span> <span class="p">(</span><span class="n">rfu_norm</span> <span class="o">-</span> <span class="n">lower</span><span class="p">[</span><span class="s2">&quot;signal&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="n">delta_lookup_signal</span>
-                <span class="n">x_fitted</span> <span class="o">=</span> <span class="p">(</span><span class="n">lower</span><span class="p">[</span><span class="s2">&quot;concentration&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">fraction</span> <span class="o">*</span> <span class="p">(</span><span class="n">upper</span><span class="p">[</span><span class="s2">&quot;concentration&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">lower</span><span class="p">[</span><span class="s2">&quot;concentration&quot;</span><span class="p">]))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k2</span>
+                <span class="n">fraction</span> <span class="o">=</span> <span class="p">(</span><span class="n">rfu_norm</span> <span class="o">-</span> <span class="n">lower</span><span class="p">[</span><span class="s2">"signal"</span><span class="p">])</span> <span class="o">/</span> <span class="n">delta_lookup_signal</span>
+                <span class="n">x_fitted</span> <span class="o">=</span> <span class="p">(</span><span class="n">lower</span><span class="p">[</span><span class="s2">"concentration"</span><span class="p">]</span> <span class="o">+</span> <span class="n">fraction</span> <span class="o">*</span> <span class="p">(</span><span class="n">upper</span><span class="p">[</span><span class="s2">"concentration"</span><span class="p">]</span> <span class="o">-</span> <span class="n">lower</span><span class="p">[</span><span class="s2">"concentration"</span><span class="p">]))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_k2</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown fit algorithm: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown fit algorithm: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_algorithm</span><span class="p">))</span>
         
         <span class="k">return</span> <span class="n">x_fitted</span></div>
 
@@ -252,14 +252,14 @@
 <div class="viewcode-block" id="Default.settling_time">
 <a class="viewcode-back" href="../../../hse.evifluor.kits.html#hse.evifluor.Default.settling_time">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">settling_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the time in seconds to wait after adding the reagent before measuring.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Returns the time in seconds to wait after adding the reagent before measuring."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settling_time</span></div>
 
 
 <div class="viewcode-block" id="Default.std_high_target_signal_factor">
 <a class="viewcode-back" href="../../../hse.evifluor.kits.html#hse.evifluor.Default.std_high_target_signal_factor">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">std_high_target_signal_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the autogain factor for the high standard signal.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Returns the autogain factor for the high standard signal."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_std_high_target_signal_factor</span></div>
 </div>
 
@@ -267,81 +267,81 @@
 <div class="viewcode-block" id="QubitTM_1X_dsDNA_High_Sensitivity_HS">
 <a class="viewcode-back" href="../../../hse.evifluor.kits.html#hse.evifluor.QubitTM_1X_dsDNA_High_Sensitivity_HS">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">QubitTM_1X_dsDNA_High_Sensitivity_HS</span><span class="p">(</span><span class="n">Default</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Preset for the QubitTM 1X dsDNA High Sensitivity (HS) Assay Kit.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Preset for the QubitTM 1X dsDNA High Sensitivity (HS) Assay Kit."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k1</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the QubitTM 1X dsDNA High Sensitivity preset.</span>
+<span class="w">        </span><span class="sd">"""Initializes the QubitTM 1X dsDNA High Sensitivity preset.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            k1: Optional override for the preset&#39;s primary scale factor.</span>
-<span class="sd">            k2: Optional override for the preset&#39;s additive concentration offset.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fit_algorithm</span> <span class="o">=</span> <span class="n">FitAlgorithm</span><span class="o">.</span><span class="n">Linear</span><span class="p">,</span> <span class="n">k1</span> <span class="o">=</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="n">k2</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;QubitTM 1X dsDNA High Sensitivity (HS) Assay Kit&quot;</span><span class="p">,</span> <span class="n">settling_time</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="sd">            k1: Optional override for the preset's primary scale factor.</span>
+<span class="sd">            k2: Optional override for the preset's additive concentration offset.</span>
+<span class="sd">        """</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fit_algorithm</span> <span class="o">=</span> <span class="n">FitAlgorithm</span><span class="o">.</span><span class="n">Linear</span><span class="p">,</span> <span class="n">k1</span> <span class="o">=</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="n">k2</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s2">"QubitTM 1X dsDNA High Sensitivity (HS) Assay Kit"</span><span class="p">,</span> <span class="n">settling_time</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span>
         <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="QubitTM_1X_dsDNA_Broad_Range_BR">
 <a class="viewcode-back" href="../../../hse.evifluor.kits.html#hse.evifluor.QubitTM_1X_dsDNA_Broad_Range_BR">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">QubitTM_1X_dsDNA_Broad_Range_BR</span><span class="p">(</span><span class="n">Default</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Preset for the QubitTM 1X dsDNA Broad Range (BR) Assay Kit.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Preset for the QubitTM 1X dsDNA Broad Range (BR) Assay Kit."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k1</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">lookup_table</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the QubitTM 1X dsDNA Broad Range preset.</span>
+<span class="w">        </span><span class="sd">"""Initializes the QubitTM 1X dsDNA Broad Range preset.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            k1: Optional override for the preset&#39;s primary scale factor.</span>
-<span class="sd">            k2: Optional override for the preset&#39;s additive concentration offset.</span>
+<span class="sd">            k1: Optional override for the preset's primary scale factor.</span>
+<span class="sd">            k2: Optional override for the preset's additive concentration offset.</span>
 <span class="sd">            lookup_table: Optional replacement for the preset lookup table. This</span>
 <span class="sd">                can be a list of lookup-table entries or a CSV/JSON file path.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">lookup_table</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">lookup_table</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="p">{</span>
-                  <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
-                  <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="mf">8.21960772015573e-19</span>
+                  <span class="s2">"concentration"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                  <span class="s2">"signal"</span><span class="p">:</span> <span class="mf">8.21960772015573e-19</span>
                 <span class="p">},</span>
                 <span class="p">{</span>
-                  <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="mf">0.655</span><span class="p">,</span>
-                  <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="mf">0.005511528146509457</span>
+                  <span class="s2">"concentration"</span><span class="p">:</span> <span class="mf">0.655</span><span class="p">,</span>
+                  <span class="s2">"signal"</span><span class="p">:</span> <span class="mf">0.005511528146509457</span>
                 <span class="p">},</span>
                 <span class="p">{</span>
-                  <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="mf">1.15</span><span class="p">,</span>
-                  <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="mf">0.012096556749881238</span>
+                  <span class="s2">"concentration"</span><span class="p">:</span> <span class="mf">1.15</span><span class="p">,</span>
+                  <span class="s2">"signal"</span><span class="p">:</span> <span class="mf">0.012096556749881238</span>
                 <span class="p">},</span>
                 <span class="p">{</span>
-                  <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="mf">10.3</span><span class="p">,</span>
-                  <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="mf">0.11696146388117148</span>
+                  <span class="s2">"concentration"</span><span class="p">:</span> <span class="mf">10.3</span><span class="p">,</span>
+                  <span class="s2">"signal"</span><span class="p">:</span> <span class="mf">0.11696146388117148</span>
                 <span class="p">},</span>
                 <span class="p">{</span>
-                  <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="mf">42.9</span><span class="p">,</span>
-                  <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="mf">0.4437930749162957</span>
+                  <span class="s2">"concentration"</span><span class="p">:</span> <span class="mf">42.9</span><span class="p">,</span>
+                  <span class="s2">"signal"</span><span class="p">:</span> <span class="mf">0.4437930749162957</span>
                 <span class="p">},</span>
                 <span class="p">{</span>
-                  <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="mf">80.5</span><span class="p">,</span>
-                  <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="mf">0.8584075257182888</span>
+                  <span class="s2">"concentration"</span><span class="p">:</span> <span class="mf">80.5</span><span class="p">,</span>
+                  <span class="s2">"signal"</span><span class="p">:</span> <span class="mf">0.8584075257182888</span>
                 <span class="p">},</span>
                 <span class="p">{</span>
-                  <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span>
-                  <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="mf">1.0</span>
+                  <span class="s2">"concentration"</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span>
+                  <span class="s2">"signal"</span><span class="p">:</span> <span class="mf">1.0</span>
                 <span class="p">},</span>
                 <span class="p">{</span>
-                  <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="mf">101.0</span><span class="p">,</span>
-                  <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="mf">1.029219428556792</span>
+                  <span class="s2">"concentration"</span><span class="p">:</span> <span class="mf">101.0</span><span class="p">,</span>
+                  <span class="s2">"signal"</span><span class="p">:</span> <span class="mf">1.029219428556792</span>
                 <span class="p">},</span>
                 <span class="p">{</span>
-                  <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="mf">166.0</span><span class="p">,</span>
-                  <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="mf">1.4952711926922733</span>
+                  <span class="s2">"concentration"</span><span class="p">:</span> <span class="mf">166.0</span><span class="p">,</span>
+                  <span class="s2">"signal"</span><span class="p">:</span> <span class="mf">1.4952711926922733</span>
                 <span class="p">},</span>
                 <span class="p">{</span>
-                  <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="mf">242.0</span><span class="p">,</span>
-                  <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="mf">1.9368286353950304</span>
+                  <span class="s2">"concentration"</span><span class="p">:</span> <span class="mf">242.0</span><span class="p">,</span>
+                  <span class="s2">"signal"</span><span class="p">:</span> <span class="mf">1.9368286353950304</span>
                 <span class="p">}</span>
             <span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lookup_table</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
                 <span class="n">lookup_table</span> <span class="o">=</span> <span class="n">LookupTable</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">lookup_table</span><span class="p">)</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
                                 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fit_algorithm</span> <span class="o">=</span> <span class="n">FitAlgorithm</span><span class="o">.</span><span class="n">LookupTable</span><span class="p">,</span> <span class="n">k1</span> <span class="o">=</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lookup_table</span> <span class="o">=</span> <span class="n">lookup_table</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;QubitTM 1X dsDNA Broad Range (BR) Assay Kit&quot;</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">settling_time</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fit_algorithm</span> <span class="o">=</span> <span class="n">FitAlgorithm</span><span class="o">.</span><span class="n">LookupTable</span><span class="p">,</span> <span class="n">k1</span> <span class="o">=</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lookup_table</span> <span class="o">=</span> <span class="n">lookup_table</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s2">"QubitTM 1X dsDNA Broad Range (BR) Assay Kit"</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">settling_time</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span>
         <span class="k">pass</span></div>
 
 </pre></div>

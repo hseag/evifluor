@@ -41,8 +41,9 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntEnum</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">DictKeys</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hse.evifluor.device</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoGainResult</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">FirstAirMeasurementResult</span><span class="p">,</span> <span class="n">FirstSampleMeasurementResult</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">hse.evifluor.measurement</span><span class="w"> </span><span class="kn">import</span> <span class="n">Algorithm</span><span class="p">,</span> <span class="n">Factors</span><span class="p">,</span> <span class="n">Measurement</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hse.evifluor.measurement</span><span class="w"> </span><span class="kn">import</span> <span class="n">Algorithm</span><span class="p">,</span> <span class="n">Factors</span><span class="p">,</span> <span class="n">Measurement</span><span class="p">,</span> <span class="n">Results</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hse.evifluor.singlemeasurement</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleMeasurement</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hse.evifluor.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">StorageMeasurement</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hse.evifluor.verification</span><span class="w"> </span><span class="kn">import</span> <span class="n">Verification</span>
@@ -52,12 +53,12 @@
 <div class="viewcode-block" id="Run">
 <a class="viewcode-back" href="../../../hse.evifluor.run.html#hse.evifluor.Run">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Run</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Coordinates guided measurement runs including acquisition, verification, and storage.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Coordinates guided measurement runs including acquisition, verification, and storage."""</span>
 
 <div class="viewcode-block" id="Run.State">
 <a class="viewcode-back" href="../../../hse.evifluor.run.html#hse.evifluor.Run.State">[docs]</a>
     <span class="k">class</span><span class="w"> </span><span class="nc">State</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>                            
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal state machine for the guided run.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Internal state machine for the guided run."""</span>
         <span class="n">FIRST_AIR</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">FIRST_SAMPLE</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="n">AIR</span>          <span class="o">=</span> <span class="mi">2</span>
@@ -75,8 +76,8 @@
         <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">FirstAirMeasurementResult</span><span class="p">(</span>
-            <span class="n">SingleMeasurement</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;min_measurement&quot;</span><span class="p">]),</span>
-            <span class="n">SingleMeasurement</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;max_measurement&quot;</span><span class="p">]),</span>
+            <span class="n">SingleMeasurement</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s2">"min_measurement"</span><span class="p">]),</span>
+            <span class="n">SingleMeasurement</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s2">"max_measurement"</span><span class="p">]),</span>
         <span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
@@ -84,18 +85,18 @@
         <span class="k">if</span> <span class="n">first_sample</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;autoGainResult&quot;</span><span class="p">:</span> <span class="n">first_sample</span><span class="o">.</span><span class="n">auto_gain_result</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
-            <span class="s2">&quot;measurement&quot;</span><span class="p">:</span> <span class="n">first_sample</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
+            <span class="s2">"autoGainResult"</span><span class="p">:</span> <span class="n">first_sample</span><span class="o">.</span><span class="n">auto_gain_result</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
+            <span class="s2">"measurement"</span><span class="p">:</span> <span class="n">first_sample</span><span class="o">.</span><span class="n">measurement</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
         <span class="p">}</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_first_sample_from_json</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
-        <span class="n">auto_gain</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s2">&quot;autoGainResult&quot;</span><span class="p">]</span>
+        <span class="n">auto_gain</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s2">"autoGainResult"</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">FirstSampleMeasurementResult</span><span class="p">(</span>
-            <span class="n">AutoGainResult</span><span class="p">(</span><span class="n">auto_gain</span><span class="p">[</span><span class="s2">&quot;found&quot;</span><span class="p">],</span> <span class="n">auto_gain</span><span class="p">[</span><span class="s2">&quot;led_power&quot;</span><span class="p">]),</span>
-            <span class="n">SingleMeasurement</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;measurement&quot;</span><span class="p">]),</span>
+            <span class="n">AutoGainResult</span><span class="p">(</span><span class="n">auto_gain</span><span class="p">[</span><span class="s2">"found"</span><span class="p">],</span> <span class="n">auto_gain</span><span class="p">[</span><span class="s2">"led_power"</span><span class="p">]),</span>
+            <span class="n">SingleMeasurement</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s2">"measurement"</span><span class="p">]),</span>
         <span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
@@ -118,8 +119,8 @@
             <span class="k">return</span> <span class="n">device</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
     
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nr_of_std_low</span><span class="p">,</span> <span class="n">nr_of_std_high</span><span class="p">,</span> <span class="n">concentration</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">no_air</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">kit</span> <span class="o">=</span> <span class="n">DefaultKit</span><span class="p">(),</span> <span class="n">settling_time</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes a new guided measurement run.</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nr_of_std_low</span><span class="p">,</span> <span class="n">nr_of_std_high</span><span class="p">,</span> <span class="n">concentration</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">no_air</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">kit</span> <span class="o">=</span> <span class="n">DefaultKit</span><span class="p">(),</span> <span class="n">settling_time</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">add_device_info</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Initializes a new guided measurement run.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            nr_of_std_low: Number of low-standard replicates to collect before</span>
@@ -130,16 +131,16 @@
 <span class="sd">            path: Optional directory for the output JSON file.</span>
 <span class="sd">            filename: Optional measurement filename. If omitted, a filename is</span>
 <span class="sd">                generated automatically.</span>
-<span class="sd">            device: Optional device serial number, ``&quot;SIMULATION&quot;``, or an</span>
+<span class="sd">            device: Optional device serial number, ``"SIMULATION"``, or an</span>
 <span class="sd">                already opened device instance.</span>
 <span class="sd">            no_air: If ``True``, the run skips air measurements and uses the</span>
 <span class="sd">                sample-only algorithm.</span>
 <span class="sd">            kit: Optional kit overriding the default fit model and measurement</span>
 <span class="sd">                settings.</span>
 <span class="sd">            settling_time: Optional explicit settling-time override in seconds.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-            <span class="s2">&quot;Run.__init__ entry: nr_of_std_low=</span><span class="si">%s</span><span class="s2"> nr_of_std_high=</span><span class="si">%s</span><span class="s2"> concentration=</span><span class="si">%s</span><span class="s2"> path=</span><span class="si">%r</span><span class="s2"> filename=</span><span class="si">%r</span><span class="s2"> device=</span><span class="si">%r</span><span class="s2"> no_air=</span><span class="si">%s</span><span class="s2">, kit=</span><span class="si">%s</span><span class="s2">, settling_time=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">"Run.__init__ entry: nr_of_std_low=</span><span class="si">%s</span><span class="s2"> nr_of_std_high=</span><span class="si">%s</span><span class="s2"> concentration=</span><span class="si">%s</span><span class="s2"> path=</span><span class="si">%r</span><span class="s2"> filename=</span><span class="si">%r</span><span class="s2"> device=</span><span class="si">%r</span><span class="s2"> no_air=</span><span class="si">%s</span><span class="s2">, kit=</span><span class="si">%s</span><span class="s2">, settling_time=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span>
             <span class="n">nr_of_std_low</span><span class="p">,</span>
             <span class="n">nr_of_std_high</span><span class="p">,</span>
             <span class="n">concentration</span><span class="p">,</span>
@@ -182,15 +183,20 @@
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span>  <span class="o">=</span> <span class="n">filename</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span>  <span class="o">=</span> <span class="s2">&quot;evifluor-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">.json&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">serial_number</span><span class="p">(),</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y_%m_</span><span class="si">%d</span><span class="s2">_%H_%M_%S&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span>  <span class="o">=</span> <span class="s2">"evifluor-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">.json"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">serial_number</span><span class="p">(),</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y_%m_</span><span class="si">%d</span><span class="s2">_%H_%M_%S"</span><span class="p">))</span>
             
         <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span>
             
         <span class="bp">self</span><span class="o">.</span><span class="n">storage</span>        <span class="o">=</span> <span class="n">StorageMeasurement</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_factors</span>       <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">add_device_info</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">add_device_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">add_dict</span><span class="p">(</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">PARAMETERS</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">())</span>
+        
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-            <span class="s2">&quot;Run.__init__ exit: filename=</span><span class="si">%r</span><span class="s2"> device=</span><span class="si">%r</span><span class="s2"> state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2"> has_factors=</span><span class="si">%s</span><span class="s2"> no_air=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">"Run.__init__ exit: filename=</span><span class="si">%r</span><span class="s2"> device=</span><span class="si">%r</span><span class="s2"> state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2"> has_factors=</span><span class="si">%s</span><span class="s2"> no_air=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_safe_device_log_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span>
@@ -198,23 +204,33 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_factors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span> <span class="o">==</span> <span class="n">Algorithm</span><span class="o">.</span><span class="n">V2</span><span class="p">,</span>
         <span class="p">)</span>
+        
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">ret</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">NR_OF_STD_LOW</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_low</span>
+        <span class="n">ret</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">NR_OF_STD_HIGH</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_high</span>
+        <span class="n">ret</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">CONCENTRATION</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span>
+        <span class="n">ret</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">KIT</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
+        <span class="n">ret</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">SETTLING_TIME</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settling_time</span>
+        <span class="n">ret</span><span class="p">[</span><span class="n">DictKeys</span><span class="o">.</span><span class="n">ALGORITHM</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>        
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a textual summary of the run state.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;device:</span><span class="si">{}</span><span class="s2"> nr_of_std_low:</span><span class="si">{}</span><span class="s2"> nr_of_std_high:</span><span class="si">{}</span><span class="s2"> concentration:</span><span class="si">{}</span><span class="s2"> state:</span><span class="si">{}</span><span class="s2"> count:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_low</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_high</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Returns a textual summary of the run state."""</span>
+        <span class="k">return</span> <span class="s2">"device:</span><span class="si">{}</span><span class="s2"> nr_of_std_low:</span><span class="si">{}</span><span class="s2"> nr_of_std_high:</span><span class="si">{}</span><span class="s2"> concentration:</span><span class="si">{}</span><span class="s2"> state:</span><span class="si">{}</span><span class="s2"> count:</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_low</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_high</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Run.close">
 <a class="viewcode-back" href="../../../hse.evifluor.run.html#hse.evifluor.Run.close">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Releases the owned device handle, if any.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Releases the owned device handle, if any."""</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-            <span class="s2">&quot;Run.close entry: device=</span><span class="si">%r</span><span class="s2"> owns_device=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">"Run.close entry: device=</span><span class="si">%r</span><span class="s2"> owns_device=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_safe_device_log_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_owns_device</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_owns_device</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Run.close exit&quot;</span><span class="p">)</span></div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Run.close exit"</span><span class="p">)</span></div>
 
 
     <span class="nd">@staticmethod</span>
@@ -222,19 +238,19 @@
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">filename</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">return</span> <span class="s2">&quot;evifluor-</span><span class="si">{}</span><span class="s2">-state.json&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">"evifluor-</span><span class="si">{}</span><span class="s2">-state.json"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">device</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;state.json&quot;</span>
+            <span class="k">return</span> <span class="s2">"state.json"</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;evifluor-</span><span class="si">{}</span><span class="s2">-state.json&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">serial_number</span><span class="p">())</span>
+            <span class="k">return</span> <span class="s2">"evifluor-</span><span class="si">{}</span><span class="s2">-state.json"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">serial_number</span><span class="p">())</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;state.json&quot;</span>
+            <span class="k">return</span> <span class="s2">"state.json"</span>
 
 <div class="viewcode-block" id="Run.load_state">
 <a class="viewcode-back" href="../../../hse.evifluor.run.html#hse.evifluor.Run.load_state">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">load_state</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads a run from a previously saved state file.</span>
+<span class="w">        </span><span class="sd">"""Loads a run from a previously saved state file.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            filename: Optional explicit state filename. If omitted, the default</span>
@@ -242,37 +258,38 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A reconstructed :class:`Run` instance.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Run.load_state entry: filename=</span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Run.load_state entry: filename=</span><span class="si">%r</span><span class="s2">"</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">_resolve_state_filename</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="p">)</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
             <span class="n">state</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
 
         <span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="p">(</span>
-            <span class="n">state</span><span class="p">[</span><span class="s2">&quot;nr_of_std_low&quot;</span><span class="p">],</span>
-            <span class="n">state</span><span class="p">[</span><span class="s2">&quot;nr_of_std_high&quot;</span><span class="p">],</span>
-            <span class="n">state</span><span class="p">[</span><span class="s2">&quot;concentration&quot;</span><span class="p">],</span>
-            <span class="n">filename</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">),</span>
-            <span class="n">device</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;device&quot;</span><span class="p">),</span>
-            <span class="n">no_air</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;no_air&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-            <span class="n">kit</span><span class="o">=</span><span class="n">DefaultKit</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;kit&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kit&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">DefaultKit</span><span class="p">(),</span>
-            <span class="n">settling_time</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;settling_time&quot;</span><span class="p">),</span>
+            <span class="n">state</span><span class="p">[</span><span class="s2">"nr_of_std_low"</span><span class="p">],</span>
+            <span class="n">state</span><span class="p">[</span><span class="s2">"nr_of_std_high"</span><span class="p">],</span>
+            <span class="n">state</span><span class="p">[</span><span class="s2">"concentration"</span><span class="p">],</span>
+            <span class="n">filename</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"filename"</span><span class="p">),</span>
+            <span class="n">device</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"device"</span><span class="p">),</span>
+            <span class="n">no_air</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"no_air"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+            <span class="n">kit</span><span class="o">=</span><span class="n">DefaultKit</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">"kit"</span><span class="p">])</span> <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"kit"</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">DefaultKit</span><span class="p">(),</span>
+            <span class="n">settling_time</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"settling_time"</span><span class="p">),</span>
+            <span class="n">add_device_info</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="p">)</span>
-        <span class="n">run</span><span class="o">.</span><span class="n">_count</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span>
-        <span class="n">run</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;factors&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">run</span><span class="o">.</span><span class="n">_factors</span> <span class="o">=</span> <span class="n">Factors</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;factors&quot;</span><span class="p">])</span>
-        <span class="n">run</span><span class="o">.</span><span class="n">_first_air</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">_first_air_from_json</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;first_air&quot;</span><span class="p">))</span>
-        <span class="n">run</span><span class="o">.</span><span class="n">_first_sample</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">_first_sample_from_json</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;first_sample&quot;</span><span class="p">))</span>
-        <span class="n">run</span><span class="o">.</span><span class="n">_air</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">_single_measurement_from_json</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;air&quot;</span><span class="p">))</span>
-        <span class="n">run</span><span class="o">.</span><span class="n">_sample</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">_single_measurement_from_json</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">))</span>
+        <span class="n">run</span><span class="o">.</span><span class="n">_count</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">"count"</span><span class="p">]</span>
+        <span class="n">run</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">"state"</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"factors"</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">run</span><span class="o">.</span><span class="n">_factors</span> <span class="o">=</span> <span class="n">Factors</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">"factors"</span><span class="p">])</span>
+        <span class="n">run</span><span class="o">.</span><span class="n">_first_air</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">_first_air_from_json</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"first_air"</span><span class="p">))</span>
+        <span class="n">run</span><span class="o">.</span><span class="n">_first_sample</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">_first_sample_from_json</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"first_sample"</span><span class="p">))</span>
+        <span class="n">run</span><span class="o">.</span><span class="n">_air</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">_single_measurement_from_json</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"air"</span><span class="p">))</span>
+        <span class="n">run</span><span class="o">.</span><span class="n">_sample</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">_single_measurement_from_json</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sample"</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">run</span><span class="o">.</span><span class="n">_filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">_filename</span><span class="p">):</span>
             <span class="n">run</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">StorageMeasurement</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">run</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">StorageMeasurement</span><span class="p">()</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-            <span class="s2">&quot;Run.load_state exit: resolved_filename=</span><span class="si">%r</span><span class="s2"> measurement_filename=</span><span class="si">%r</span><span class="s2"> state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2"> has_factors=</span><span class="si">%s</span><span class="s2"> no_air=</span><span class="si">%s</span><span class="s2"> storage_len=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">"Run.load_state exit: resolved_filename=</span><span class="si">%r</span><span class="s2"> measurement_filename=</span><span class="si">%r</span><span class="s2"> state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2"> has_factors=</span><span class="si">%s</span><span class="s2"> no_air=</span><span class="si">%s</span><span class="s2"> storage_len=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span>
             <span class="n">filename</span><span class="p">,</span>
             <span class="n">run</span><span class="o">.</span><span class="n">_filename</span><span class="p">,</span>
             <span class="n">run</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span>
@@ -287,14 +304,14 @@
 <div class="viewcode-block" id="Run.save_state">
 <a class="viewcode-back" href="../../../hse.evifluor.run.html#hse.evifluor.Run.save_state">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">save_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Persists the current run state and measurement filename.</span>
+<span class="w">        </span><span class="sd">"""Persists the current run state and measurement filename.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            filename: Optional explicit state filename overriding the default</span>
 <span class="sd">                naming.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-            <span class="s2">&quot;Run.save_state entry: filename=</span><span class="si">%r</span><span class="s2"> state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2"> measurement_filename=</span><span class="si">%r</span><span class="s2"> has_factors=</span><span class="si">%s</span><span class="s2"> no_air=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">"Run.save_state entry: filename=</span><span class="si">%r</span><span class="s2"> state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2"> measurement_filename=</span><span class="si">%r</span><span class="s2"> has_factors=</span><span class="si">%s</span><span class="s2"> no_air=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span>
             <span class="n">filename</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">,</span>
@@ -304,27 +321,27 @@
         <span class="p">)</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_state_filename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="n">state</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">,</span>
-            <span class="s2">&quot;nr_of_std_low&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_low</span><span class="p">,</span>
-            <span class="s2">&quot;nr_of_std_high&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_high</span><span class="p">,</span>
-            <span class="s2">&quot;concentration&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span>
-            <span class="s2">&quot;kit&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
-            <span class="s2">&quot;settling_time&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">settling_time</span><span class="p">,</span>
-            <span class="s2">&quot;no_air&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span> <span class="o">==</span> <span class="n">Algorithm</span><span class="o">.</span><span class="n">V2</span><span class="p">,</span>
-            <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">,</span>
-            <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">),</span>
-            <span class="s2">&quot;device&quot;</span><span class="p">:</span> <span class="s2">&quot;SIMULATION&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">is_simulation</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">serial_number</span><span class="p">(),</span>
-            <span class="s2">&quot;first_air&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first_air_to_json</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_first_air&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-            <span class="s2">&quot;first_sample&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first_sample_to_json</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_first_sample&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-            <span class="s2">&quot;air&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_single_measurement_to_json</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_air&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-            <span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_single_measurement_to_json</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_sample&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-            <span class="s2">&quot;factors&quot;</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_factors</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_factors</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
+            <span class="s2">"filename"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">,</span>
+            <span class="s2">"nr_of_std_low"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_low</span><span class="p">,</span>
+            <span class="s2">"nr_of_std_high"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_high</span><span class="p">,</span>
+            <span class="s2">"concentration"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span>
+            <span class="s2">"kit"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
+            <span class="s2">"settling_time"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">settling_time</span><span class="p">,</span>
+            <span class="s2">"no_air"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span> <span class="o">==</span> <span class="n">Algorithm</span><span class="o">.</span><span class="n">V2</span><span class="p">,</span>
+            <span class="s2">"count"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">,</span>
+            <span class="s2">"state"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">),</span>
+            <span class="s2">"device"</span><span class="p">:</span> <span class="s2">"SIMULATION"</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">is_simulation</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">serial_number</span><span class="p">(),</span>
+            <span class="s2">"first_air"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first_air_to_json</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_first_air"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+            <span class="s2">"first_sample"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first_sample_to_json</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_first_sample"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+            <span class="s2">"air"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_single_measurement_to_json</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_air"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+            <span class="s2">"sample"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_single_measurement_to_json</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_sample"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+            <span class="s2">"factors"</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_factors</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_factors</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
         <span class="p">}</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
             <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">handle</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-            <span class="s2">&quot;Run.save_state exit: state_filename=</span><span class="si">%r</span><span class="s2"> measurement_filename=</span><span class="si">%r</span><span class="s2"> storage_len=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">"Run.save_state exit: state_filename=</span><span class="si">%r</span><span class="s2"> measurement_filename=</span><span class="si">%r</span><span class="s2"> storage_len=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span>
             <span class="n">filename</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">,</span>
             <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="p">),</span>
@@ -334,9 +351,9 @@
 <div class="viewcode-block" id="Run.re_calculate">
 <a class="viewcode-back" href="../../../hse.evifluor.run.html#hse.evifluor.Run.re_calculate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">re_calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Recomputes calibration factors when enough standards exist and applies pending results.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Recomputes calibration factors when enough standards exist and applies pending results."""</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-            <span class="s2">&quot;Run.re_calculate entry: nr_of_std_low=</span><span class="si">%s</span><span class="s2"> nr_of_std_high=</span><span class="si">%s</span><span class="s2"> concentration=</span><span class="si">%s</span><span class="s2"> storage_len=</span><span class="si">%s</span><span class="s2"> has_factors=</span><span class="si">%s</span><span class="s2"> no_air=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">"Run.re_calculate entry: nr_of_std_low=</span><span class="si">%s</span><span class="s2"> nr_of_std_high=</span><span class="si">%s</span><span class="s2"> concentration=</span><span class="si">%s</span><span class="s2"> storage_len=</span><span class="si">%s</span><span class="s2"> has_factors=</span><span class="si">%s</span><span class="s2"> no_air=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_low</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_high</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span>
@@ -347,34 +364,55 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_factors</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_low</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_high</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_factors</span> <span class="o">=</span> <span class="n">Measurement</span><span class="o">.</span><span class="n">calculate_factors</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">measurements</span><span class="p">()[</span><span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_low</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_high</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_low</span><span class="p">:],</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">measurements</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">nr_of_std_high</span><span class="p">:],</span> <span class="n">algorithm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span><span class="p">)</span>
             
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+            
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_factors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">entry</span><span class="o">.</span><span class="n">has_results</span><span class="p">():</span>
-                    <span class="n">entry</span><span class="o">.</span><span class="n">apply_results</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_factors</span><span class="p">,</span> <span class="n">kit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kit</span><span class="p">)</span>
+                    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">apply_results</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_factors</span><span class="p">,</span> <span class="n">kit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kit</span><span class="p">))</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-            <span class="s2">&quot;Run.re_calculate exit: has_factors=</span><span class="si">%s</span><span class="s2"> storage_len=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">"Run.re_calculate exit: has_factors=</span><span class="si">%s</span><span class="s2"> storage_len=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_factors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span>
             <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="p">),</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span></div>
 
 
 <div class="viewcode-block" id="Run.measure">
 <a class="viewcode-back" href="../../../hse.evifluor.run.html#hse.evifluor.Run.measure">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comment</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Executes the next step in the measurement sequence.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comment</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>  <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Verification</span><span class="p">,</span> <span class="n">Results</span><span class="p">]</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Verification</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Advances the guided run by exactly one measurement step.</span>
+
+<span class="sd">        Depending on the internal state, this performs the first air</span>
+<span class="sd">        measurement, the first sample measurement, a regular air measurement,</span>
+<span class="sd">        or a regular sample measurement. Completed measurements are stored,</span>
+<span class="sd">        pending calibration results are recalculated when possible, and the</span>
+<span class="sd">        updated run state is persisted to disk.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            comment: Optional annotation stored with the next completed</span>
-<span class="sd">                measurement.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">                measurement entry. It has no effect on intermediate steps that</span>
+<span class="sd">                do not append a measurement to storage.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A tuple ``(verification, result)`` for the executed step.</span>
+<span class="sd">            ``verification`` contains the checks performed for the current</span>
+<span class="sd">            acquisition. ``result`` is the newly available</span>
+<span class="sd">            :class:`hse.evifluor.measurement.Results` for the measurement</span>
+<span class="sd">            completed by this call, or ``None`` if no sample measurement was</span>
+<span class="sd">            completed yet or no calculated result is available at this point.</span>
+<span class="sd">        """</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-            <span class="s2">&quot;Run.measure entry: comment=</span><span class="si">%r</span><span class="s2"> state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2"> measurement_filename=</span><span class="si">%r</span><span class="s2"> no_air=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">"Run.measure entry: comment=</span><span class="si">%r</span><span class="s2"> state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2"> measurement_filename=</span><span class="si">%r</span><span class="s2"> no_air=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span>
             <span class="n">comment</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span> <span class="o">==</span> <span class="n">Algorithm</span><span class="o">.</span><span class="n">V2</span><span class="p">,</span>
         <span class="p">)</span>
+        
+        <span class="n">return_last_result</span> <span class="o">=</span> <span class="kc">False</span>
+        
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">FIRST_AIR</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">verification</span> <span class="o">=</span> <span class="n">Verification</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_first_air</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">first_air_measurement</span><span class="p">()</span>
@@ -400,13 +438,16 @@
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">AIR</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">verification</span> <span class="o">=</span> <span class="n">Verification</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_air</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">measure</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">verification</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_air</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">SAMPLE</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">verification</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_air</span><span class="p">,</span> <span class="n">hints</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">MUST_HAVE_CUVETTE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">SAMPLE</span>            
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">SAMPLE</span><span class="p">:</span>
+            <span class="n">return_last_result</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span> <span class="o">==</span> <span class="n">Algorithm</span><span class="o">.</span><span class="n">V2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">verification</span> <span class="o">=</span> <span class="n">Verification</span><span class="p">()</span>
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settling_time</span><span class="p">)</span>
             
             <span class="bp">self</span><span class="o">.</span><span class="n">_sample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">measure</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">verification</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sample</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">verification</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sample</span><span class="p">,</span> <span class="n">hints</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">MUST_HAVE_CUVETTE</span><span class="p">)</span>
             
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span> <span class="o">==</span> <span class="n">Algorithm</span><span class="o">.</span><span class="n">V1</span><span class="p">:</span>
                 <span class="n">measurement</span> <span class="o">=</span> <span class="n">Measurement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_air</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample</span><span class="p">)</span>
@@ -417,63 +458,93 @@
             
             <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurement</span><span class="p">,</span> <span class="n">comment</span><span class="p">,</span> <span class="n">logging</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">logging</span><span class="p">(),</span> <span class="n">verification</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">verification</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">re_calculate</span><span class="p">()</span>
+        <span class="n">new_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">re_calculate</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-            <span class="s2">&quot;Run.measure exit: next_state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2"> storage_len=</span><span class="si">%s</span><span class="s2"> has_factors=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">"Run.measure exit: next_state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2"> storage_len=</span><span class="si">%s</span><span class="s2"> has_factors=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">,</span>
             <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_factors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">return_last_result</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_results</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">verification</span><span class="p">,</span> <span class="n">new_results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">verification</span><span class="p">,</span> <span class="kc">None</span></div>
 
     
 <div class="viewcode-block" id="Run.check_empty">
 <a class="viewcode-back" href="../../../hse.evifluor.run.html#hse.evifluor.Run.check_empty">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True when the cuvette holder is empty according to the device.&quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Run.check_empty entry&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Returns True when the cuvette holder is empty according to the device."""</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Run.check_empty entry"</span><span class="p">)</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">is_cuvette_holder_empty</span><span class="p">()</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Run.check_empty exit: result=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ret</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Run.check_empty exit: result=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">ret</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ret</span></div>
 
 
 <div class="viewcode-block" id="Run.export_as_csv">
 <a class="viewcode-back" href="../../../hse.evifluor.run.html#hse.evifluor.Run.export_as_csv">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">export_as_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Saves the stored measurements as CSV.&quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Run.export_as_csv entry: measurement_filename=</span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Saves the stored measurements as CSV."""</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Run.export_as_csv entry: measurement_filename=</span><span class="si">%r</span><span class="s2">"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">export_as_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Run.export_as_csv exit: measurement_filename=</span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span></div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Run.export_as_csv exit: measurement_filename=</span><span class="si">%r</span><span class="s2">"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span></div>
 
         
 <div class="viewcode-block" id="Run.skip_air">
 <a class="viewcode-back" href="../../../hse.evifluor.run.html#hse.evifluor.Run.skip_air">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">skip_air</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Skips the next air measurement and reuses the previous air value.</span>
+<span class="w">        </span><span class="sd">"""Skips the next air measurement and reuses the previous air value.</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            Exception: If the current state does not allow skipping the air</span>
 <span class="sd">                measurement or no reusable air value is available.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Run.skip_air entry: state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Run.skip_air entry: state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">FIRST_AIR</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;State.FIRST_AIR: Can&#39;t skip the first air measurement!&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"State.FIRST_AIR: Can't skip the first air measurement!"</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">FIRST_SAMPLE</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;State.FIRST_SAMPLE: Wrong state, expected state is AIR!&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"State.FIRST_SAMPLE: Wrong state, expected state is AIR!"</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">AIR</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_air&quot;</span><span class="p">):</span>
-                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_first_air&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_first_sample&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_air"</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_first_air"</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_first_sample"</span><span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_air</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first_air</span><span class="o">.</span><span class="n">adjust_to_led_power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_first_sample</span><span class="o">.</span><span class="n">auto_gain_result</span><span class="o">.</span><span class="n">led_power</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;State.AIR: air and first_air are None!&quot;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"State.AIR: air and first_air are None!"</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">SAMPLE</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">SAMPLE</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;State.SAMPLE: Wrong state, expected state is AIR!&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"State.SAMPLE: Wrong state, expected state is AIR!"</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;State.?: Wrong state, expected state is AIR!&quot;</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Run.skip_air exit: next_state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"State.?: Wrong state, expected state is AIR!"</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Run.skip_air exit: next_state=</span><span class="si">%s</span><span class="s2"> count=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="Run.results">
+<a class="viewcode-back" href="../../../hse.evifluor.run.html#hse.evifluor.Run.results">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">results</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Returns all calculated results currently available in storage.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of :class:`hse.evifluor.measurement.Results` in measurement</span>
+<span class="sd">            order. Entries without calculated results are skipped until</span>
+<span class="sd">            calibration factors have been derived and applied.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">results</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Run.verifications">
+<a class="viewcode-back" href="../../../hse.evifluor.run.html#hse.evifluor.Run.verifications">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">verifications</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Returns all verification results currently available in storage.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of :class:`hse.evifluor.measurement.Verification` in measurement</span>
+<span class="sd">            order. Entries without verification results are skipped until</span>
+<span class="sd">            calibration factors have been derived and applied.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">verifications</span><span class="p">()</span></div>
 </div>
 
 </pre></div>

@@ -2170,6 +2170,19 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Run.ResolveStateFilename
   nameWithType: Run.ResolveStateFilename
+- uid: Hse.EviFluor.Run.Results
+  name: Results()
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_Results
+  commentId: M:Hse.EviFluor.Run.Results
+  fullName: Hse.EviFluor.Run.Results()
+  nameWithType: Run.Results()
+- uid: Hse.EviFluor.Run.Results*
+  name: Results
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_Results_
+  commentId: Overload:Hse.EviFluor.Run.Results
+  isSpec: "True"
+  fullName: Hse.EviFluor.Run.Results
+  nameWithType: Run.Results
 - uid: Hse.EviFluor.Run.SaveState(System.String)
   name: SaveState(string?)
   href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_SaveState_System_String_
@@ -2186,6 +2199,19 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Run.SaveState
   nameWithType: Run.SaveState
+- uid: Hse.EviFluor.Run.Verifications
+  name: Verifications()
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_Verifications
+  commentId: M:Hse.EviFluor.Run.Verifications
+  fullName: Hse.EviFluor.Run.Verifications()
+  nameWithType: Run.Verifications()
+- uid: Hse.EviFluor.Run.Verifications*
+  name: Verifications
+  href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_Verifications_
+  commentId: Overload:Hse.EviFluor.Run.Verifications
+  isSpec: "True"
+  fullName: Hse.EviFluor.Run.Verifications
+  nameWithType: Run.Verifications
 - uid: Hse.EviFluor.Run.checkEmpty
   name: checkEmpty()
   href: api/Hse.EviFluor.Run.html#Hse_EviFluor_Run_checkEmpty
@@ -2603,6 +2629,19 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.StorageMeasurement.Save
   nameWithType: StorageMeasurement.Save
+- uid: Hse.EviFluor.StorageMeasurement.Verifications
+  name: Verifications()
+  href: api/Hse.EviFluor.StorageMeasurement.html#Hse_EviFluor_StorageMeasurement_Verifications
+  commentId: M:Hse.EviFluor.StorageMeasurement.Verifications
+  fullName: Hse.EviFluor.StorageMeasurement.Verifications()
+  nameWithType: StorageMeasurement.Verifications()
+- uid: Hse.EviFluor.StorageMeasurement.Verifications*
+  name: Verifications
+  href: api/Hse.EviFluor.StorageMeasurement.html#Hse_EviFluor_StorageMeasurement_Verifications_
+  commentId: Overload:Hse.EviFluor.StorageMeasurement.Verifications
+  isSpec: "True"
+  fullName: Hse.EviFluor.StorageMeasurement.Verifications
+  nameWithType: StorageMeasurement.Verifications
 - uid: Hse.EviFluor.StorageMeasurement.data
   name: data
   href: api/Hse.EviFluor.StorageMeasurement.html#Hse_EviFluor_StorageMeasurement_data
@@ -3035,6 +3074,22 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.Verification.Failed
   nameWithType: Verification.Failed
+- uid: Hse.EviFluor.Verification.FromJson(System.Text.Json.Nodes.JsonNode)
+  name: FromJson(JsonNode?)
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_FromJson_System_Text_Json_Nodes_JsonNode_
+  commentId: M:Hse.EviFluor.Verification.FromJson(System.Text.Json.Nodes.JsonNode)
+  name.vb: FromJson(JsonNode)
+  fullName: Hse.EviFluor.Verification.FromJson(System.Text.Json.Nodes.JsonNode?)
+  fullName.vb: Hse.EviFluor.Verification.FromJson(System.Text.Json.Nodes.JsonNode)
+  nameWithType: Verification.FromJson(JsonNode?)
+  nameWithType.vb: Verification.FromJson(JsonNode)
+- uid: Hse.EviFluor.Verification.FromJson*
+  name: FromJson
+  href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_FromJson_
+  commentId: Overload:Hse.EviFluor.Verification.FromJson
+  isSpec: "True"
+  fullName: Hse.EviFluor.Verification.FromJson
+  nameWithType: Verification.FromJson
 - uid: Hse.EviFluor.Verification.HasProblem(Hse.EviFluor.Verification.ProblemId)
   name: HasProblem(ProblemId)
   href: api/Hse.EviFluor.Verification.html#Hse_EviFluor_Verification_HasProblem_Hse_EviFluor_Verification_ProblemId_

@@ -284,7 +284,15 @@ def create_app(working_dir: Optional[str] = None) -> FastAPI:
 
     @app.post("/api/v1/runs/{run_id}/measure")
     def run_measure(run_id: str, request: RunMeasureRequest):
-        return _with_run_id(service.measure_run_state(decode_run_id(run_id), comment=request.comment))
+        return service.measure_run_values_state(decode_run_id(run_id), comment=request.comment)
+
+    @app.get("/api/v1/runs/{run_id}/results")
+    def run_results(run_id: str):
+        return service.load_run_results_state(decode_run_id(run_id))
+
+    @app.get("/api/v1/runs/{run_id}/verifications")
+    def run_verifications(run_id: str):
+        return service.load_run_verifications_state(decode_run_id(run_id))
 
     @app.post("/api/v1/runs/{run_id}/export/csv")
     def run_export(run_id: str):

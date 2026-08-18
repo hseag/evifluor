@@ -61,6 +61,8 @@ class StorageMeasurementEntry:
         v.check(results)
         if v.failed():
             self.node[DictKeys.ERRORS] = v.to_json()
+            
+        return results
         
     @staticmethod
     def from_json(node):
@@ -209,9 +211,18 @@ class StorageMeasurement:
         """Returns the stored results."""
         ret = []
         for m in self.data[DictKeys.MEASUREMENTS]:
-            ret.append(Results.from_json(m[DictKeys.RESULTS]))
+            if DictKeys.RESULTS in m:
+                ret.append(Results.from_json(m[DictKeys.RESULTS]))
         return ret
    
+    def verifications(self):
+        """Returns the stored verifications."""
+        ret = []
+        for m in self.data[DictKeys.MEASUREMENTS]:
+            if DictKeys.ERRORS in m:
+                ret.append(Verification.from_json(m[DictKeys.ERRORS]))
+        return ret
+    
     def __getitem__(self, item):
         """Retrieves the entry at the specified index.
 

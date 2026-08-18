@@ -20,6 +20,8 @@ The current REST API covers:
 - empty-check of the cuvette guide
 - run initialization
 - step-wise run measurement
+- retrieval of calculated run results
+- retrieval of stored run verifications
 - CSV export of a run
 - retrieval of generated JSON run data
 - download of generated JSON and CSV files
@@ -31,7 +33,7 @@ Run initialization supports the same kit selection and settling-time override as
 To install the published wheel directly from the documentation site, use:
 
 ```bash
-python -m pip install "hse-evifluor[rest] @ https://hseag.github.io/evi-test/pre-release/python/dist/hse_evifluor-0.12.0rc1-py3-none-any.whl"
+python -m pip install "hse-evifluor[rest] @ https://hseag.github.io/evi-test/pre-release/python/dist/hse_evifluor-0.12.0rc2-py3-none-any.whl"
 ```
 
 Start the REST API with:
@@ -455,7 +457,7 @@ Response fields:
 - `next_state`: next expected state in the run state machine
 - `measurement_count`: number of completed stored measurements
 - `has_factors`: whether standard-derived factors are available
-- `verification`: verification result of the most recently executed measurement step; see [Verification Reference](./verification.md)
+- `verification`: verification result currently tracked in the run state; empty after initialization and updated on later measurement steps; see [Verification Reference](./verification.md)
 - `state`: current serialized run state without internal server-side file paths
 
 Behavior:
@@ -506,21 +508,76 @@ Request fields:
 
 Response:
 
-- same general structure as `GET /api/v1/runs/{run_id}`
-- includes `verification` for the measurement step that was just executed; see [Verification Reference](./verification.md)
+```json
+{
+  "verification": [],
+  "result": null
+}
+```
+
+Response fields:
+
+- `verification`: verification result of the measurement step that was just executed; see [Verification Reference](./verification.md)
+- `result`: calculated result returned by that step, or `null` if no completed sample result is available yet
+
+Notes:
+
+- this endpoint mirrors the return value of [`Run.measure(...)`][run-measure-api]
+- use `GET /api/v1/runs/{run_id}` when a full run snapshot is needed after the measurement step
 
 Behavior in normal mode:
 
 - first call performs the first-air step
 - second call performs the first-sample step and appends the first completed measurement
 - subsequent calls alternate between air and sample measurements
+- air steps return `result = null`
+- sample steps return `result = null` until enough standards are available to calculate factors
 
 Behavior with `no_air=true`:
 
 - the first call performs the first-sample step and appends the first completed measurement
 - subsequent calls perform sample-only measurements and append one measurement per call
+- `result` remains `null` until enough standards are available to calculate factors
 
-### 5.15 `POST /api/v1/runs/{run_id}/export/csv`
+### 5.15 `GET /api/v1/runs/{run_id}/results`
+
+Purpose:
+
+- returns all currently available calculated results for the run
+
+Path parameters:
+
+- `run_id`: run identifier
+
+Request:
+
+- no request body
+
+Response:
+
+- JSON array of result objects in measurement order
+- structure of each entry matches the `results` object in the measurement JSON data file
+
+### 5.16 `GET /api/v1/runs/{run_id}/verifications`
+
+Purpose:
+
+- returns all stored verification failures for the run
+
+Path parameters:
+
+- `run_id`: run identifier
+
+Request:
+
+- no request body
+
+Response:
+
+- JSON array of verification objects in measurement order
+- structure of each entry matches the verification format documented in [Verification Reference](./verification.md)
+
+### 5.17 `POST /api/v1/runs/{run_id}/export/csv`
 
 Purpose:
 
@@ -544,7 +601,7 @@ Behavior:
 - the server writes or updates the CSV file on disk
 - the same request returns the generated CSV content to the client
 
-### 5.16 `GET /api/v1/runs/{run_id}/data`
+### 5.18 `GET /api/v1/runs/{run_id}/data`
 
 Purpose:
 
@@ -563,7 +620,7 @@ Response:
 - the full JSON measurement data file
 - structure as documented in the user manual JSON data file format section
 
-### 5.17 `GET /api/v1/runs/{run_id}/file/json`
+### 5.19 `GET /api/v1/runs/{run_id}/file/json`
 
 Purpose:
 
@@ -581,7 +638,7 @@ Return:
 
 - file download with media type `application/json`
 
-### 5.18 `GET /api/v1/runs/{run_id}/file/csv`
+### 5.20 `GET /api/v1/runs/{run_id}/file/csv`
 
 Purpose:
 
@@ -647,12 +704,16 @@ def main():
         if not client.checkempty()["empty"]:
             raise RuntimeError("Cuvette holder must be empty before the measurement")
         # Move the empty cuvette into the cuvette guide and start the air measurement.
-        client.run_measure(run_id)
+        air_verification, air_result = client.run_measure(run_id)
         # Dispense the liquid into the cuvette and start the sample measurement.
-        client.run_measure(run_id, sample_name)
+        verification, result = client.run_measure(run_id, sample_name)
         # Aspirate the liquid back into the tip, leave the cuvette guide, and discard tip plus cuvette.
 
+    results = client.run_results(run_id)
+    verifications = client.run_verifications(run_id)
     csv_text = client.run_export_csv(run_id)
+    print(results)
+    print(verifications)
     print(csv_text)
 
 
@@ -689,10 +750,14 @@ def main():
         if not client.checkempty()["empty"]:
             raise RuntimeError("Cuvette holder must be empty before the measurement")
         # Dispense the liquid into the cuvette and start the sample measurement.
-        client.run_measure(run_id, sample_name)
+        verification, result = client.run_measure(run_id, sample_name)
         # Aspirate the liquid back into the tip, leave the cuvette guide, and discard tip plus cuvette.
 
+    results = client.run_results(run_id)
+    verifications = client.run_verifications(run_id)
     csv_text = client.run_export_csv(run_id)
+    print(results)
+    print(verifications)
     print(csv_text)
 
 

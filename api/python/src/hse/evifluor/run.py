@@ -8,8 +8,9 @@ from datetime import datetime
 from enum import IntEnum
 import time
 
+from .constants import DictKeys
 from hse.evifluor.device import AutoGainResult, Device, FirstAirMeasurementResult, FirstSampleMeasurementResult
-from hse.evifluor.measurement import Algorithm, Factors, Measurement
+from hse.evifluor.measurement import Algorithm, Factors, Measurement, Results
 from hse.evifluor.singlemeasurement import SingleMeasurement
 from hse.evifluor.storage import StorageMeasurement
 from hse.evifluor.verification import Verification
@@ -80,7 +81,7 @@ class Run:
             return device
         return type(device).__name__
     
-    def __init__(self, nr_of_std_low, nr_of_std_high, concentration, path = None, filename = None, device = None, no_air = False, kit = DefaultKit(), settling_time = None):
+    def __init__(self, nr_of_std_low, nr_of_std_high, concentration, path = None, filename = None, device = None, no_air = False, kit = DefaultKit(), settling_time = None, add_device_info = True):
         """Initializes a new guided measurement run.
 
         Args:
@@ -151,6 +152,11 @@ class Run:
             
         self.storage        = StorageMeasurement()
         self._factors       = None
+
+        if add_device_info:
+            self.storage.add_device_info(self.device)
+            self.storage.add_dict(DictKeys.PARAMETERS, self._parameters())
+        
         logger.debug(
             "Run.__init__ exit: filename=%r device=%r state=%s count=%s has_factors=%s no_air=%s",
             self._filename,
@@ -160,6 +166,16 @@ class Run:
             self._factors is not None,
             self._algorithm == Algorithm.V2,
         )
+        
+    def _parameters(self):
+        ret = {}
+        ret[DictKeys.NR_OF_STD_LOW] = self.nr_of_std_low
+        ret[DictKeys.NR_OF_STD_HIGH] = self.nr_of_std_high
+        ret[DictKeys.CONCENTRATION] = self.concentration
+        ret[DictKeys.KIT] = self.kit.to_json()
+        ret[DictKeys.SETTLING_TIME] = self.settling_time
+        ret[DictKeys.ALGORITHM] = int(self._algorithm)
+        return ret        
 
     def __repr__(self):
         """Returns a textual summary of the run state."""
@@ -214,6 +230,7 @@ class Run:
             no_air=state.get("no_air", False),
             kit=DefaultKit.from_json(state["kit"]) if state.get("kit") is not None else DefaultKit(),
             settling_time=state.get("settling_time"),
+            add_device_info = False
         )
         run._count = state["count"]
         run._state = Run.State(state["state"])
@@ -298,22 +315,40 @@ class Run:
         if self._factors is None and len(self.storage) == self.nr_of_std_low + self.nr_of_std_high:
             self._factors = Measurement.calculate_factors(0, self.concentration, self.storage.measurements()[self.nr_of_std_low:self.nr_of_std_high+self.nr_of_std_low:], self.storage.measurements()[0:self.nr_of_std_high:], algorithm = self._algorithm)
             
+        results = []
+            
         if self._factors is not None:
             for entry in self.storage:
                 if not entry.has_results():
-                    entry.apply_results(self._factors, kit = self.kit)
+                    results.append(entry.apply_results(self._factors, kit = self.kit))
         logger.debug(
             "Run.re_calculate exit: has_factors=%s storage_len=%s",
             self._factors is not None,
             len(self.storage),
         )
+        return results
 
-    def measure(self, comment = None):
-        """Executes the next step in the measurement sequence.
+    def measure(self, comment = None)  -> tuple[Verification, Results] | tuple[Verification, None]:
+        """Advances the guided run by exactly one measurement step.
+
+        Depending on the internal state, this performs the first air
+        measurement, the first sample measurement, a regular air measurement,
+        or a regular sample measurement. Completed measurements are stored,
+        pending calibration results are recalculated when possible, and the
+        updated run state is persisted to disk.
 
         Args:
             comment: Optional annotation stored with the next completed
-                measurement.
+                measurement entry. It has no effect on intermediate steps that
+                do not append a measurement to storage.
+
+        Returns:
+            A tuple ``(verification, result)`` for the executed step.
+            ``verification`` contains the checks performed for the current
+            acquisition. ``result`` is the newly available
+            :class:`hse.evifluor.measurement.Results` for the measurement
+            completed by this call, or ``None`` if no sample measurement was
+            completed yet or no calculated result is available at this point.
         """
         logger.debug(
             "Run.measure entry: comment=%r state=%s count=%s measurement_filename=%r no_air=%s",
@@ -323,6 +358,9 @@ class Run:
             self._filename,
             self._algorithm == Algorithm.V2,
         )
+        
+        return_last_result = False
+        
         if self._state == self.State.FIRST_AIR:
             self.verification = Verification()
             self._first_air = self.device.first_air_measurement()
@@ -348,13 +386,16 @@ class Run:
         elif self._state == self.State.AIR:
             self.verification = Verification()
             self._air = self.device.measure()
-            self.verification.check(self._air)
-            self._state = self.State.SAMPLE
+            self.verification.check(self._air, hints = Verification.Hints.MUST_HAVE_CUVETTE)
+            self._state = self.State.SAMPLE            
         elif self._state == self.State.SAMPLE:
+            return_last_result = True
+            if self._algorithm == Algorithm.V2:
+                self.verification = Verification()
             time.sleep(self.settling_time)
             
             self._sample = self.device.measure()
-            self.verification.check(self._sample)
+            self.verification.check(self._sample, hints = Verification.Hints.MUST_HAVE_CUVETTE)
             
             if self._algorithm == Algorithm.V1:
                 measurement = Measurement(self._air, self._sample)
@@ -365,7 +406,7 @@ class Run:
             
             self.storage.append(measurement, comment, logging = self.device.logging(), verification = self.verification)
 
-        self.re_calculate()
+        new_results = self.re_calculate()
         self.storage.save(self._filename)
         self._count = self._count + 1
         logger.debug(
@@ -375,6 +416,10 @@ class Run:
             len(self.storage),
             self._factors is not None,
         )
+        if return_last_result and len(new_results) > 0:
+            return self.verification, new_results[-1]
+        else:
+            return self.verification, None
     
     def check_empty(self) -> bool:
         """Returns True when the cuvette holder is empty according to the device."""
@@ -413,3 +458,23 @@ class Run:
         else:
             raise Exception("State.?: Wrong state, expected state is AIR!")
         logger.debug("Run.skip_air exit: next_state=%s count=%s", self._state, self._count)
+        
+    def results(self):
+        """Returns all calculated results currently available in storage.
+
+        Returns:
+            A list of :class:`hse.evifluor.measurement.Results` in measurement
+            order. Entries without calculated results are skipped until
+            calibration factors have been derived and applied.
+        """
+        return self.storage.results()
+
+    def verifications(self):
+        """Returns all verification results currently available in storage.
+
+        Returns:
+            A list of :class:`hse.evifluor.measurement.Verification` in measurement
+            order. Entries without verification results are skipped until
+            calibration factors have been derived and applied.
+        """
+        return self.storage.verifications()

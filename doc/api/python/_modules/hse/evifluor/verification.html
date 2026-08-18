@@ -48,7 +48,7 @@
 <div class="viewcode-block" id="Verification">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Verification</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provides verification checks for various measurement types and conditions.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Provides verification checks for various measurement types and conditions."""</span>
     <span class="n">_DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR</span>      <span class="o">=</span> <span class="mf">0.8</span>
     <span class="n">_DEFAULT_MIN_RFU</span>                          <span class="o">=</span> <span class="mf">4.5</span>
     <span class="n">_min_rfu</span>                                  <span class="o">=</span> <span class="n">_DEFAULT_MIN_RFU</span>
@@ -71,11 +71,11 @@
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.set_min_rfu">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_min_rfu</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the minimum expected RFU value or resets to the default.</span>
+<span class="w">        </span><span class="sd">"""Sets the minimum expected RFU value or resets to the default.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Minimum expected RFU, or ``None`` to restore the default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">Verification</span><span class="o">.</span><span class="n">_min_rfu</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_DEFAULT_MIN_RFU</span>
         <span class="k">else</span><span class="p">:</span>
@@ -84,27 +84,27 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">min_rfu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the current minimum expected RFU value.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Gets the current minimum expected RFU value."""</span>
         <span class="k">return</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_min_rfu</span>
 
     <span class="nd">@min_rfu</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">min_rfu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the current minimum expected RFU value.</span>
+<span class="w">        </span><span class="sd">"""Sets the current minimum expected RFU value.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Minimum expected RFU, or ``None`` to restore the default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">Verification</span><span class="o">.</span><span class="n">set_min_rfu</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Verification.set_max_rfu">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.set_max_rfu">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_max_rfu</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the maximum expected RFU value or resets to the default.</span>
+<span class="w">        </span><span class="sd">"""Sets the maximum expected RFU value or resets to the default.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Maximum expected RFU, or ``None`` to restore the default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">Verification</span><span class="o">.</span><span class="n">_max_rfu</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_DEFAULT_MAX_RFU</span>
         <span class="k">else</span><span class="p">:</span>
@@ -113,28 +113,28 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">max_rfu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the current maximum expected RFU value.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Gets the current maximum expected RFU value."""</span>
         <span class="k">return</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_max_rfu</span>
 
     <span class="nd">@max_rfu</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">max_rfu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the current maximum expected RFU value.</span>
+<span class="w">        </span><span class="sd">"""Sets the current maximum expected RFU value.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Maximum expected RFU, or ``None`` to restore the default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">Verification</span><span class="o">.</span><span class="n">set_max_rfu</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Verification.set_min_led">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.set_min_led">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_min_led</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the minimum expected LED power or resets to the default.</span>
+<span class="w">        </span><span class="sd">"""Sets the minimum expected LED power or resets to the default.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Minimum expected LED power, or ``None`` to restore the</span>
 <span class="sd">                default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">Verification</span><span class="o">.</span><span class="n">_min_led</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_DEFAULT_MIN_LED</span>
         <span class="k">else</span><span class="p">:</span>
@@ -143,29 +143,29 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">min_led</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the current minimum expected LED power.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Gets the current minimum expected LED power."""</span>
         <span class="k">return</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_min_led</span>
 
     <span class="nd">@min_led</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">min_led</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the current minimum expected LED power.</span>
+<span class="w">        </span><span class="sd">"""Sets the current minimum expected LED power.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Minimum expected LED power, or ``None`` to restore the</span>
 <span class="sd">                default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">Verification</span><span class="o">.</span><span class="n">set_min_led</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Verification.set_max_led">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.set_max_led">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_max_led</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the maximum expected LED power or resets to the default.</span>
+<span class="w">        </span><span class="sd">"""Sets the maximum expected LED power or resets to the default.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Maximum expected LED power, or ``None`` to restore the</span>
 <span class="sd">                default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">Verification</span><span class="o">.</span><span class="n">_max_led</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_DEFAULT_MAX_LED</span>
         <span class="k">else</span><span class="p">:</span>
@@ -174,28 +174,28 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">max_led</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the current maximum expected LED power.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Gets the current maximum expected LED power."""</span>
         <span class="k">return</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_max_led</span>
 
     <span class="nd">@max_led</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">max_led</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the current maximum expected LED power.</span>
+<span class="w">        </span><span class="sd">"""Sets the current maximum expected LED power.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Maximum expected LED power, or ``None`` to restore the</span>
 <span class="sd">                default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">Verification</span><span class="o">.</span><span class="n">set_max_led</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Verification.set_threshold_multiplier">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.set_threshold_multiplier">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_threshold_multiplier</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the RFU threshold multiplier used for cuvette detection.</span>
+<span class="w">        </span><span class="sd">"""Sets the RFU threshold multiplier used for cuvette detection.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Threshold multiplier, or ``None`` to restore the default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">Verification</span><span class="o">.</span><span class="n">_threshold_multiplier</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_DEFAULT_THRESHOLD_MULTIPLIER</span>
         <span class="k">else</span><span class="p">:</span>
@@ -204,27 +204,27 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">threshold_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the RFU threshold multiplier used when detecting cuvette presence.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Gets the RFU threshold multiplier used when detecting cuvette presence."""</span>
         <span class="k">return</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_threshold_multiplier</span>
 
     <span class="nd">@threshold_multiplier</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">threshold_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the RFU threshold multiplier used for cuvette detection.</span>
+<span class="w">        </span><span class="sd">"""Sets the RFU threshold multiplier used for cuvette detection.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Threshold multiplier, or ``None`` to restore the default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">Verification</span><span class="o">.</span><span class="n">set_threshold_multiplier</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Verification.set_max_signal">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.set_max_signal">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_max_signal</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the maximum allowed signal value before saturation.</span>
+<span class="w">        </span><span class="sd">"""Sets the maximum allowed signal value before saturation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Maximum signal threshold, or ``None`` to restore the default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">Verification</span><span class="o">.</span><span class="n">_max_signal</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_DEFAULT_MAX_SIGNAL</span>
         <span class="k">else</span><span class="p">:</span>
@@ -233,27 +233,27 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">max_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the maximum allowed signal value before saturation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Gets the maximum allowed signal value before saturation."""</span>
         <span class="k">return</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_max_signal</span>
 
     <span class="nd">@max_signal</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">max_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the maximum allowed signal value before saturation.</span>
+<span class="w">        </span><span class="sd">"""Sets the maximum allowed signal value before saturation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Maximum signal threshold, or ``None`` to restore the default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">Verification</span><span class="o">.</span><span class="n">set_max_signal</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Verification.set_std_high_delta">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.set_std_high_delta">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_std_high_delta</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the allowed deviation around the standard-high target.</span>
+<span class="w">        </span><span class="sd">"""Sets the allowed deviation around the standard-high target.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Allowed deviation, or ``None`` to restore the default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">Verification</span><span class="o">.</span><span class="n">_std_high_delta</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_DEFAULT_STD_HIGH_DELTA</span>
         <span class="k">else</span><span class="p">:</span>
@@ -262,28 +262,28 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">std_high_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the allowed deviation around the standard high target.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Gets the allowed deviation around the standard high target."""</span>
         <span class="k">return</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_std_high_delta</span>
 
     <span class="nd">@std_high_delta</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">std_high_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the allowed deviation around the standard-high target.</span>
+<span class="w">        </span><span class="sd">"""Sets the allowed deviation around the standard-high target.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Allowed deviation, or ``None`` to restore the default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">Verification</span><span class="o">.</span><span class="n">set_std_high_delta</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Verification.set_threshold_negative_concentration">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.set_threshold_negative_concentration">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_threshold_negative_concentration</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the threshold used to flag negative concentrations.</span>
+<span class="w">        </span><span class="sd">"""Sets the threshold used to flag negative concentrations.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Negative concentration threshold, or ``None`` to restore the</span>
 <span class="sd">                default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">Verification</span><span class="o">.</span><span class="n">_threshold_negative_concentration</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_DEFAULT_THRESHOLD_NEGATIVE_CONCENTRATION</span>
         <span class="k">else</span><span class="p">:</span>
@@ -292,23 +292,23 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">threshold_negative_concentration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the threshold used to flag negative concentrations.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Gets the threshold used to flag negative concentrations."""</span>
         <span class="k">return</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_threshold_negative_concentration</span>
 
     <span class="nd">@threshold_negative_concentration</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">threshold_negative_concentration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the threshold used to flag negative concentrations.</span>
+<span class="w">        </span><span class="sd">"""Sets the threshold used to flag negative concentrations.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Negative concentration threshold, or ``None`` to restore the</span>
 <span class="sd">                default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">Verification</span><span class="o">.</span><span class="n">set_threshold_negative_concentration</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Verification.ProblemId">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.ProblemId">[docs]</a>
     <span class="k">class</span><span class="w"> </span><span class="nc">ProblemId</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Problem identifiers tracked during verification.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Problem identifiers tracked during verification."""</span>
         <span class="n">SATURATION</span>             <span class="o">=</span> <span class="mi">1</span>
         <span class="n">CUVETTE_MISSING</span>        <span class="o">=</span> <span class="mi">2</span>
         <span class="n">MIN_LED_POWER</span>          <span class="o">=</span> <span class="mi">3</span>
@@ -321,7 +321,7 @@
 <div class="viewcode-block" id="Verification.Hints">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.Hints">[docs]</a>
     <span class="k">class</span><span class="w"> </span><span class="nc">Hints</span><span class="p">(</span><span class="n">Flag</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Context-sensitive hints that adjust verification checks.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Context-sensitive hints that adjust verification checks."""</span>
         <span class="n">NONE</span>                   <span class="o">=</span> <span class="mi">0</span>
         <span class="n">MUST_HAVE_CUVETTE</span>      <span class="o">=</span> <span class="mi">1</span>
         <span class="n">STD_HIGH</span>               <span class="o">=</span> <span class="mi">2</span></div>
@@ -331,30 +331,30 @@
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.Entry">[docs]</a>
     <span class="k">class</span><span class="w"> </span><span class="nc">Entry</span><span class="p">:</span>
         <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;Initializes a verification entry.</span>
+<span class="w">            </span><span class="sd">"""Initializes a verification entry.</span>
 
 <span class="sd">            Args:</span>
 <span class="sd">                problem_id: Specific problem identifier.</span>
 <span class="sd">                data: Data associated with the problem, such as a measurement or</span>
 <span class="sd">                    result object.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">problem_id</span> <span class="o">=</span> <span class="n">problem_id</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">data</span>       <span class="o">=</span> <span class="n">data</span>
     
         <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;Returns a readable representation of the entry.&quot;&quot;&quot;</span>
-            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">(</span><span class="si">{}</span><span class="s2">) </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">problem_id</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem_id</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="w">            </span><span class="sd">"""Returns a readable representation of the entry."""</span>
+            <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">(</span><span class="si">{}</span><span class="s2">) </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">problem_id</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem_id</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
     
 <div class="viewcode-block" id="Verification.Entry.to_json">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.Entry.to_json">[docs]</a>
         <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;Converts the entry to a JSON-friendly dictionary.&quot;&quot;&quot;</span>
-            <span class="n">ret</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;problem_id&#39;</span>  <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem_id</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-                    <span class="s1">&#39;description&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem_id</span><span class="o">.</span><span class="n">name</span><span class="p">}</span>
-            <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;to_json&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
-                <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
+<span class="w">            </span><span class="sd">"""Converts the entry to a JSON-friendly dictionary."""</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">'problem_id'</span>  <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem_id</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                    <span class="s1">'description'</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem_id</span><span class="o">.</span><span class="n">name</span><span class="p">}</span>
+            <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s2">"to_json"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
+                <span class="n">ret</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+                <span class="n">ret</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
             <span class="k">return</span> <span class="n">ret</span></div>
 
 
@@ -362,52 +362,52 @@
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.Entry.from_json">[docs]</a>
         <span class="nd">@staticmethod</span>
         <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;Restores a verification entry from JSON data.</span>
+<span class="w">            </span><span class="sd">"""Restores a verification entry from JSON data.</span>
 
 <span class="sd">            Args:</span>
 <span class="sd">                node: JSON object containing serialized entry data.</span>
 
 <span class="sd">            Returns:</span>
 <span class="sd">                A reconstructed :class:`Verification.Entry`.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
-            <span class="k">return</span> <span class="n">Verification</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">Verification</span><span class="o">.</span><span class="n">ProblemId</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;problem_id&#39;</span><span class="p">]),</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span></div>
+<span class="sd">            """</span>
+            <span class="k">return</span> <span class="n">Verification</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">Verification</span><span class="o">.</span><span class="n">ProblemId</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s1">'problem_id'</span><span class="p">]),</span> <span class="n">node</span><span class="p">[</span><span class="s1">'data'</span><span class="p">])</span></div>
 </div>
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes an empty verification result container.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initializes an empty verification result container."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">entries</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">return</span>
         
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a textual representation of all collected entries.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;entries:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Returns a textual representation of all collected entries."""</span>
+        <span class="k">return</span> <span class="s2">"entries:</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span>
         
 <div class="viewcode-block" id="Verification.success">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.success">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indicates whether verification completed without findings.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Indicates whether verification completed without findings."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></div>
 
         
 <div class="viewcode-block" id="Verification.failed">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.failed">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">failed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indicates whether any verification issues were recorded.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Indicates whether any verification issues were recorded."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
 
         
 <div class="viewcode-block" id="Verification.has_problem">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.has_problem">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">has_problem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem_id</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks whether a specific problem has already been recorded.</span>
+<span class="w">        </span><span class="sd">"""Checks whether a specific problem has already been recorded.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            problem_id: Problem identifier to look for.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            ``True`` if the problem is already present, otherwise ``False``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">entry</span><span class="o">.</span><span class="n">problem_id</span> <span class="o">==</span> <span class="n">problem_id</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span>
@@ -417,12 +417,12 @@
 <div class="viewcode-block" id="Verification.add_problem_id">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.add_problem_id">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">add_problem_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a problem entry if it has not been recorded already.</span>
+<span class="w">        </span><span class="sd">"""Adds a problem entry if it has not been recorded already.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            problem_id: Problem identifier to add.</span>
 <span class="sd">            data: Data associated with the detected problem.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span><span class="p">(</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_problem</span><span class="p">(</span><span class="n">problem_id</span><span class="p">)):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">problem_id</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span></div>
 
@@ -430,7 +430,7 @@
 <div class="viewcode-block" id="Verification.check_auto_gain_result">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.check_auto_gain_result">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_auto_gain_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auto_gain_result</span><span class="p">,</span> <span class="n">hints</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks the result of the auto-gain procedure for errors.</span>
+<span class="w">        </span><span class="sd">"""Checks the result of the auto-gain procedure for errors.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            auto_gain_result: Auto-gain result to verify.</span>
@@ -439,7 +439,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            ``True`` if the result passes verification, otherwise ``False``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">auto_gain_result</span><span class="o">.</span><span class="n">found</span> <span class="o">==</span> <span class="kc">True</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_problem_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ProblemId</span><span class="o">.</span><span class="n">AUTO_GAIN_RESULT</span><span class="p">,</span> <span class="n">auto_gain_result</span><span class="p">)</span>
@@ -452,14 +452,14 @@
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.expected_value">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">expected_value</span><span class="p">(</span><span class="n">led_power</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the expected RFU value for a given LED power.</span>
+<span class="w">        </span><span class="sd">"""Computes the expected RFU value for a given LED power.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            led_power: LED power level for which the expected RFU is calculated.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            The interpolated expected RFU value.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">Verification</span><span class="o">.</span><span class="n">_max_rfu</span> <span class="o">-</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_min_rfu</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">Verification</span><span class="o">.</span><span class="n">_max_led</span> <span class="o">-</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_min_led</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_min_rfu</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="p">(</span><span class="n">led_power</span> <span class="o">-</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_min_led</span><span class="p">)</span></div>
 
@@ -468,7 +468,7 @@
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.has_cuvette">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">has_cuvette</span><span class="p">(</span><span class="n">sm</span><span class="p">:</span> <span class="n">SingleMeasurement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Heuristic test for cuvette presence based on LED power and RFU.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Heuristic test for cuvette presence based on LED power and RFU."""</span>
         <span class="n">expected</span> <span class="o">=</span> <span class="n">Verification</span><span class="o">.</span><span class="n">expected_value</span><span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">channel_470</span><span class="o">.</span><span class="n">led_power</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">sm</span><span class="o">.</span><span class="n">delta</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">expected</span> <span class="o">*</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_threshold_multiplier</span></div>
 
@@ -476,7 +476,7 @@
 <div class="viewcode-block" id="Verification.check_single_measurement">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.check_single_measurement">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_single_measurement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">single_measurement</span><span class="p">,</span> <span class="n">hints</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="n">_DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR</span><span class="p">):</span>      
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks a single measurement for saturation and expected behavior.</span>
+<span class="w">        </span><span class="sd">"""Checks a single measurement for saturation and expected behavior.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            single_measurement: Measurement to verify.</span>
@@ -487,7 +487,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            ``True`` if the measurement passes verification, otherwise ``False``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">if</span> <span class="n">std_high_target_signal_factor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -514,7 +514,7 @@
 <div class="viewcode-block" id="Verification.check_measurement">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.check_measurement">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_measurement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">measurement</span><span class="p">,</span> <span class="n">hints</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verifies a full air/sample measurement pair.</span>
+<span class="w">        </span><span class="sd">"""Verifies a full air/sample measurement pair.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            measurement: Full measurement containing air and sample values.</span>
@@ -522,7 +522,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            ``True`` if both measurements pass verification, otherwise ``False``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">ret1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_single_measurement</span><span class="p">(</span><span class="n">measurement</span><span class="o">.</span><span class="n">air</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">MUST_HAVE_CUVETTE</span> <span class="p">)</span>
         <span class="n">ret2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_single_measurement</span><span class="p">(</span><span class="n">measurement</span><span class="o">.</span><span class="n">sample</span><span class="p">,</span> <span class="p">(</span><span class="n">hints</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span> <span class="o">|</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">MUST_HAVE_CUVETTE</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ret1</span> <span class="ow">and</span> <span class="n">ret2</span></div>
@@ -531,7 +531,7 @@
 <div class="viewcode-block" id="Verification.check_result">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.check_result">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">hints</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validates computed results against negative concentration thresholds.</span>
+<span class="w">        </span><span class="sd">"""Validates computed results against negative concentration thresholds.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            results: Computed concentration results to verify.</span>
@@ -539,7 +539,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            ``True`` if the result passes verification, otherwise ``False``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">concentration</span> <span class="o">&lt;</span> <span class="n">Verification</span><span class="o">.</span><span class="n">_threshold_negative_concentration</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_problem_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ProblemId</span><span class="o">.</span><span class="n">NEGATIVE_CONCENTRATION</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
             <span class="n">ret</span> <span class="o">=</span> <span class="kc">False</span>
@@ -551,7 +551,7 @@
 <div class="viewcode-block" id="Verification.check_first_air_measurement_result">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.check_first_air_measurement_result">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_first_air_measurement_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fam</span><span class="p">,</span> <span class="n">hints</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verifies a first-air measurement result.</span>
+<span class="w">        </span><span class="sd">"""Verifies a first-air measurement result.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            fam: First-air measurement result containing min/max measurements.</span>
@@ -559,7 +559,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            ``True`` if both contained measurements pass verification.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">ret1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_single_measurement</span><span class="p">(</span><span class="n">fam</span><span class="o">.</span><span class="n">min_measurement</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">MUST_HAVE_CUVETTE</span><span class="p">)</span>
         <span class="n">ret2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_single_measurement</span><span class="p">(</span><span class="n">fam</span><span class="o">.</span><span class="n">max_measurement</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">MUST_HAVE_CUVETTE</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ret1</span> <span class="ow">and</span> <span class="n">ret2</span></div>
@@ -568,7 +568,7 @@
 <div class="viewcode-block" id="Verification.check_first_sample_measurement_result">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.check_first_sample_measurement_result">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_first_sample_measurement_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fsm</span><span class="p">,</span> <span class="n">hints</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verifies a first-sample measurement result.</span>
+<span class="w">        </span><span class="sd">"""Verifies a first-sample measurement result.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            fsm: First-sample measurement result to verify.</span>
@@ -578,7 +578,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            ``True`` if both auto-gain and sample measurement pass verification.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">ret1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_auto_gain_result</span><span class="p">(</span><span class="n">fsm</span><span class="o">.</span><span class="n">auto_gain_result</span><span class="p">,</span> <span class="n">hints</span><span class="p">)</span>
         <span class="n">ret2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_single_measurement</span><span class="p">(</span><span class="n">fsm</span><span class="o">.</span><span class="n">measurement</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">MUST_HAVE_CUVETTE</span> <span class="o">|</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hints</span><span class="o">.</span><span class="n">STD_HIGH</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="n">std_high_target_signal_factor</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ret1</span> <span class="ow">and</span> <span class="n">ret2</span></div>
@@ -587,7 +587,7 @@
 <div class="viewcode-block" id="Verification.check">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.check">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">hints</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="n">_DEFAULT_STD_HIGH_TARGET_SIGNAL_FACTOR</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Dispatches verification based on the provided object type.</span>
+<span class="w">        </span><span class="sd">"""Dispatches verification based on the provided object type.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            sample: Object to verify. Supported types include</span>
@@ -601,7 +601,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            ``True`` if the object passes verification, otherwise ``False``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">SingleMeasurement</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_single_measurement</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">hints</span><span class="p">,</span> <span class="n">std_high_target_signal_factor</span> <span class="o">=</span> <span class="n">std_high_target_signal_factor</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">AutoGainResult</span><span class="p">):</span>
@@ -615,13 +615,13 @@
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">Results</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_result</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">hints</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unsupported class </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">sample</span><span class="p">)))</span></div>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"Unsupported class </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">sample</span><span class="p">)))</span></div>
 
         
 <div class="viewcode-block" id="Verification.to_json">
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serializes all verification entries to a JSON-compatible list.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Serializes all verification entries to a JSON-compatible list."""</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">:</span>
             <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
@@ -632,14 +632,14 @@
 <a class="viewcode-back" href="../../../hse.evifluor.verification.html#hse.evifluor.Verification.from_json">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Restores verification entries from JSON.</span>
+<span class="w">        </span><span class="sd">"""Restores verification entries from JSON.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            node: JSON array containing serialized verification entries.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A reconstructed :class:`Verification` instance.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="n">Verification</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
             <span class="n">ret</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Verification</span><span class="o">.</span><span class="n">Entry</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">entry</span><span class="p">))</span>

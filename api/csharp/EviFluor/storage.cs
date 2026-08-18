@@ -334,6 +334,25 @@ public class StorageMeasurement
     }
 
     /// <summary>
+    /// Retrieves the list of stored verifications.
+    /// </summary>
+    /// <returns>A list of <see cref="Verification"/> objects.</returns>
+    public List<Verification> Verifications()
+    {
+        var ret = new List<Verification>();
+
+        foreach (var m in data[Dict.MEASUREMENTS]?.AsArray() ?? new JsonArray())
+        {
+            if (m != null && m.AsObject().ContainsKey(Dict.ERRORS) && m[Dict.ERRORS] != null)
+            {
+                ret.Add(Verification.FromJson(m[Dict.ERRORS]));
+            }
+        }
+
+        return ret;
+    }
+
+    /// <summary>
     /// Gets the <see cref="StorageMeasurementEntry"/> at the specified index.
     /// </summary>
     /// <param name="index">The zero-based index of the measurement entry to retrieve.</param>

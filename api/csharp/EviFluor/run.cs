@@ -236,13 +236,23 @@ public class Run
     /// Saves the updated JSON after each step.
     /// </summary>
     /// <param name="comment">Optional annotation stored with the measurement.</param>
+    /// <returns>
+    /// A tuple <c>(verification, result)</c> for the executed step.
+    /// <c>verification</c> contains the checks performed for the current acquisition.
+    /// <c>result</c> is the newly available <see cref="Results"/> for the measurement
+    /// completed by this call, or <c>null</c> if no sample measurement was completed yet
+    /// or no calculated result is available at this point.
+    /// </returns>
     /// <exception cref="InvalidOperationException">When required intermediate values are missing for the current state.</exception>
-    public void measure(string comment = "")
+    public (Verification verification, Results? result) measure(string comment = "")
     {
         if (Device_ == null)
         {
             throw new Exception("Device cant be null!");
         }
+
+        bool returnLastResult = false;
+        int resultsCountBefore = Storage_.Results().Count;
 
         switch (State_)
         {
@@ -317,6 +327,7 @@ public class Run
                         Thread.Sleep((int)(SettlingTime_ * 1000.0));
                     }
 
+                    returnLastResult = true;
                     Sample_ = Device_.Measure();
                     Verification_.Check(Sample_);
                     var measurement = new Measurement(NoAir_ ? null : Air_, Sample_);
@@ -332,6 +343,17 @@ public class Run
         }
         Storage_.Save(Filename);
         Count_++;
+
+        if (returnLastResult)
+        {
+            List<Results> results = Storage_.Results();
+            if (results.Count > resultsCountBefore)
+            {
+                return (Verification_, results[^1]);
+            }
+        }
+
+        return (Verification_, null);
     }
 
     /// <summary>
@@ -356,6 +378,24 @@ public class Run
             throw new Exception("Filename cant be null!");
         }
         Storage_.ExportAsCsv(Filename);
+    }
+
+    /// <summary>
+    /// Returns all calculated results currently available in storage.
+    /// </summary>
+    /// <returns>A list of <see cref="Results"/> in measurement order.</returns>
+    public List<Results> Results()
+    {
+        return Storage_.Results();
+    }
+
+    /// <summary>
+    /// Returns all verification results currently available in storage.
+    /// </summary>
+    /// <returns>A list of <see cref="Verification"/> in measurement order.</returns>
+    public List<Verification> Verifications()
+    {
+        return Storage_.Verifications();
     }
 
     /// <summary>

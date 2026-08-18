@@ -130,8 +130,10 @@ class Instrument:
             
         self.pipette20_x1.dispense(VOLUME)
         if not self.protocol.is_simulating():
-            self.run.measure(self.comment(sample))      
+            _, results = self.run.measure(self.comment(sample))      
             self.error_handling()
+            if results is not None:
+                self.protocol.comment("Results: {}".format(results))
             
         self.move_out_of_cg()
         self.pipette20_x1.aspirate(VOLUME + EXTRA)

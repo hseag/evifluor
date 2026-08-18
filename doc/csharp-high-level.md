@@ -29,6 +29,7 @@ The following example demonstrates a complete high-level workflow:
 
 ```csharp
 using System;
+using System.Collections.Generic;
 using Hse.EviFluor;
 
 internal class Program
@@ -48,11 +49,14 @@ internal class Program
             }
 
             // Move the empty cuvette into the cuvette guide and start the air measurement.
-            run.measure();
+            (Verification airVerification, Results? airResult) = run.measure();
             // Dispense the liquid into the cuvette and start the sample measurement.
-            run.measure(sample);
+            (Verification verification, Results? result) = run.measure(sample);
             // Aspirate the liquid back into the tip, leave the cuvette guide, and discard tip plus cuvette.
         }
+
+        List<Results> results = run.Results();
+        List<Verification> verifications = run.Verifications();
     }
 }
 ```
@@ -119,11 +123,18 @@ For predefined kits, string names, fit models, and JSON serialization, see [Kit 
 
 Each call to [`run.measure(...)`][run-measure-api] advances the workflow by one step.
 
+Return value:
+
+- `verification`: verification result for the step that was just executed
+- `result`: newly available calculated result for that step, or `null` if no sample result is available yet
+
 Practical effect:
 
 - the first call performs the initial air setup
 - the second call performs the initial sample setup and stores the first measurement
 - subsequent calls alternate between air and sample
+- air steps return `result = null`
+- sample steps return `result = null` until enough standards are available to calculate factors
 
 ## 7. Standard Handling and Recalculation
 
@@ -134,6 +145,8 @@ Behavior:
 - until the configured standard counts are completed, stored measurements may not yet contain calculated results
 - once the configured standards are available, factors are calculated
 - all stored measurements without results are updated automatically
+- `run.Results()` returns all currently available calculated results
+- `run.Verifications()` returns all stored failed verifications
 
 ## 8. Persisted Files
 
