@@ -22,7 +22,6 @@ def build_parser():
     evidense_parser.add_argument("data", nargs="?", help="Data file to use (optional)")
 
     evifluor_parser = subparsers.add_parser("evifluor", help="eviFluor simulation")
-    evifluor_parser.add_argument("--no-air", action="store_true", help="Run without air correction")
     evifluor_parser.add_argument("data", nargs="?", help="Data file to use (optional)")
 
     sim_parser = subparsers.add_parser("sim", help="Simulation control")
@@ -34,7 +33,7 @@ def create_simulation(args):
     if args.mode == "evidense":
         return EviDenseSimulation(), "evidense"
     if args.mode == "evifluor":
-        return EviFluorSimulation(args.no_air), "evifluor"
+        return EviFluorSimulation(), "evifluor"
     raise Exception("Device not implemented!")
 
 

@@ -5,7 +5,11 @@
 This chapter documents the Python command line tool only.
 It does not describe the in-process high-level or low-level Python APIs.
 
-## 2. Overview
+## 2. Installation and Python Variants
+
+Installation instructions and an overview of the available Python variants are provided in [Python Interfaces](./python.md).
+
+## 3. Overview
 
 The Python interface can also be used through the command line entry point.
 This tool provides access to common device operations and the guided run workflow without embedding the library in application code.
@@ -31,7 +35,7 @@ The currently implemented command set includes:
 - `checkempty`
 - `run`
 
-## 3. Installation and Startup
+## 4. Installation and Startup
 
 Entry points:
 
@@ -42,7 +46,7 @@ python -m hse.evifluor --help
 
 This chapter focuses on usage after the tool is available in the Python environment.
 
-## 4. Command Syntax
+## 5. Command Syntax
 
 Global options:
 
@@ -55,9 +59,9 @@ Example:
 python -m hse.evifluor --device SN0010 selftest
 ```
 
-## 5. Main Commands
+## 6. Main Commands
 
-### 5.1 `info`
+### 6.1 `info`
 
 Shows device information.
 
@@ -71,7 +75,7 @@ Behavior:
 - default output prints serial number, firmware version, and production number
 - `--json` prints the same information as formatted JSON
 
-### 5.2 `selftest`
+### 6.2 `selftest`
 
 Runs the device self-test.
 
@@ -88,7 +92,7 @@ Behavior:
 - `--file FILE` writes the output to a file instead of stdout
 - the command returns exit code `0` when the self-test succeeds and `1` when problems are reported
 
-### 5.3 `checkempty`
+### 6.3 `checkempty`
 
 Checks whether the cuvette holder is empty.
 
@@ -103,7 +107,7 @@ It prints:
 
 The command returns exit code `0` for `Empty` and `1` for `Not empty`.
 
-### 5.4 `run`
+### 6.4 `run`
 
 Performs a guided workflow on top of the Python `Run` implementation.
 
@@ -134,7 +138,7 @@ Behavior:
 
 Supported kit names are listed in [Kit Reference](./kit.md), section 2.
 
-## 6. Output and Files
+## 7. Output and Files
 
 The Python CLI uses:
 
@@ -144,7 +148,7 @@ The Python CLI uses:
 - CSV files for exported run data
 - a log file named `evifluor.log` in the working directory unless `--debug` is used
 
-## 7. Typical Examples
+## 8. Typical Examples
 
 Query device information:
 
@@ -245,7 +249,7 @@ python -m hse.evifluor run measure "sample 2"
 python -m hse.evifluor run export
 ```
 
-## 8. Notes
+## 9. Notes
 
 The Python CLI is intentionally focused on common operational workflows.
 For direct library integration, use the Python high-level or low-level APIs instead.
@@ -255,5 +259,5 @@ API links:
 - [`hse.evifluor.cli`][cli-api]
 - [`hse.evifluor.__main__`][main-api]
 
-[cli-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.cli.html
-[main-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/modules.html
+[cli-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.cli.html
+[main-api]: https://hseag.github.io/evifluor/doc/api/python/modules.html

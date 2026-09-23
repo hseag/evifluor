@@ -1,4 +1,4 @@
-# eviFluor Duo Fluorometer User Manual
+# eviFluor Duo Fluorometer Integration and Software Hub
 
 ## 0. Pre-Release Status
 
@@ -28,7 +28,7 @@ The eviFluor Duo Fluorometer software stack provides three interface groups:
 
 ### 1.3 Liquid Handler Integrations
 
-The eviFluor software interfaces are intended to be integrated into liquid-handler-specific workflows.
+The eviFluor Duo Fluorometer software interfaces are intended to be integrated into liquid-handler-specific workflows.
 To keep these integrations maintainable, the robot-specific motion logic should be separated from the fluorometer control logic so that multiple liquid handler platforms can be documented and supported consistently.
 
 Available integration guides:
@@ -92,7 +92,7 @@ The standard high measurement must come first because the detector performs an a
 Starting with the high standard ensures that the gain is adjusted so that the standard high reaches approximately 80% of the maximum detector response.
 
 See a video of a simple workflow on an Opentrons OT-2 Robot:
-[![Simple workflow](doc/images/evifluor-workflow.png)](https://hseag.github.io/evifluor/pre-release/doc/images/evifluor-workflow.mp4)
+[![Simple workflow](doc/images/evifluor-workflow.png)](https://hseag.github.io/evifluor/doc/images/evifluor-workflow.mp4)
 
 ## 2. CAD
 
@@ -131,7 +131,7 @@ As a geometric reference, the lower edge of the cuvette is approximately 26.0 mm
 
 ## 3. Simulation
 
-For development, automated tests, and workflow validation without physical hardware, an eviFluor simulator is available.
+For development, automated tests, and workflow validation without physical hardware, an eviFluor Duo Fluorometer simulator is available.
 
 See [Simulation Guide](./doc/simulation.md) for setup, startup commands, control options, and examples for using the simulator with the Python interfaces.
 
@@ -181,7 +181,7 @@ The file typically contains:
 A measurement entry typically contains the air and sample values relevant for the eviFluor Duo Fluorometer workflow.
 If results have already been calculated, the corresponding result values are stored together with the raw measurement data.
 The calculated result block contains the concentration and, if available, the RFU value used as input for the concentration fit.
-In the eviFluor context, RFU is the measured signal voltage in mV after subtracting the `dark` values and the `std_low` baseline contribution already included in the selected workflow.
+In the eviFluor Duo Fluorometer context, RFU is the measured signal voltage in mV after subtracting the `dark` values and the `std_low` baseline contribution already included in the selected workflow.
 The typical RFU range is 0 to 2500 mV.
 
 Typical top-level fields:

@@ -183,11 +183,7 @@ class SimulationBase:
             file_b = args[4]
             skip_a = 0
             skip_b = 0
-            no_air = False
             extra = args[5:]
-            if "--no_air" in extra:
-                no_air = True
-                extra = [arg for arg in extra if arg != "--no_air"]
             if len(extra) == 2:
                 skip_a = int(extra[0])
                 skip_b = int(extra[1])
@@ -196,10 +192,10 @@ class SimulationBase:
             if self._verbose:
                 print(
                     f"Simulator compare device={device_name} a={file_a} b={file_b} "
-                    f"skipa={skip_a} skipb={skip_b} no_air={no_air}"
+                    f"skipa={skip_a} skipb={skip_b}"
                 )
             try:
-                return "! 0" if compare_measurement_files(file_a, file_b, device_name, skip_a, skip_b, no_air) else "! 1"
+                return "! 0" if compare_measurement_files(file_a, file_b, device_name, skip_a, skip_b) else "! 1"
             except Exception:
                 return "! 991"
         return f"E {Error.EVI_INVALID_PARAMETER}"

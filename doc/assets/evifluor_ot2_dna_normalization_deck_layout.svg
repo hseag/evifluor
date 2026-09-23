@@ -1,0 +1,762 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="945" height="924" viewBox="0 0 945 924">
+<title>Opentrons OT-2 Deck - dimensionally scaled labware</title>
+<desc>Slots use 128 x 86 mm and 132.5 x 90.5 mm pitch. Labware footprints use their JSON dimensions.</desc>
+<style>
+  .deck { fill:#e2e2e2; stroke:#444; stroke-width:2; }
+  .slot { fill:#e2e2e2; stroke:#8a8a8a; stroke-width:2; }
+  .slot-label { fill:#666; font:700 22px Arial,sans-serif; text-anchor:middle; dominant-baseline:middle; }
+  .trash-area { fill:#8a8a8a; }
+  .trash-label { fill:#fff; font:700 22px Arial,sans-serif; text-anchor:middle; dominant-baseline:middle; }
+
+  .mtp-body { fill:currentColor; stroke:#929292; stroke-width:2; }
+  .mtp-well { fill:none; stroke:#252936; stroke-width:1; }
+
+  .tiprack-body { fill:#c7c7c7; stroke:#929292; stroke-width:2; }
+  .tiprack-hole { fill:none; stroke:#252936; stroke-width:1; }
+  .tiprack-tip { fill:#f5f5f2; stroke:#252936; stroke-width:.7; }
+
+  .tube-rack-body { fill:#bfc1c7; stroke:#929292; stroke-width:2; }
+  .tube-rack-well { fill:none; stroke:#252936; stroke-width:1.2; }
+
+  .evifluor-body { fill:#c7c7c7; stroke:#929292; stroke-width:2; }
+  .evifluor-well { fill:none; stroke:#252936; stroke-width:.9; }
+
+  .dir { fill:#222; font:700 18px Arial,sans-serif; text-anchor:middle; }
+</style>
+
+<defs>
+<g id="mtp96">
+<rect class="mtp-body" x="0" y="0" width="255.52" height="170.96" rx="11"/>
+<circle class="mtp-well" data-well="A1" cx="28.76" cy="22.48" r="5.50"/>
+<circle class="mtp-well" data-well="B1" cx="28.76" cy="40.48" r="5.50"/>
+<circle class="mtp-well" data-well="C1" cx="28.76" cy="58.48" r="5.50"/>
+<circle class="mtp-well" data-well="D1" cx="28.76" cy="76.48" r="5.50"/>
+<circle class="mtp-well" data-well="E1" cx="28.76" cy="94.48" r="5.50"/>
+<circle class="mtp-well" data-well="F1" cx="28.76" cy="112.48" r="5.50"/>
+<circle class="mtp-well" data-well="G1" cx="28.76" cy="130.48" r="5.50"/>
+<circle class="mtp-well" data-well="H1" cx="28.76" cy="148.48" r="5.50"/>
+<circle class="mtp-well" data-well="A2" cx="46.76" cy="22.48" r="5.50"/>
+<circle class="mtp-well" data-well="B2" cx="46.76" cy="40.48" r="5.50"/>
+<circle class="mtp-well" data-well="C2" cx="46.76" cy="58.48" r="5.50"/>
+<circle class="mtp-well" data-well="D2" cx="46.76" cy="76.48" r="5.50"/>
+<circle class="mtp-well" data-well="E2" cx="46.76" cy="94.48" r="5.50"/>
+<circle class="mtp-well" data-well="F2" cx="46.76" cy="112.48" r="5.50"/>
+<circle class="mtp-well" data-well="G2" cx="46.76" cy="130.48" r="5.50"/>
+<circle class="mtp-well" data-well="H2" cx="46.76" cy="148.48" r="5.50"/>
+<circle class="mtp-well" data-well="A3" cx="64.76" cy="22.48" r="5.50"/>
+<circle class="mtp-well" data-well="B3" cx="64.76" cy="40.48" r="5.50"/>
+<circle class="mtp-well" data-well="C3" cx="64.76" cy="58.48" r="5.50"/>
+<circle class="mtp-well" data-well="D3" cx="64.76" cy="76.48" r="5.50"/>
+<circle class="mtp-well" data-well="E3" cx="64.76" cy="94.48" r="5.50"/>
+<circle class="mtp-well" data-well="F3" cx="64.76" cy="112.48" r="5.50"/>
+<circle class="mtp-well" data-well="G3" cx="64.76" cy="130.48" r="5.50"/>
+<circle class="mtp-well" data-well="H3" cx="64.76" cy="148.48" r="5.50"/>
+<circle class="mtp-well" data-well="A4" cx="82.76" cy="22.48" r="5.50"/>
+<circle class="mtp-well" data-well="B4" cx="82.76" cy="40.48" r="5.50"/>
+<circle class="mtp-well" data-well="C4" cx="82.76" cy="58.48" r="5.50"/>
+<circle class="mtp-well" data-well="D4" cx="82.76" cy="76.48" r="5.50"/>
+<circle class="mtp-well" data-well="E4" cx="82.76" cy="94.48" r="5.50"/>
+<circle class="mtp-well" data-well="F4" cx="82.76" cy="112.48" r="5.50"/>
+<circle class="mtp-well" data-well="G4" cx="82.76" cy="130.48" r="5.50"/>
+<circle class="mtp-well" data-well="H4" cx="82.76" cy="148.48" r="5.50"/>
+<circle class="mtp-well" data-well="A5" cx="100.76" cy="22.48" r="5.50"/>
+<circle class="mtp-well" data-well="B5" cx="100.76" cy="40.48" r="5.50"/>
+<circle class="mtp-well" data-well="C5" cx="100.76" cy="58.48" r="5.50"/>
+<circle class="mtp-well" data-well="D5" cx="100.76" cy="76.48" r="5.50"/>
+<circle class="mtp-well" data-well="E5" cx="100.76" cy="94.48" r="5.50"/>
+<circle class="mtp-well" data-well="F5" cx="100.76" cy="112.48" r="5.50"/>
+<circle class="mtp-well" data-well="G5" cx="100.76" cy="130.48" r="5.50"/>
+<circle class="mtp-well" data-well="H5" cx="100.76" cy="148.48" r="5.50"/>
+<circle class="mtp-well" data-well="A6" cx="118.76" cy="22.48" r="5.50"/>
+<circle class="mtp-well" data-well="B6" cx="118.76" cy="40.48" r="5.50"/>
+<circle class="mtp-well" data-well="C6" cx="118.76" cy="58.48" r="5.50"/>
+<circle class="mtp-well" data-well="D6" cx="118.76" cy="76.48" r="5.50"/>
+<circle class="mtp-well" data-well="E6" cx="118.76" cy="94.48" r="5.50"/>
+<circle class="mtp-well" data-well="F6" cx="118.76" cy="112.48" r="5.50"/>
+<circle class="mtp-well" data-well="G6" cx="118.76" cy="130.48" r="5.50"/>
+<circle class="mtp-well" data-well="H6" cx="118.76" cy="148.48" r="5.50"/>
+<circle class="mtp-well" data-well="A7" cx="136.76" cy="22.48" r="5.50"/>
+<circle class="mtp-well" data-well="B7" cx="136.76" cy="40.48" r="5.50"/>
+<circle class="mtp-well" data-well="C7" cx="136.76" cy="58.48" r="5.50"/>
+<circle class="mtp-well" data-well="D7" cx="136.76" cy="76.48" r="5.50"/>
+<circle class="mtp-well" data-well="E7" cx="136.76" cy="94.48" r="5.50"/>
+<circle class="mtp-well" data-well="F7" cx="136.76" cy="112.48" r="5.50"/>
+<circle class="mtp-well" data-well="G7" cx="136.76" cy="130.48" r="5.50"/>
+<circle class="mtp-well" data-well="H7" cx="136.76" cy="148.48" r="5.50"/>
+<circle class="mtp-well" data-well="A8" cx="154.76" cy="22.48" r="5.50"/>
+<circle class="mtp-well" data-well="B8" cx="154.76" cy="40.48" r="5.50"/>
+<circle class="mtp-well" data-well="C8" cx="154.76" cy="58.48" r="5.50"/>
+<circle class="mtp-well" data-well="D8" cx="154.76" cy="76.48" r="5.50"/>
+<circle class="mtp-well" data-well="E8" cx="154.76" cy="94.48" r="5.50"/>
+<circle class="mtp-well" data-well="F8" cx="154.76" cy="112.48" r="5.50"/>
+<circle class="mtp-well" data-well="G8" cx="154.76" cy="130.48" r="5.50"/>
+<circle class="mtp-well" data-well="H8" cx="154.76" cy="148.48" r="5.50"/>
+<circle class="mtp-well" data-well="A9" cx="172.76" cy="22.48" r="5.50"/>
+<circle class="mtp-well" data-well="B9" cx="172.76" cy="40.48" r="5.50"/>
+<circle class="mtp-well" data-well="C9" cx="172.76" cy="58.48" r="5.50"/>
+<circle class="mtp-well" data-well="D9" cx="172.76" cy="76.48" r="5.50"/>
+<circle class="mtp-well" data-well="E9" cx="172.76" cy="94.48" r="5.50"/>
+<circle class="mtp-well" data-well="F9" cx="172.76" cy="112.48" r="5.50"/>
+<circle class="mtp-well" data-well="G9" cx="172.76" cy="130.48" r="5.50"/>
+<circle class="mtp-well" data-well="H9" cx="172.76" cy="148.48" r="5.50"/>
+<circle class="mtp-well" data-well="A10" cx="190.76" cy="22.48" r="5.50"/>
+<circle class="mtp-well" data-well="B10" cx="190.76" cy="40.48" r="5.50"/>
+<circle class="mtp-well" data-well="C10" cx="190.76" cy="58.48" r="5.50"/>
+<circle class="mtp-well" data-well="D10" cx="190.76" cy="76.48" r="5.50"/>
+<circle class="mtp-well" data-well="E10" cx="190.76" cy="94.48" r="5.50"/>
+<circle class="mtp-well" data-well="F10" cx="190.76" cy="112.48" r="5.50"/>
+<circle class="mtp-well" data-well="G10" cx="190.76" cy="130.48" r="5.50"/>
+<circle class="mtp-well" data-well="H10" cx="190.76" cy="148.48" r="5.50"/>
+<circle class="mtp-well" data-well="A11" cx="208.76" cy="22.48" r="5.50"/>
+<circle class="mtp-well" data-well="B11" cx="208.76" cy="40.48" r="5.50"/>
+<circle class="mtp-well" data-well="C11" cx="208.76" cy="58.48" r="5.50"/>
+<circle class="mtp-well" data-well="D11" cx="208.76" cy="76.48" r="5.50"/>
+<circle class="mtp-well" data-well="E11" cx="208.76" cy="94.48" r="5.50"/>
+<circle class="mtp-well" data-well="F11" cx="208.76" cy="112.48" r="5.50"/>
+<circle class="mtp-well" data-well="G11" cx="208.76" cy="130.48" r="5.50"/>
+<circle class="mtp-well" data-well="H11" cx="208.76" cy="148.48" r="5.50"/>
+<circle class="mtp-well" data-well="A12" cx="226.76" cy="22.48" r="5.50"/>
+<circle class="mtp-well" data-well="B12" cx="226.76" cy="40.48" r="5.50"/>
+<circle class="mtp-well" data-well="C12" cx="226.76" cy="58.48" r="5.50"/>
+<circle class="mtp-well" data-well="D12" cx="226.76" cy="76.48" r="5.50"/>
+<circle class="mtp-well" data-well="E12" cx="226.76" cy="94.48" r="5.50"/>
+<circle class="mtp-well" data-well="F12" cx="226.76" cy="112.48" r="5.50"/>
+<circle class="mtp-well" data-well="G12" cx="226.76" cy="130.48" r="5.50"/>
+<circle class="mtp-well" data-well="H12" cx="226.76" cy="148.48" r="5.50"/>
+</g>
+<g id="tiprack20-empty">
+<rect class="tiprack-body" x="0" y="0" width="255.52" height="170.96" rx="11"/>
+<circle class="tiprack-hole" data-well="A1" cx="28.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="B1" cx="28.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="C1" cx="28.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="D1" cx="28.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="E1" cx="28.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="F1" cx="28.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="G1" cx="28.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="H1" cx="28.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="A2" cx="46.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="B2" cx="46.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="C2" cx="46.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="D2" cx="46.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="E2" cx="46.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="F2" cx="46.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="G2" cx="46.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="H2" cx="46.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="A3" cx="64.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="B3" cx="64.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="C3" cx="64.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="D3" cx="64.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="E3" cx="64.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="F3" cx="64.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="G3" cx="64.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="H3" cx="64.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="A4" cx="82.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="B4" cx="82.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="C4" cx="82.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="D4" cx="82.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="E4" cx="82.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="F4" cx="82.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="G4" cx="82.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="H4" cx="82.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="A5" cx="100.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="B5" cx="100.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="C5" cx="100.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="D5" cx="100.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="E5" cx="100.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="F5" cx="100.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="G5" cx="100.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="H5" cx="100.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="A6" cx="118.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="B6" cx="118.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="C6" cx="118.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="D6" cx="118.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="E6" cx="118.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="F6" cx="118.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="G6" cx="118.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="H6" cx="118.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="A7" cx="136.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="B7" cx="136.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="C7" cx="136.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="D7" cx="136.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="E7" cx="136.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="F7" cx="136.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="G7" cx="136.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="H7" cx="136.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="A8" cx="154.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="B8" cx="154.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="C8" cx="154.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="D8" cx="154.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="E8" cx="154.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="F8" cx="154.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="G8" cx="154.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="H8" cx="154.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="A9" cx="172.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="B9" cx="172.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="C9" cx="172.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="D9" cx="172.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="E9" cx="172.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="F9" cx="172.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="G9" cx="172.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="H9" cx="172.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="A10" cx="190.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="B10" cx="190.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="C10" cx="190.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="D10" cx="190.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="E10" cx="190.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="F10" cx="190.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="G10" cx="190.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="H10" cx="190.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="A11" cx="208.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="B11" cx="208.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="C11" cx="208.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="D11" cx="208.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="E11" cx="208.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="F11" cx="208.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="G11" cx="208.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="H11" cx="208.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="A12" cx="226.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="B12" cx="226.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="C12" cx="226.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="D12" cx="226.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="E12" cx="226.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="F12" cx="226.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="G12" cx="226.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-hole" data-well="H12" cx="226.72" cy="148.44" r="3.27"/>
+</g>
+<g id="tiprack20-full">
+<rect class="tiprack-body" x="0" y="0" width="255.52" height="170.96" rx="11"/>
+<circle class="tiprack-hole" cx="28.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-tip" cx="28.72" cy="22.44" r="1.47"/>
+<circle class="tiprack-hole" cx="28.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-tip" cx="28.72" cy="40.44" r="1.47"/>
+<circle class="tiprack-hole" cx="28.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-tip" cx="28.72" cy="58.44" r="1.47"/>
+<circle class="tiprack-hole" cx="28.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-tip" cx="28.72" cy="76.44" r="1.47"/>
+<circle class="tiprack-hole" cx="28.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-tip" cx="28.72" cy="94.44" r="1.47"/>
+<circle class="tiprack-hole" cx="28.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-tip" cx="28.72" cy="112.44" r="1.47"/>
+<circle class="tiprack-hole" cx="28.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-tip" cx="28.72" cy="130.44" r="1.47"/>
+<circle class="tiprack-hole" cx="28.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-tip" cx="28.72" cy="148.44" r="1.47"/>
+<circle class="tiprack-hole" cx="46.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-tip" cx="46.72" cy="22.44" r="1.47"/>
+<circle class="tiprack-hole" cx="46.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-tip" cx="46.72" cy="40.44" r="1.47"/>
+<circle class="tiprack-hole" cx="46.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-tip" cx="46.72" cy="58.44" r="1.47"/>
+<circle class="tiprack-hole" cx="46.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-tip" cx="46.72" cy="76.44" r="1.47"/>
+<circle class="tiprack-hole" cx="46.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-tip" cx="46.72" cy="94.44" r="1.47"/>
+<circle class="tiprack-hole" cx="46.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-tip" cx="46.72" cy="112.44" r="1.47"/>
+<circle class="tiprack-hole" cx="46.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-tip" cx="46.72" cy="130.44" r="1.47"/>
+<circle class="tiprack-hole" cx="46.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-tip" cx="46.72" cy="148.44" r="1.47"/>
+<circle class="tiprack-hole" cx="64.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-tip" cx="64.72" cy="22.44" r="1.47"/>
+<circle class="tiprack-hole" cx="64.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-tip" cx="64.72" cy="40.44" r="1.47"/>
+<circle class="tiprack-hole" cx="64.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-tip" cx="64.72" cy="58.44" r="1.47"/>
+<circle class="tiprack-hole" cx="64.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-tip" cx="64.72" cy="76.44" r="1.47"/>
+<circle class="tiprack-hole" cx="64.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-tip" cx="64.72" cy="94.44" r="1.47"/>
+<circle class="tiprack-hole" cx="64.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-tip" cx="64.72" cy="112.44" r="1.47"/>
+<circle class="tiprack-hole" cx="64.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-tip" cx="64.72" cy="130.44" r="1.47"/>
+<circle class="tiprack-hole" cx="64.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-tip" cx="64.72" cy="148.44" r="1.47"/>
+<circle class="tiprack-hole" cx="82.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-tip" cx="82.72" cy="22.44" r="1.47"/>
+<circle class="tiprack-hole" cx="82.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-tip" cx="82.72" cy="40.44" r="1.47"/>
+<circle class="tiprack-hole" cx="82.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-tip" cx="82.72" cy="58.44" r="1.47"/>
+<circle class="tiprack-hole" cx="82.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-tip" cx="82.72" cy="76.44" r="1.47"/>
+<circle class="tiprack-hole" cx="82.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-tip" cx="82.72" cy="94.44" r="1.47"/>
+<circle class="tiprack-hole" cx="82.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-tip" cx="82.72" cy="112.44" r="1.47"/>
+<circle class="tiprack-hole" cx="82.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-tip" cx="82.72" cy="130.44" r="1.47"/>
+<circle class="tiprack-hole" cx="82.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-tip" cx="82.72" cy="148.44" r="1.47"/>
+<circle class="tiprack-hole" cx="100.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-tip" cx="100.72" cy="22.44" r="1.47"/>
+<circle class="tiprack-hole" cx="100.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-tip" cx="100.72" cy="40.44" r="1.47"/>
+<circle class="tiprack-hole" cx="100.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-tip" cx="100.72" cy="58.44" r="1.47"/>
+<circle class="tiprack-hole" cx="100.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-tip" cx="100.72" cy="76.44" r="1.47"/>
+<circle class="tiprack-hole" cx="100.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-tip" cx="100.72" cy="94.44" r="1.47"/>
+<circle class="tiprack-hole" cx="100.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-tip" cx="100.72" cy="112.44" r="1.47"/>
+<circle class="tiprack-hole" cx="100.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-tip" cx="100.72" cy="130.44" r="1.47"/>
+<circle class="tiprack-hole" cx="100.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-tip" cx="100.72" cy="148.44" r="1.47"/>
+<circle class="tiprack-hole" cx="118.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-tip" cx="118.72" cy="22.44" r="1.47"/>
+<circle class="tiprack-hole" cx="118.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-tip" cx="118.72" cy="40.44" r="1.47"/>
+<circle class="tiprack-hole" cx="118.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-tip" cx="118.72" cy="58.44" r="1.47"/>
+<circle class="tiprack-hole" cx="118.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-tip" cx="118.72" cy="76.44" r="1.47"/>
+<circle class="tiprack-hole" cx="118.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-tip" cx="118.72" cy="94.44" r="1.47"/>
+<circle class="tiprack-hole" cx="118.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-tip" cx="118.72" cy="112.44" r="1.47"/>
+<circle class="tiprack-hole" cx="118.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-tip" cx="118.72" cy="130.44" r="1.47"/>
+<circle class="tiprack-hole" cx="118.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-tip" cx="118.72" cy="148.44" r="1.47"/>
+<circle class="tiprack-hole" cx="136.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-tip" cx="136.72" cy="22.44" r="1.47"/>
+<circle class="tiprack-hole" cx="136.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-tip" cx="136.72" cy="40.44" r="1.47"/>
+<circle class="tiprack-hole" cx="136.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-tip" cx="136.72" cy="58.44" r="1.47"/>
+<circle class="tiprack-hole" cx="136.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-tip" cx="136.72" cy="76.44" r="1.47"/>
+<circle class="tiprack-hole" cx="136.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-tip" cx="136.72" cy="94.44" r="1.47"/>
+<circle class="tiprack-hole" cx="136.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-tip" cx="136.72" cy="112.44" r="1.47"/>
+<circle class="tiprack-hole" cx="136.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-tip" cx="136.72" cy="130.44" r="1.47"/>
+<circle class="tiprack-hole" cx="136.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-tip" cx="136.72" cy="148.44" r="1.47"/>
+<circle class="tiprack-hole" cx="154.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-tip" cx="154.72" cy="22.44" r="1.47"/>
+<circle class="tiprack-hole" cx="154.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-tip" cx="154.72" cy="40.44" r="1.47"/>
+<circle class="tiprack-hole" cx="154.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-tip" cx="154.72" cy="58.44" r="1.47"/>
+<circle class="tiprack-hole" cx="154.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-tip" cx="154.72" cy="76.44" r="1.47"/>
+<circle class="tiprack-hole" cx="154.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-tip" cx="154.72" cy="94.44" r="1.47"/>
+<circle class="tiprack-hole" cx="154.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-tip" cx="154.72" cy="112.44" r="1.47"/>
+<circle class="tiprack-hole" cx="154.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-tip" cx="154.72" cy="130.44" r="1.47"/>
+<circle class="tiprack-hole" cx="154.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-tip" cx="154.72" cy="148.44" r="1.47"/>
+<circle class="tiprack-hole" cx="172.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-tip" cx="172.72" cy="22.44" r="1.47"/>
+<circle class="tiprack-hole" cx="172.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-tip" cx="172.72" cy="40.44" r="1.47"/>
+<circle class="tiprack-hole" cx="172.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-tip" cx="172.72" cy="58.44" r="1.47"/>
+<circle class="tiprack-hole" cx="172.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-tip" cx="172.72" cy="76.44" r="1.47"/>
+<circle class="tiprack-hole" cx="172.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-tip" cx="172.72" cy="94.44" r="1.47"/>
+<circle class="tiprack-hole" cx="172.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-tip" cx="172.72" cy="112.44" r="1.47"/>
+<circle class="tiprack-hole" cx="172.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-tip" cx="172.72" cy="130.44" r="1.47"/>
+<circle class="tiprack-hole" cx="172.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-tip" cx="172.72" cy="148.44" r="1.47"/>
+<circle class="tiprack-hole" cx="190.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-tip" cx="190.72" cy="22.44" r="1.47"/>
+<circle class="tiprack-hole" cx="190.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-tip" cx="190.72" cy="40.44" r="1.47"/>
+<circle class="tiprack-hole" cx="190.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-tip" cx="190.72" cy="58.44" r="1.47"/>
+<circle class="tiprack-hole" cx="190.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-tip" cx="190.72" cy="76.44" r="1.47"/>
+<circle class="tiprack-hole" cx="190.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-tip" cx="190.72" cy="94.44" r="1.47"/>
+<circle class="tiprack-hole" cx="190.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-tip" cx="190.72" cy="112.44" r="1.47"/>
+<circle class="tiprack-hole" cx="190.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-tip" cx="190.72" cy="130.44" r="1.47"/>
+<circle class="tiprack-hole" cx="190.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-tip" cx="190.72" cy="148.44" r="1.47"/>
+<circle class="tiprack-hole" cx="208.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-tip" cx="208.72" cy="22.44" r="1.47"/>
+<circle class="tiprack-hole" cx="208.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-tip" cx="208.72" cy="40.44" r="1.47"/>
+<circle class="tiprack-hole" cx="208.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-tip" cx="208.72" cy="58.44" r="1.47"/>
+<circle class="tiprack-hole" cx="208.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-tip" cx="208.72" cy="76.44" r="1.47"/>
+<circle class="tiprack-hole" cx="208.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-tip" cx="208.72" cy="94.44" r="1.47"/>
+<circle class="tiprack-hole" cx="208.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-tip" cx="208.72" cy="112.44" r="1.47"/>
+<circle class="tiprack-hole" cx="208.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-tip" cx="208.72" cy="130.44" r="1.47"/>
+<circle class="tiprack-hole" cx="208.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-tip" cx="208.72" cy="148.44" r="1.47"/>
+<circle class="tiprack-hole" cx="226.72" cy="22.44" r="3.27"/>
+<circle class="tiprack-tip" cx="226.72" cy="22.44" r="1.47"/>
+<circle class="tiprack-hole" cx="226.72" cy="40.44" r="3.27"/>
+<circle class="tiprack-tip" cx="226.72" cy="40.44" r="1.47"/>
+<circle class="tiprack-hole" cx="226.72" cy="58.44" r="3.27"/>
+<circle class="tiprack-tip" cx="226.72" cy="58.44" r="1.47"/>
+<circle class="tiprack-hole" cx="226.72" cy="76.44" r="3.27"/>
+<circle class="tiprack-tip" cx="226.72" cy="76.44" r="1.47"/>
+<circle class="tiprack-hole" cx="226.72" cy="94.44" r="3.27"/>
+<circle class="tiprack-tip" cx="226.72" cy="94.44" r="1.47"/>
+<circle class="tiprack-hole" cx="226.72" cy="112.44" r="3.27"/>
+<circle class="tiprack-tip" cx="226.72" cy="112.44" r="1.47"/>
+<circle class="tiprack-hole" cx="226.72" cy="130.44" r="3.27"/>
+<circle class="tiprack-tip" cx="226.72" cy="130.44" r="1.47"/>
+<circle class="tiprack-hole" cx="226.72" cy="148.44" r="3.27"/>
+<circle class="tiprack-tip" cx="226.72" cy="148.44" r="1.47"/>
+</g>
+<g id="tube-rack">
+<rect class="tube-rack-body" x="0" y="0" width="255.50" height="171.00" rx="11"/>
+<circle class="tube-rack-well" cx="36.42" cy="135.82" r="8.70"/>
+<circle class="tube-rack-well" cx="36.42" cy="97.26" r="8.70"/>
+<circle class="tube-rack-well" cx="36.42" cy="58.70" r="8.70"/>
+<circle class="tube-rack-well" cx="36.42" cy="20.14" r="8.70"/>
+<circle class="tube-rack-well" cx="76.20" cy="135.82" r="8.70"/>
+<circle class="tube-rack-well" cx="76.20" cy="97.26" r="8.70"/>
+<circle class="tube-rack-well" cx="76.20" cy="58.70" r="8.70"/>
+<circle class="tube-rack-well" cx="76.20" cy="20.14" r="8.70"/>
+<circle class="tube-rack-well" cx="115.98" cy="135.82" r="8.70"/>
+<circle class="tube-rack-well" cx="115.98" cy="97.26" r="8.70"/>
+<circle class="tube-rack-well" cx="115.98" cy="58.70" r="8.70"/>
+<circle class="tube-rack-well" cx="115.98" cy="20.14" r="8.70"/>
+<circle class="tube-rack-well" cx="155.76" cy="135.82" r="8.70"/>
+<circle class="tube-rack-well" cx="155.76" cy="97.26" r="8.70"/>
+<circle class="tube-rack-well" cx="155.76" cy="58.70" r="8.70"/>
+<circle class="tube-rack-well" cx="155.76" cy="20.14" r="8.70"/>
+<circle class="tube-rack-well" cx="195.54" cy="135.82" r="8.70"/>
+<circle class="tube-rack-well" cx="195.54" cy="97.26" r="8.70"/>
+<circle class="tube-rack-well" cx="195.54" cy="58.70" r="8.70"/>
+<circle class="tube-rack-well" cx="195.54" cy="20.14" r="8.70"/>
+<circle class="tube-rack-well" cx="235.32" cy="135.82" r="8.70"/>
+<circle class="tube-rack-well" cx="235.32" cy="97.26" r="8.70"/>
+<circle class="tube-rack-well" cx="235.32" cy="58.70" r="8.70"/>
+<circle class="tube-rack-well" cx="235.32" cy="20.14" r="8.70"/>
+</g>
+<g id="evifluor">
+<rect class="evifluor-body" x="0" y="0" width="255.52" height="170.94" rx="11"/>
+<rect class="evifluor-well" data-well="A1" x="24.80" y="148.20" width="6.00" height="6.00" rx="1"/>
+<circle class="evifluor-well" data-well="A2" cx="46.86" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B2" cx="46.86" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C2" cx="46.86" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D2" cx="46.86" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E2" cx="46.86" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F2" cx="46.86" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G2" cx="46.86" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H2" cx="46.86" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I2" cx="46.86" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J2" cx="46.86" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K2" cx="46.86" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L2" cx="46.86" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M2" cx="46.86" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N2" cx="46.86" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O2" cx="46.86" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P2" cx="46.86" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A3" cx="55.86" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B3" cx="55.86" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C3" cx="55.86" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D3" cx="55.86" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E3" cx="55.86" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F3" cx="55.86" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G3" cx="55.86" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H3" cx="55.86" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I3" cx="55.86" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J3" cx="55.86" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K3" cx="55.86" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L3" cx="55.86" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M3" cx="55.86" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N3" cx="55.86" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O3" cx="55.86" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P3" cx="55.86" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A4" cx="64.86" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B4" cx="64.86" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C4" cx="64.86" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D4" cx="64.86" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E4" cx="64.86" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F4" cx="64.86" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G4" cx="64.86" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H4" cx="64.86" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I4" cx="64.86" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J4" cx="64.86" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K4" cx="64.86" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L4" cx="64.86" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M4" cx="64.86" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N4" cx="64.86" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O4" cx="64.86" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P4" cx="64.86" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A5" cx="73.86" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B5" cx="73.86" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C5" cx="73.86" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D5" cx="73.86" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E5" cx="73.86" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F5" cx="73.86" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G5" cx="73.86" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H5" cx="73.86" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I5" cx="73.86" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J5" cx="73.86" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K5" cx="73.86" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L5" cx="73.86" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M5" cx="73.86" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N5" cx="73.86" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O5" cx="73.86" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P5" cx="73.86" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A6" cx="82.86" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B6" cx="82.86" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C6" cx="82.86" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D6" cx="82.86" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E6" cx="82.86" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F6" cx="82.86" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G6" cx="82.86" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H6" cx="82.86" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I6" cx="82.86" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J6" cx="82.86" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K6" cx="82.86" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L6" cx="82.86" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M6" cx="82.86" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N6" cx="82.86" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O6" cx="82.86" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P6" cx="82.86" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A7" cx="91.86" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B7" cx="91.86" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C7" cx="91.86" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D7" cx="91.86" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E7" cx="91.86" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F7" cx="91.86" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G7" cx="91.86" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H7" cx="91.86" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I7" cx="91.86" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J7" cx="91.86" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K7" cx="91.86" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L7" cx="91.86" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M7" cx="91.86" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N7" cx="91.86" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O7" cx="91.86" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P7" cx="91.86" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A8" cx="117.46" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B8" cx="117.46" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C8" cx="117.46" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D8" cx="117.46" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E8" cx="117.46" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F8" cx="117.46" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G8" cx="117.46" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H8" cx="117.46" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I8" cx="117.46" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J8" cx="117.46" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K8" cx="117.46" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L8" cx="117.46" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M8" cx="117.46" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N8" cx="117.46" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O8" cx="117.46" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P8" cx="117.46" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A9" cx="126.46" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B9" cx="126.46" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C9" cx="126.46" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D9" cx="126.46" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E9" cx="126.46" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F9" cx="126.46" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G9" cx="126.46" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H9" cx="126.46" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I9" cx="126.46" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J9" cx="126.46" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K9" cx="126.46" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L9" cx="126.46" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M9" cx="126.46" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N9" cx="126.46" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O9" cx="126.46" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P9" cx="126.46" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A10" cx="135.46" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B10" cx="135.46" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C10" cx="135.46" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D10" cx="135.46" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E10" cx="135.46" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F10" cx="135.46" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G10" cx="135.46" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H10" cx="135.46" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I10" cx="135.46" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J10" cx="135.46" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K10" cx="135.46" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L10" cx="135.46" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M10" cx="135.46" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N10" cx="135.46" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O10" cx="135.46" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P10" cx="135.46" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A11" cx="144.46" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B11" cx="144.46" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C11" cx="144.46" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D11" cx="144.46" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E11" cx="144.46" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F11" cx="144.46" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G11" cx="144.46" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H11" cx="144.46" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I11" cx="144.46" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J11" cx="144.46" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K11" cx="144.46" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L11" cx="144.46" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M11" cx="144.46" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N11" cx="144.46" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O11" cx="144.46" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P11" cx="144.46" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A12" cx="153.46" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B12" cx="153.46" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C12" cx="153.46" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D12" cx="153.46" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E12" cx="153.46" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F12" cx="153.46" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G12" cx="153.46" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H12" cx="153.46" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I12" cx="153.46" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J12" cx="153.46" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K12" cx="153.46" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L12" cx="153.46" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M12" cx="153.46" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N12" cx="153.46" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O12" cx="153.46" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P12" cx="153.46" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A13" cx="162.46" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B13" cx="162.46" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C13" cx="162.46" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D13" cx="162.46" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E13" cx="162.46" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F13" cx="162.46" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G13" cx="162.46" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H13" cx="162.46" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I13" cx="162.46" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J13" cx="162.46" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K13" cx="162.46" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L13" cx="162.46" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M13" cx="162.46" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N13" cx="162.46" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O13" cx="162.46" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P13" cx="162.46" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A14" cx="188.06" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B14" cx="188.06" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C14" cx="188.06" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D14" cx="188.06" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E14" cx="188.06" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F14" cx="188.06" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G14" cx="188.06" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H14" cx="188.06" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I14" cx="188.06" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J14" cx="188.06" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K14" cx="188.06" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L14" cx="188.06" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M14" cx="188.06" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N14" cx="188.06" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O14" cx="188.06" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P14" cx="188.06" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A15" cx="197.06" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B15" cx="197.06" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C15" cx="197.06" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D15" cx="197.06" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E15" cx="197.06" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F15" cx="197.06" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G15" cx="197.06" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H15" cx="197.06" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I15" cx="197.06" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J15" cx="197.06" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K15" cx="197.06" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L15" cx="197.06" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M15" cx="197.06" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N15" cx="197.06" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O15" cx="197.06" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P15" cx="197.06" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A16" cx="206.06" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B16" cx="206.06" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C16" cx="206.06" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D16" cx="206.06" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E16" cx="206.06" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F16" cx="206.06" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G16" cx="206.06" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H16" cx="206.06" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I16" cx="206.06" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J16" cx="206.06" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K16" cx="206.06" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L16" cx="206.06" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M16" cx="206.06" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N16" cx="206.06" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O16" cx="206.06" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P16" cx="206.06" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A17" cx="215.06" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B17" cx="215.06" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C17" cx="215.06" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D17" cx="215.06" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E17" cx="215.06" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F17" cx="215.06" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G17" cx="215.06" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H17" cx="215.06" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I17" cx="215.06" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J17" cx="215.06" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K17" cx="215.06" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L17" cx="215.06" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M17" cx="215.06" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N17" cx="215.06" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O17" cx="215.06" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P17" cx="215.06" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A18" cx="224.06" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B18" cx="224.06" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C18" cx="224.06" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D18" cx="224.06" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E18" cx="224.06" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F18" cx="224.06" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G18" cx="224.06" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H18" cx="224.06" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I18" cx="224.06" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J18" cx="224.06" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K18" cx="224.06" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L18" cx="224.06" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M18" cx="224.06" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N18" cx="224.06" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O18" cx="224.06" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P18" cx="224.06" cy="155.14" r="2.00"/>
+<circle class="evifluor-well" data-well="A19" cx="233.06" cy="20.14" r="2.00"/>
+<circle class="evifluor-well" data-well="B19" cx="233.06" cy="29.14" r="2.00"/>
+<circle class="evifluor-well" data-well="C19" cx="233.06" cy="38.14" r="2.00"/>
+<circle class="evifluor-well" data-well="D19" cx="233.06" cy="47.14" r="2.00"/>
+<circle class="evifluor-well" data-well="E19" cx="233.06" cy="56.14" r="2.00"/>
+<circle class="evifluor-well" data-well="F19" cx="233.06" cy="65.14" r="2.00"/>
+<circle class="evifluor-well" data-well="G19" cx="233.06" cy="74.14" r="2.00"/>
+<circle class="evifluor-well" data-well="H19" cx="233.06" cy="83.14" r="2.00"/>
+<circle class="evifluor-well" data-well="I19" cx="233.06" cy="92.14" r="2.00"/>
+<circle class="evifluor-well" data-well="J19" cx="233.06" cy="101.14" r="2.00"/>
+<circle class="evifluor-well" data-well="K19" cx="233.06" cy="110.14" r="2.00"/>
+<circle class="evifluor-well" data-well="L19" cx="233.06" cy="119.14" r="2.00"/>
+<circle class="evifluor-well" data-well="M19" cx="233.06" cy="128.14" r="2.00"/>
+<circle class="evifluor-well" data-well="N19" cx="233.06" cy="137.14" r="2.00"/>
+<circle class="evifluor-well" data-well="O19" cx="233.06" cy="146.14" r="2.00"/>
+<circle class="evifluor-well" data-well="P19" cx="233.06" cy="155.14" r="2.00"/>
+<rect class="evifluor-well" data-well="A20" x="9.60" y="83.07" width="4.80" height="4.80" rx="1"/>
+</g>
+</defs>
+
+<rect id="deck" class="deck" x="40" y="50" width="865.0" height="819.0" rx="10"/>
+
+<g id="slot-10"><rect class="slot" x="70.00" y="80.00" width="256.00" height="172.00" rx="11"/><text class="slot-label" x="198.00" y="166.00">10</text></g><g id="slot-11"><rect class="slot" x="335.00" y="80.00" width="256.00" height="172.00" rx="11"/><text class="slot-label" x="463.00" y="166.00">11</text></g><g id="slot-7"><rect class="slot" x="70.00" y="261.00" width="256.00" height="172.00" rx="11"/><text class="slot-label" x="198.00" y="347.00">7</text></g><g id="slot-8"><rect class="slot" x="335.00" y="261.00" width="256.00" height="172.00" rx="11"/><text class="slot-label" x="463.00" y="347.00">8</text></g><g id="slot-9"><rect class="slot" x="600.00" y="261.00" width="256.00" height="172.00" rx="11"/><text class="slot-label" x="728.00" y="347.00">9</text></g><g id="slot-4"><rect class="slot" x="70.00" y="442.00" width="256.00" height="172.00" rx="11"/><text class="slot-label" x="198.00" y="528.00">4</text></g><g id="slot-5"><rect class="slot" x="335.00" y="442.00" width="256.00" height="172.00" rx="11"/><text class="slot-label" x="463.00" y="528.00">5</text></g><g id="slot-6"><rect class="slot" x="600.00" y="442.00" width="256.00" height="172.00" rx="11"/><text class="slot-label" x="728.00" y="528.00">6</text></g><g id="slot-1"><rect class="slot" x="70.00" y="623.00" width="256.00" height="172.00" rx="11"/><text class="slot-label" x="198.00" y="709.00">1</text></g><g id="slot-2"><rect class="slot" x="335.00" y="623.00" width="256.00" height="172.00" rx="11"/><text class="slot-label" x="463.00" y="709.00">2</text></g><g id="slot-3"><rect class="slot" x="600.00" y="623.00" width="256.00" height="172.00" rx="11"/><text class="slot-label" x="728.00" y="709.00">3</text></g>
+
+<g id="trash">
+  <rect class="trash-area" x="600.00" y="80.00" width="256.00" height="172.00" rx="11"/>
+  <text class="trash-label" x="728.00" y="166.00">Trash</text>
+</g>
+
+<g id="labware">
+  <use id="tube-rack-slot-1" href="#tube-rack" x="70.00" y="623.00"/><use id="mtp-slot-2" href="#mtp96" x="335.00" y="623.00" color="#c7c7c7"/><use id="mtp-slot-5" href="#mtp96" x="335.00" y="442.00" color="#c7c7c7"/><use id="tiprack20-slot-6" href="#tiprack20-full" x="600.00" y="442.00"/><use id="tiprack20-slot-9" href="#tiprack20-empty" x="600.00" y="261.00"/><use id="evifluor-slot-7" href="#evifluor" x="70.00" y="261.00"/>
+  <use id="mtp-slot-8" href="#mtp96" x="335.00" y="261.00" color="#c7c7c7"/>
+  <use id="mtp-slot-3" href="#mtp96" x="600.00" y="623.00" color="#c7c7c7"/>
+</g>
+
+<g id="orientation">
+  <text class="dir" x="472.50" y="25">BACK</text>
+  <text class="dir" x="472.50" y="906.00">FRONT</text>
+</g>
+</svg>

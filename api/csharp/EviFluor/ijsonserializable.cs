@@ -1,5 +1,7 @@
 ﻿using System.Text.Json.Nodes;
 
+namespace Hse.EviFluor;
+
 /// <summary>
 /// Defines a contract for types that can serialize themselves to a <see cref="System.Text.Json.Nodes.JsonNode"/>.
 /// </summary>

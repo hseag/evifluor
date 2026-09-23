@@ -29,9 +29,8 @@ class EviFluorStatusLed(IntEnum):
 
 
 class EviFluorSimulation(SimulationBase):
-    def __init__(self, no_air=False):
+    def __init__(self):
         super().__init__()
-        self._initial_no_air = no_air
         self.reset_state()
 
     def reset_state(self):
@@ -41,7 +40,6 @@ class EviFluorSimulation(SimulationBase):
         self.current_led470_power = 80
         self.current_led625_power = 64
         self.current_led470_power_max = 200
-        self.no_air = self._initial_no_air
         self.measure_always_zero = False
 
     def append_measurement_data(self, data):
@@ -58,7 +56,7 @@ class EviFluorSimulation(SimulationBase):
                 if "values" in measurement:
                     for value in measurement["values"]:
                         self.append_measurement_data(value)
-                if self.no_air is False and "air" in measurement:
+                if "air" in measurement:
                     self.append_measurement_data(measurement["air"])
                     if first_air:
                         self.append_measurement_data(measurement["air"])
@@ -70,15 +68,6 @@ class EviFluorSimulation(SimulationBase):
         return "eviFluor"
 
     def handle_control_command(self, args) -> str:
-        if len(args) == 2 and args[1] == "RESET":
-            response = super().handle_control_command(args)
-            self.no_air = False
-            return response
-        if len(args) == 3 and args[1] == "NO_AIR":
-            if args[2] not in ["0", "1"]:
-                return f"E {Error.EVI_INVALID_PARAMETER}"
-            self.no_air = bool(int(args[2]))
-            return "! 0"
         return super().handle_control_command(args)
 
     def next_measurement_response(self):

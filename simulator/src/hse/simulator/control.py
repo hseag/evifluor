@@ -29,7 +29,7 @@ class SimulationControl:
                         break
                     response += chunk
 
-                if response != b":! 0":
+                if response.decode().strip() != ":! 0":
                     print("Response:", response.decode().strip())
                 return response.decode().strip()
         except ConnectionRefusedError:

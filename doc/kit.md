@@ -2,7 +2,7 @@
 
 ## 1. Overview
 
-`Kit` objects define how an eviFluor measurement is converted into a concentration after standard-based calibration.
+`Kit` objects define how an eviFluor Duo Fluorometer  measurement is converted into a concentration after standard-based calibration.
 
 A kit contains:
 
@@ -20,9 +20,9 @@ If you need to pass a kit name as a string, for example in the Python CLI, Pytho
 
 | Use this name | Also accepted | Python class | C# class | Behavior |
 |---|---|---|---|---|
-| `Default` | `default` | `hse.evifluor.kits.Default` | `Hse.EviFluor.Kits.Default` | Linear fit with `k1=1.0`, `k2=0.0`, `k3=0.0` |
+| `Default` | `default` | `hse.evifluor.kits.Default` | `Hse.EviFluor.Kits.Default` | The `Default` kit can be fully customized. Without customization, it uses a linear fit with `k1=1.0`, `k2=0.0`, and `k3=0.0`. |
 | `QubitTM_1X_dsDNA_High_Sensitivity_HS` | `qubit_hs` | `hse.evifluor.kits.QubitTM_1X_dsDNA_High_Sensitivity_HS` | `Hse.EviFluor.Kits.QubitTM_1X_dsDNA_High_Sensitivity_HS` | Linear preset for the Qubit 1X dsDNA High Sensitivity assay |
-| `QubitTM_1X_dsDNA_Broad_Range_BR` | `qubit_br` | `hse.evifluor.kits.QubitTM_1X_dsDNA_Broad_Range_BR` | `Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR` | HillFit preset for the Qubit 1X dsDNA Broad Range assay |
+| `QubitTM_1X_dsDNA_Broad_Range_BR` | `qubit_br` | `hse.evifluor.kits.QubitTM_1X_dsDNA_Broad_Range_BR` | `Hse.EviFluor.Kits.QubitTM_1X_dsDNA_Broad_Range_BR` | LookupTable preset for the Qubit 1X dsDNA Broad Range assay |
 
 Copy-and-paste examples:
 

@@ -180,6 +180,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Hse.EviFluor.IJsonSerializable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Hse.EviFluor.IJsonSerializable.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Hse.EviFluor.IJsonSerializable",
+      "Summary": "<p sourcefile=\"api/Hse.EviFluor.IJsonSerializable.yml\" sourcestartlinenumber=\"1\">Defines a contract for types that can serialize themselves to a <xref href=\"System.Text.Json.Nodes.JsonNode\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Hse.EviFluor.IKit.yml",
       "output": {
         ".html": {

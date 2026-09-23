@@ -6,7 +6,7 @@ from hse.simulator.compare.evifluor import compare_evifluor_measurement
 from hse.simulator.compare.shared import DotDict, load_json_file, trim_measurements
 
 
-def compare_measurement_files(file_a, file_b, device, skip_a=0, skip_b=0, no_air=False) -> bool:
+def compare_measurement_files(file_a, file_b, device, skip_a=0, skip_b=0) -> bool:
     data_a = load_json_file(file_a)
     data_b = load_json_file(file_b)
 
@@ -27,7 +27,7 @@ def compare_measurement_files(file_a, file_b, device, skip_a=0, skip_b=0, no_air
             if not compare_evidense_measurement(measurement_a, measurement_b, f"measurements[{index}]"):
                 matches = False
         elif device == "evifluor":
-            if not compare_evifluor_measurement(measurement_a, measurement_b, f"measurements[{index}]", no_air):
+            if not compare_evifluor_measurement(measurement_a, measurement_b, f"measurements[{index}]"):
                 matches = False
         else:
             print(f"Simulaor: Device ({device}) not supported")

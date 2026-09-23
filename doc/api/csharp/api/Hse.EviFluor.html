@@ -37,7 +37,8 @@
         document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
       </script>
 
-  </head>
+  <meta name="robots" content="noindex">
+</head>
 
   <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
     <header class="bg-body border-bottom">
@@ -194,6 +195,11 @@ Contains a measurement, an optional comment, results, and raw JSON data.</p>
     <h3 id="interfaces">
 Interfaces
 </h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Hse.EviFluor.IJsonSerializable.html">IJsonSerializable</a></dt>
+      <dd><p>Defines a contract for types that can serialize themselves to a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.nodes.jsonnode">JsonNode</a>.</p>
+</dd>
+    </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Hse.EviFluor.IKit.html">IKit</a></dt>
       <dd><p>Interface for implementing calibration fitting algorithms.</p>

@@ -1,0 +1,75 @@
+site_name: eviFluor Duo Fluorometer Integration and Software Hub
+site_description: Repository documentation published with MkDocs Material on GitLab Pages.
+docs_dir: doc
+theme:
+  name: material
+  custom_dir: overrides
+  logo: assets/brand/hseag-logo.png
+  favicon: assets/brand/favicon.ico
+  language: en
+  font:
+    text: Roboto
+    code: Roboto Mono
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+  features:
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/solid/globe
+      link: https://www.hseag.com/
+      name: HSE AG
+    - icon: fontawesome/solid/newspaper
+      link: https://blog.hseag.com/
+      name: HSE Blog
+plugins:
+  - search
+extra_css:
+  - stylesheets/extra.css
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+copyright: Copyright &copy; 2026 HSE AG
+nav:
+  - Home:
+      - Overview: index.md      
+  - Applications:
+      - applications/index.md
+      - Workflow: applications-workflow.md
+      - Assay Kits and Fit Types: applications-assay-kits.md
+      - Results and Data Handling: applications-results-and-data-handling.md
+  - Software:
+      - software/index.md
+      - Firmware:
+          - software/firmware/index.md
+          - Updates and Versions: software-firmware-versions.md
+          - Update with eviManager: software-firmware-update.md
+      - API Updates and Versions: software-api-versions.md
+      - Release Notes: software-release-notes.md
+  - Integration:
+      - integration/index.md
+      - General Overview: integration-overview.md
+      - Compatibility: integration-compatibility.md
+      - Available Interfaces: integration-interfaces.md
+      - Liquid Handler Requirements: integration-requirements.md
+      - Positioning and Teaching: integration-positioning.md
+      - Simulation and Dry Runs: integration-simulation.md
+      - Verification and Troubleshooting : verification.md
+  - Integration Kits:
+      - integration-kits/index.md
+      - Opentrons OT-2: integration-kits/opentrons-ot2/index.md
+      - More Kits Coming Soon: integration-kits-coming-soon.md

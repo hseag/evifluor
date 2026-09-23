@@ -3,6 +3,7 @@
 
 from enum import IntEnum
 import json
+import time
 
 from hse.simulator.base import Error, SimulationBase, ValueType
 
@@ -13,6 +14,14 @@ class EviDenseIndex(IntEnum):
     LED260NM_MAX_CURRENT = 33
     LED280NM_MAX_CURRENT = 43
     LED340NM_MAX_CURRENT = 53
+    AUTOMEASURE_BASELINE_SAMPLE_COUNT = 60
+    AUTOMEASURE_INSERT_THRESHOLD_PERMILLE = 61
+    AUTOMEASURE_REMOVE_THRESHOLD_PERMILLE = 62
+    AUTOMEASURE_BASELINE_TRACK_MIN_PERMILLE = 63
+    AUTOMEASURE_BASELINE_TRACK_MAX_PERMILLE = 64
+    AUTOMEASURE_SIGNAL_LEVEL_TOLERANCE_PERMILLE = 65
+    AUTOMEASURE_PERSISTENCE_COUNT = 66
+    AUTOMEASURE_SIGNAL_LEVEL_VERIFY_SAMPLE_COUNT = 67
     SELFTEST_AMPLIFIER_SPLITRATIO230NM = 100
     SELFTEST_AMPLIFIER_CURRENT = 101
     SELFTEST_AMPLIFIER_SAMPLE1 = 102
@@ -89,6 +98,20 @@ class EviDenseSimulation(SimulationBase):
         self.led = 0
         self.amplifiers = [0, 0, 0]
         self.center_wavelengths = {"230": 230000, "260": 260000, "280": 280000, "340": 340000}
+        self.auto_measure_parameters = {
+            EviDenseIndex.AUTOMEASURE_BASELINE_SAMPLE_COUNT: 12,
+            EviDenseIndex.AUTOMEASURE_INSERT_THRESHOLD_PERMILLE: 800,
+            EviDenseIndex.AUTOMEASURE_REMOVE_THRESHOLD_PERMILLE: 950,
+            EviDenseIndex.AUTOMEASURE_BASELINE_TRACK_MIN_PERMILLE: 950,
+            EviDenseIndex.AUTOMEASURE_BASELINE_TRACK_MAX_PERMILLE: 1050,
+            EviDenseIndex.AUTOMEASURE_SIGNAL_LEVEL_TOLERANCE_PERMILLE: 50,
+            EviDenseIndex.AUTOMEASURE_PERSISTENCE_COUNT: 2,
+            EviDenseIndex.AUTOMEASURE_SIGNAL_LEVEL_VERIFY_SAMPLE_COUNT: 5,
+        }
+        self.auto_measure_state = 0
+        self.auto_measure_result = 0
+        self.auto_measure_deadline = None
+        self.auto_measure_complete_pending = False
         self.measure_always_zero = False
 
     def device_name(self):
@@ -135,7 +158,47 @@ class EviDenseSimulation(SimulationBase):
             return self.handle_set_detector_amplifying_command(args)
         if args[0] == "A":
             return self.handle_auto_update_command(args)
+        if args[0] == "U":
+            return self.handle_auto_measure_command(args)
         return super().handle_command(args)
+
+    def handle_auto_measure_command(self, args) -> str:
+        if len(args) == 1:
+            now = time.monotonic()
+            if self.auto_measure_complete_pending:
+                self.handle_baseline_command(["G"])
+                self.handle_measure_command(["M"])
+                self.handle_measure_command(["M"])
+                self.auto_measure_state = 0
+                self.auto_measure_result = 2
+                self.auto_measure_deadline = None
+                self.auto_measure_complete_pending = False
+            elif self.auto_measure_deadline is not None and now >= self.auto_measure_deadline:
+                self.auto_measure_state = 0
+                self.auto_measure_result = 3
+                self.auto_measure_deadline = None
+            return f"U {self.auto_measure_state} {self.auto_measure_result}"
+
+        if args[1] == "0" and len(args) == 2:
+            self.auto_measure_state = 0
+            self.auto_measure_result = 5
+            self.auto_measure_deadline = None
+            self.auto_measure_complete_pending = False
+            return "U 0 5"
+
+        if args[1] == "1" and len(args) in (2, 4):
+            timeout_ms = 60000 if len(args) == 2 else int(args[3])
+            if timeout_ms < 0:
+                return f"E {Error.EVI_INVALID_PARAMETER}"
+            self.auto_measure_state = 1
+            self.auto_measure_result = 1
+            self.auto_measure_deadline = time.monotonic() + timeout_ms / 1000.0
+            self.last_measurement_count = 0
+            self.last_measurements = []
+            self.auto_measure_complete_pending = len(self._data) >= 3
+            return "U 1 1"
+
+        return f"E {Error.EVI_INVALID_PARAMETER}"
 
     def get_value_command(self, index):
         if index == EviDenseIndex.LAST_MEASUREMENT_COUNT:
@@ -146,6 +209,8 @@ class EviDenseSimulation(SimulationBase):
             return "V 150000"
         if index == EviDenseIndex.LED340NM_MAX_CURRENT:
             return "V 220000"
+        if index in self.auto_measure_parameters:
+            return f"V {self.auto_measure_parameters[index]}"
         if index in [
             EviDenseIndex.SELFTEST_AMPLIFIER_SPLITRATIO230NM,
             EviDenseIndex.SELFTEST_AMPLIFIER_CURRENT,
@@ -204,6 +269,12 @@ class EviDenseSimulation(SimulationBase):
             return f"V {self.center_wavelengths['340']}"
         return super().get_value_command(index)
 
+    def set_value_command(self, index, value) -> str:
+        if index in self.auto_measure_parameters and value >= 0:
+            self.auto_measure_parameters[index] = value
+            return "V"
+        return super().set_value_command(index, value)
+
     def get_value_type_command(self, index) -> str:
         supported = {member.value for member in EviDenseIndex}
         supported.update([24, 34, 44, 54])
@@ -239,12 +310,12 @@ class EviDenseSimulation(SimulationBase):
     def handle_baseline_command(self, args) -> str:
         if len(args) == 1:
             self.last_measurement_count = 0
+            self.last_measurements = []
             value = self.next_measurement_response("G")
             self.last_measurement_count += 1
-            self.last_measurements.insert(0, "M" + value[1:])
-
-            if len(self.last_measurements) > 20:
-                del self.last_measurements[-1]
+            if len(self.last_measurements) >= 20:
+                del self.last_measurements[0]
+            self.last_measurements.append("M" + value[1:])
 
             return value
         return f"E {Error.EVI_INVALID_PARAMETER}"
@@ -253,13 +324,15 @@ class EviDenseSimulation(SimulationBase):
         if len(args) == 1:
             value = self.next_measurement_response("M")
             self.last_measurement_count += 1
-            if len(self.last_measurements) > 20:
-                del self.last_measurements[-1]
-            else:
-                self.last_measurements.insert(0, value)
+            if len(self.last_measurements) >= 20:
+                del self.last_measurements[0]
+            self.last_measurements.append(value)
             return value
         if len(args) == 2:
-            return self.last_measurements[int(args[1])]
+            index = int(args[1])
+            if 0 <= index < len(self.last_measurements):
+                return self.last_measurements[index]
+            return f"E {Error.EVI_INVALID_PARAMETER}"
         return f"E {Error.EVI_INVALID_PARAMETER}"
 
     def handle_levelling_command(self, args) -> str:
@@ -344,6 +417,9 @@ class EviDenseSimulation(SimulationBase):
 
     def commandA_AutoUpdate(self, args) -> str:
         return self.handle_auto_update_command(args)
+
+    def command_simulator(self, args) -> str:
+        return self.handle_control_command(args)
 
 
 # Backward-compatible aliases

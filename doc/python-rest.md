@@ -5,7 +5,11 @@
 This chapter documents the Python-based REST API.
 It complements the high-level API, the low-level API, and the Python command line interface.
 
-## 2. Overview
+## 2. Installation and Python Variants
+
+Installation instructions and an overview of the available Python variants are provided in [Python Interfaces](./python.md).
+
+## 3. Overview
 
 The REST API provides HTTP access to the Python software stack of the eviFluor Duo Fluorometer.
 It is intended for machine-to-machine integration and exposes a command model aligned with the Python CLI run workflow.
@@ -28,12 +32,12 @@ The current REST API covers:
 
 Run initialization supports the same kit selection and settling-time override as the Python CLI. For supported kit names and serialized kit fields, see [Kit Reference](./kit.md), especially section 2.
 
-## 3. Installation and Startup
+## 4. Installation and Startup
 
 To install the published wheel directly from the documentation site, use:
 
 ```bash
-python -m pip install "hse-evifluor[rest] @ https://hseag.github.io/evifluor/pre-release/python/dist/hse_evifluor-0.12.0rc2-py3-none-any.whl"
+python -m pip install "hse-evifluor[rest] @ https://hseag.github.io/evifluor/api/python/dist/hse_evifluor-0.12.0-py3-none-any.whl"
 ```
 
 Start the REST API with:
@@ -65,11 +69,11 @@ After startup, the interactive API documentation is available at:
 - `http://127.0.0.1:8000/docs`
 - `http://127.0.0.1:8000/redoc`
 
-## 4. Addressing Modes
+## 5. Addressing Modes
 
 The REST API supports two addressing modes.
 
-### 4.1 Single-Device Mode
+### 5.1 Single-Device Mode
 
 If exactly one device is available, the convenience endpoints without an explicit device ID can be used.
 
@@ -79,7 +83,7 @@ Examples:
 - `POST /api/v1/device/selftest`
 - `GET /api/v1/device/checkempty`
 
-### 4.2 Multi-Device Mode
+### 5.2 Multi-Device Mode
 
 If multiple devices are available, the explicit device routes should be used.
 
@@ -89,7 +93,7 @@ Examples:
 - `POST /api/v1/devices/{device_id}/selftest`
 - `GET /api/v1/devices/{device_id}/checkempty`
 
-## 5. Main Endpoints
+## 6. Main Endpoints
 
 All requests and responses use JSON unless a file download endpoint is used.
 
@@ -101,7 +105,7 @@ The REST server also configures backend logging:
 - the log file uses rotation with backups
 - with `--debug`, backend logs are written to stderr instead of the log file
 
-### 5.1 `GET /api/v1/health`
+### 6.1 `GET /api/v1/health`
 
 Purpose:
 
@@ -119,7 +123,7 @@ Response:
 }
 ```
 
-### 5.2 `GET /api/v1/version`
+### 6.2 `GET /api/v1/version`
 
 Purpose:
 
@@ -138,7 +142,7 @@ Response:
 }
 ```
 
-### 5.3 `GET /api/v1/devices`
+### 6.3 `GET /api/v1/devices`
 
 Purpose:
 
@@ -167,7 +171,7 @@ Response fields:
 - `device_id`: serial number used in explicit device routes
 - `port`: host-side port or connection identifier
 
-### 5.4 `GET /api/v1/device/info`
+### 6.4 `GET /api/v1/device/info`
 
 Purpose:
 
@@ -188,7 +192,7 @@ Response:
 }
 ```
 
-### 5.5 `GET /api/v1/devices/{device_id}/info`
+### 6.5 `GET /api/v1/devices/{device_id}/info`
 
 Purpose:
 
@@ -206,7 +210,7 @@ Response:
 
 - same structure as `GET /api/v1/device/info`
 
-### 5.6 `POST /api/v1/device/selftest`
+### 6.6 `POST /api/v1/device/selftest`
 
 Purpose:
 
@@ -232,7 +236,7 @@ Response fields:
 - `hasProblems`: convenience flag derived from `result`
 - additional fields contain the detailed self-test payload returned by the backend
 
-### 5.7 `POST /api/v1/devices/{device_id}/selftest`
+### 6.7 `POST /api/v1/devices/{device_id}/selftest`
 
 Purpose:
 
@@ -250,7 +254,7 @@ Response:
 
 - same structure as `POST /api/v1/device/selftest`
 
-### 5.8 `GET /api/v1/device/checkempty`
+### 6.8 `GET /api/v1/device/checkempty`
 
 Purpose:
 
@@ -269,7 +273,7 @@ Response:
 }
 ```
 
-### 5.9 `GET /api/v1/devices/{device_id}/checkempty`
+### 6.9 `GET /api/v1/devices/{device_id}/checkempty`
 
 Purpose:
 
@@ -291,7 +295,7 @@ Response:
 }
 ```
 
-### 5.10 `GET /api/v1/device/status`
+### 6.10 `GET /api/v1/device/status`
 
 Purpose:
 
@@ -331,7 +335,7 @@ The `error` state is not persistent.
 Each status request evaluates the current state again.
 If the device appears again in a later discovery pass, the endpoint returns `idle` again.
 
-### 5.11 `GET /api/v1/devices/{device_id}/status`
+### 6.11 `GET /api/v1/devices/{device_id}/status`
 
 Purpose:
 
@@ -355,7 +359,7 @@ Behavior:
 - `busy`: the device is currently used by another REST request, for example during a self-test or active measurement step
 - `error`: no matching device is available or no device could be resolved
 
-### 5.12 `POST /api/v1/runs`
+### 6.12 `POST /api/v1/runs`
 
 Purpose:
 
@@ -465,7 +469,7 @@ Behavior:
 - the measurement order must be `standard high`, `standard low`, then the samples
 - `standard high` must come first because the initial automatic gain adjustment is based on this measurement sequence
 
-### 5.13 `GET /api/v1/runs/{run_id}`
+### 6.13 `GET /api/v1/runs/{run_id}`
 
 Purpose:
 
@@ -484,7 +488,7 @@ Response:
 - same structure as the `POST /api/v1/runs` response
 - may additionally contain `data` if a data file already exists
 
-### 5.14 `POST /api/v1/runs/{run_id}/measure`
+### 6.14 `POST /api/v1/runs/{run_id}/measure`
 
 Purpose:
 
@@ -539,7 +543,7 @@ Behavior with `no_air=true`:
 - subsequent calls perform sample-only measurements and append one measurement per call
 - `result` remains `null` until enough standards are available to calculate factors
 
-### 5.15 `GET /api/v1/runs/{run_id}/results`
+### 6.15 `GET /api/v1/runs/{run_id}/results`
 
 Purpose:
 
@@ -558,7 +562,7 @@ Response:
 - JSON array of result objects in measurement order
 - structure of each entry matches the `results` object in the measurement JSON data file
 
-### 5.16 `GET /api/v1/runs/{run_id}/verifications`
+### 6.16 `GET /api/v1/runs/{run_id}/verifications`
 
 Purpose:
 
@@ -577,7 +581,7 @@ Response:
 - JSON array of verification objects in measurement order
 - structure of each entry matches the verification format documented in [Verification Reference](./verification.md)
 
-### 5.17 `POST /api/v1/runs/{run_id}/export/csv`
+### 6.17 `POST /api/v1/runs/{run_id}/export/csv`
 
 Purpose:
 
@@ -601,7 +605,7 @@ Behavior:
 - the server writes or updates the CSV file on disk
 - the same request returns the generated CSV content to the client
 
-### 5.18 `GET /api/v1/runs/{run_id}/data`
+### 6.18 `GET /api/v1/runs/{run_id}/data`
 
 Purpose:
 
@@ -620,7 +624,7 @@ Response:
 - the full JSON measurement data file
 - structure as documented in the user manual JSON data file format section
 
-### 5.19 `GET /api/v1/runs/{run_id}/file/json`
+### 6.19 `GET /api/v1/runs/{run_id}/file/json`
 
 Purpose:
 
@@ -638,7 +642,7 @@ Return:
 
 - file download with media type `application/json`
 
-### 5.20 `GET /api/v1/runs/{run_id}/file/csv`
+### 6.20 `GET /api/v1/runs/{run_id}/file/csv`
 
 Purpose:
 
@@ -656,7 +660,7 @@ Return:
 
 - file download with media type `text/csv`
 
-## 6. Relationship to the Python CLI
+## 7. Relationship to the Python CLI
 
 The REST API is aligned with the Python CLI and mirrors the same main workflow concepts:
 
@@ -672,7 +676,7 @@ The difference is only the transport:
 - the CLI is shell-based
 - the REST API is HTTP- and JSON-based
 
-## 7. Example Workflow
+## 8. Example Workflow
 
 The following example demonstrates the same workflow as the high-level Python example, but through the REST API:
 
@@ -769,7 +773,7 @@ This example uses the Python REST client in:
 
 - [module/python/hse/evifluor/rest_client.py](../api/python/src/hse/evifluor/rest_client.py)
 
-## 8. Error Handling
+## 9. Error Handling
 
 The REST API returns structured JSON errors for invalid requests, device problems, and run-state problems.
 
@@ -782,7 +786,7 @@ Typical categories are:
 - missing run data file
 - backend execution errors from the device or run logic
 
-## 9. Notes
+## 10. Notes
 
 - The REST API is implemented on top of the existing Python service layer.
 - Device and run cleanup is handled even if a request fails.
@@ -790,5 +794,5 @@ Typical categories are:
 - The `--working-dir` option controls both generated data files and the default log file location.
 - The `--debug` option enables stderr logging for easier interactive troubleshooting.
 
-[rest-server-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.rest_server.html
-[rest-client-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.rest_client.html
+[rest-server-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.rest_server.html
+[rest-client-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.rest_client.html

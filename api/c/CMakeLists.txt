@@ -130,9 +130,15 @@ if (UNIX)
         INSTALL_RPATH "$ORIGIN/../lib")
 endif()
 
+set(CJSON_GIT_REPOSITORY "https://github.com/DaveGamble/cJSON.git")
+if(DEFINED ENV{GITLAB_CI})
+    set(CJSON_GIT_REPOSITORY
+        "https://hsegit01.intra.hse-ag.com/pro/colibri/evifamily/cjson-mirror.git")
+endif()
+
 FetchContent_Declare(
     cJSON
-    GIT_REPOSITORY "https://github.com/DaveGamble/cJSON.git"
+    GIT_REPOSITORY "${CJSON_GIT_REPOSITORY}"
     GIT_TAG "v1.7.18"
     GIT_PROGRESS TRUE
     GIT_SHALLOW TRUE

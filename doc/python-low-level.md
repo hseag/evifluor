@@ -5,7 +5,11 @@
 This chapter describes the low-level Python API.
 It intentionally does not use the [`Run`][run-api] class, because the goal is to show the explicit device workflow.
 
-## 2. API Overview
+## 2. Installation and Python Variants
+
+Installation instructions and an overview of the available Python variants are provided in [Python Interfaces](./python.md).
+
+## 3. API Overview
 
 The low-level Python API is centered around explicit interaction with a [`Device`][device-api] object and the related measurement and storage classes.
 
@@ -40,7 +44,7 @@ Important low-level [`Device`][device-api] methods:
 - [`Device.logging()`][device-logging-api]
 - [`Device.close()`][device-close-api]
 
-## 3. Complete Low-Level Example
+## 4. Complete Low-Level Example
 
 The following example demonstrates the full low-level workflow without [`Run`][run-api]:
 
@@ -129,7 +133,7 @@ if __name__ == "__main__":
 This example uses two high standards, two low standards, and two samples for clarity.
 The same pattern scales directly to other counts: first collect all `std high` measurements, then all `std low` measurements, then the samples, while keeping the low-level sequence `first_air_measurement()`, `first_sample_measurement()`, and then repeated `measure()` / `measure()` pairs.
 
-## 4. Opening a Device
+## 5. Opening a Device
 
 You can either let the library auto-detect a connected device or pass a specific serial number.
 
@@ -146,7 +150,7 @@ Notes:
 - when a device cannot be found, the constructor raises an exception
 - `Device("SIMULATION")` connects to the TCP simulator instead of a physical serial device
 
-## 5. Querying Device Information
+## 6. Querying Device Information
 
 Use these methods for basic metadata:
 
@@ -164,7 +168,7 @@ Typical uses:
 - display firmware information in a UI or CLI
 - add device metadata to persisted measurement data
 
-## 6. Running a Self-Test
+## 7. Running a Self-Test
 
 Run the self-test with [`device.selftest()`][device-selftest-api]:
 
@@ -192,7 +196,7 @@ If you need a broader device-side payload, use:
 report = device.technical_report()
 ```
 
-## 7. Acquiring Raw Measurements
+## 8. Acquiring Raw Measurements
 
 The low-level fluorescence workflow is explicit:
 
@@ -228,7 +232,7 @@ empty = device.is_cuvette_holder_empty()
 
 The [`baseline()`][device-baseline-api] method is also available and clears the device's internal recent-measurement buffer, but it is not part of the normal guided fluorescence workflow shown here.
 
-## 8. Building a `Measurement`
+## 9. Building a `Measurement`
 
 Create a [`Measurement`][measurement-api] from either:
 
@@ -248,7 +252,7 @@ For the no-air workflow, a measurement can also be built without a separate air 
 measurement = Measurement(None, first_sample, comment="std high 1")
 ```
 
-## 9. Calculating Results
+## 10. Calculating Results
 
 Calculate fluorescence calibration factors with [`Measurement.calculate_factors(...)`][measurement-calculatefactors-api]:
 
@@ -271,7 +275,7 @@ Notes:
 
 If you need a different fitting model, pass a different kit object to [`measurement.results(...)`][measurement-results-api]. The available presets and configurable fit models are described in [Kit Reference](./kit.md).
 
-## 10. Persisting Data
+## 11. Persisting Data
 
 Use [`StorageMeasurement`][storage-api] for JSON persistence:
 
@@ -300,7 +304,7 @@ StorageMeasurement.export_as_csv("run_data.json")
 
 In no-air data sets, the CSV export leaves the `air` columns empty.
 
-## 11. Error Handling and Cleanup
+## 12. Error Handling and Cleanup
 
 The Python API uses exceptions for device communication and data errors.
 
@@ -328,36 +332,36 @@ Cleanup note:
 - for physical devices the serial port is held inside the `Device` instance
 - call [`device.close()`][device-close-api] when the workflow is complete
 
-## 12. Notes About `Run`
+## 13. Notes About `Run`
 
 The [`Run`][run-api] class is intentionally excluded from this chapter because it abstracts away the individual device operations.
 
-[run-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run
-[device-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device
-[singlemeasurement-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.singlemeasurement.html#hse.evifluor.singlemeasurement.SingleMeasurement
-[measurement-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.measurement.html#hse.evifluor.measurement.Measurement
-[storage-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement
-[selftest-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.SelfttestResult
-[firstair-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.FirstAirMeasurementResult
-[firstsample-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.FirstSampleMeasurementResult
-[device-finddevice-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.find_device
-[device-serial-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.serial_number
-[device-fw-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.firmware_version
-[device-prod-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.production_number
-[device-selftest-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.selftest
-[device-empty-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.is_cuvette_holder_empty
-[device-baseline-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.baseline
-[device-measure-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.measure
-[device-firstair-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.first_air_measurement
-[device-firstsample-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.first_sample_measurement
-[device-logging-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.logging
-[device-close-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.close
-[selftest-result-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.SelfttestResult.result
-[selftest-hasproblems-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.SelfttestResult.has_problems
-[selftest-hascommunicationerror-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.SelfttestResult.has_communication_error
-[measurement-calculatefactors-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.measurement.html#hse.evifluor.measurement.Measurement.calculate_factors
-[measurement-results-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.measurement.html#hse.evifluor.measurement.Measurement.results
-[storage-adddeviceinfo-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement.add_device_info
-[storage-appendwithresults-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement.append_with_results
-[storage-save-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement.save
-[storage-exportcsv-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement.export_as_csv
+[run-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run
+[device-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device
+[singlemeasurement-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.singlemeasurement.html#hse.evifluor.singlemeasurement.SingleMeasurement
+[measurement-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.measurement.html#hse.evifluor.measurement.Measurement
+[storage-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement
+[selftest-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.SelfttestResult
+[firstair-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.FirstAirMeasurementResult
+[firstsample-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.FirstSampleMeasurementResult
+[device-finddevice-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.find_device
+[device-serial-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.serial_number
+[device-fw-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.firmware_version
+[device-prod-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.production_number
+[device-selftest-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.selftest
+[device-empty-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.is_cuvette_holder_empty
+[device-baseline-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.baseline
+[device-measure-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.measure
+[device-firstair-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.first_air_measurement
+[device-firstsample-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.first_sample_measurement
+[device-logging-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.logging
+[device-close-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.Device.close
+[selftest-result-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.SelfttestResult.result
+[selftest-hasproblems-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.SelfttestResult.has_problems
+[selftest-hascommunicationerror-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.device.html#hse.evifluor.device.SelfttestResult.has_communication_error
+[measurement-calculatefactors-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.measurement.html#hse.evifluor.measurement.Measurement.calculate_factors
+[measurement-results-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.measurement.html#hse.evifluor.measurement.Measurement.results
+[storage-adddeviceinfo-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement.add_device_info
+[storage-appendwithresults-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement.append_with_results
+[storage-save-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement.save
+[storage-exportcsv-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement.export_as_csv

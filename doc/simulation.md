@@ -2,17 +2,13 @@
 
 ## 1. Overview
 
-The repository contains an eviFluor simulator for development and testing without a physical device.
+The repository contains an eviFluor Duo Fluorometer simulator for development and testing without a physical device.
 The simulator exposes the same basic workflow over TCP that the software interfaces use when a device is opened as `"SIMULATION"`.
-When started without preloaded data, the simulator behaves like an eviFluor that currently does not measure a cuvette with real sample data.
+When started without preloaded data, the simulator behaves like an eviFluor Duo Fluorometer that currently does not measure a cuvette with real sample data.
 It still responds like a device and returns simulated values for the normal workflow.
 
 With `LOAD`, an existing measurement JSON file from a real or previously simulated run can be loaded and replayed step by step.
 This is useful for repeating known runs during development, regression tests, and interface validation.
-If `NO_AIR` is enabled, `LOAD` interprets the loaded file in no-air mode as well.
-In that case, the client workflow must also be started in no-air mode so that the measurement sequence matches the loaded data.
-
-The simulator package is located in [`simulator`](../simulator).
 
 ## 2. Installation
 
@@ -21,7 +17,7 @@ The simulator is provided as a Python package with the console script `hse-simul
 Example installation from the repository root:
 
 ```powershell
-python -m pip install https://hseag.github.io/evifluor/pre-release/simulator/dist/hse_simulator-0.1.0-py3-none-any.whl
+python -m pip install https://hseag.github.io/evifluor/simulator/dist/hse_simulator-0.2.0-py3-none-any.whl
 ```
 
 This installs:
@@ -30,7 +26,7 @@ This installs:
 
 ## 3. Start the eviFluor Simulator
 
-Start the default eviFluor simulator with:
+Start the default eviFluor Duo Fluorometer simulator with:
 
 ```powershell
 hse-simulator evifluor
@@ -46,7 +42,6 @@ Behavior:
 Useful variants:
 
 ```powershell
-hse-simulator evifluor --no-air
 hse-simulator evifluor .\test\testdata\evifluor-P10006-2025_04_24_16_18_09.json
 hse-simulator --no-web evifluor
 hse-simulator --web-host 127.0.0.1 --web-port 8000 evifluor
@@ -55,7 +50,6 @@ hse-simulator --verbose evifluor
 
 Meaning of the most important options:
 
-- `--no-air`: starts the simulator in the sample-only workflow
 - `<data file>`: preloads measurement values from a JSON file
 - `--no-web`: disables the browser-based control UI
 - `--web-host` and `--web-port`: configure where the web UI is exposed
@@ -227,8 +221,6 @@ hse-simulator sim RESET
 hse-simulator sim CHECKEMPTY 1
 hse-simulator sim CHECKEMPTY 0
 hse-simulator sim LOAD .\test\testdata\evifluor-P10006-2025_04_24_16_18_09.json
-hse-simulator sim NO_AIR 1
-hse-simulator sim NO_AIR 0
 ```
 
 Typical command usage:
@@ -237,8 +229,6 @@ Typical command usage:
 - `CHECKEMPTY 1`: report that the cuvette holder is empty
 - `CHECKEMPTY 0`: report that the cuvette holder is not empty
 - `LOAD <file>`: load measurement data from a JSON file
-- `NO_AIR 1`: enable the no-air workflow
-- `NO_AIR 0`: disable the no-air workflow
 
 ## 6. Command Reference
 
@@ -252,9 +242,6 @@ The loaded values are then returned step by step during the following measuremen
 The file is loaded from the simulator process point of view.
 This means the referenced file path must be accessible on the same computer where the simulator is running.
 As a consequence, the web UI or CLI that triggers `LOAD` must be used against a simulator running on a machine that can access that file locally.
-`LOAD` also depends on the current `NO_AIR` setting of the simulator.
-If the simulator is in no-air mode, the loaded file is interpreted as a no-air run.
-The client must then also use a no-air run configuration, otherwise the expected measurement order does not match.
 
 Example:
 
@@ -267,7 +254,6 @@ Typical use:
 - replay a known measurement run
 - reproduce a customer issue with fixed data
 - validate a client implementation against stable expected values
-- replay a no-air run together with a matching client-side no-air workflow
 
 ### 6.2 `RESET`
 
@@ -306,28 +292,7 @@ Typical use:
 - test empty-check handling in a client
 - simulate a blocked or occupied cuvette position
 
-### 6.4 `NO_AIR 0|1`
-
-Enables or disables the no-air workflow in the simulator.
-
-Examples:
-
-```powershell
-hse-simulator sim NO_AIR 1
-hse-simulator sim NO_AIR 0
-```
-
-Meaning:
-
-- `NO_AIR 1`: sample-only workflow
-- `NO_AIR 0`: normal workflow with air measurements
-
-Typical use:
-
-- validate integrations that use `no_air=True`
-- switch between both supported workflow variants
-
-### 6.5 `EXIT`
+### 6.4 `EXIT`
 
 Stops the running simulator.
 

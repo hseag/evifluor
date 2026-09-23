@@ -1,0 +1,123 @@
+:root {
+  --md-primary-fg-color: #cf234a;
+  --md-primary-fg-color--light: #df5271;
+  --md-primary-fg-color--dark: #9f1737;
+  --md-accent-fg-color: #cf234a;
+  --hse-ink: #16181d;
+  --hse-muted: #5f6670;
+  --hse-line: rgba(22, 24, 29, 0.12);
+}
+
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: #faf7f4;
+  --md-default-fg-color: #16181d;
+  --md-typeset-a-color: #bc1f42;
+}
+
+body {
+  background: #faf7f4;
+  color: var(--hse-ink);
+}
+
+.md-header {
+  background: #ffffff;
+  color: var(--hse-ink);
+  box-shadow: 0 1px 0 rgba(22, 24, 29, 0.08);
+}
+
+.md-header__button,
+.md-header__title,
+.md-search__icon,
+.md-search__input::placeholder,
+.md-tabs__link {
+  color: var(--hse-ink);
+}
+
+.md-header__button.md-logo img {
+  height: 1.3rem;
+  width: auto;
+}
+
+.md-search__form {
+  background: rgba(22, 24, 29, 0.04);
+  border-radius: 0.4rem;
+}
+
+.md-tabs {
+  background: #ffffff;
+  color: var(--hse-ink);
+  box-shadow: inset 0 -1px 0 rgba(22, 24, 29, 0.08);
+}
+
+.md-tabs__link--active,
+.md-tabs__link:is(:focus, :hover) {
+  color: var(--md-primary-fg-color);
+}
+
+.md-nav--primary .md-nav__item--section > .md-nav__link[for] {
+  color: var(--hse-ink);
+}
+
+.md-main__inner {
+  max-width: 72rem;
+}
+
+.md-content__inner::before {
+  display: none;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  color: var(--hse-ink);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.md-typeset h1 {
+  margin-bottom: 1rem;
+}
+
+.md-typeset h2 {
+  margin-top: 2.25rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--hse-line);
+}
+
+.md-typeset p,
+.md-typeset li {
+  color: var(--hse-ink);
+}
+
+.md-typeset a {
+  text-decoration-thickness: 0.08em;
+}
+
+.md-typeset code {
+  border-radius: 0.25rem;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border: 1px solid var(--hse-line);
+  border-radius: 0.35rem;
+  box-shadow: none;
+}
+
+.md-typeset table:not([class]) {
+  border: 1px solid var(--hse-line);
+}
+
+.md-typeset table:not([class]) th {
+  background: rgba(207, 35, 74, 0.06);
+  color: var(--hse-ink);
+}
+
+.md-footer-meta {
+  background: #f1ebe7;
+  color: var(--hse-muted);
+}
+
+.md-footer-meta a {
+  color: var(--md-primary-fg-color);
+}

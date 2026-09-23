@@ -5,7 +5,11 @@
 This chapter describes the high-level Python API based on the [`Run`][run-api] class.
 It is intended for applications that want a guided measurement workflow instead of manually controlling each low-level step.
 
-## 2. Overview
+## 2. Installation and Python Variants
+
+Installation instructions and an overview of the available Python variants are provided in [Python Interfaces](./python.md).
+
+## 3. Overview
 
 [`Run`][run-api] wraps the repeated measurement sequence and manages:
 
@@ -24,7 +28,7 @@ from hse.evifluor.run import Run
 
 [`Run`][run-api] is the recommended API when the application wants to execute a standard workflow with minimal boilerplate.
 
-## 3. Typical High-Level Example
+## 4. Typical High-Level Example
 
 The following example demonstrates a complete high-level workflow:
 
@@ -63,7 +67,7 @@ if __name__ == "__main__":
     main()
 ```
 
-## 4. When to Use `Run`
+## 5. When to Use `Run`
 
 Use [`Run`][run-api] when:
 
@@ -83,7 +87,7 @@ See also:
 
 - [Python Low-Level API](./python-low-level.md)
 
-## 5. Constructor
+## 6. Constructor
 
 Create a new run with:
 
@@ -116,7 +120,7 @@ Behavior:
 
 For predefined kits, string names, fit models, and JSON serialization, see [Kit Reference](./kit.md), especially section 2.
 
-## 6. Run State Model
+## 7. Run State Model
 
 By default, [`Run`][run-api] keeps an internal state machine:
 
@@ -144,7 +148,7 @@ Practical effect with `no_air=True`:
 - all following calls perform sample measurements only
 - no intermediate air measurements are taken between samples
 
-## 7. Standard Handling and Recalculation
+## 8. Standard Handling and Recalculation
 
 [`Run`][run-api] derives correction factors automatically once enough low and high standards are available.
 
@@ -160,7 +164,7 @@ The intended measurement order is:
 2. all `std low` measurements
 3. all sample measurements
 
-## 8. Persisted Files
+## 9. Persisted Files
 
 [`Run`][run-api] manages a measurement JSON file.
 
@@ -173,7 +177,7 @@ The measurement JSON file contains:
 You can also persist the workflow state separately with [`run.save_state()`][run-save-api].
 This stores the current state machine position, temporary measurement data, factors, the active measurement filename, the selected kit, and the active `settling_time`.
 
-## 9. Checking the Cuvette Holder
+## 10. Checking the Cuvette Holder
 
 Use [`run.check_empty()`][run-checkempty-api]:
 
@@ -183,7 +187,7 @@ empty = run.check_empty()
 
 This forwards to the underlying device and returns `True` when the cuvette holder is empty.
 
-## 10. Exporting Data
+## 11. Exporting Data
 
 Export the active measurement file as CSV with [`run.export_as_csv()`][run-export-api]:
 
@@ -191,7 +195,7 @@ Export the active measurement file as CSV with [`run.export_as_csv()`][run-expor
 run.export_as_csv()
 ```
 
-## 11. Saving and Loading Run State
+## 12. Saving and Loading Run State
 
 Persist the workflow state with [`run.save_state()`][run-save-api]:
 
@@ -207,7 +211,7 @@ run = Run.load_state("evifluor-SN0010-state.json")
 
 This is useful when a workflow should be resumed after an interruption without losing the current step and accumulated data.
 
-## 12. Closing the Device
+## 13. Closing the Device
 
 If the `Run` instance owns the device connection, close it when the workflow is finished:
 
@@ -215,15 +219,15 @@ If the `Run` instance owns the device connection, close it when the workflow is 
 run.close()
 ```
 
-## 13. Notes
+## 14. Notes
 
 The current `Run` implementation in `evifluor` focuses on guided acquisition, persistence, and resumable workflow state.
 It additionally exposes `save_state` and `load_state`, which are useful for longer-running automation scenarios.
 
-[run-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run
-[storage-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement
-[run-measure-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.measure
-[run-checkempty-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.check_empty
-[run-export-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.export_as_csv
-[run-save-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.save_state
-[run-load-api]: https://hseag.github.io/evifluor/pre-release/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.load_state
+[run-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run
+[storage-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.storage.html#hse.evifluor.storage.StorageMeasurement
+[run-measure-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.measure
+[run-checkempty-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.check_empty
+[run-export-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.export_as_csv
+[run-save-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.save_state
+[run-load-api]: https://hseag.github.io/evifluor/doc/api/python/hse.evifluor.run.html#hse.evifluor.run.Run.load_state

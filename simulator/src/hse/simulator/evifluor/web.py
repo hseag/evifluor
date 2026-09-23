@@ -30,11 +30,6 @@ def _reset_simulator(host: str, port: int) -> bool:
     return _read_checkempty(host, port)
 
 
-def _write_no_air(value: bool, host: str, port: int) -> bool:
-    _send_control(f"NO_AIR {1 if value else 0}", host, port)
-    return value
-
-
 def _load_data(path: str, host: str, port: int) -> bool:
     _send_control(f'LOAD "{path}"', host, port)
     return _read_checkempty(host, port)
@@ -225,13 +220,6 @@ def create_app(sim_host: str = "127.0.0.1", sim_port: int = 5000) -> FastAPI:
       <button id="btn-reset" type="button">Reset Simulator</button>
     </section>
     <section class="status">
-      <div>Simulation flags</div>
-      <div class="toggle-row">
-        <label for="no-air">NO_AIR</label>
-        <input id="no-air" type="checkbox">
-      </div>
-    </section>
-    <section class="status">
       <div>Load measurement data</div>
       <div class="load-row">
         <input id="load-path" type="text" placeholder="Path to JSON measurement file">
@@ -248,7 +236,6 @@ def create_app(sim_host: str = "127.0.0.1", sim_port: int = 5000) -> FastAPI:
   <script>
     const stateEl = document.getElementById("state");
     const messageEl = document.getElementById("message");
-    const noAirEl = document.getElementById("no-air");
     const loadPathEl = document.getElementById("load-path");
     const loadFileEl = document.getElementById("load-file");
     const controls = [
@@ -257,7 +244,6 @@ def create_app(sim_host: str = "127.0.0.1", sim_port: int = 5000) -> FastAPI:
       document.getElementById("btn-reset"),
       document.getElementById("btn-load"),
       document.getElementById("btn-upload-load"),
-      noAirEl,
       loadPathEl,
       loadFileEl,
     ];
@@ -313,28 +299,8 @@ def create_app(sim_host: str = "127.0.0.1", sim_port: int = 5000) -> FastAPI:
         const payload = await response.json();
         if (!response.ok) { throw new Error(payload.detail || "Unable to reset simulator"); }
         renderState(payload.empty);
-        noAirEl.checked = false;
         setMessage("Simulator reset.");
       } catch (error) {
-        setMessage(error.message, true);
-      } finally {
-        setBusy(false);
-      }
-    }
-    async function updateNoAir() {
-      setBusy(true);
-      try {
-        const response = await fetch("/api/no-air", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ enabled: noAirEl.checked }),
-        });
-        const payload = await response.json();
-        if (!response.ok) { throw new Error(payload.detail || "Unable to update NO_AIR"); }
-        noAirEl.checked = payload.enabled;
-        setMessage(`NO_AIR ${payload.enabled ? "enabled" : "disabled"}.`);
-      } catch (error) {
-        noAirEl.checked = !noAirEl.checked;
         setMessage(error.message, true);
       } finally {
         setBusy(false);
@@ -393,7 +359,6 @@ def create_app(sim_host: str = "127.0.0.1", sim_port: int = 5000) -> FastAPI:
     document.getElementById("btn-reset").addEventListener("click", resetSimulator);
     document.getElementById("btn-load").addEventListener("click", loadData);
     document.getElementById("btn-upload-load").addEventListener("click", loadSelectedFile);
-    noAirEl.addEventListener("change", updateNoAir);
     refresh();
   </script>
 </body>
@@ -423,17 +388,6 @@ def create_app(sim_host: str = "127.0.0.1", sim_port: int = 5000) -> FastAPI:
     def reset():
         try:
             return {"empty": _reset_simulator(sim_host, sim_port)}
-        except OSError as exc:
-            raise HTTPException(status_code=503, detail=f"Simulator not reachable at {sim_host}:{sim_port}") from exc
-        except Exception as exc:
-            raise HTTPException(status_code=500, detail=str(exc)) from exc
-
-    @app.post("/api/no-air")
-    def set_no_air(payload: dict):
-        if "enabled" not in payload or not isinstance(payload["enabled"], bool):
-            raise HTTPException(status_code=400, detail="JSON body must contain boolean field 'enabled'")
-        try:
-            return {"enabled": _write_no_air(payload["enabled"], sim_host, sim_port)}
         except OSError as exc:
             raise HTTPException(status_code=503, detail=f"Simulator not reachable at {sim_host}:{sim_port}") from exc
         except Exception as exc:

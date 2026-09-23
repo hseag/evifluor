@@ -24,7 +24,7 @@ def compare_evifluor_single_measurement(left, right, hint) -> bool:
     return matches
 
 
-def compare_evifluor_measurement(left, right, hint, no_air=False) -> bool:
+def compare_evifluor_measurement(left, right, hint) -> bool:
     matches = True
 
     if left.results is None or right.results is None:
@@ -34,18 +34,14 @@ def compare_evifluor_measurement(left, right, hint, no_air=False) -> bool:
     elif not compare_evifluor_results(DotDict(left.results), DotDict(right.results), hint + "/results"):
         matches = False
 
-    if no_air:
-        if left.air is not None or right.air is not None:
-            print(hint)
-            print("    entry air should be missing in no_air mode")
-            matches = False
-    else:
-        if left.air is None or right.air is None:
-            print(hint)
-            print("    entry air missing")
-            matches = False
-        elif not compare_evifluor_single_measurement(DotDict(left.air), DotDict(right.air), hint + "/air"):
-            matches = False
+    if left.air is None and right.air is None:
+        pass
+    elif left.air is None or right.air is None:
+        print(hint)
+        print("    entry air differs")
+        matches = False
+    elif not compare_evifluor_single_measurement(DotDict(left.air), DotDict(right.air), hint + "/air"):
+        matches = False
 
     if left.sample is None or right.sample is None:
         print(hint)

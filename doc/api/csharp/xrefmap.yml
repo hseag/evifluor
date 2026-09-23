@@ -1122,6 +1122,25 @@ references:
   isSpec: "True"
   fullName: Hse.EviFluor.FirstSampleMeasurementResult.ToString
   nameWithType: FirstSampleMeasurementResult.ToString
+- uid: Hse.EviFluor.IJsonSerializable
+  name: IJsonSerializable
+  href: api/Hse.EviFluor.IJsonSerializable.html
+  commentId: T:Hse.EviFluor.IJsonSerializable
+  fullName: Hse.EviFluor.IJsonSerializable
+  nameWithType: IJsonSerializable
+- uid: Hse.EviFluor.IJsonSerializable.ToJson
+  name: ToJson()
+  href: api/Hse.EviFluor.IJsonSerializable.html#Hse_EviFluor_IJsonSerializable_ToJson
+  commentId: M:Hse.EviFluor.IJsonSerializable.ToJson
+  fullName: Hse.EviFluor.IJsonSerializable.ToJson()
+  nameWithType: IJsonSerializable.ToJson()
+- uid: Hse.EviFluor.IJsonSerializable.ToJson*
+  name: ToJson
+  href: api/Hse.EviFluor.IJsonSerializable.html#Hse_EviFluor_IJsonSerializable_ToJson_
+  commentId: Overload:Hse.EviFluor.IJsonSerializable.ToJson
+  isSpec: "True"
+  fullName: Hse.EviFluor.IJsonSerializable.ToJson
+  nameWithType: IJsonSerializable.ToJson
 - uid: Hse.EviFluor.IKit
   name: IKit
   href: api/Hse.EviFluor.IKit.html

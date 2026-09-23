@@ -26,4 +26,4 @@ This makes Python a good fit for:
 - orchestration and automation
 - test systems
 - external software integration over HTTP
-- rapid prototyping around the eviFluor workflow
+- rapid prototyping around the eviFluor Duo Fluorometer workflow

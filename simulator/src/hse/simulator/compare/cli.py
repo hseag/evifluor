@@ -10,7 +10,6 @@ def build_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("device", choices=["evidense", "evifluor"], help="Device to compare")
     parser.add_argument("--verbose", help="increase output verbosity", action="store_true")
-    parser.add_argument("--no-air", help="Expect eviFluor measurements without air field", action="store_true")
     parser.add_argument("--skip-a", help="Skip first N measurements from file a", default=0, type=int)
     parser.add_argument("--skip-b", help="Skip first N measurements from file b", default=0, type=int)
     parser.add_argument("a")
@@ -28,7 +27,6 @@ def main(argv=None):
         args.device,
         skip_a=args.skip_a,
         skip_b=args.skip_b,
-        no_air=args.no_air,
     )
     if same:
         print(f"file {args.a} and {args.b} are the same.")
