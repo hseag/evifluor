@@ -219,7 +219,7 @@ jobs:
 
       - name: Run Python source against simulator
         run: |
-          export PYTHONPATH="$GITHUB_WORKSPACE/simulator:$GITHUB_WORKSPACE/api/python"
+          export PYTHONPATH="simulator:api/python"
           cleanup() {
             python -m hse.simulator sim EXIT >/dev/null 2>&1 || true
             if [ -n "${SIM_PID:-}" ]; then
