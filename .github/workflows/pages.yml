@@ -262,8 +262,9 @@ jobs:
           python-version: "3.12"
 
       - name: Install Python dependencies
-        run: ls simulator/dist/*.whl api/python/dist/*.whl
-        run: python -m pip install pyserial simulator/dist/*.whl api/python/dist/*.whl
+        run: | 
+          ls simulator/dist/*.whl api/python/dist/*.whl
+          python -m pip install pyserial simulator/dist/*.whl api/python/dist/*.whl
 
       - name: Run Python wheel against simulator
         run: |
