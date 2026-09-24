@@ -219,6 +219,10 @@ jobs:
 
       - name: Run Python source against simulator
         run: |
+          echo "::group::Workspace"
+          pwd
+          find . -maxdepth 3 -type f | sort
+          echo "::endgroup::"
           export PYTHONPATH="simulator:api/python"
           cleanup() {
             python -m hse.simulator sim EXIT >/dev/null 2>&1 || true
