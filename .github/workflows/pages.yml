@@ -43,10 +43,10 @@ jobs:
           mkdir -p "$PAGES_DIR"
           mkdocs build --site-dir "$PAGES_DIR"
           cp -r doc "$PAGES_DIR/"
-          cp -r simulator "$PAGES_DIR/"
           cp -r api "$PAGES_DIR/"
           cp -r integration_kits "$PAGES_DIR/"
-          find "$PAGES_DIR" -maxdepth 5 -type f -print
+          cp -r simulator "$PAGES_DIR/"
+          cp -r firmware "$PAGES_DIR/"
           PAGES_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}"
           if [ "$BRANCH_NAME" != "main" ]; then
             PAGES_URL="${PAGES_URL}/${BRANCH_NAME}/"
