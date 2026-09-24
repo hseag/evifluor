@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "dgSpecHash": "i4biuKwS6uE=",
+  "success": true,
+  "projectFilePath": "C:\\scm\\hse\\colibri\\github\\evifluor\\api\\csharp\\EviFluorDemo\\EviFluorDemo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.1\\microsoft.extensions.configuration.9.0.1.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.1\\microsoft.extensions.configuration.abstractions.9.0.1.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\microsoft.extensions.configuration.commandline\\9.0.1\\microsoft.extensions.configuration.commandline.9.0.1.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.1\\microsoft.extensions.primitives.9.0.1.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.android-arm.runtime.native.system.io.ports\\9.0.0\\runtime.android-arm.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.android-arm64.runtime.native.system.io.ports\\9.0.0\\runtime.android-arm64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.android-x64.runtime.native.system.io.ports\\9.0.0\\runtime.android-x64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.android-x86.runtime.native.system.io.ports\\9.0.0\\runtime.android-x86.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\9.0.0\\runtime.linux-arm.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\9.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.linux-bionic-arm64.runtime.native.system.io.ports\\9.0.0\\runtime.linux-bionic-arm64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.linux-bionic-x64.runtime.native.system.io.ports\\9.0.0\\runtime.linux-bionic-x64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.linux-musl-arm.runtime.native.system.io.ports\\9.0.0\\runtime.linux-musl-arm.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.linux-musl-arm64.runtime.native.system.io.ports\\9.0.0\\runtime.linux-musl-arm64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.linux-musl-x64.runtime.native.system.io.ports\\9.0.0\\runtime.linux-musl-x64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\9.0.0\\runtime.linux-x64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.maccatalyst-arm64.runtime.native.system.io.ports\\9.0.0\\runtime.maccatalyst-arm64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.maccatalyst-x64.runtime.native.system.io.ports\\9.0.0\\runtime.maccatalyst-x64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.native.system.io.ports\\9.0.0\\runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.osx-arm64.runtime.native.system.io.ports\\9.0.0\\runtime.osx-arm64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\9.0.0\\runtime.osx-x64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\system.codedom\\8.0.0\\system.codedom.8.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\system.io.ports\\9.0.0\\system.io.ports.9.0.0.nupkg.sha512",
+    "C:\\Users\\daniel.zwirner\\.nuget\\packages\\system.management\\8.0.0\\system.management.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

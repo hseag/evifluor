@@ -47,7 +47,11 @@ jobs:
           cp -r api "$PAGES_DIR/"
           cp -r integration_kits "$PAGES_DIR/"
           find "$PAGES_DIR" -maxdepth 5 -type f -print
-          printf 'Documentation prepared in %s\n' "$PAGES_DIR"
+          PAGES_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}"
+          if [ "$BRANCH_NAME" != "main" ]; then
+            PAGES_URL="${PAGES_URL}/${BRANCH_NAME}/"
+          fi
+          printf 'Documentation will be available at: %s\n' "$PAGES_URL"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
