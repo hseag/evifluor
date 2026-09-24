@@ -6,7 +6,7 @@ The instrument firmware controls the behavior of the eviFluor Duo Fluorometer de
 
 This repository currently contains the firmware image file:
 
-- [firmware/evifluor-0.8.0.srec](https://hseag.github.io/evifluor/firmware/evifluor-0.8.0.srec){: download="evifluor-0.8.0.srec" }
+- [firmware/evifluor-0.8.0.srec](https://hseag.github.io/evifluor/pre-release/firmware/evifluor-0.8.0.srec){: download="evifluor-0.8.0.srec" }
 
 ## What to Check in Practice
 

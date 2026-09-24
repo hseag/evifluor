@@ -1,6 +1,6 @@
 # eviFluor Duo Fluorometer OT-2 Device Demo
 
-This guide describes how to run [`evifluor_ot2_device_demo.py`](https://hseag.github.io/evifluor/integration_kits/opentrons-ot2/protocol/evifluor_ot2_device_demo.py){ download="evifluor_ot2_device_demo.py" } on an
+This guide describes how to run [`evifluor_ot2_device_demo.py`](https://hseag.github.io/evifluor/pre-release/integration_kits/opentrons-ot2/protocol/evifluor_ot2_device_demo.py){ download="evifluor_ot2_device_demo.py" } on an
 Opentrons OT-2. The protocol demonstrates the eviFluor Duo Fluorometer device-control sequence:
 aspirating liquid from a sample plate, picking up a cuvette, moving it into the
 measurement guide, running the eviFluor Duo Fluorometer measurement, and returning the liquid
@@ -14,7 +14,7 @@ dilution factor, or implement a validated measurement workflow.
 - Opentrons OT-2 with a P20 single-channel pipette on the left mount
 - One full `opentrons_96_filtertiprack_20ul` rack
 - One `corning_96_wellplate_360ul_flat` sample plate with source liquids
-- The custom eviFluor Duo Fluorometer labware [`hse_evifluor_pilot_left_20ul_tip_v2.json`](https://hseag.github.io/evifluor/integration_kits/opentrons-ot2/labware/hse_evifluor_pilot_left_20ul_tip_v2.json){ download="hse_evifluor_pilot_left_20ul_tip_v2.json" }
+- The custom eviFluor Duo Fluorometer labware [`hse_evifluor_pilot_left_20ul_tip_v2.json`](https://hseag.github.io/evifluor/pre-release/integration_kits/opentrons-ot2/labware/hse_evifluor_pilot_left_20ul_tip_v2.json){ download="hse_evifluor_pilot_left_20ul_tip_v2.json" }
 - The eviFluor Duo Fluorometer device and its OT-2 runtime integration for a real run
 - One prepared eviFluor Duo Fluorometer cuvette for every configured measurement
 

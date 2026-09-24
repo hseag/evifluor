@@ -1,6 +1,6 @@
 # OT-2 DNA Normalization
 
-This guide describes how to run [`evifluor_ot2_dna_normalization.py`](https://hseag.github.io/evifluor/integration_kits/opentrons-ot2/protocol/evifluor_ot2_dna_normalization.py){ download="evifluor_ot2_dna_normalization.py" } on
+This guide describes how to run [`evifluor_ot2_dna_normalization.py`](https://hseag.github.io/evifluor/pre-release/integration_kits/opentrons-ot2/protocol/evifluor_ot2_dna_normalization.py){ download="evifluor_ot2_dna_normalization.py" } on
 an Opentrons OT-2. The protocol measures 1 to 24 DNA samples with eviFluor Duo Fluorometer,
 calculates a target concentration, and prepares valid normalized samples in
 the NORM plate.
@@ -15,7 +15,7 @@ concentration.
 - Compatible 20 uL filter tips and one empty 20 uL filter-tip rack for parking
 - Eppendorf Safe-Lock 1.5 mL tubes in an Opentrons 24-tube rack
 - Four empty or prepared 96-well PCR plates for SAMPLE, DILUTED, MIX, and NORM
-- The custom eviFluor Duo Fluorometer labware [`hse_evifluor_pilot_left_20ul_tip_v2.json`](https://hseag.github.io/evifluor/integration_kits/opentrons-ot2/labware/hse_evifluor_pilot_left_20ul_tip_v2.json){ download="hse_evifluor_pilot_left_20ul_tip_v2.json" }
+- The custom eviFluor Duo Fluorometer labware [`hse_evifluor_pilot_left_20ul_tip_v2.json`](https://hseag.github.io/evifluor/pre-release/integration_kits/opentrons-ot2/labware/hse_evifluor_pilot_left_20ul_tip_v2.json){ download="hse_evifluor_pilot_left_20ul_tip_v2.json" }
 - eviFluor Duo Fluorometer device and its OT-2 runtime integration for a real run
 - DNA samples, dilution diluent, normalization diluent, working solution, and standards
 

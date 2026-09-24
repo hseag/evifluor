@@ -17,7 +17,7 @@ The simulator is provided as a Python package with the console script `hse-simul
 Example installation from the repository root:
 
 ```powershell
-python -m pip install https://hseag.github.io/evifluor/simulator/dist/hse_simulator-0.2.0-py3-none-any.whl
+python -m pip install https://hseag.github.io/evifluor/pre-release/simulator/dist/hse_simulator-0.2.0-py3-none-any.whl
 ```
 
 This installs:

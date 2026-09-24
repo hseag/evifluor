@@ -1,7 +1,7 @@
 # OT-2 DNA Test Sample Measurement (1:10 Dilution)
 
 This guide describes how to run
-[`evifluor_ot2_dna_sample_measurement_diluted_1_10.py`](https://hseag.github.io/evifluor/integration_kits/opentrons-ot2/protocol/evifluor_ot2_dna_sample_measurement_diluted_1_10.py){ download="evifluor_ot2_dna_sample_measurement_diluted_1_10.py" }
+[`evifluor_ot2_dna_sample_measurement_diluted_1_10.py`](https://hseag.github.io/evifluor/pre-release/integration_kits/opentrons-ot2/protocol/evifluor_ot2_dna_sample_measurement_diluted_1_10.py){ download="evifluor_ot2_dna_sample_measurement_diluted_1_10.py" }
 on an Opentrons OT-2. The protocol measures 1 to 24 already normalized DNA
 samples with eviFluor Duo Fluorometer and reports the concentration of each original sample.
 
@@ -15,7 +15,7 @@ therefore the measured assay concentration multiplied by 10.
 - An empty 20 uL filter-tip rack for parking sample-specific tips
 - Eppendorf Safe-Lock 1.5 mL tubes in an Opentrons 24-tube rack
 - Three 96-well PCR plates for SAMPLE, DILUTED, and MIX
-- The custom eviFluor Duo Fluorometer labware [`hse_evifluor_pilot_left_20ul_tip_v2.json`](https://hseag.github.io/evifluor/integration_kits/opentrons-ot2/labware/hse_evifluor_pilot_left_20ul_tip_v2.json){ download="hse_evifluor_pilot_left_20ul_tip_v2.json" }
+- The custom eviFluor Duo Fluorometer labware [`hse_evifluor_pilot_left_20ul_tip_v2.json`](https://hseag.github.io/evifluor/pre-release/integration_kits/opentrons-ot2/labware/hse_evifluor_pilot_left_20ul_tip_v2.json){ download="hse_evifluor_pilot_left_20ul_tip_v2.json" }
 - eviFluor Duo Fluorometer device and its OT-2 runtime integration available for a real run
 - Normalized DNA samples in the SAMPLE plate; at least 10 uL in every selected well
 - Dilution diluent, working solution, and high and low eviFluor Duo Fluorometer standards
