@@ -223,7 +223,7 @@ jobs:
           pwd
           find . -maxdepth 5 -type f | sort
           echo "::endgroup::"
-          export PYTHONPATH="simulator:api/python"
+          export PYTHONPATH="$GITHUB_WORKSPACE/simulator/src:$GITHUB_WORKSPACE/api/python/src"
           cleanup() {
             python -m hse.simulator sim EXIT >/dev/null 2>&1 || true
             if [ -n "${SIM_PID:-}" ]; then
