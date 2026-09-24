@@ -262,6 +262,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install Python dependencies
+        run: ls simulator/dist/*.whl api/python/dist/*.whl
         run: python -m pip install pyserial simulator/dist/*.whl api/python/dist/*.whl
 
       - name: Run Python wheel against simulator
@@ -308,7 +309,7 @@ jobs:
           dotnet-version: "8.0.x"
 
       - name: Restore C# solution
-        run: dotnet restore api/csharp/evifluor.sln
+        run: dotnet restore api/csharp/eviFluor.sln
 
       - name: Build C# solution
-        run: dotnet build api/csharp/evifluor.sln --configuration Release --no-restore
+        run: dotnet build api/csharp/eviFluor.sln --configuration Release --no-restore
