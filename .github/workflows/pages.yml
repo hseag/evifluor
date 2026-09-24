@@ -263,10 +263,10 @@ jobs:
 
       - name: Install Python dependencies
         run: | 
-          ls *
-          ls simulator/*
-          ls simulator/dist/*
-          ls simulator/dist/*.whl api/python/dist/*.whl
+          echo "::group::Workspace"
+          pwd
+          find . -maxdepth 3 -type f | sort
+          echo "::endgroup::"
           python -m pip install pyserial simulator/dist/*.whl api/python/dist/*.whl
 
       - name: Run Python wheel against simulator
