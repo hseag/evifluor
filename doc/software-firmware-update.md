@@ -1,6 +1,6 @@
 # Updating Firmware with eviManager
 
-Use eviManager when you want a guided firmware update workflow instead of a script- or code-based update.
+Use the eviManager software when you require a guided firmware update workflow instead of a script- or code-based update.
 
 You can download eviManager from [https://hseag.github.io/evimanager/](https://hseag.github.io/evimanager/).
 

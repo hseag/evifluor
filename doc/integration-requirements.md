@@ -25,4 +25,3 @@ The system should also be able to:
 
 - run or call one of the supported eviFluor Duo Fluorometer API interfaces
 - retain result files or pass result data to host software
-- support troubleshooting, validation, and repeatable deployment

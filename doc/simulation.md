@@ -1,18 +1,25 @@
-# Simulation Guide
+# eviFamily Simulation Guide
 
 ## 1. Overview
 
-The repository contains an eviFluor Duo Fluorometer simulator for development and testing without a physical device.
-The simulator exposes the same basic workflow over TCP that the software interfaces use when a device is opened as `"SIMULATION"`.
-When started without preloaded data, the simulator behaves like an eviFluor Duo Fluorometer that currently does not measure a cuvette with real sample data.
-It still responds like a device and returns simulated values for the normal workflow.
+The repository contains simulators for eviDense UV Photometer and eviFluor Duo
+Fluorometer. They support development, integration, demonstrations, and
+automated testing without a physical device.
 
-With `LOAD`, an existing measurement JSON file from a real or previously simulated run can be loaded and replayed step by step.
-This is useful for repeating known runs during development, regression tests, and interface validation.
+Both simulators expose the basic device protocol over TCP. Host-side interfaces
+connect to the simulated device by opening it as `SIMULATION`. When started
+without preloaded data, a simulator responds like its corresponding device but
+does not replay a real measurement run.
+
+Measurement data from a real or previously simulated run can be preloaded at
+startup or with the `LOAD` control command. This is useful for repeatable
+development, regression tests, and interface validation. A data file must match
+the selected product.
 
 ## 2. Installation
 
-The simulator is provided as a Python package with the console script `hse-simulator`.
+The simulator is provided as a Python package with the console script
+`hse-simulator`.
 
 Example installation from the repository root:
 
@@ -20,326 +27,130 @@ Example installation from the repository root:
 python -m pip install https://hseag.github.io/evifluor/pre-release/simulator/dist/hse_simulator-0.2.0-py3-none-any.whl
 ```
 
+or download it
+
+[`hse_simulator-0.2.0-py3-none-any.whl`](https://hseag.github.io/evifluor/pre-release/simulator/dist/hse_simulator-0.2.0-py3-none-any.whl){ download="hse_simulator-0.2.0-py3-none-any.whl" }
+
+
 This installs:
 
 - `hse-simulator`
 
-## 3. Start the eviFluor Simulator
+## 3. Start a Simulator
 
-Start the default eviFluor Duo Fluorometer simulator with:
+Select the product to simulate:
+
+| Product | Command | Default web UI port |
+| --- | --- | --- |
+| eviDense UV Photometer | `hse-simulator evidense` | `8011` |
+| eviFluor Duo Fluorometer | `hse-simulator evifluor` | `8010` |
+
+Both simulators listen on TCP port `5000`. Start only one simulator at a time
+on the same host unless you provide a separate environment for the device
+protocol port.
+
+The matching web UI starts automatically unless `--no-web` is passed. The
+default web UI bind host is `127.0.0.1`.
+
+Useful common variants:
 
 ```powershell
-hse-simulator evifluor
-```
-
-Behavior:
-
-- the simulator listens on TCP port `5000`
-- the matching web UI starts automatically unless `--no-web` is passed
-- the default web UI bind host is `127.0.0.1`
-- the default web UI port for `evifluor` is `8010`
-
-Useful variants:
-
-```powershell
-hse-simulator evifluor .\test\testdata\evifluor-P10006-2025_04_24_16_18_09.json
+hse-simulator --no-web evidense
 hse-simulator --no-web evifluor
-hse-simulator --web-host 127.0.0.1 --web-port 8000 evifluor
+hse-simulator --verbose evidense
 hse-simulator --verbose evifluor
+hse-simulator evidense path/to/evidense-measurement-data.json
+hse-simulator evifluor path/to/evifluor-measurement-data.json
+hse-simulator --web-host 127.0.0.1 --web-port 8000 evidense
 ```
 
-Meaning of the most important options:
-
-- `<data file>`: preloads measurement values from a JSON file
-- `--no-web`: disables the browser-based control UI
-- `--web-host` and `--web-port`: configure where the web UI is exposed
-- `--verbose`: prints request and response details
-
-## 4. Interface Examples
-
-After the simulator is running, all supported interfaces can be pointed to the simulated device.
-The important selector is the device name `"SIMULATION"`.
-
-### 4.1 C CLI
-
-The C command line tool can run against the simulator by passing `--device SIMULATION`.
-
-Example:
+The eviFluor simulator also supports a workflow without air measurements:
 
 ```powershell
-evifluor-cli --device SIMULATION selftest
-evifluor-cli --device SIMULATION empty
-evifluor-cli --device SIMULATION run init 2 2 10
-evifluor-cli --device SIMULATION run checkempty
-evifluor-cli --device SIMULATION run measure
-evifluor-cli --device SIMULATION run measure "std high 1"
+hse-simulator evifluor --no-air
 ```
 
-See also [C Command Line Interface](./c-cli.md).
+`--no-air` applies only to eviFluor. When it is used with preloaded data, the
+client workflow must use the same no-air mode so that the measurement sequence
+matches the data.
 
-### 4.2 C# Low-Level API
+## 4. Use the Simulator from an Interface
 
-In the low-level C# API, open the device as `"SIMULATION"`:
+After the simulator is running, use `SIMULATION` as the device identifier in
+the selected product interface.
 
-```csharp
-using Hse.EviFluor;
-
-using var device = new Device("SIMULATION");
-
-var selftest = device.SelfTest();
-bool empty = device.IsCuvetteHolderEmpty();
-var firstAir = device.FirstAirMeasurement();
-var firstSample = device.FirstSampleMeasurement();
-```
-
-See also [C# Low-Level API](./csharp-low-level.md).
-
-### 4.3 C# High-Level API
-
-In the high-level C# API, create the run with `device: "SIMULATION"`:
-
-```csharp
-using Hse.EviFluor;
-
-var run = new Run(
-    nrOfStdLow: 2,
-    nrOfStdHigh: 2,
-    concentration: 10.0,
-    device: "SIMULATION");
-
-if (!run.checkEmpty())
-{
-    throw new InvalidOperationException("Cuvette holder must be empty before the measurement");
-}
-
-run.measure();
-run.measure("std high 1");
-```
-
-See also [C# High-Level API](./csharp-high-level.md).
-
-### 4.4 Python Low-Level API
-
-In the low-level Python API, open the device as `"SIMULATION"`:
+For example, the Python low-level APIs open the simulated device as follows:
 
 ```python
+# eviDense
+from hse.evidense.device import Device
+
+device = Device("SIMULATION")
+```
+
+```python
+# eviFluor
 from hse.evifluor.device import Device
 
 device = Device("SIMULATION")
-
-selftest = device.selftest()
-empty = device.is_cuvette_holder_empty()
-first_air = device.first_air_measurement()
-first_sample = device.first_sample_measurement()
-
-device.close()
 ```
 
-See also [Python Low-Level API](./python-low-level.md).
+Use the interface package for the product currently being simulated; do not
+connect both clients to the same simulator instance. The same `SIMULATION`
+identifier is supported by the Python, C#, C CLI, and REST integration paths.
 
-### 4.5 Python High-Level API
-
-In the high-level Python API, create the run with `device="SIMULATION"`:
-
-```python
-from hse.evifluor.run import Run
-
-run = Run(
-    nr_of_std_low=2,
-    nr_of_std_high=2,
-    concentration=10.0,
-    device="SIMULATION",
-)
-
-if not run.check_empty():
-    raise RuntimeError("Cuvette holder must be empty before the measurement")
-
-run.measure()
-run.measure("std high 1")
-run.close()
-```
-
-See also [Python High-Level API](./python-high-level.md).
-
-### 4.6 Python CLI
-
-The Python CLI can run against the simulator with `--device SIMULATION`.
-
-Example:
+Examples for the Python command-line interfaces:
 
 ```powershell
-python -m hse.evifluor --device SIMULATION info
-python -m hse.evifluor --device SIMULATION selftest --json
-python -m hse.evifluor --device SIMULATION checkempty
-python -m hse.evifluor --device SIMULATION run init 2 2 10
-python -m hse.evifluor --device SIMULATION run measure
-python -m hse.evifluor --device SIMULATION run measure "std high 1"
+python -m hse.evidense --device SIMULATION selftest
+python -m hse.evifluor --device SIMULATION selftest
 ```
 
-See also [Python Command Line Interface](./python-cli.md).
-
-### 4.7 Python REST API
-
-First start the REST server:
-
-```powershell
-evifluor-rest --host 127.0.0.1 --port 8000
-```
-
-Then initialize a run against the simulator by using `device_id: "SIMULATION"`:
-
-```python
-from hse.evifluor.rest_client import RestClient
-
-client = RestClient(base_url="http://127.0.0.1:8000", serial_number="SIMULATION")
-
-run = client.run_init(
-    nr_of_std_low=2,
-    nr_of_std_high=2,
-    concentration=10.0,
-)
-run_id = run["run_id"]
-
-if not client.checkempty()["empty"]:
-    raise RuntimeError("Cuvette holder must be empty before the measurement")
-
-client.run_measure(run_id)
-client.run_measure(run_id, "std high 1")
-```
-
-See also [Python REST API](./python-rest.md).
+Use the product-specific interface documentation for the complete measurement
+workflow and its product-specific parameters.
 
 ## 5. Simulator Control Commands
 
-The simulator accepts control commands while it is running.
-These commands are useful for test setup and for switching specific states.
-
-Examples:
+Send control commands to the running simulator with `hse-simulator sim ...`.
+The following commands are available for both products:
 
 ```powershell
 hse-simulator sim RESET
 hse-simulator sim CHECKEMPTY 1
 hse-simulator sim CHECKEMPTY 0
-hse-simulator sim LOAD .\test\testdata\evifluor-P10006-2025_04_24_16_18_09.json
-```
-
-Typical command usage:
-
-- `RESET`: resets the simulator state
-- `CHECKEMPTY 1`: report that the cuvette holder is empty
-- `CHECKEMPTY 0`: report that the cuvette holder is not empty
-- `LOAD <file>`: load measurement data from a JSON file
-
-## 6. Command Reference
-
-This chapter summarizes the most important simulator control functions.
-All commands are sent with `hse-simulator sim ...` while the simulator is running.
-
-### 6.1 `LOAD <file>`
-
-Loads measurement data from a JSON file into the simulator.
-The loaded values are then returned step by step during the following measurement calls.
-The file is loaded from the simulator process point of view.
-This means the referenced file path must be accessible on the same computer where the simulator is running.
-As a consequence, the web UI or CLI that triggers `LOAD` must be used against a simulator running on a machine that can access that file locally.
-
-Example:
-
-```powershell
-hse-simulator sim LOAD .\test\testdata\evifluor-P10006-2025_04_24_16_18_09.json
-```
-
-Typical use:
-
-- replay a known measurement run
-- reproduce a customer issue with fixed data
-- validate a client implementation against stable expected values
-
-### 6.2 `RESET`
-
-Resets the simulator state.
-This clears loaded measurement progress, resets the empty state to default, and clears temporary simulator status.
-
-Example:
-
-```powershell
-hse-simulator sim RESET
-```
-
-Typical use:
-
-- start a test from a clean simulator state
-- restart a workflow after a failed test run
-
-### 6.3 `CHECKEMPTY 0|1`
-
-Sets the reported cuvette-holder state.
-
-Examples:
-
-```powershell
-hse-simulator sim CHECKEMPTY 1
-hse-simulator sim CHECKEMPTY 0
-```
-
-Meaning:
-
-- `CHECKEMPTY 1`: the simulator reports that the cuvette holder is empty
-- `CHECKEMPTY 0`: the simulator reports that the cuvette holder is not empty
-
-Typical use:
-
-- test empty-check handling in a client
-- simulate a blocked or occupied cuvette position
-
-### 6.4 `EXIT`
-
-Stops the running simulator.
-
-Example:
-
-```powershell
+hse-simulator sim LOAD path/to/measurement-data.json
+hse-simulator sim ZERO 1
+hse-simulator sim SKIP 2
 hse-simulator sim EXIT
 ```
 
-Typical use:
+| Command | Purpose |
+| --- | --- |
+| `RESET` | Reset the simulator state and clear loaded-data progress. |
+| `CHECKEMPTY 0|1` | Set the reported cuvette-holder state. |
+| `LOAD <file>` | Load product-matching measurement data for replay. |
+| `ZERO 0|1` | Enable or disable zero-value measurement mode. |
+| `SKIP <count>` | Skip preloaded measurement entries. |
+| `EXIT` | Stop the running simulator. |
 
-- stop the simulator from a script
-- terminate a remote or background simulator session cleanly
-
-### 6.6 `ZERO 0|1`
-
-Enables or disables zero-value measurement mode.
-
-Example:
-
-```powershell
-hse-simulator sim ZERO 1
-```
-
-Typical use:
-
-- test client behavior with degenerate or placeholder measurement values
-
-### 6.7 `SKIP <count>`
-
-Skips the next `<count>` preloaded measurement entries from the currently loaded data set.
-
-Example:
+The eviFluor simulator additionally supports switching the no-air workflow:
 
 ```powershell
-hse-simulator sim SKIP 2
+hse-simulator sim NO_AIR 1
+hse-simulator sim NO_AIR 0
 ```
 
-Typical use:
+Use `NO_AIR` only with eviFluor. It is not an eviDense control command.
 
-- continue replay at a later point in a loaded run
-- align the simulator state with a partially executed workflow
+## 6. Typical Development Workflow
 
-## 7. Typical Development Workflow
-
-1. Start the simulator with `hse-simulator evifluor`.
-2. Optionally preload test data with a JSON file or `LOAD`.
-3. Start the client application or script with `Device("SIMULATION")`.
-4. Use the web UI or `hse-simulator sim ...` commands to adjust simulator state as needed.
+1. Start the simulator for the target product.
+2. Optionally preload a matching measurement JSON file at startup or with
+   `LOAD`.
+3. Start the client application or script with the device identifier
+   `SIMULATION`.
+4. Use the web UI or `hse-simulator sim ...` commands to adjust simulator state
+   as needed.
 5. Run the normal measurement workflow against the simulator.
+6. Validate positioning, cuvette handling, and the complete workflow on the
+   physical device before productive use.

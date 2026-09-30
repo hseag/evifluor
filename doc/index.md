@@ -19,7 +19,7 @@ The following video demonstrates a simple eviFluor Duo Fluorometer workflow on a
 
 ## What is eviFluor Duo Fluorometer?
 
-The eviFluor Duo Fluorometer measures prepared standards and samples as part of an automated liquid handling workflow. It enables fluorescence measurements to be integrated directly into the workflow, allowing samples to be measured without leaving the liquid handling platform. The instrument can be controlled through an API, allowing measuring steps to be incorporated into automated liquid handling protocols.
+The eviFluor Duo Fluorometer measures prepared standards and samples as part of an automated liquid handling workflow. It enables fluorescence measurements to be integrated directly into the workflow, allowing samples to be measured without leaving the liquid handling platform. The instrument can be controlled through an API, allowing measuring steps to be incorporated into automated liquid handling protocols. The eviFluor Duo Fluorometer does not require a separate user interface for routine operation.
 
 eviFluor Duo Fluorometer measures prepared standards and samples in an automated workflow. It is especially useful when fluorescence measurement should be added to a liquid handler process without turning the liquid handler itself into a custom measurement instrument.
 

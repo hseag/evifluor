@@ -1,24 +1,22 @@
 # Compatibility
 
-eviFluor Duo Fluorometer is designed for automation environments rather than stand-alone benchtop use. In practice, compatibility should be viewed on three levels: mechanics, workflow, and software.
 
-## Currently Documented Compatibility
 
-- A documented reference integration is available for the [Opentrons OT-2](integration-kits/opentrons-ot2/index.md).
-- The software stack currently includes [Python](python.md), [C#](csharp.md), [C CLI](c-cli.md), and [Python REST](python-rest.md) integration paths.
-- The workflow model assumes prepared standards and samples that are transferred into disposable cuvettes for measurement.
+The eviDense UV Photometer is designed for integration into automated liquid handling platforms. 
+The following liquid handlers currently have a documented integration:
 
-## What Another Liquid Handler Needs
 
-Another platform can be a good fit when it can:
+|Liquid Handler |	Integration Status |	Resources |
+| --- | --- | --- |
+| Beckman Coulter Biomek i-Series	| Documented integration	| Contact your local Beckman Coulter Life Sciences representative |
+| Opentrons OT-2	| Documented integration	 | [Opentrons OT-2 Integration Kit](integration-kits/opentrons-ot2/index.md) |
 
-- pick up, move, insert, and discard the cuvette repeatably
-- coordinate those motions with the eviFluor Duo Fluorometer measurement sequence
-- run or call one of the supported software interfaces
-- retain and process the generated measurement results
+### Integration with Other Liquid Handlers
 
-## What Compatibility Does Not Mean
+The eviDense UV Photometer can also be integrated with other liquid handling platforms, provided that the required mechanical movements and software communication can be implemented.
 
-Compatibility does not automatically mean that every liquid handler is already validated. A technical integration and assay validation step is still required for each target platform outside the OT-2 reference setup.
+For the requirements to integrate a new platform, see:
 
-Use [Integration Overview](integration-overview.md) for the next step if you are evaluating a new platform.
+- [Liquid Handler Requirements](integration-requirements.md)
+- [Positioning and Teaching](integration-positioning.md)
+- [Available Interfaces](integration-interfaces.md)

@@ -38,4 +38,5 @@ Before using assay liquids, validate the taught positions and cuvette handling:
 - verify reliable cuvette pickup from the rack 
 - verify repeatable movement to and insertion into the cuvette guide 
 - verify reliable cuvette removal and discard 
-- repeat the complete motion sequence to confirm consistent operation
+
+repeat the complete motion sequence to confirm consistent operation
