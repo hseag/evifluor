@@ -24,14 +24,3 @@ The eviFluor Duo Fluorometer measures prepared standards and samples as part of 
 eviFluor Duo Fluorometer measures prepared standards and samples in an automated workflow. It is especially useful when fluorescence measurement should be added to a liquid handler process without turning the liquid handler itself into a custom measurement instrument.
 
 For an overview of how the eviFluor Duo Fluorometer fits into an automated laboratory workflow, see [Workflow](applications-workflow.md).
-
-## Where do I go next?
-
-| If you want to... | Start here |
-| --- | --- |
-| Understand the lab workflow around the eviFluor Duo Fluorometer | [Workflow](applications-workflow.md) |
-| Run the available reference setup on an Opentrons OT-2 liquid handler | [Opentrons OT-2](integration-kits/opentrons-ot2/index.md) |
-| Download the latest instrument firmware | [Latest firmware](software-firmware-versions.md) |
-| Plan an integration for another liquid handler | [Integration Overview](integration-overview.md) |
-| Check firmware or API release information | [Release Notes](software-release-notes.md) |
-| Dive into API implementation details | [Python](python.md), [C#](csharp.md), or [C CLI](c-cli.md) |

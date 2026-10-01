@@ -12,11 +12,3 @@ A typical integration process includes the following steps:
 2. Set up and validate positioning and cuvette handling.
 3. Implement and test the workflow with dry runs or simulation.
 4. Validate the complete workflow on the target platform.
-
-For more detailed integration guidance, see:
-
-- [Available Interfaces](integration-interfaces.md)
-- [Liquid Handler Requirements](integration-requirements.md)
-- [Positioning and Teaching](integration-positioning.md)
-- [Integration Paths](integration-paths.md)
-

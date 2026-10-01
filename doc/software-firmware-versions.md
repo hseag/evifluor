@@ -16,7 +16,7 @@ Before and after an update, confirm:
 - which firmware image was approved for the workflow
 - whether the device and host software belong to the same validated release set
 
-## Where to Find More Detail
+## Where to Find More Details
 
 - Use [Updating Firmware with eviManager](software-firmware-update.md) for the guided product-level update flow.
 - Use [Python Low-Level API](python-low-level.md), [C# Low-Level API](csharp-low-level.md), or [C CLI](c-cli.md) when you need technical access to version queries and update commands.
