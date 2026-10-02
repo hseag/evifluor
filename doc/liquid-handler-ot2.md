@@ -22,13 +22,13 @@ If the OT-2 has no internet connection, download the Python wheel to your comput
 and copy it to your OT-2:
 
 ```bash
-scp -i ot2_ssh_key hse_evifluor-0.12.0-py3-none-any.whl root@YOUR_IP:
+scp -O -i ot2_ssh_key hse_evifluor-0.12.0-py3-none-any.whl root@YOUR_IP:
 ```
 
 Then install it locally on the OT-2 with:
 
 ```bash
-python -m pip install hse_evifluor-0.12.0-py3-none-any.whl
+python -m pip install hse_evifluor-0.12.0-py3-none-any.whl --no-deps
 ```
 
 After the installation, restart the OT-2.
