@@ -3296,7 +3296,7 @@
         "quirks": []
     },
     "schemaVersion": 2,
-    "version": 1,
+    "version": 2,
     "cornerOffsetFromSlot": {
         "x": 0,
         "y": 0,

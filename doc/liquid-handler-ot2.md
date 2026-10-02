@@ -12,7 +12,7 @@ This document describes a practical starting point for integrating the eviFluor 
 2. Install the Python package with:
 
 ```bash
-python -m pip install https://hseag.github.io/evifluor/pre-release/api/python/dist/hse_evifluor-0.12.0-py3-none-any.whl
+python -m pip install https://hseag.github.io/evifluor/pre-release/api/python/dist/hse_evifluor-0.12.0-py3-none-any.whl --no-deps
 ```
 
 If the OT-2 has no internet connection, download the Python wheel to your computer:
